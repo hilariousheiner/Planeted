@@ -32,8 +32,8 @@ namespace Planeted
 
     struct Token
     {
-        TokenTypeEnum type;
-        std::string lexeme;
+        TokenTypeEnum TokenType;
+        std::string Lexeme;
     };
 
     inline std::string TokenTypeToString(TokenTypeEnum tokenType)

@@ -16,7 +16,7 @@ namespace Planeted
         virtual Value eval(PDSL_Runtime &runtime) = 0;
     };
 
-     struct ConstantExpression : Expression
+    struct ConstantExpression : Expression
     {
         Value value;
 
