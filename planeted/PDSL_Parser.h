@@ -51,7 +51,7 @@ namespace Planeted
         Token expect(TokenTypeEnum tokenType);
 
         Token currentToken;
-        Token next;
+        Token nextToken;
         Lexer &lexer;
     };
 }

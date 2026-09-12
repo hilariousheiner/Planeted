@@ -5,7 +5,7 @@ namespace Planeted
     Parser::Parser(Lexer &lexer)
         : lexer(lexer)
     {
-        this->next = this->lexer.Next();
+        this->nextToken = this->lexer.Next();
         this->advance();
     }
 
@@ -37,7 +37,7 @@ namespace Planeted
             }
             else
             {
-                if(this->next.TokenType == TokenTypeEnum::Equals)
+                if(this->nextToken.TokenType == TokenTypeEnum::Equals)
                 {
                     result = this->parseAssignmentStatement();
                 }
@@ -121,7 +121,7 @@ namespace Planeted
     {
         if(this->currentToken.TokenType == TokenTypeEnum::Identifier)
         {
-            if(this->next.TokenType == TokenTypeEnum::LParen)
+            if(this->nextToken.TokenType == TokenTypeEnum::LParen)
             {
                 return this->parseCallExpression();
             }
@@ -253,8 +253,8 @@ namespace Planeted
 
     void Parser::advance()
     {
-        this->currentToken = this->next;
-        this->next = this->lexer.Next();
+        this->currentToken = this->nextToken;
+        this->nextToken = this->lexer.Next();
     }
 
     Token Parser::expect(TokenTypeEnum tokenType)
