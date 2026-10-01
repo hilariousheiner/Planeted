@@ -83,7 +83,7 @@ namespace Planeted
     {
         std::string current;
 
-        if (!FileStack.empty())
+        if (!this->FileStack.empty())
         {
             current = FileStack.back();
         }
