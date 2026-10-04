@@ -43,8 +43,8 @@ namespace Planeted
 
     Value PDSL_Runtime::GetVariableValue(const std::string &name) const
     {
-        std::unordered_map<std::string, Value>::const_iterator it = this->Environment.find(name);
-        if(it == this->Environment.end())
+        std::unordered_map<std::string, Value>::const_iterator it = this->environment.find(name);
+        if(it == this->environment.end())
         {
             throw std::runtime_error("Undefined variable: " + name);
         }
@@ -52,18 +52,18 @@ namespace Planeted
     }
     void PDSL_Runtime::SetVariableValue(std::string name, Value value)
     {
-        this->Environment[name] = value;
+        this->environment[name] = value;
     }
 
 
     void PDSL_Runtime::InstallBuiltinFunction(std::string name, BuiltinFunction fn)
     {
-        this->BuiltinFunctionsTable[name] = fn;
+        this->builtinFunctionsTable[name] = fn;
     }
     Value PDSL_Runtime::CallFunction(std::string &name, std::vector<Value> &args)
     {
-        auto it = this->BuiltinFunctionsTable.find(name);
-        if(it == this->BuiltinFunctionsTable.end())
+        auto it = this->builtinFunctionsTable.find(name);
+        if(it == this->builtinFunctionsTable.end())
         {
             throw std::runtime_error("Unknown function: " + name);
         }
@@ -73,7 +73,7 @@ namespace Planeted
     void PDSL_Runtime::DumpEnvironment()
     {
         std::cout << "environment: \n";
-        for(auto &v : this->Environment)
+        for(auto &v : this->environment)
         {
             std::cout << v.first << "\n";
         }

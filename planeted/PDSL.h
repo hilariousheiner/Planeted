@@ -43,15 +43,16 @@ namespace Planeted
 
         std::string ResolvePath(const std::string &filename) const;
 
-        std::unordered_map<std::string, Value> Environment;
-        std::unordered_map<std::string, BuiltinFunction> BuiltinFunctionsTable;
-
         std::vector<std::string> FileStack;
 
         std::string OutPath;
 
         Value Result;
         bool DebugFlag = false;
+
+        private:
+        std::unordered_map<std::string, Value> environment;
+        std::unordered_map<std::string, BuiltinFunction> builtinFunctionsTable;
     };
 }
 #endif
