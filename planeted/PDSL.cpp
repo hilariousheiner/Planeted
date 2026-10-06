@@ -3,34 +3,26 @@
 #include <memory>
 
 #include "PDSL_Lib.h"
+#include "PDSL_Utils.h"
 #include "PDSL_Parser.h"
 
 namespace Planeted
 {
     static Value builtin_setDebugFlag(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
-        if(args.size() != 1)
-        {
-            throw std::runtime_error("setDebugFlag expects one argument.");
-        }
+        ExpectArgsCount(args, 1, "setDebugFlag");
         runtime.DebugFlag = args[0].GetBoolValue();
         return Value::Null();
     }
     static Value builtin_log(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
-        if(args.size() != 1)
-        {
-            throw std::runtime_error("log expects exactly one argument.");
-        }
+        ExpectArgsCount(args, 1, "log");
         std::cout << args[0].ToString() << "\n";
         return Value::Null();
     }
     static Value builtin_load(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
-        if(args.size() != 1)
-        {
-            throw std::runtime_error("load expects exactly one argument.");
-        }
+        ExpectArgsCount(args, 1, "load");
         return PDSL_Load(args[0].ToString(), runtime);
     }
 
