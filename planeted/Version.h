@@ -5,7 +5,7 @@ namespace Planeted
 {
     namespace Version
     {
-        constexpr const char* VersionString = "0.1.0";
+        constexpr const char* VersionString = "0.2.0";
     }
 }
 #endif
