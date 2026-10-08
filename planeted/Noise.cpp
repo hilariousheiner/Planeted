@@ -5,6 +5,19 @@ namespace Planeted
 {
     Noise::Noise() { }
 
+    float Noise::Noise1D(const float &p) const
+    {
+        return Random::FBM1D(p, this->fbmParams, this->noiseParams, Random::GetNoiseFunction1D(this->noiseType, this->noiseStyle));
+    }
+    float Noise::Noise2D(const Vector2 &p) const
+    {
+        return Random::FBM2D(p, this->fbmParams, this->noiseParams, Random::GetNoiseFunction2D(this->noiseType, this->noiseStyle));
+    }
+    float Noise::Noise3D(const Vector3 &p) const
+    {
+        return Random::FBM3D(p, this->fbmParams, this->noiseParams, Random::GetNoiseFunction3D(this->noiseType, this->noiseStyle));
+    }
+
     void Noise::SetNumberOfOctaves(std::uint32_t numberOfOctaves)
     {
         this->fbmParams.NumberOfOctaves = numberOfOctaves;
@@ -38,18 +51,5 @@ namespace Planeted
     void Noise::SetWhiteNoiseScale(float scale)
     {
         this->noiseParams.WhiteNoiseScale = scale;
-    }
-
-    float Noise::Noise1D(const float &p) const
-    {
-        return Random::FBM1D(p, this->fbmParams, this->noiseParams, Random::GetNoiseFunction1D(this->noiseType, this->noiseStyle));
-    }
-    float Noise::Noise2D(const Vector2 &p) const
-    {
-        return Random::FBM2D(p, this->fbmParams, this->noiseParams, Random::GetNoiseFunction2D(this->noiseType, this->noiseStyle));
-    }
-    float Noise::Noise3D(const Vector3 &p) const
-    {
-        return Random::FBM3D(p, this->fbmParams, this->noiseParams, Random::GetNoiseFunction3D(this->noiseType, this->noiseStyle));
     }
 }

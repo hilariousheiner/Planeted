@@ -10,6 +10,10 @@ namespace Planeted
     public:
         Noise();
 
+        float Noise1D(const float &p) const;
+        float Noise2D(const Vector2 &p) const;
+        float Noise3D(const Vector3 &p) const;
+
         void SetNumberOfOctaves(std::uint32_t numberOfOctaves);
         void SetStartFrequency(float startFrequency);
         void SetLacunarity(float lacunarity);
@@ -18,10 +22,6 @@ namespace Planeted
         void SetExponent(float exponent);
 
         void SetWhiteNoiseScale(float scale);
-
-        float Noise1D(const float &p) const;
-        float Noise2D(const Vector2 &p) const;
-        float Noise3D(const Vector3 &p) const;
 
         Random::NoiseTypeEnum noiseType;
         Random::NoiseStyleEnum noiseStyle;
