@@ -76,14 +76,22 @@ namespace Planeted
         return result;
     }
 
-    Noise &GetNoiseArg(const std::vector<Value> &args, size_t index, const std::string &functionName)
+    Noise GetNoiseArg(const std::vector<Value> &args, size_t index, const std::string &functionName)
     {
+        /*
         Noise *result = args[index].TryGetNoiseValue();
         if(result == nullptr)
         {
             throw std::runtime_error(functionName + ": argument " + std::to_string(index + 1) + " must be a noise.");
         }
         return *result;
+        */
+        Noise result;
+        if(!TryAsNoise(args[index], result))
+        {
+            throw std::runtime_error(functionName + ": argument " + std::to_string(index + 1) + " must be a noise.");
+        }
+        return result;
     }
 
     Mesh GetMeshArg(const std::vector<Value> &args, size_t index, const std::string &functionName)
@@ -204,6 +212,18 @@ namespace Planeted
                     result = true;
                 }
             }
+        }
+        return result;
+    }
+
+    bool TryAsNoise(const Value &value, Noise &out)
+    {
+        bool result = false;
+
+        if(value.GetValueType() == ValueTypeEnum::Noise)
+        {
+            out = value.GetNoiseValue();
+            result = true;
         }
         return result;
     }
