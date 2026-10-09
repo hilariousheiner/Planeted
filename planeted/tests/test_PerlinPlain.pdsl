@@ -2,16 +2,16 @@ import "../lib/stdlib.pdsl"
 
 n = noise();
 
-seedNoise(n, "11836-Eileen");
+n = seedNoise(n, "11836-Eileen");
 
-setNormalizeFBM(n, true);
-setStartFrequency(n, 1.0);
-setLacunarity(n, 2.0);
-setNumberOfOctaves(n, 6);
-setExponent(n, 1.0);
+n = setNormalizeFBM(n, true);
+n = setStartFrequency(n, 1.0);
+n = setLacunarity(n, 2.0);
+n = setNumberOfOctaves(n, 6);
+n = setExponent(n, 1.0);
 
-setNoiseType(n, NOISE_TYPE_PERLIN);
-setNoiseStyle(n, NOISE_STYLE_PLAIN);
+n = setNoiseType(n, NOISE_TYPE_PERLIN);
+n = setNoiseStyle(n, NOISE_STYLE_PLAIN);
 
 noiseTest(n, "test_PerlinPlain3D");
 noiseTest2D(n, "test_PerlinPlain2D");
