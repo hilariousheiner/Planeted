@@ -73,15 +73,15 @@ namespace Planeted
             return result;
         }
 
-        static Random::NoiseFunction3D getCurrentNoise(const Noise &noise)
+        static Random::NoiseFunction3D getCurrentNoise(const NoiseFunction &noise)
         {
             return Random::GetNoiseFunction3D(noise.noiseType, noise.noiseStyle);
         }
-        static Random::NoiseFunction2D getCurrentNoise2D(const Noise &noise)
+        static Random::NoiseFunction2D getCurrentNoise2D(const NoiseFunction &noise)
         {
             return Random::GetNoiseFunction2D(noise.noiseType, noise.noiseStyle);
         }
-        static Random::NoiseFunction1D getCurrentNoise1D(const Noise &noise)
+        static Random::NoiseFunction1D getCurrentNoise1D(const NoiseFunction &noise)
         {
             return Random::GetNoiseFunction1D(noise.noiseType, noise.noiseStyle);
         }
@@ -90,7 +90,7 @@ namespace Planeted
         {
             ExpectArgsCount(args, 0, "noise");
 
-            Noise noise;
+            NoiseFunction noise;
             return Value(noise);
         }
 
@@ -98,7 +98,7 @@ namespace Planeted
         {
             ExpectArgsCount(args, 2, "seedNoise");
 
-            Noise noise = GetNoiseArg(args, 0, "seedNoise");
+            NoiseFunction noise = GetNoiseArg(args, 0, "seedNoise");
 
             if(args[1].GetValueType() == ValueTypeEnum::Int)
             {
@@ -121,7 +121,7 @@ namespace Planeted
         {
             ExpectArgsCount(args, 2, "setNoiseType");
 
-            Noise noise = GetNoiseArg(args, 0, "setNoiseType");
+            NoiseFunction noise = GetNoiseArg(args, 0, "setNoiseType");
             noise.noiseType = toNoiseType(GetIntArg(args, 1, "setNoiseType"));
 
             return Value(noise);
@@ -130,7 +130,7 @@ namespace Planeted
         {
             ExpectArgsCount(args, 2, "setNoiseStyle");
 
-            Noise noise = GetNoiseArg(args, 0, "setNoiseStyle");
+            NoiseFunction noise = GetNoiseArg(args, 0, "setNoiseStyle");
             noise.noiseStyle = toNoiseStyle(GetIntArg(args, 1, "setNoiseStyle"));
 
             return Value(noise);
@@ -140,7 +140,7 @@ namespace Planeted
         {
             ExpectArgsCount(args, 2, "setNumberOfOctaves");
 
-            Noise noise = GetNoiseArg(args, 0, "setNumberOfOctaves");
+            NoiseFunction noise = GetNoiseArg(args, 0, "setNumberOfOctaves");
             noise.SetNumberOfOctaves(GetIntArg(args, 1, "setNumberOfOctaves"));
 
             return Value(noise);
@@ -149,7 +149,7 @@ namespace Planeted
         {
             ExpectArgsCount(args, 2, "setStartFrequency");
 
-            Noise noise = GetNoiseArg(args, 0, "setStartFrequency");
+            NoiseFunction noise = GetNoiseArg(args, 0, "setStartFrequency");
             noise.SetStartFrequency(GetFloatArg(args, 1, "setStartFrequency"));
 
             return Value(noise);
@@ -159,7 +159,7 @@ namespace Planeted
         {
             ExpectArgsCount(args, 2, "setLacunarity");
 
-            Noise noise = GetNoiseArg(args, 0, "setLacunarity");
+            NoiseFunction noise = GetNoiseArg(args, 0, "setLacunarity");
             noise.SetLacunarity(GetFloatArg(args, 1, "setLacunarity"));
 
             return Value(noise);
@@ -169,7 +169,7 @@ namespace Planeted
         {
             ExpectArgsCount(args, 2, "setPersistence");
 
-            Noise noise = GetNoiseArg(args, 0, "setPersistence");
+            NoiseFunction noise = GetNoiseArg(args, 0, "setPersistence");
             noise.SetPersistence(GetFloatArg(args, 1, "setPersistence"));
 
             return Value(noise);
@@ -179,7 +179,7 @@ namespace Planeted
         {
             ExpectArgsCount(args, 2, "setNormalizeFBM");
 
-            Noise noise = GetNoiseArg(args, 0, "setNormalizeFBM");
+            NoiseFunction noise = GetNoiseArg(args, 0, "setNormalizeFBM");
             noise.SetNormalizeFBM(GetBoolArg(args, 1, "setNormalizeFBM"));
 
             return Value(noise);
@@ -189,7 +189,7 @@ namespace Planeted
         {
             ExpectArgsCount(args, 2, "setExponent");
 
-            Noise noise = GetNoiseArg(args, 0, "setExponent");
+            NoiseFunction noise = GetNoiseArg(args, 0, "setExponent");
             noise.SetExponent(GetFloatArg(args, 1, "setExponent"));
 
             return Value(noise);
@@ -199,7 +199,7 @@ namespace Planeted
         {
             ExpectArgsCount(args, 2, "setWhiteNoiseScale");
 
-            Noise noise = GetNoiseArg(args, 0, "setWhiteNoiseScale");
+            NoiseFunction noise = GetNoiseArg(args, 0, "setWhiteNoiseScale");
             noise.SetWhiteNoiseScale(GetFloatArg(args, 1, "setWhiteNoiseScale"));
 
             return Value(noise);
@@ -209,7 +209,7 @@ namespace Planeted
         {
             ExpectArgsCount(args, 2, "noiseTest");
 
-            Noise noise = GetNoiseArg(args, 0, "noiseTest");
+            NoiseFunction noise = GetNoiseArg(args, 0, "noiseTest");
             std::string filename = GetStringArg(args, 1, "noiseTest");
 
             filename = NormalizePath(runtime.OutPath + filename);
@@ -221,7 +221,7 @@ namespace Planeted
         {
             ExpectArgsCount(args, 2, "noiseTest2D");
 
-            Noise noise = GetNoiseArg(args, 0, "noiseTest2D");
+            NoiseFunction noise = GetNoiseArg(args, 0, "noiseTest2D");
             std::string filename = GetStringArg(args, 1, "noiseTest2D");
 
             filename = NormalizePath(runtime.OutPath + filename);
@@ -233,7 +233,7 @@ namespace Planeted
         {
             ExpectArgsCount(args, 2, "noiseTest1D");
 
-            Noise noise = GetNoiseArg(args, 0, "noiseTest1D");
+            NoiseFunction noise = GetNoiseArg(args, 0, "noiseTest1D");
             std::string filename = GetStringArg(args, 1, "noiseTest1D");
 
             filename = NormalizePath(runtime.OutPath + filename);
@@ -283,7 +283,7 @@ namespace Planeted
             return Value(m);
         }
 
-        static DisplacementFunction noiseDisplaceFun(const Noise &noise)
+        static DisplacementFunction noiseDisplaceFun(const NoiseFunction &noise)
         {
             return [noise](const Vector3 &v)
             {
@@ -296,7 +296,7 @@ namespace Planeted
             ExpectArgsCountAtMost(args, 4, "displace");
 
             Mesh m = GetMeshArg(args, 0, "displace");
-            Noise noise = GetNoiseArg(args, 1, "displace");
+            NoiseFunction noise = GetNoiseArg(args, 1, "displace");
             float a = GetFloatArg(args, 2, "displace");
 
             DisplacementTypeEnum displacementType = DisplacementTypeEnum::Normal;

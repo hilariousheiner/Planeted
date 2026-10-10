@@ -5,10 +5,10 @@
 
 namespace Planeted
 {
-    class Noise
+    class NoiseFunction
     {
     public:
-        Noise();
+        NoiseFunction();
 
         float Noise1D(const float &p) const;
         float Noise2D(const Vector2 &p) const;
