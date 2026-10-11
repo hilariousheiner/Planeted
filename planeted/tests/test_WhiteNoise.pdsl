@@ -1,7 +1,6 @@
 import "../lib/stdlib.pdsl" 
 
 n = whiteNoise();
-
 n = seedNoise(n, "Diomedes-1437");
 
 n = setNormalizeFBM(n, false);
@@ -12,7 +11,6 @@ n = setExponent(n, 1.0);
 
 n = setWhiteNoiseScale(n, 100.0);
 
-//n = setNoiseType(n, NOISE_TYPE_WHITE);
 n = setNoiseStyle(n, NOISE_STYLE_PLAIN);
 
 noiseTest(n, "test_WhiteNoise3D");

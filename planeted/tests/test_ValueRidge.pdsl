@@ -1,7 +1,6 @@
 import "../lib/stdlib.pdsl" 
 
-n = noise();
-
+n = valueNoise();
 n = seedNoise(n, "BETTY");
 
 n = setNormalizeFBM(n, false);
@@ -9,7 +8,6 @@ n = setStartFrequency(n, 4.0);
 n = setNumberOfOctaves(n, 6);
 n = setExponent(n, 10.0);
 
-n = setNoiseType(n, NOISE_TYPE_VALUE);
 n = setNoiseStyle(n, NOISE_STYLE_RIDGE);
 
 noiseTest(n, "test_ValueRidge3D");

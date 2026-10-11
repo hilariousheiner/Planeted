@@ -1,6 +1,6 @@
 import "../lib/stdlib.pdsl" 
 
-n = noise();
+n = perlinNoise();
 
 n = seedNoise(n, "11836-Eileen");
 
@@ -10,7 +10,6 @@ n = setLacunarity(n, 2.0);
 n = setNumberOfOctaves(n, 6);
 n = setExponent(n, 1.0);
 
-n = setNoiseType(n, NOISE_TYPE_PERLIN);
 n = setNoiseStyle(n, NOISE_STYLE_PLAIN);
 
 noiseTest(n, "test_PerlinPlain3D");
