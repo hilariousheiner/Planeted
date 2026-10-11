@@ -77,6 +77,9 @@ namespace Planeted
 
             NoiseFunction noise = GetNoiseArg(args, 0, "seedNoise");
 
+            SeedNoise(noise, args[1]);
+
+            /*
             if(args[1].GetValueType() == ValueTypeEnum::Int)
             {
                 int seed = args[1].GetIntValue();
@@ -91,6 +94,7 @@ namespace Planeted
             {
                 throw std::runtime_error("seed must be an integer or a string.");
             }
+            */
             return Value(noise);
         }
 

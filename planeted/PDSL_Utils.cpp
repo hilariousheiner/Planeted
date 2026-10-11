@@ -318,4 +318,23 @@ namespace Planeted
         }
         return result;
     }
+
+    // Noise:
+    void SeedNoise(NoiseFunction &noise, const Value &value)
+    {
+        if(value.GetValueType() == ValueTypeEnum::Int)
+        {
+            int seed = value.GetIntValue();
+            noise.noiseParams.SeedNoise(seed);
+        }
+        else if(value.GetValueType() == ValueTypeEnum::String)
+        {
+            std::string seed = value.GetStringValue();
+            noise.noiseParams.SeedNoise(seed);
+        }
+        else
+        {
+            throw std::runtime_error("seed must be an integer or a string.");
+        }
+    }
 }

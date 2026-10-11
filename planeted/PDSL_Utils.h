@@ -40,6 +40,9 @@ namespace Planeted
 
     // Arithmetic:
     Value Negate(const Value &value);
+
+    // Noise:
+    void SeedNoise(NoiseFunction &noise, const Value &value);
 }
 
 #endif // PLANETED_PDSL_UTILS_H
