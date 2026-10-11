@@ -1,6 +1,6 @@
 import "../lib/stdlib.pdsl" 
 
-n = billowNoise(valueNoise("Amphitrite-29"));
+n = billow(valueNoise("Amphitrite-29"));
 
 n = setNormalizeFBM(n, false);
 n = setStartFrequency(n, 1.0);

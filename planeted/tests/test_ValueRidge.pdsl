@@ -1,6 +1,6 @@
 import "../lib/stdlib.pdsl" 
 
-n = ridgeNoise(valueNoise("BETTY"));
+n = ridge(valueNoise("BETTY"));
 
 n = setNormalizeFBM(n, false);
 n = setStartFrequency(n, 4.0);

@@ -1,6 +1,6 @@
 import "../lib/stdlib.pdsl" 
 
-n = ridgeNoise(perlinNoise("NERIXI"));
+n = ridge(perlinNoise("NERIXI"));
 
 n = setNormalizeFBM(n, false);
 n = setStartFrequency(n, 4.0);
