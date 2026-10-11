@@ -1,7 +1,7 @@
 import "../lib/stdlib.pdsl" 
 
-n = perlinNoise(); 
-n = seedNoise(n, "Amphitrite-29");
+n = perlinNoise("Amphitrite-29"); 
+//n = seedNoise(n, "Amphitrite-29");
 
 n = setNormalizeFBM(n, false);
 n = setStartFrequency(n, 1.0);

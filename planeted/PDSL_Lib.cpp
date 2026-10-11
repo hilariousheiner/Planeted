@@ -44,30 +44,44 @@ namespace Planeted
 
         static Value builtin_whiteNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
-            ExpectArgsCount(args, 0, "whiteNoise");
+            ExpectArgsCountAtMost(args, 1, "whiteNoise");
 
             NoiseFunction noise;
             noise.noiseType = Random::NoiseTypeEnum::White;
             noise.noiseStyle = Random::NoiseStyleEnum::Plain;
 
+            if(args.size() == 1)
+            {
+                SeedNoise(noise, args[1]);
+            }
             return Value(noise);
         }
         static Value builtin_valueNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
-            ExpectArgsCount(args, 0, "valueNoise");
+            ExpectArgsCountAtMost(args, 1, "valueNoise");
 
             NoiseFunction noise;
             noise.noiseType = Random::NoiseTypeEnum::Value;
             noise.noiseStyle = Random::NoiseStyleEnum::Plain;
+
+            if(args.size() == 1)
+            {
+                SeedNoise(noise, args[1]);
+            }
             return Value(noise);
         }
         static Value builtin_perlinNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
-            ExpectArgsCount(args, 0, "perlinNoise");
+            ExpectArgsCountAtMost(args, 1, "perlinNoise");
 
             NoiseFunction noise;
             noise.noiseType = Random::NoiseTypeEnum::Perlin;
             noise.noiseStyle = Random::NoiseStyleEnum::Plain;
+
+            if(args.size() == 1)
+            {
+                SeedNoise(noise, args[1]);
+            }
             return Value(noise);
         }
 
@@ -79,22 +93,6 @@ namespace Planeted
 
             SeedNoise(noise, args[1]);
 
-            /*
-            if(args[1].GetValueType() == ValueTypeEnum::Int)
-            {
-                int seed = args[1].GetIntValue();
-                noise.noiseParams.SeedNoise(seed);
-            }
-            else if(args[1].GetValueType() == ValueTypeEnum::String)
-            {
-                std::string seed = args[1].GetStringValue();
-                noise.noiseParams.SeedNoise(seed);
-            }
-            else
-            {
-                throw std::runtime_error("seed must be an integer or a string.");
-            }
-            */
             return Value(noise);
         }
 

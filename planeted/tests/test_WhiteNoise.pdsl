@@ -1,7 +1,6 @@
 import "../lib/stdlib.pdsl" 
 
-n = whiteNoise();
-n = seedNoise(n, "Diomedes-1437");
+n = whiteNoise("Diomedes-1437");
 
 n = setNormalizeFBM(n, false);
 n = setStartFrequency(n, 1.0);
