@@ -112,6 +112,14 @@ namespace Planeted
             noise.noiseType = Random::NoiseTypeEnum::Value;
             return Value(noise);
         }
+        static Value builtin_perlinNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        {
+            ExpectArgsCount(args, 0, "perlinNoise");
+
+            NoiseFunction noise;
+            noise.noiseType = Random::NoiseTypeEnum::Perlin;
+            return Value(noise);
+        }
 
         static Value builtin_seedNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
@@ -333,6 +341,7 @@ namespace Planeted
             runtime.InstallBuiltinFunction("noise", builtin_noise);
             runtime.InstallBuiltinFunction("whiteNoise", builtin_whiteNoise);
             runtime.InstallBuiltinFunction("valueNoise", builtin_valueNoise);
+            runtime.InstallBuiltinFunction("perlinNoise", builtin_perlinNoise);
 
             runtime.InstallBuiltinFunction("seedNoise", builtin_seedNoise);
 
