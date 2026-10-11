@@ -25,6 +25,7 @@ namespace Planeted
         {
             result = result / t;
         }
+        return result;
     }
 
     float ANoise::Eval2D(const Vector2 &p) const
