@@ -8,7 +8,8 @@ n = setStartFrequency(n, 4.0);
 n = setNumberOfOctaves(n, 6);
 n = setExponent(n, 10.0);
 
-n = setNoiseStyle(n, NOISE_STYLE_RIDGE);
+n = ridgeNoise(n);
+//n = setNoiseStyle(n, NOISE_STYLE_RIDGE);
 
 noiseTest(n, "test_ValueRidge3D");
 noiseTest2D(n, "test_ValueRidge2D");

@@ -11,8 +11,6 @@ n = setExponent(n, 1.0);
 
 n = setWhiteNoiseScale(n, 100.0);
 
-n = setNoiseStyle(n, NOISE_STYLE_PLAIN);
-
 noiseTest(n, "test_WhiteNoise3D");
 noiseTest2D(n, "test_WhiteNoise2D");
 noiseTest1D(n, "test_WhiteNoise1D");
