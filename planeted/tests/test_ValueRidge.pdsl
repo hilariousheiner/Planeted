@@ -1,15 +1,11 @@
 import "../lib/stdlib.pdsl" 
 
-n = valueNoise();
-n = seedNoise(n, "BETTY");
+n = ridgeNoise(valueNoise("BETTY"));
 
 n = setNormalizeFBM(n, false);
 n = setStartFrequency(n, 4.0);
 n = setNumberOfOctaves(n, 6);
 n = setExponent(n, 10.0);
-
-n = ridgeNoise(n);
-//n = setNoiseStyle(n, NOISE_STYLE_RIDGE);
 
 noiseTest(n, "test_ValueRidge3D");
 noiseTest2D(n, "test_ValueRidge2D");

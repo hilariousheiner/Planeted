@@ -1,8 +1,6 @@
 import "../lib/stdlib.pdsl" 
 
-n = perlinNoise();
-
-n = seedNoise(n, "11836-Eileen");
+n = perlinNoise("11836-Eileen");
 
 n = setNormalizeFBM(n, true);
 n = setStartFrequency(n, 1.0);

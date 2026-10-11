@@ -1,15 +1,13 @@
 import "../lib/stdlib.pdsl" 
 
-n = whiteNoise();
-n = seedNoise(n, "Diomedes-1437");
+n = whiteNoise("Diomedes-1437");
+n = setWhiteNoiseScale(n, 3.0);
 
 n = setNormalizeFBM(n, false);
 n = setStartFrequency(n, 1.0);
 n = setLacunarity(n, 1.0);
 n = setNumberOfOctaves(n, 1);
 n = setExponent(n, 1.0);
-
-n = setWhiteNoiseScale(n, 3.0);
 
 noiseTest(n, "test_WhiteNoise3_3D");
 noiseTest2D(n, "test_WhiteNoise3_2D");

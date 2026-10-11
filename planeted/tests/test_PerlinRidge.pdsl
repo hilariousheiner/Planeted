@@ -1,14 +1,11 @@
 import "../lib/stdlib.pdsl" 
 
-n = perlinNoise();
-n = seedNoise(n, "NERIXI");
+n = ridgeNoise(perlinNoise("NERIXI"));
 
 n = setNormalizeFBM(n, false);
 n = setStartFrequency(n, 4.0);
 n = setNumberOfOctaves(n, 6);
 n = setExponent(n, 10.0);
-
-n = ridgeNoise(n);
 
 noiseTest(n, "test_PerlinRidge3D");
 noiseTest2D(n, "test_PerlinRidge2D");
