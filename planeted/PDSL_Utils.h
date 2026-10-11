@@ -40,14 +40,6 @@ namespace Planeted
 
     // Arithmetic:
     Value Negate(const Value &value);
-
-    // Get rid of these:
-
-    /*float ToFloat(const Value &value);
-    Mesh *ToMesh(const Value &value);
-    TriangleIndices ToTriangle(const Value &value);
-    Vector3 ToVector3(const Value &value);
-    */
 }
 
 #endif // PLANETED_PDSL_UTILS_H
