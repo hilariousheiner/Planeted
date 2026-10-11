@@ -92,6 +92,7 @@ namespace Planeted
 
             NoiseFunction noise;
             noise.noiseType = Random::NoiseTypeEnum::White;
+            noise.noiseStyle = Random::NoiseStyleEnum::Plain;
             return Value(noise);
         }
         static Value builtin_valueNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
@@ -100,6 +101,7 @@ namespace Planeted
 
             NoiseFunction noise;
             noise.noiseType = Random::NoiseTypeEnum::Value;
+            noise.noiseStyle = Random::NoiseStyleEnum::Plain;
             return Value(noise);
         }
         static Value builtin_perlinNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
@@ -108,6 +110,7 @@ namespace Planeted
 
             NoiseFunction noise;
             noise.noiseType = Random::NoiseTypeEnum::Perlin;
+            noise.noiseStyle = Random::NoiseStyleEnum::Plain;
             return Value(noise);
         }
 
