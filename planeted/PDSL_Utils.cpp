@@ -78,14 +78,6 @@ namespace Planeted
 
     NoiseFunction GetNoiseArg(const std::vector<Value> &args, size_t index, const std::string &functionName)
     {
-        /*
-        Noise *result = args[index].TryGetNoiseValue();
-        if(result == nullptr)
-        {
-            throw std::runtime_error(functionName + ": argument " + std::to_string(index + 1) + " must be a noise.");
-        }
-        return *result;
-        */
         NoiseFunction result;
         if(!TryAsNoise(args[index], result))
         {

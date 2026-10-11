@@ -69,8 +69,6 @@ namespace Planeted
         const Mesh &GetMeshValue() const;
         const NoiseFunction &GetNoiseValue() const;
 
-        //Noise *TryGetNoiseValue() const;
-
         ValueTypeEnum GetValueType() const;
 
         std::string ToString() const;
