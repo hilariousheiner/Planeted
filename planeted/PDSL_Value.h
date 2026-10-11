@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "Mesh.h"
-#include "Noise.h"
+#include "NoiseFunction.h"
 
 namespace Planeted
 {
