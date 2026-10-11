@@ -8,7 +8,7 @@ n = setStartFrequency(n, 4.0);
 n = setNumberOfOctaves(n, 6);
 n = setExponent(n, 10.0);
 
-n = setNoiseStyle(n, NOISE_STYLE_RIDGE);
+n = ridgeNoise(n);
 
 noiseTest(n, "test_PerlinRidge3D");
 noiseTest2D(n, "test_PerlinRidge2D");

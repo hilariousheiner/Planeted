@@ -150,6 +150,8 @@ namespace Planeted
             return Value(noise);
         }
         */
+
+        //ToDo: get rid of this:
         static Value builtin_setNoiseStyle(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "setNoiseStyle");
@@ -159,6 +161,16 @@ namespace Planeted
 
             return Value(noise);
         }
+        static Value builtin_ridgeNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        {
+            ExpectArgsCount(args, 1, "ridgeNoise");
+
+            NoiseFunction noise = GetNoiseArg(args, 0, "ridgeNoise");
+            noise.noiseStyle = Random::NoiseStyleEnum::Ridge;
+
+            return Value(noise);
+        }
+
 
         static Value builtin_setNumberOfOctaves(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
@@ -343,6 +355,8 @@ namespace Planeted
 
           //  runtime.InstallBuiltinFunction("setNoiseType", builtin_setNoiseType);
             runtime.InstallBuiltinFunction("setNoiseStyle", builtin_setNoiseStyle);
+
+            runtime.InstallBuiltinFunction("ridgeNoise", builtin_ridgeNoise);
 
             runtime.InstallBuiltinFunction("setWhiteNoiseScale", builtin_setWhiteNoiseScale);
 
