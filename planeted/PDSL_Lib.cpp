@@ -86,6 +86,8 @@ namespace Planeted
             return Random::GetNoiseFunction1D(noise.noiseType, noise.noiseStyle);
         }
 
+
+        // ToDo: get rid of this
         static Value builtin_noise(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 0, "noise");
@@ -93,6 +95,16 @@ namespace Planeted
             NoiseFunction noise;
             return Value(noise);
         }
+
+        static Value builtin_whiteNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        {
+            ExpectArgsCount(args, 0, "whiteNoise");
+
+            NoiseFunction noise;
+            noise.noiseType = Random::NoiseTypeEnum::White;
+            return Value(noise);
+        }
+
 
         static Value builtin_seedNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
@@ -312,6 +324,8 @@ namespace Planeted
         void Load(PDSL_Runtime &runtime)
         {
             runtime.InstallBuiltinFunction("noise", builtin_noise);
+            runtime.InstallBuiltinFunction("whiteNoise", builtin_whiteNoise);
+
             runtime.InstallBuiltinFunction("seedNoise", builtin_seedNoise);
 
             runtime.InstallBuiltinFunction("setNoiseType", builtin_setNoiseType);
