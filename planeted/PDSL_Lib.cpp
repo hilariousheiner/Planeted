@@ -29,53 +29,6 @@ namespace Planeted
             return result;
         }
 
-        /*
-        static Random::NoiseTypeEnum toNoiseType(int type)
-        {
-            Random::NoiseTypeEnum result = Random::NoiseTypeEnum::Value;
-
-            switch(type)
-            {
-            case 0:
-                result = Random::NoiseTypeEnum::White;
-                break;
-            case 1:
-                result = Random::NoiseTypeEnum::Value;
-                break;
-            case 2:
-                result = Random::NoiseTypeEnum::Perlin;
-                break;
-            case 3:
-                result = Random::NoiseTypeEnum::Gradient;
-                break;
-            default:
-                break;
-            }
-            return result;
-        }
-        */
-        /*
-        static Random::NoiseStyleEnum toNoiseStyle(int style)
-        {
-            Random::NoiseStyleEnum result = Random::NoiseStyleEnum::Plain;
-
-            switch(style)
-            {
-            case 0:
-                result = Random::NoiseStyleEnum::Plain;
-                break;
-            case 1:
-                result = Random::NoiseStyleEnum::Billow;
-                break;
-            case 2:
-                result = Random::NoiseStyleEnum::Ridge;
-                break;
-            default:
-                break;
-            }
-            return result;
-        }
-        */
         static Random::NoiseFunction3D getCurrentNoise(const NoiseFunction &noise)
         {
             return Random::GetNoiseFunction3D(noise.noiseType, noise.noiseStyle);
@@ -96,6 +49,7 @@ namespace Planeted
             NoiseFunction noise;
             noise.noiseType = Random::NoiseTypeEnum::White;
             noise.noiseStyle = Random::NoiseStyleEnum::Plain;
+
             return Value(noise);
         }
         static Value builtin_valueNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
@@ -140,29 +94,6 @@ namespace Planeted
             return Value(noise);
         }
 
-        /*
-        static Value builtin_setNoiseType(PDSL_Runtime &runtime, const std::vector<Value> &args)
-        {
-            ExpectArgsCount(args, 2, "setNoiseType");
-
-            NoiseFunction noise = GetNoiseArg(args, 0, "setNoiseType");
-            noise.noiseType = toNoiseType(GetIntArg(args, 1, "setNoiseType"));
-
-            return Value(noise);
-        }
-        */
-
-        /*ToDo: get rid of this:
-        static Value builtin_setNoiseStyle(PDSL_Runtime &runtime, const std::vector<Value> &args)
-        {
-            ExpectArgsCount(args, 2, "setNoiseStyle");
-
-            NoiseFunction noise = GetNoiseArg(args, 0, "setNoiseStyle");
-            noise.noiseStyle = toNoiseStyle(GetIntArg(args, 1, "setNoiseStyle"));
-
-            return Value(noise);
-        }
-        */
         static Value builtin_ridgeNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 1, "ridgeNoise");
@@ -363,8 +294,6 @@ namespace Planeted
 
             runtime.InstallBuiltinFunction("seedNoise", builtin_seedNoise);
 
-          //  runtime.InstallBuiltinFunction("setNoiseType", builtin_setNoiseType);
-          //  runtime.InstallBuiltinFunction("setNoiseStyle", builtin_setNoiseStyle);
             runtime.InstallBuiltinFunction("ridgeNoise", builtin_ridgeNoise);
             runtime.InstallBuiltinFunction("billowNoise", builtin_billowNoise);
 
