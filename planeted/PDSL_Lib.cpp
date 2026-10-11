@@ -52,7 +52,7 @@ namespace Planeted
 
             if(args.size() == 1)
             {
-                SeedNoise(noise, args[1]);
+                SeedNoise(noise, args[0]);
             }
             return Value(noise);
         }
@@ -66,7 +66,7 @@ namespace Planeted
 
             if(args.size() == 1)
             {
-                SeedNoise(noise, args[1]);
+                SeedNoise(noise, args[0]);
             }
             return Value(noise);
         }
@@ -80,7 +80,7 @@ namespace Planeted
 
             if(args.size() == 1)
             {
-                SeedNoise(noise, args[1]);
+                SeedNoise(noise, args[0]);
             }
             return Value(noise);
         }
