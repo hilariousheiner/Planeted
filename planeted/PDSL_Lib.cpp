@@ -54,6 +54,7 @@ namespace Planeted
             return result;
         }
         */
+        /*
         static Random::NoiseStyleEnum toNoiseStyle(int style)
         {
             Random::NoiseStyleEnum result = Random::NoiseStyleEnum::Plain;
@@ -74,7 +75,7 @@ namespace Planeted
             }
             return result;
         }
-
+        */
         static Random::NoiseFunction3D getCurrentNoise(const NoiseFunction &noise)
         {
             return Random::GetNoiseFunction3D(noise.noiseType, noise.noiseStyle);
@@ -151,7 +152,7 @@ namespace Planeted
         }
         */
 
-        //ToDo: get rid of this:
+        /*ToDo: get rid of this:
         static Value builtin_setNoiseStyle(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "setNoiseStyle");
@@ -161,6 +162,7 @@ namespace Planeted
 
             return Value(noise);
         }
+        */
         static Value builtin_ridgeNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 1, "ridgeNoise");
@@ -362,7 +364,7 @@ namespace Planeted
             runtime.InstallBuiltinFunction("seedNoise", builtin_seedNoise);
 
           //  runtime.InstallBuiltinFunction("setNoiseType", builtin_setNoiseType);
-            runtime.InstallBuiltinFunction("setNoiseStyle", builtin_setNoiseStyle);
+          //  runtime.InstallBuiltinFunction("setNoiseStyle", builtin_setNoiseStyle);
             runtime.InstallBuiltinFunction("ridgeNoise", builtin_ridgeNoise);
             runtime.InstallBuiltinFunction("billowNoise", builtin_billowNoise);
 
