@@ -96,20 +96,20 @@ namespace Planeted
             return Value(noise);
         }
 
-        static Value builtin_ridgeNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        static Value builtin_ridge(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
-            ExpectArgsCount(args, 1, "ridgeNoise");
+            ExpectArgsCount(args, 1, "ridge");
 
-            NoiseFunction noise = GetNoiseArg(args, 0, "ridgeNoise");
+            NoiseFunction noise = GetNoiseArg(args, 0, "ridge");
             noise.noiseStyle = Random::NoiseStyleEnum::Ridge;
 
             return Value(noise);
         }
-        static Value builtin_billowNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        static Value builtin_billow(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
-            ExpectArgsCount(args, 1, "billowNoise");
+            ExpectArgsCount(args, 1, "billow");
 
-            NoiseFunction noise = GetNoiseArg(args, 0, "billowNoise");
+            NoiseFunction noise = GetNoiseArg(args, 0, "billow");
             noise.noiseStyle = Random::NoiseStyleEnum::Billow;
 
             return Value(noise);
@@ -296,8 +296,8 @@ namespace Planeted
 
             runtime.InstallBuiltinFunction("seedNoise", builtin_seedNoise);
 
-            runtime.InstallBuiltinFunction("ridgeNoise", builtin_ridgeNoise);
-            runtime.InstallBuiltinFunction("billowNoise", builtin_billowNoise);
+            runtime.InstallBuiltinFunction("ridge", builtin_ridge);
+            runtime.InstallBuiltinFunction("billow", builtin_billow);
 
             runtime.InstallBuiltinFunction("setWhiteNoiseScale", builtin_setWhiteNoiseScale);
 
