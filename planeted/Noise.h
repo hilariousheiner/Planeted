@@ -14,6 +14,9 @@ namespace Planeted
         float Eval2D(const Vector2 &p) const;
         float Eval3D(const Vector3 &p) const;
 
+        virtual void SeedNoise(std::uint32_t seed) = 0;
+        virtual void SeedNoise(std::string seed) = 0;
+
         void SetNumberOfOctaves(std::uint32_t numberOfOctaves);
         void SetStartFrequency(float startFrequency);
         void SetLacunarity(float lacunarity);
@@ -29,6 +32,8 @@ namespace Planeted
     private:
         Random::FBMParameters fbmParams;
     };
+
+
 
     struct WhiteNoise : ANoise
     {
