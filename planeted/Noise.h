@@ -47,6 +47,11 @@ namespace Planeted
     {
     public:
         void SetWhiteNoiseScale(float scale);
+
+    protected:
+        float noise1D(const float &p) const override;
+        float noise2D(const Vector2 &p) const override;
+        float noise3D(const Vector3 &p) const override;
     };
 }
 #endif

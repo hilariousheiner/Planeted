@@ -122,4 +122,32 @@ namespace Planeted
     {
         this->noiseParams.WhiteNoiseScale = scale;
     }
+
+    float WhiteNoise::noise1D(const float &p) const
+    {
+        int pi = std::floor(p * this->noiseParams.WhiteNoiseScale);
+
+        uint32_t h = Hash1D(pi, this->noiseParams.seed);
+
+        return HashToSigned(h);
+    }
+    float WhiteNoise::noise2D(const Vector2 &p) const
+    {
+        int xi = std::floor(p.X * this->noiseParams.WhiteNoiseScale);
+        int yi = std::floor(p.Y * this->noiseParams.WhiteNoiseScale);
+
+        uint32_t h = Hash2D(xi, yi, this->noiseParams.seed);
+
+        return HashToSigned(h);
+    }
+    float WhiteNoise::noise3D(const Vector3 &p) const
+    {
+        int xi = std::floor(p.X * this->noiseParams.WhiteNoiseScale);
+        int yi = std::floor(p.Y * this->noiseParams.WhiteNoiseScale);
+        int zi = std::floor(p.Z * this->noiseParams.WhiteNoiseScale);
+
+        uint32_t h = Hash3D(xi, yi, zi, this->noiseParams.seed);
+
+        return HashToSigned(h);
+    }
 }
