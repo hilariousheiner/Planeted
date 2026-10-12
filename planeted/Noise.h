@@ -46,7 +46,7 @@ namespace Planeted
     class WhiteNoise : ANoiseGenerator
     {
     public:
-
+        void SetWhiteNoiseScale(float scale);
     };
 }
 #endif

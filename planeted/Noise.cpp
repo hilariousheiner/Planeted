@@ -112,9 +112,14 @@ namespace Planeted
     void ANoiseGenerator::SeedNoise(std::uint32_t seed)
     {
         this->noiseParams.SeedNoise(seed);
-    };
+    }
     void ANoiseGenerator::SeedNoise(std::string seed)
     {
         this->noiseParams.SeedNoise(seed);
-    };
+    }
+
+    void WhiteNoise::SetWhiteNoiseScale(float scale)
+    {
+        this->noiseParams.WhiteNoiseScale = scale;
+    }
 }
