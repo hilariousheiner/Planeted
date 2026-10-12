@@ -61,5 +61,13 @@ namespace Planeted
         float noise2D(const Vector2 &p) const override;
         float noise3D(const Vector3 &p) const override;
     };
+
+    class PerlinNoise : ANoiseGenerator
+    {
+    protected:
+        float noise1D(const float &p) const override;
+        float noise2D(const Vector2 &p) const override;
+        float noise3D(const Vector3 &p) const override;
+    };
 }
 #endif
