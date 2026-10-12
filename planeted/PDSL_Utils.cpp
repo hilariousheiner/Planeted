@@ -325,12 +325,14 @@ namespace Planeted
         if(value.GetValueType() == ValueTypeEnum::Int)
         {
             int seed = value.GetIntValue();
-            noise.noiseParams.SeedNoise(seed);
+            noise.SeedNoise(seed);
+            //noise.noiseParams.SeedNoise(seed);
         }
         else if(value.GetValueType() == ValueTypeEnum::String)
         {
             std::string seed = value.GetStringValue();
-            noise.noiseParams.SeedNoise(seed);
+            noise.SeedNoise(seed);
+            //noise.noiseParams.SeedNoise(seed);
         }
         else
         {

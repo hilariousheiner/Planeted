@@ -17,6 +17,15 @@ namespace Planeted
         return Random::FBM3D(p, this->fbmParams, this->noiseParams, Random::GetNoiseFunction3D(this->noiseType, this->noiseStyle));
     }
 
+    void NoiseFunction::SeedNoise(std::uint32_t seed)
+    {
+        this->noiseParams.SeedNoise(seed);
+    }
+    void NoiseFunction::SeedNoise(std::string seed)
+    {
+        this->noiseParams.SeedNoise(seed);
+    }
+
     void NoiseFunction::SetNumberOfOctaves(std::uint32_t numberOfOctaves)
     {
         this->fbmParams.NumberOfOctaves = numberOfOctaves;

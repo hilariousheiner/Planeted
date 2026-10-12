@@ -14,6 +14,9 @@ namespace Planeted
         float Noise2D(const Vector2 &p) const;
         float Noise3D(const Vector3 &p) const;
 
+        void SeedNoise(std::uint32_t seed);
+        void SeedNoise(std::string seed);
+
         void SetNumberOfOctaves(std::uint32_t numberOfOctaves);
         void SetStartFrequency(float startFrequency);
         void SetLacunarity(float lacunarity);
@@ -26,8 +29,8 @@ namespace Planeted
         Random::NoiseTypeEnum noiseType;
         Random::NoiseStyleEnum noiseStyle;
 
-        Random::NoiseParameters noiseParams;
         Random::FBMParameters fbmParams;
+        Random::NoiseParameters noiseParams;
     };
 }
 #endif
