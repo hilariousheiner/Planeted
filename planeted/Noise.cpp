@@ -432,4 +432,21 @@ namespace Planeted
         float n = (0.9f - std::abs(this->noise->Eval3D(p)));
         return n*n;
     }
+
+    BillowNoiseModifier::BillowNoiseModifier(std::unique_ptr<ANoise> noise)
+        : noise(std::move(noise))
+    {}
+
+    float BillowNoiseModifier::noise1D(const float &p) const
+    {
+        return std::abs(this->noise->Eval1D(p));
+    }
+    float BillowNoiseModifier::noise2D(const Vector2 &p) const
+    {
+        return std::abs(this->noise->Eval2D(p));
+    }
+    float BillowNoiseModifier::noise3D(const Vector3 &p) const
+    {
+        return std::abs(this->noise->Eval3D(p));
+    }
 }
