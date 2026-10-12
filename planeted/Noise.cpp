@@ -108,4 +108,13 @@ namespace Planeted
     {
         this->fbmParams.Exponent = exponent;
     }
+
+    void ANoiseGenerator::SeedNoise(std::uint32_t seed)
+    {
+        this->noiseParams.SeedNoise(seed);
+    };
+    void ANoiseGenerator::SeedNoise(std::string seed)
+    {
+        this->noiseParams.SeedNoise(seed);
+    };
 }

@@ -33,9 +33,17 @@ namespace Planeted
         Random::FBMParameters fbmParams;
     };
 
+    class ANoiseGenerator : ANoise
+    {
+    public:
+        void SeedNoise(std::uint32_t seed) override;
+        void SeedNoise(std::string seed) override;
 
+    protected:
+        Random::NoiseParameters noiseParams;
+    };
 
-    struct WhiteNoise : ANoise
+    class WhiteNoise : ANoiseGenerator
     {
     public:
 
