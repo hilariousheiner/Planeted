@@ -25,7 +25,7 @@ namespace Planeted
         {
             result = result / t;
         }
-        return result;
+        return std::powf(result, fbmParams.Exponent);
     }
 
     float ANoise::Eval2D(const Vector2 &p) const
@@ -50,7 +50,7 @@ namespace Planeted
         {
             result = result / t;
         }
-        return result;
+        return std::powf(result, fbmParams.Exponent);
     }
 
     float ANoise::Eval3D(const Vector3 &p) const
@@ -75,6 +75,6 @@ namespace Planeted
         {
             result = result / t;
         }
-        return result;
+        return std::powf(result, fbmParams.Exponent);
     }
 }
