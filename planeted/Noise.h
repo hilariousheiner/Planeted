@@ -1,6 +1,8 @@
 #ifndef PLANETED_NOISE_H
 #define PLANETED_NOISE_H
 
+#include <memory>
+
 #include "Random.h"
 
 namespace Planeted
@@ -68,6 +70,20 @@ namespace Planeted
         float noise1D(const float &p) const override;
         float noise2D(const Vector2 &p) const override;
         float noise3D(const Vector3 &p) const override;
+    };
+
+    class RidgeNoiseModifier : ANoise
+    {
+    public:
+        RidgeNoiseModifier(std::unique_ptr<ANoise> noise);
+
+    protected:
+        float noise1D(const float &p) const override;
+        float noise2D(const Vector2 &p) const override;
+        float noise3D(const Vector3 &p) const override;
+
+    private:
+        std::unique_ptr<ANoise> noise;
     };
 }
 #endif

@@ -412,4 +412,24 @@ namespace Planeted
 
         return SmoothStepUnclamped5(v0, v1, tz);
     }
+
+    RidgeNoiseModifier::RidgeNoiseModifier(std::unique_ptr<ANoise> noise)
+        : noise(std::move(noise))
+    {}
+
+    float RidgeNoiseModifier::noise1D(const float &p) const
+    {
+        float n = (0.9f - std::abs(this->noise->Eval1D(p)));
+        return n*n;
+    }
+    float RidgeNoiseModifier::noise2D(const Vector2 &p) const
+    {
+        float n = (0.9f - std::abs(this->noise->Eval2D(p)));
+        return n*n;
+    }
+    float RidgeNoiseModifier::noise3D(const Vector3 &p) const
+    {
+        float n = (0.9f - std::abs(this->noise->Eval3D(p)));
+        return n*n;
+    }
 }
