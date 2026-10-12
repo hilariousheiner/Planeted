@@ -77,4 +77,35 @@ namespace Planeted
         }
         return std::powf(result, fbmParams.Exponent);
     }
+
+
+    void ANoise::SetNumberOfOctaves(std::uint32_t numberOfOctaves)
+    {
+        this->fbmParams.NumberOfOctaves = numberOfOctaves;
+    }
+
+    void ANoise::SetStartFrequency(float startFrequency)
+    {
+        this->fbmParams.StartFrequency = startFrequency;
+    }
+
+    void ANoise::SetLacunarity(float lacunarity)
+    {
+        this->fbmParams.Lacunarity = lacunarity;
+    }
+
+    void ANoise::SetPersistence(float persistence)
+    {
+        this->fbmParams.Persistence = persistence;
+    }
+
+    void ANoise::SetNormalizeFBM(bool normalize)
+    {
+        this->fbmParams.Normalize = normalize;
+    }
+
+    void ANoise::SetExponent(float exponent)
+    {
+        this->fbmParams.Exponent = exponent;
+    }
 }
