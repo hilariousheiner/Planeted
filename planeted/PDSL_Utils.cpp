@@ -76,9 +76,9 @@ namespace Planeted
         return result;
     }
 
-    NoiseFunction GetNoiseArg(const std::vector<Value> &args, size_t index, const std::string &functionName)
+    NoiseValue GetNoiseArg(const std::vector<Value> &args, size_t index, const std::string &functionName)
     {
-        NoiseFunction result;
+        NoiseValue result;
         if(!TryAsNoise(args[index], result))
         {
             throw std::runtime_error(functionName + ": argument " + std::to_string(index + 1) + " must be a noise.");
@@ -208,7 +208,7 @@ namespace Planeted
         return result;
     }
 
-    bool TryAsNoise(const Value &value, NoiseFunction &out)
+    bool TryAsNoise(const Value &value, NoiseValue &out)
     {
         bool result = false;
 

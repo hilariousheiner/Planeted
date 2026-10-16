@@ -45,7 +45,7 @@ namespace Planeted
         : data(std::move(meshValue))
     {}
 
-    Value::Value(NoiseFunction noiseValue)
+    Value::Value(NoiseValue noiseValue)
         : data(std::move(noiseValue))
     { }
 
@@ -93,9 +93,9 @@ namespace Planeted
         return std::get<Mesh>(this->data);
     }
 
-    const NoiseFunction &Value::GetNoiseValue() const
+    const NoiseValue &Value::GetNoiseValue() const
     {
-        return std::get<NoiseFunction>(this->data);
+        return std::get<NoiseValue>(this->data);
     }
 
     ValueTypeEnum Value::GetValueType() const
@@ -135,7 +135,7 @@ namespace Planeted
         {
             return ValueTypeEnum::Mesh;
         }
-        if(std::holds_alternative<NoiseFunction>(this->data))
+        if(std::holds_alternative<NoiseValue>(this->data))
         {
             return ValueTypeEnum::Noise;
         }

@@ -19,7 +19,7 @@ namespace Planeted
 
     bool GetBoolArg(const std::vector<Value> &args, size_t index, const std::string &functionName);
 
-    NoiseFunction GetNoiseArg(const std::vector<Value> &args, size_t index, const std::string &functionName);
+    NoiseValue GetNoiseArg(const std::vector<Value> &args, size_t index, const std::string &functionName);
 
     Mesh GetMeshArg(const std::vector<Value> &args, size_t index, const std::string &functionName);
 
@@ -31,7 +31,7 @@ namespace Planeted
     bool TryAsVector3(const Value &value, Vector3 &out);
     bool TryAsTriangle(const Value &value, TriangleIndices &out);
     bool TryAsMesh(const Value &value, Mesh &out);
-    bool TryAsNoise(const Value &value, NoiseFunction &out);
+    bool TryAsNoise(const Value &value, NoiseValue &out);
 
     // Tuple conversions:
     bool TupleToMesh(const Tuple &t, Mesh &out);

@@ -1,6 +1,7 @@
 #ifndef PLANETED_PDSL_VALUE_H
 #define PLANETED_PDSL_VALUE_H
 
+#include <memory>
 #include <variant>
 #include <vector>
 
@@ -40,6 +41,40 @@ namespace Planeted
         std::string ToString() const;
     };
 
+    class NoiseValue
+    {
+    public:
+        NoiseValue() = default;
+
+        explicit NoiseValue(std::unique_ptr<NoiseFunction> noise)
+            : noise(std::move(noise))
+        {}
+
+        NoiseValue(const NoiseValue &other)
+            : noise(other.noise->Clone())
+        {}
+
+        NoiseValue &operator=(const NoiseValue &other)
+        {
+            if(this != &other)
+            {
+                this->noise = other.noise->Clone();
+            }
+            return *this;
+        }
+
+        NoiseValue(NoiseValue&&) noexcept = default;
+        NoiseValue& operator=(NoiseValue&&) noexcept = default;
+
+        NoiseFunction &Get()
+        {
+            return *noise;
+        }
+
+    private:
+        std::unique_ptr<NoiseFunction> noise;
+    };
+
     class Value
     {
     public:
@@ -53,7 +88,7 @@ namespace Planeted
         explicit Value(List listValue);
         explicit Value(Mesh meshValue);
 
-        explicit Value(NoiseFunction noiseValue);
+        explicit Value(NoiseValue noiseValue);
 
         bool IsNull() const;
         static const Value &Null();
@@ -67,7 +102,7 @@ namespace Planeted
         const List &GetListValue() const;
 
         const Mesh &GetMeshValue() const;
-        const NoiseFunction &GetNoiseValue() const;
+        const NoiseValue &GetNoiseValue() const;
 
         ValueTypeEnum GetValueType() const;
 
@@ -75,7 +110,7 @@ namespace Planeted
         std::string TypeToString() const;
 
     private:
-        std::variant<std::monostate, int, float, bool, std::string, Tuple, List, Mesh, NoiseFunction> data;
+        std::variant<std::monostate, int, float, bool, std::string, Tuple, List, Mesh, NoiseValue> data;
     };
 }
 #endif // PLANETED_PDSL_VALUE_H

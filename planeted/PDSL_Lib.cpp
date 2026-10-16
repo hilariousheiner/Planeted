@@ -1,5 +1,6 @@
 #include "PDSL_Lib.h"
 
+#include <memory>
 #include <iostream>
 
 #include "Noise.h"
@@ -46,153 +47,153 @@ namespace Planeted
         {
             ExpectArgsCountAtMost(args, 1, "whiteNoise");
 
-            NoiseFunction noise;
-            noise.noiseType = Random::NoiseTypeEnum::White;
-            noise.noiseStyle = Random::NoiseStyleEnum::Plain;
+            NoiseValue noiseValue(std::make_unique<NoiseFunction>());
+            noiseValue.Get().noiseType = Random::NoiseTypeEnum::White;
+            noiseValue.Get().noiseStyle = Random::NoiseStyleEnum::Plain;
 
             if(args.size() == 1)
             {
-                SeedNoise(noise, args[0]);
+                SeedNoise(noiseValue.Get(), args[0]);
             }
-            return Value(noise);
+            return Value(noiseValue);
         }
         static Value builtin_valueNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCountAtMost(args, 1, "valueNoise");
 
-            NoiseFunction noise;
-            noise.noiseType = Random::NoiseTypeEnum::Value;
-            noise.noiseStyle = Random::NoiseStyleEnum::Plain;
+            NoiseValue noiseValue(std::make_unique<NoiseFunction>());
+            noiseValue.Get().noiseType = Random::NoiseTypeEnum::Value;
+            noiseValue.Get().noiseStyle = Random::NoiseStyleEnum::Plain;
 
             if(args.size() == 1)
             {
-                SeedNoise(noise, args[0]);
+                SeedNoise(noiseValue.Get(), args[0]);
             }
-            return Value(noise);
+            return Value(noiseValue);
         }
         static Value builtin_perlinNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCountAtMost(args, 1, "perlinNoise");
 
-            NoiseFunction noise;
-            noise.noiseType = Random::NoiseTypeEnum::Perlin;
-            noise.noiseStyle = Random::NoiseStyleEnum::Plain;
+            NoiseValue noiseValue(std::make_unique<NoiseFunction>());
+            noiseValue.Get().noiseType = Random::NoiseTypeEnum::Perlin;
+            noiseValue.Get().noiseStyle = Random::NoiseStyleEnum::Plain;
 
             if(args.size() == 1)
             {
-                SeedNoise(noise, args[0]);
+                SeedNoise(noiseValue.Get(), args[0]);
             }
-            return Value(noise);
+            return Value(noiseValue);
         }
 
         static Value builtin_seedNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "seedNoise");
 
-            NoiseFunction noise = GetNoiseArg(args, 0, "seedNoise");
+            NoiseValue noiseValue = GetNoiseArg(args, 0, "seedNoise");
 
-            SeedNoise(noise, args[1]);
+            SeedNoise(noiseValue.Get(), args[1]);
 
-            return Value(noise);
+            return Value(noiseValue);
         }
 
         static Value builtin_ridge(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 1, "ridge");
 
-            NoiseFunction noise = GetNoiseArg(args, 0, "ridge");
-            noise.noiseStyle = Random::NoiseStyleEnum::Ridge;
+            NoiseValue noiseValue = GetNoiseArg(args, 0, "ridge");
+            noiseValue.Get().noiseStyle = Random::NoiseStyleEnum::Ridge;
 
-            return Value(noise);
+            return Value(noiseValue);
         }
         static Value builtin_billow(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 1, "billow");
 
-            NoiseFunction noise = GetNoiseArg(args, 0, "billow");
-            noise.noiseStyle = Random::NoiseStyleEnum::Billow;
+            NoiseValue noiseValue = GetNoiseArg(args, 0, "billow");
+            noiseValue.Get().noiseStyle = Random::NoiseStyleEnum::Billow;
 
-            return Value(noise);
+            return Value(noiseValue);
         }
 
         static Value builtin_setNumberOfOctaves(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "setNumberOfOctaves");
 
-            NoiseFunction noise = GetNoiseArg(args, 0, "setNumberOfOctaves");
-            noise.SetNumberOfOctaves(GetIntArg(args, 1, "setNumberOfOctaves"));
+            NoiseValue noiseValue = GetNoiseArg(args, 0, "setNumberOfOctaves");
+            noiseValue.Get().SetNumberOfOctaves(GetIntArg(args, 1, "setNumberOfOctaves"));
 
-            return Value(noise);
+            return Value(noiseValue);
         }
         static Value builtin_setStartFrequency(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "setStartFrequency");
 
-            NoiseFunction noise = GetNoiseArg(args, 0, "setStartFrequency");
-            noise.SetStartFrequency(GetFloatArg(args, 1, "setStartFrequency"));
+            NoiseValue noiseValue = GetNoiseArg(args, 0, "setStartFrequency");
+            noiseValue.Get().SetStartFrequency(GetFloatArg(args, 1, "setStartFrequency"));
 
-            return Value(noise);
+            return Value(noiseValue);
         }
 
         static Value builtin_setLacunarity(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "setLacunarity");
 
-            NoiseFunction noise = GetNoiseArg(args, 0, "setLacunarity");
-            noise.SetLacunarity(GetFloatArg(args, 1, "setLacunarity"));
+            NoiseValue noiseValue = GetNoiseArg(args, 0, "setLacunarity");
+            noiseValue.Get().SetLacunarity(GetFloatArg(args, 1, "setLacunarity"));
 
-            return Value(noise);
+            return Value(noiseValue);
         }
 
         static Value builtin_setPersistence(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "setPersistence");
 
-            NoiseFunction noise = GetNoiseArg(args, 0, "setPersistence");
-            noise.SetPersistence(GetFloatArg(args, 1, "setPersistence"));
+            NoiseValue noiseValue = GetNoiseArg(args, 0, "setPersistence");
+            noiseValue.Get().SetPersistence(GetFloatArg(args, 1, "setPersistence"));
 
-            return Value(noise);
+            return Value(noiseValue);
         }
 
         static Value builtin_setNormalizeFBM(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "setNormalizeFBM");
 
-            NoiseFunction noise = GetNoiseArg(args, 0, "setNormalizeFBM");
-            noise.SetNormalizeFBM(GetBoolArg(args, 1, "setNormalizeFBM"));
+            NoiseValue noiseValue = GetNoiseArg(args, 0, "setNormalizeFBM");
+            noiseValue.Get().SetNormalizeFBM(GetBoolArg(args, 1, "setNormalizeFBM"));
 
-            return Value(noise);
+            return Value(noiseValue);
         }
 
         static Value builtin_setExponent(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "setExponent");
 
-            NoiseFunction noise = GetNoiseArg(args, 0, "setExponent");
-            noise.SetExponent(GetFloatArg(args, 1, "setExponent"));
+            NoiseValue noiseValue = GetNoiseArg(args, 0, "setExponent");
+            noiseValue.Get().SetExponent(GetFloatArg(args, 1, "setExponent"));
 
-            return Value(noise);
+            return Value(noiseValue);
         }
 
         static Value builtin_setWhiteNoiseScale(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "setWhiteNoiseScale");
 
-            NoiseFunction noise = GetNoiseArg(args, 0, "setWhiteNoiseScale");
-            noise.SetWhiteNoiseScale(GetFloatArg(args, 1, "setWhiteNoiseScale"));
+            NoiseValue noiseValue = GetNoiseArg(args, 0, "setWhiteNoiseScale");
+            noiseValue.Get().SetWhiteNoiseScale(GetFloatArg(args, 1, "setWhiteNoiseScale"));
 
-            return Value(noise);
+            return Value(noiseValue);
         }
 
         static Value builtin_noiseTest(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "noiseTest");
 
-            NoiseFunction noise = GetNoiseArg(args, 0, "noiseTest");
+            NoiseValue noiseValue = GetNoiseArg(args, 0, "noiseTest");
             std::string filename = GetStringArg(args, 1, "noiseTest");
 
             filename = NormalizePath(runtime.OutPath + filename);
-            NoiseTest3D(filename, noise.fbmParams, noise.noiseParams, PDSL_Lib::getCurrentNoise(noise));
+            NoiseTest3D(filename, noiseValue.Get().fbmParams, noiseValue.Get().noiseParams, PDSL_Lib::getCurrentNoise(noiseValue.Get()));
 
             return Value::Null();
         }
@@ -200,11 +201,11 @@ namespace Planeted
         {
             ExpectArgsCount(args, 2, "noiseTest2D");
 
-            NoiseFunction noise = GetNoiseArg(args, 0, "noiseTest2D");
+            NoiseValue noiseValue = GetNoiseArg(args, 0, "noiseTest2D");
             std::string filename = GetStringArg(args, 1, "noiseTest2D");
 
             filename = NormalizePath(runtime.OutPath + filename);
-            NoiseTest2D(filename, noise.fbmParams, noise.noiseParams, PDSL_Lib::getCurrentNoise2D(noise));
+            NoiseTest2D(filename, noiseValue.Get().fbmParams, noiseValue.Get().noiseParams, PDSL_Lib::getCurrentNoise2D(noiseValue.Get()));
 
             return Value::Null();
         }
@@ -212,11 +213,11 @@ namespace Planeted
         {
             ExpectArgsCount(args, 2, "noiseTest1D");
 
-            NoiseFunction noise = GetNoiseArg(args, 0, "noiseTest1D");
+            NoiseValue noiseValue = GetNoiseArg(args, 0, "noiseTest1D");
             std::string filename = GetStringArg(args, 1, "noiseTest1D");
 
             filename = NormalizePath(runtime.OutPath + filename);
-            NoiseTest1D(filename, noise.fbmParams, noise.noiseParams, PDSL_Lib::getCurrentNoise1D(noise));
+            NoiseTest1D(filename, noiseValue.Get().fbmParams, noiseValue.Get().noiseParams, PDSL_Lib::getCurrentNoise1D(noiseValue.Get()));
 
             return Value::Null();
         }
@@ -275,7 +276,7 @@ namespace Planeted
             ExpectArgsCountAtMost(args, 4, "displace");
 
             Mesh m = GetMeshArg(args, 0, "displace");
-            NoiseFunction noise = GetNoiseArg(args, 1, "displace");
+            NoiseValue noiseValue = GetNoiseArg(args, 1, "displace");
             float a = GetFloatArg(args, 2, "displace");
 
             DisplacementTypeEnum displacementType = DisplacementTypeEnum::Normal;
@@ -284,7 +285,7 @@ namespace Planeted
                 displacementType = toDisplacementType(args[3].GetIntValue());
             }
 
-            m.Displace(noiseDisplaceFun(noise), a, displacementType);
+            m.Displace(noiseDisplaceFun(noiseValue.Get()), a, displacementType);
             return Value(m);
         }
 
