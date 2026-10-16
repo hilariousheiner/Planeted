@@ -4,6 +4,11 @@ namespace Planeted
 {
     NoiseFunction::NoiseFunction() { }
 
+    std::unique_ptr<NoiseFunction> NoiseFunction::Clone() const
+    {
+        return std::make_unique<NoiseFunction>(*this);
+    }
+
     float NoiseFunction::Noise1D(const float &p) const
     {
         return Random::FBM1D(p, this->fbmParams, this->noiseParams, Random::GetNoiseFunction1D(this->noiseType, this->noiseStyle));

@@ -1,6 +1,8 @@
 #ifndef PLANETED_NOISEFUNCTION_H
 #define PLANETED_NOISEFUNCTION_H
 
+#include <memory>
+
 #include "Random.h"
 
 namespace Planeted
@@ -9,6 +11,7 @@ namespace Planeted
     {
     public:
         NoiseFunction();
+        std::unique_ptr<NoiseFunction> Clone() const;
 
         float Noise1D(const float &p) const;
         float Noise2D(const Vector2 &p) const;
