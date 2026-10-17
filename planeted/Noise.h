@@ -11,6 +11,7 @@ namespace Planeted
     {
     public:
         virtual ~ANoise() = default;
+        virtual std::unique_ptr<ANoise> Clone() const = 0;
 
         float Eval1D(const float &p) const;
         float Eval2D(const Vector2 &p) const;
@@ -49,6 +50,7 @@ namespace Planeted
     {
     public:
         void SetWhiteNoiseScale(float scale);
+        std::unique_ptr<ANoise> Clone() const override;
 
     protected:
         float noise1D(const float &p) const override;
@@ -58,6 +60,9 @@ namespace Planeted
 
     class ValueNoise : public ANoiseGenerator
     {
+    public:
+        std::unique_ptr<ANoise> Clone() const override;
+
     protected:
         float noise1D(const float &p) const override;
         float noise2D(const Vector2 &p) const override;
@@ -66,6 +71,9 @@ namespace Planeted
 
     class PerlinNoise : public ANoiseGenerator
     {
+    public:
+        std::unique_ptr<ANoise> Clone() const override;
+
     protected:
         float noise1D(const float &p) const override;
         float noise2D(const Vector2 &p) const override;
@@ -75,7 +83,12 @@ namespace Planeted
     class RidgeNoiseModifier : public ANoise
     {
     public:
+
         RidgeNoiseModifier(std::unique_ptr<ANoise> noise);
+
+        RidgeNoiseModifier(const RidgeNoiseModifier &other);
+
+        std::unique_ptr<ANoise> Clone() const override;
 
         void SeedNoise(std::uint32_t seed) override;
         void SeedNoise(std::string seed) override;
@@ -93,6 +106,9 @@ namespace Planeted
     {
     public:
         BillowNoiseModifier(std::unique_ptr<ANoise> noise);
+        BillowNoiseModifier(const BillowNoiseModifier &other);
+
+        std::unique_ptr<ANoise> Clone() const override;
 
         void SeedNoise(std::uint32_t seed) override;
         void SeedNoise(std::string seed) override;

@@ -118,6 +118,11 @@ namespace Planeted
         this->noiseParams.SeedNoise(seed);
     }
 
+
+    std::unique_ptr<ANoise> WhiteNoise::Clone() const
+    {
+        return std::make_unique<WhiteNoise>(*this);
+    }
     void WhiteNoise::SetWhiteNoiseScale(float scale)
     {
         this->noiseParams.WhiteNoiseScale = scale;
@@ -151,6 +156,11 @@ namespace Planeted
         return HashToSigned(h);
     }
 
+
+    std::unique_ptr<ANoise> ValueNoise::Clone() const
+    {
+        return std::make_unique<ValueNoise>(*this);
+    }
     // ToDo: move somewhere else; maybe into ANoise
     static std::uint8_t toGrid(const int &x)
     {
@@ -236,6 +246,11 @@ namespace Planeted
         return SmoothStepUnclamped(v0, v1, tz);
     }
 
+
+    std::unique_ptr<ANoise> PerlinNoise::Clone() const
+    {
+        return std::make_unique<PerlinNoise>(*this);
+    }
     static const float randomDotGradPerlin(const Random::NoiseParameters &params, const std::uint8_t &x, const float tx)
     {
         return params.Permute(x) & 1 ? tx : -tx;
@@ -413,9 +428,19 @@ namespace Planeted
         return SmoothStepUnclamped5(v0, v1, tz);
     }
 
+
     RidgeNoiseModifier::RidgeNoiseModifier(std::unique_ptr<ANoise> noise)
         : noise(std::move(noise))
     {}
+
+    RidgeNoiseModifier::RidgeNoiseModifier(const RidgeNoiseModifier &other)
+        : noise(other.noise->Clone())
+    {}
+
+    std::unique_ptr<ANoise> RidgeNoiseModifier::Clone() const
+    {
+        return std::make_unique<RidgeNoiseModifier>(*this);
+    }
 
     void RidgeNoiseModifier::SeedNoise(std::uint32_t seed)
     {
@@ -445,6 +470,15 @@ namespace Planeted
     BillowNoiseModifier::BillowNoiseModifier(std::unique_ptr<ANoise> noise)
         : noise(std::move(noise))
     {}
+
+    BillowNoiseModifier::BillowNoiseModifier(const BillowNoiseModifier &other)
+        : noise(other.noise->Clone())
+    {}
+
+    std::unique_ptr<ANoise> BillowNoiseModifier::Clone() const
+    {
+        return std::make_unique<BillowNoiseModifier>(*this);
+    }
 
     void BillowNoiseModifier::SeedNoise(std::uint32_t seed)
     {
