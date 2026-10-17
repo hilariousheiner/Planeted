@@ -417,6 +417,15 @@ namespace Planeted
         : noise(std::move(noise))
     {}
 
+    void RidgeNoiseModifier::SeedNoise(std::uint32_t seed)
+    {
+        this->noise->SeedNoise(seed);
+    }
+    void RidgeNoiseModifier::SeedNoise(std::string seed)
+    {
+        this->noise->SeedNoise(seed);
+    }
+
     float RidgeNoiseModifier::noise1D(const float &p) const
     {
         float n = (0.9f - std::abs(this->noise->Eval1D(p)));
@@ -436,6 +445,15 @@ namespace Planeted
     BillowNoiseModifier::BillowNoiseModifier(std::unique_ptr<ANoise> noise)
         : noise(std::move(noise))
     {}
+
+    void BillowNoiseModifier::SeedNoise(std::uint32_t seed)
+    {
+        this->noise->SeedNoise(seed);
+    }
+    void BillowNoiseModifier::SeedNoise(std::string seed)
+    {
+        this->noise->SeedNoise(seed);
+    }
 
     float BillowNoiseModifier::noise1D(const float &p) const
     {

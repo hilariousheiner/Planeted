@@ -77,6 +77,9 @@ namespace Planeted
     public:
         RidgeNoiseModifier(std::unique_ptr<ANoise> noise);
 
+        void SeedNoise(std::uint32_t seed) override;
+        void SeedNoise(std::string seed) override;
+
     protected:
         float noise1D(const float &p) const override;
         float noise2D(const Vector2 &p) const override;
@@ -90,6 +93,9 @@ namespace Planeted
     {
     public:
         BillowNoiseModifier(std::unique_ptr<ANoise> noise);
+
+        void SeedNoise(std::uint32_t seed) override;
+        void SeedNoise(std::string seed) override;
 
     protected:
         float noise1D(const float &p) const override;
