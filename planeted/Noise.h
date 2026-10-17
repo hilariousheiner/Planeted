@@ -10,7 +10,7 @@ namespace Planeted
     class ANoise
     {
     public:
-        virtual ~ANoise() {}
+        virtual ~ANoise() = default;
 
         float Eval1D(const float &p) const;
         float Eval2D(const Vector2 &p) const;
@@ -35,7 +35,7 @@ namespace Planeted
         Random::FBMParameters fbmParams;
     };
 
-    class ANoiseGenerator : ANoise
+    class ANoiseGenerator : public ANoise
     {
     public:
         void SeedNoise(std::uint32_t seed) override;
@@ -45,7 +45,7 @@ namespace Planeted
         Random::NoiseParameters noiseParams;
     };
 
-    class WhiteNoise : ANoiseGenerator
+    class WhiteNoise : public ANoiseGenerator
     {
     public:
         void SetWhiteNoiseScale(float scale);
@@ -56,7 +56,7 @@ namespace Planeted
         float noise3D(const Vector3 &p) const override;
     };
 
-    class ValueNoise : ANoiseGenerator
+    class ValueNoise : public ANoiseGenerator
     {
     protected:
         float noise1D(const float &p) const override;
@@ -64,7 +64,7 @@ namespace Planeted
         float noise3D(const Vector3 &p) const override;
     };
 
-    class PerlinNoise : ANoiseGenerator
+    class PerlinNoise : public ANoiseGenerator
     {
     protected:
         float noise1D(const float &p) const override;
@@ -72,7 +72,7 @@ namespace Planeted
         float noise3D(const Vector3 &p) const override;
     };
 
-    class RidgeNoiseModifier : ANoise
+    class RidgeNoiseModifier : public ANoise
     {
     public:
         RidgeNoiseModifier(std::unique_ptr<ANoise> noise);
@@ -86,7 +86,7 @@ namespace Planeted
         std::unique_ptr<ANoise> noise;
     };
 
-    class BillowNoiseModifier : ANoise
+    class BillowNoiseModifier : public ANoise
     {
     public:
         BillowNoiseModifier(std::unique_ptr<ANoise> noise);
