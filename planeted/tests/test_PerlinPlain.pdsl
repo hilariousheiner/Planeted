@@ -2,10 +2,11 @@ import "../lib/stdlib.pdsl"
 
 n = perlinNoise("11836-Eileen");
 
-n = setNormalizeFBM(n, true);
-n = setStartFrequency(n, 1.0);
-n = setLacunarity(n, 2.0);
 n = setNumberOfOctaves(n, 6);
+n = setLacunarity(n, 2.0);
+n = setPersistence(n, 0.5);
+n = setStartFrequency(n, 1.0);
+n = setNormalizeFBM(n, true);
 n = setExponent(n, 1.0);
 
 noiseTest(n, "test_PerlinPlain3D");
