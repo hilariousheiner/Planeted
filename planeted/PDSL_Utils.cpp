@@ -339,4 +339,22 @@ namespace Planeted
             throw std::runtime_error("seed must be an integer or a string.");
         }
     }
+
+    void SeedNoise(ANoise &noise, const Value &value)
+    {
+        if(value.GetValueType() == ValueTypeEnum::Int)
+        {
+            int seed = value.GetIntValue();
+            noise.SeedNoise(seed);
+        }
+        else if(value.GetValueType() == ValueTypeEnum::String)
+        {
+            std::string seed = value.GetStringValue();
+            noise.SeedNoise(seed);
+        }
+        else
+        {
+            throw std::runtime_error("seed must be an integer or a string.");
+        }
+    }
 }

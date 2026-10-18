@@ -43,6 +43,7 @@ namespace Planeted
 
     // Noise:
     void SeedNoise(NoiseFunction &noise, const Value &value);
+    void SeedNoise(ANoise &noise, const Value &value);
 }
 
 #endif // PLANETED_PDSL_UTILS_H
