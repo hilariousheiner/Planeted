@@ -29,8 +29,8 @@ namespace Planeted
         FBMParameters::FBMParameters()
         {
             this->NumberOfOctaves = 1;
-            this->Lacunarity = 2.0f;
-            this->Persistence = 0.5f;
+            this->Lacunarity = 1.0f;
+            this->Persistence = 1.0f;
             this->StartFrequency = 1.0f;
             this->Normalize = false;
             this->Exponent = 1.0f;
