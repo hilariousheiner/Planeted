@@ -7,7 +7,7 @@ n = setLacunarity(n, 1.0);
 n = setPersistence(n, 0.5);
 n = setStartFrequency(n, 1.0);
 n = setNormalizeFBM(n, false);
-n = setExponent(n, 1.5);
+//n = setExponent(n, 1.5);
 
 noiseTest(n, "test_ValueBillow3D");
 noiseTest2D(n, "test_ValueBillow2D");

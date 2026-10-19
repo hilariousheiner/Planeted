@@ -56,11 +56,6 @@ namespace Planeted
         this->fbmParams.Normalize = normalize;
     }
 
-    void NoiseFunction::SetExponent(float exponent)
-    {
-        this->fbmParams.Exponent = exponent;
-    }
-
     void NoiseFunction::SetWhiteNoiseScale(float scale)
     {
         this->noiseParams.WhiteNoiseScale = scale;

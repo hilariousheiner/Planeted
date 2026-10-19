@@ -178,16 +178,6 @@ namespace Planeted
             return Value(noiseValue);
         }
 
-        static Value builtin_setExponent(PDSL_Runtime &runtime, const std::vector<Value> &args)
-        {
-            ExpectArgsCount(args, 2, "setExponent");
-
-            NoiseValue noiseValue = GetNoiseArg(args, 0, "setExponent");
-            noiseValue.Get().SetExponent(GetFloatArg(args, 1, "setExponent"));
-
-            return Value(noiseValue);
-        }
-
         static Value builtin_setWhiteNoiseScale(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "setWhiteNoiseScale");
@@ -339,7 +329,6 @@ namespace Planeted
             runtime.InstallBuiltinFunction("setLacunarity", builtin_setLacunarity);
             runtime.InstallBuiltinFunction("setPersistence", builtin_setPersistence);
             runtime.InstallBuiltinFunction("setNormalizeFBM", builtin_setNormalizeFBM);
-            runtime.InstallBuiltinFunction("setExponent", builtin_setExponent);
 
             runtime.InstallBuiltinFunction("subdivide", builtin_subdivide);
             runtime.InstallBuiltinFunction("tessellate", builtin_tessellate);

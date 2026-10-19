@@ -25,7 +25,7 @@ namespace Planeted
         {
             result = result / t;
         }
-        return std::powf(result, fbmParams.Exponent);
+        return result; //std::powf(result, fbmParams.Exponent);
     }
 
     float ANoise::Eval2D(const Vector2 &p) const
@@ -50,7 +50,7 @@ namespace Planeted
         {
             result = result / t;
         }
-        return std::powf(result, fbmParams.Exponent);
+        return result; //std::powf(result, fbmParams.Exponent);
     }
 
     float ANoise::Eval3D(const Vector3 &p) const
@@ -75,7 +75,7 @@ namespace Planeted
         {
             result = result / t;
         }
-        return std::powf(result, fbmParams.Exponent);
+        return result; //std::powf(result, fbmParams.Exponent);
     }
 
 
@@ -102,11 +102,6 @@ namespace Planeted
     void ANoise::SetNormalizeFBM(bool normalize)
     {
         this->fbmParams.Normalize = normalize;
-    }
-
-    void ANoise::SetExponent(float exponent)
-    {
-        this->fbmParams.Exponent = exponent;
     }
 
     void ANoiseGenerator::SeedNoise(std::uint32_t seed)

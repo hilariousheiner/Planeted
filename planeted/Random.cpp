@@ -33,7 +33,6 @@ namespace Planeted
             this->Persistence = 1.0f;
             this->StartFrequency = 1.0f;
             this->Normalize = false;
-            this->Exponent = 1.0f;
         }
 
         NoiseParameters::NoiseParameters()
@@ -480,7 +479,7 @@ namespace Planeted
                 result = result / t;
             }
 
-            return std::pow(result, fbmParams.Exponent);
+            return result; //std::pow(result, fbmParams.Exponent);
         }
         float FBM2D(const Vector2 &p, const FBMParameters &fbmParams, const NoiseParameters &params, NoiseFunction2D noiseFun)
         {
@@ -505,7 +504,7 @@ namespace Planeted
                 result = result / t;
             }
 
-            return std::pow(result, fbmParams.Exponent);
+            return result; //std::pow(result, fbmParams.Exponent);
         }
         float FBM3D(const Vector3 &p, const FBMParameters &fbmParams, const NoiseParameters &noiseParams, NoiseFunction3D noiseFun)
         {
@@ -530,7 +529,7 @@ namespace Planeted
                 result = result / t;
             }
 
-            return std::powf(result, fbmParams.Exponent);
+            return result; //std::powf(result, fbmParams.Exponent);
         }
 
         NoiseFunction1D Billow1D(NoiseFunction1D noiseFun)

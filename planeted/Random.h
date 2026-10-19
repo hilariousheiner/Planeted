@@ -39,7 +39,6 @@ namespace Planeted
             float Persistence;
             float StartFrequency;
             bool Normalize;
-            float Exponent;
         };
 
         class NoiseParameters
