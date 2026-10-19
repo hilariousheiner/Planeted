@@ -277,7 +277,7 @@ namespace Planeted
         {
         case 0:
             result = tx; // (1, 0) * (tx, ty)
-            //break; <-- BUG! forgot the break. Fixing this will break tests. Need to generate new reference files
+            break; //<-- BUG! forgot the break. Fixing this will break tests. Need to generate new reference files
         case 1:
             result = -tx; // (-1, 0) * (tx, ty)
             break;
