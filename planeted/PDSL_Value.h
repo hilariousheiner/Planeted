@@ -47,7 +47,7 @@ namespace Planeted
     public:
         NoiseValue() = default;
 
-        explicit NoiseValue(std::unique_ptr<NoiseFunction> noise)
+        explicit NoiseValue(std::unique_ptr<ANoise> noise)
             : noise(std::move(noise))
         {}
 
@@ -67,13 +67,13 @@ namespace Planeted
         NoiseValue(NoiseValue&&) noexcept = default;
         NoiseValue& operator=(NoiseValue&&) noexcept = default;
 
-        NoiseFunction &Get()
+        ANoise &Get()
         {
             return *noise;
         }
 
     private:
-        std::unique_ptr<NoiseFunction> noise;
+        std::unique_ptr<ANoise> noise;
     };
 
     class Value

@@ -423,13 +423,12 @@ namespace Planeted
         return SmoothStepUnclamped5(v0, v1, tz);
     }
 
-
     RidgeNoiseModifier::RidgeNoiseModifier(std::unique_ptr<ANoise> noise)
         : noise(std::move(noise))
     {}
 
     RidgeNoiseModifier::RidgeNoiseModifier(const RidgeNoiseModifier &other)
-        : noise(other.noise->Clone())
+        : ANoise(other), noise(other.noise->Clone())
     {}
 
     std::unique_ptr<ANoise> RidgeNoiseModifier::Clone() const
@@ -467,7 +466,7 @@ namespace Planeted
     {}
 
     BillowNoiseModifier::BillowNoiseModifier(const BillowNoiseModifier &other)
-        : noise(other.noise->Clone())
+        : ANoise(other), noise(other.noise->Clone())
     {}
 
     std::unique_ptr<ANoise> BillowNoiseModifier::Clone() const
