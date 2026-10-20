@@ -30,28 +30,9 @@ namespace Planeted
             return result;
         }
 
-        static Random::NoiseFunction3D getCurrentNoise(const NoiseFunction &noise)
-        {
-            return Random::GetNoiseFunction3D(noise.noiseType, noise.noiseStyle);
-        }
-        static Random::NoiseFunction2D getCurrentNoise2D(const NoiseFunction &noise)
-        {
-            return Random::GetNoiseFunction2D(noise.noiseType, noise.noiseStyle);
-        }
-        static Random::NoiseFunction1D getCurrentNoise1D(const NoiseFunction &noise)
-        {
-            return Random::GetNoiseFunction1D(noise.noiseType, noise.noiseStyle);
-        }
-
         static Value builtin_whiteNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCountAtMost(args, 1, "whiteNoise");
-
-            /*
-            NoiseValue noiseValue(std::make_unique<NoiseFunction>());
-            noiseValue.Get().noiseType = Random::NoiseTypeEnum::White;
-            noiseValue.Get().noiseStyle = Random::NoiseStyleEnum::Plain;
-            */
 
             NoiseValue noiseValue(std::make_unique<WhiteNoise>());
 
@@ -65,12 +46,6 @@ namespace Planeted
         {
             ExpectArgsCountAtMost(args, 1, "valueNoise");
 
-            /*
-            NoiseValue noiseValue(std::make_unique<NoiseFunction>());
-            noiseValue.Get().noiseType = Random::NoiseTypeEnum::Value;
-            noiseValue.Get().noiseStyle = Random::NoiseStyleEnum::Plain;
-            */
-
             NoiseValue noiseValue(std::make_unique<ValueNoise>());
 
             if(args.size() == 1)
@@ -82,13 +57,6 @@ namespace Planeted
         static Value builtin_perlinNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCountAtMost(args, 1, "perlinNoise");
-
-            /*
-            NoiseValue noiseValue(std::make_unique<NoiseFunction>());
-            noiseValue.Get().noiseType = Random::NoiseTypeEnum::Perlin;
-            noiseValue.Get().noiseStyle = Random::NoiseStyleEnum::Plain;
-            */
-
             NoiseValue noiseValue(std::make_unique<PerlinNoise>());
 
             if(args.size() == 1)
@@ -113,11 +81,7 @@ namespace Planeted
         {
             ExpectArgsCount(args, 1, "ridge");
 
-
             NoiseValue noiseValue = GetNoiseArg(args, 0, "ridge");
-
-            //noiseValue.Get().noiseStyle = Random::NoiseStyleEnum::Ridge;
-            //return Value(noiseValue);
 
             NoiseValue ridgedNoiseValue(RidgeNoiseModifier(noiseValue.Get().Clone()).Clone());
             return Value(ridgedNoiseValue);
@@ -127,9 +91,6 @@ namespace Planeted
             ExpectArgsCount(args, 1, "billow");
 
             NoiseValue noiseValue = GetNoiseArg(args, 0, "billow");
-
-            //noiseValue.Get().noiseStyle = Random::NoiseStyleEnum::Billow;
-            //return Value(noiseValue);
 
             NoiseValue billowNoiseValue(BillowNoiseModifier(noiseValue.Get().Clone()).Clone());
             return Value(billowNoiseValue);
@@ -190,9 +151,6 @@ namespace Planeted
 
             NoiseValue noiseValue = GetNoiseArg(args, 0, "setWhiteNoiseScale");
 
-            //noiseValue.Get().SetWhiteNoiseScale(GetFloatArg(args, 1, "setWhiteNoiseScale"));
-            //return Value(noiseValue);
-
             WhiteNoise &wNoise = dynamic_cast<WhiteNoise&>(noiseValue.Get());
             wNoise.SetWhiteNoiseScale(GetFloatArg(args, 1, "setWhiteNoiseScale"));
             return Value(NoiseValue(wNoise.Clone()));
@@ -207,7 +165,6 @@ namespace Planeted
 
             filename = NormalizePath(runtime.OutPath + filename);
 
-            //NoiseTest3D(filename, noiseValue.Get().fbmParams, noiseValue.Get().noiseParams, PDSL_Lib::getCurrentNoise(noiseValue.Get()));
             NoiseTest3D(filename, noiseValue.Get());
 
             return Value::Null();
@@ -221,7 +178,6 @@ namespace Planeted
 
             filename = NormalizePath(runtime.OutPath + filename);
 
-            //NoiseTest2D(filename, noiseValue.Get().fbmParams, noiseValue.Get().noiseParams, PDSL_Lib::getCurrentNoise2D(noiseValue.Get()));
             NoiseTest2D(filename, noiseValue.Get());
 
             return Value::Null();
@@ -235,7 +191,6 @@ namespace Planeted
 
             filename = NormalizePath(runtime.OutPath + filename);
 
-            //NoiseTest1D(filename, noiseValue.Get().fbmParams, noiseValue.Get().noiseParams, PDSL_Lib::getCurrentNoise1D(noiseValue.Get()));
             NoiseTest1D(filename, noiseValue.Get());
 
             return Value::Null();
@@ -280,14 +235,6 @@ namespace Planeted
             m.CalculateNormals();
 
             return Value(m);
-        }
-
-        static DisplacementFunction noiseDisplaceFun(const NoiseFunction &noise)
-        {
-            return [noise](const Vector3 &v)
-            {
-                return Random::FBM3D(v, noise.fbmParams, noise.noiseParams, PDSL_Lib::getCurrentNoise(noise));
-            };
         }
 
         static DisplacementFunction noiseDisplaceFun(const ANoise &noise)
