@@ -88,14 +88,13 @@ namespace Planeted
         }
         static Value builtin_abs(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
-            ExpectArgsCount(args, 1, "billow");
+            ExpectArgsCount(args, 1, "abs");
 
-            NoiseValue noiseValue = GetNoiseArg(args, 0, "billow");
+            NoiseValue noiseValue = GetNoiseArg(args, 0, "abs");
 
             NoiseValue absNoiseValue(AbsNoiseModifier(noiseValue.Get().Clone()).Clone());
             return Value(absNoiseValue);
         }
-
         static Value builtin_setNumberOfOctaves(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "setNumberOfOctaves");
