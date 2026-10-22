@@ -95,6 +95,17 @@ namespace Planeted
             NoiseValue absNoiseValue(AbsNoiseModifier(noiseValue.Get().Clone()).Clone());
             return Value(absNoiseValue);
         }
+        static Value builtin_pow(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        {
+            ExpectArgsCount(args, 2, "pow");
+
+            NoiseValue noiseValue = GetNoiseArg(args, 0, "pow");
+            float exponent = GetFloatArg(args, 1, "pow");
+
+            NoiseValue powNoiseValue(PowNoiseModifier(noiseValue.Get().Clone(), exponent).Clone());
+            return Value(powNoiseValue);
+        }
+
         static Value builtin_setNumberOfOctaves(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "setNumberOfOctaves");
@@ -274,6 +285,7 @@ namespace Planeted
             runtime.InstallBuiltinFunction("ridge", builtin_ridge);
 
             runtime.InstallBuiltinFunction("abs", builtin_abs);
+            runtime.InstallBuiltinFunction("pow", builtin_pow);
 
             runtime.InstallBuiltinFunction("setWhiteNoiseScale", builtin_setWhiteNoiseScale);
 
