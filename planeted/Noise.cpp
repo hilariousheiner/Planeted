@@ -502,7 +502,7 @@ namespace Planeted
     {}
 
     PowNoiseModifier::PowNoiseModifier(const PowNoiseModifier &other)
-        : ANoise(other), noise(other.noise->Clone())
+        : ANoise(other), noise(other.noise->Clone()), exponent(other.exponent)
     {}
 
     std::unique_ptr<ANoise> PowNoiseModifier::Clone() const
