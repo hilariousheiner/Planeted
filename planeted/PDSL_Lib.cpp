@@ -86,14 +86,14 @@ namespace Planeted
             NoiseValue ridgedNoiseValue(RidgeNoiseModifier(noiseValue.Get().Clone()).Clone());
             return Value(ridgedNoiseValue);
         }
-        static Value builtin_billow(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        static Value builtin_abs(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 1, "billow");
 
             NoiseValue noiseValue = GetNoiseArg(args, 0, "billow");
 
-            NoiseValue billowNoiseValue(BillowNoiseModifier(noiseValue.Get().Clone()).Clone());
-            return Value(billowNoiseValue);
+            NoiseValue absNoiseValue(AbsNoiseModifier(noiseValue.Get().Clone()).Clone());
+            return Value(absNoiseValue);
         }
 
         static Value builtin_setNumberOfOctaves(PDSL_Runtime &runtime, const std::vector<Value> &args)
@@ -273,7 +273,8 @@ namespace Planeted
             runtime.InstallBuiltinFunction("seedNoise", builtin_seedNoise);
 
             runtime.InstallBuiltinFunction("ridge", builtin_ridge);
-            runtime.InstallBuiltinFunction("billow", builtin_billow);
+
+            runtime.InstallBuiltinFunction("abs", builtin_abs);
 
             runtime.InstallBuiltinFunction("setWhiteNoiseScale", builtin_setWhiteNoiseScale);
 

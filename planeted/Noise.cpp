@@ -461,37 +461,37 @@ namespace Planeted
         return n*n;
     }
 
-    BillowNoiseModifier::BillowNoiseModifier(std::unique_ptr<ANoise> noise)
+    AbsNoiseModifier::AbsNoiseModifier(std::unique_ptr<ANoise> noise)
         : noise(std::move(noise))
     {}
 
-    BillowNoiseModifier::BillowNoiseModifier(const BillowNoiseModifier &other)
+    AbsNoiseModifier::AbsNoiseModifier(const AbsNoiseModifier &other)
         : ANoise(other), noise(other.noise->Clone())
     {}
 
-    std::unique_ptr<ANoise> BillowNoiseModifier::Clone() const
+    std::unique_ptr<ANoise> AbsNoiseModifier::Clone() const
     {
-        return std::make_unique<BillowNoiseModifier>(*this);
+        return std::make_unique<AbsNoiseModifier>(*this);
     }
 
-    void BillowNoiseModifier::SeedNoise(std::uint32_t seed)
+    void AbsNoiseModifier::SeedNoise(std::uint32_t seed)
     {
         this->noise->SeedNoise(seed);
     }
-    void BillowNoiseModifier::SeedNoise(std::string seed)
+    void AbsNoiseModifier::SeedNoise(std::string seed)
     {
         this->noise->SeedNoise(seed);
     }
 
-    float BillowNoiseModifier::noise1D(const float &p) const
+    float AbsNoiseModifier::noise1D(const float &p) const
     {
         return std::abs(this->noise->Eval1D(p));
     }
-    float BillowNoiseModifier::noise2D(const Vector2 &p) const
+    float AbsNoiseModifier::noise2D(const Vector2 &p) const
     {
         return std::abs(this->noise->Eval2D(p));
     }
-    float BillowNoiseModifier::noise3D(const Vector3 &p) const
+    float AbsNoiseModifier::noise3D(const Vector3 &p) const
     {
         return std::abs(this->noise->Eval3D(p));
     }

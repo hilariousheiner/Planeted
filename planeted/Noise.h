@@ -102,11 +102,11 @@ namespace Planeted
         std::unique_ptr<ANoise> noise;
     };
 
-    class BillowNoiseModifier : public ANoise
+    class AbsNoiseModifier : public ANoise
     {
     public:
-        BillowNoiseModifier(std::unique_ptr<ANoise> noise);
-        BillowNoiseModifier(const BillowNoiseModifier &other);
+        AbsNoiseModifier(std::unique_ptr<ANoise> noise);
+        AbsNoiseModifier(const AbsNoiseModifier &other);
 
         std::unique_ptr<ANoise> Clone() const override;
 
