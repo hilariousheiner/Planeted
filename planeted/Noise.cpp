@@ -495,4 +495,40 @@ namespace Planeted
     {
         return std::abs(this->noise->Eval3D(p));
     }
+
+
+    PowNoiseModifier::PowNoiseModifier(std::unique_ptr<ANoise> noise, float exponent)
+        : noise(std::move(noise)), exponent(exponent)
+    {}
+
+    PowNoiseModifier::PowNoiseModifier(const PowNoiseModifier &other)
+        : ANoise(other), noise(other.noise->Clone())
+    {}
+
+    std::unique_ptr<ANoise> PowNoiseModifier::Clone() const
+    {
+        return std::make_unique<PowNoiseModifier>(*this);
+    }
+
+    void PowNoiseModifier::SeedNoise(std::uint32_t seed)
+    {
+        this->noise->SeedNoise(seed);
+    }
+    void PowNoiseModifier::SeedNoise(std::string seed)
+    {
+        this->noise->SeedNoise(seed);
+    }
+
+    float PowNoiseModifier::noise1D(const float &p) const
+    {
+        return std::pow(this->noise->Eval1D(p), this->exponent);
+    }
+    float PowNoiseModifier::noise2D(const Vector2 &p) const
+    {
+        return std::pow(this->noise->Eval2D(p), this->exponent);
+    }
+    float PowNoiseModifier::noise3D(const Vector3 &p) const
+    {
+        return std::pow(this->noise->Eval3D(p), this->exponent);
+    }
 }
