@@ -38,8 +38,6 @@
 		<Unit filename="Mesh.h" />
 		<Unit filename="Noise.cpp" />
 		<Unit filename="Noise.h" />
-		<Unit filename="NoiseFunction.cpp" />
-		<Unit filename="NoiseFunction.h" />
 		<Unit filename="OBJ.cpp" />
 		<Unit filename="OBJ.h" />
 		<Unit filename="PDSL.cpp" />
