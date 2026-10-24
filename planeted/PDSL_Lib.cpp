@@ -75,18 +75,6 @@ namespace Planeted
             return Value(parametersValue);
         }
 
-        static Value builtin_fbm(PDSL_Runtime &runtime, const std::vector<Value> &args)
-        {
-            ExpectArgsCount(args, 2, "fbm");
-
-            NoiseValue noiseValue = GetNoiseArg(args, 0, "fbm");
-            FBMParameters parametersValue = GetFBMParametersArg(args, 1, "fbm");
-
-            noiseValue.Get().SetFBMParameters(parametersValue);
-
-            return Value(noiseValue);
-        }
-
         static Value builtin_seedNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "seedNoise");
@@ -107,6 +95,18 @@ namespace Planeted
             NoiseValue ridgedNoiseValue(RidgeNoiseModifier(noiseValue.Get().Clone()).Clone());
             return Value(ridgedNoiseValue);
         }
+        static Value builtin_fbm(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        {
+            ExpectArgsCount(args, 2, "fbm");
+
+            NoiseValue noiseValue = GetNoiseArg(args, 0, "fbm");
+            FBMParameters parametersValue = GetFBMParametersArg(args, 1, "fbm");
+
+            NoiseValue fbmNoiseValue(FBMScalarFieldModifier(noiseValue.Get().Clone(), parametersValue).Clone());
+
+            return Value(fbmNoiseValue);
+        }
+
         static Value builtin_abs(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 1, "abs");
@@ -126,7 +126,6 @@ namespace Planeted
             NoiseValue powNoiseValue(PowNoiseModifier(noiseValue.Get().Clone(), exponent).Clone());
             return Value(powNoiseValue);
         }
-
 
         static Value builtin_setNumberOfOctaves(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
@@ -415,11 +414,11 @@ namespace Planeted
             runtime.InstallBuiltinFunction("perlinNoise", builtin_perlinNoise);
 
             runtime.InstallBuiltinFunction("fbmParameters", builtin_fbmParameters);
-            runtime.InstallBuiltinFunction("fbm", builtin_fbm);
 
             runtime.InstallBuiltinFunction("seedNoise", builtin_seedNoise);
 
             runtime.InstallBuiltinFunction("ridge", builtin_ridge);
+            runtime.InstallBuiltinFunction("fbm", builtin_fbm);
 
             runtime.InstallBuiltinFunction("abs", builtin_abs);
             runtime.InstallBuiltinFunction("pow", builtin_pow);

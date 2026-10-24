@@ -552,6 +552,79 @@ namespace Planeted
         return std::make_unique<FBMScalarFieldModifier>(*this);
     }
 
+    float FBMScalarFieldModifier::Eval(const float &p) const
+    {
+        float result = 0.0f;
+
+        float frequency = this->fbmParams.StartFrequency;
+        float amplitude = 1.0f;
+
+        float t = 0.0f;
+
+        for(std::uint32_t i = 0; i < this->fbmParams.NumberOfOctaves; i++)
+        {
+            result += amplitude*this->noise1D(p*frequency);
+
+            t += amplitude;
+            frequency *= this->fbmParams.Lacunarity;
+            amplitude *= this->fbmParams.Persistence;
+        }
+
+        if(this->fbmParams.Normalize)
+        {
+            result = result / t;
+        }
+        return result;
+    }
+    float FBMScalarFieldModifier::Eval(const Vector2 &p) const
+    {
+        float result = 0.0f;
+
+        float frequency = this->fbmParams.StartFrequency;
+        float amplitude = 1.0f;
+
+        float t = 0.0f;
+
+        for(std::uint32_t i = 0; i < this->fbmParams.NumberOfOctaves; i++)
+        {
+            result += amplitude*this->noise2D(p*frequency);
+
+            t += amplitude;
+            frequency *= fbmParams.Lacunarity;
+            amplitude *= fbmParams.Persistence;
+        }
+
+        if(fbmParams.Normalize)
+        {
+            result = result / t;
+        }
+        return result;
+    }
+    float FBMScalarFieldModifier::Eval(const Vector3 &p) const
+    {
+        float result = 0.0f;
+
+        float frequency = this->fbmParams.StartFrequency;
+        float amplitude = 1.0f;
+
+        float t = 0.0f;
+
+        for(std::uint32_t i = 0; i < this->fbmParams.NumberOfOctaves; i++)
+        {
+            result += amplitude*this->noise3D(p*frequency);
+
+            t += amplitude;
+            frequency *= this->fbmParams.Lacunarity;
+            amplitude *= this->fbmParams.Persistence;
+        }
+
+        if(this->fbmParams.Normalize)
+        {
+            result = result / t;
+        }
+        return result;
+    }
+
     void FBMScalarFieldModifier::Seed(std::uint32_t seed)
     {
         this->noise->Seed(seed);

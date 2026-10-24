@@ -14,9 +14,9 @@ namespace Planeted
         virtual ~ANoise() = default;
         virtual std::unique_ptr<ANoise> Clone() const = 0;
 
-        float Eval(const float &p) const;
-        float Eval(const Vector2 &p) const;
-        float Eval(const Vector3 &p) const;
+        virtual float Eval(const float &p) const;
+        virtual float Eval(const Vector2 &p) const;
+        virtual float Eval(const Vector3 &p) const;
 
         virtual void Seed(std::uint32_t seed) = 0;
         virtual void Seed(std::string seed) = 0;
@@ -152,6 +152,10 @@ namespace Planeted
         FBMScalarFieldModifier(const FBMScalarFieldModifier &other);
 
         std::unique_ptr<ANoise> Clone() const override;
+
+        float Eval(const float &p) const override;
+        float Eval(const Vector2 &p) const override;
+        float Eval(const Vector3 &p) const override;
 
         void Seed(std::uint32_t seed) override;
         void Seed(std::string seed) override;
