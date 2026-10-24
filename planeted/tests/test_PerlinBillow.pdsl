@@ -10,6 +10,8 @@ n = setPersistence(n, 0.5);
 n = setStartFrequency(n, 1.0);
 n = setNormalizeFBM(n, false);
 
+//n = setFBMParameters(n, fbmParams); 
+
 n = pow(abs(n), 1.5);
 
 noiseTest(n, "test_PerlinBillow3D");
