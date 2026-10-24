@@ -1,14 +1,13 @@
 import "../lib/stdlib.pdsl" 
 
-n = ridge(valueNoise("BETTY"));
+fbmParams = fbmParameters();
+fbmParams = setNumberOfOctaves(fbmParams, 6);
+fbmParams = setLacunarity(fbmParams, 2.0);
+fbmParams = setPersistence(fbmParams, 0.5);
+fbmParams = setStartFrequency(fbmParams, 4.0);
+fbmParams = setNormalizeFBM(fbmParams, false);
 
-n = setNumberOfOctaves(n, 6);
-n = setLacunarity(n, 2.0);
-n = setPersistence(n, 0.5);
-n = setStartFrequency(n, 4.0);
-n = setNormalizeFBM(n, false);
-
-n = pow(abs(n), 10.0);
+n = pow(abs(fbm(ridge(valueNoise("BETTY")), fbmParams)), 10.0);
 
 noiseTest(n, "test_ValueRidge3D");
 noiseTest2D(n, "test_ValueRidge2D");
