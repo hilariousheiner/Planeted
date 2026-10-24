@@ -26,15 +26,6 @@ namespace Planeted
             212, 182, 136, 185, 110, 40 , 235, 21 , 222, 178, 174, 205, 68 , 90 , 171, 199
         };
 
-        FBMParameters::FBMParameters()
-        {
-            this->NumberOfOctaves = 1;
-            this->Lacunarity = 1.0f;
-            this->Persistence = 1.0f;
-            this->StartFrequency = 1.0f;
-            this->Normalize = false;
-        }
-
         NoiseParameters::NoiseParameters()
         {
             this->WhiteNoiseScale = 100.0f;

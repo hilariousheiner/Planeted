@@ -15,18 +15,6 @@ namespace Planeted
 {
     namespace Random
     {
-        struct FBMParameters
-        {
-            FBMParameters();
-
-            std::uint32_t NumberOfOctaves;
-            float Lacunarity;
-            float Persistence;
-            float StartFrequency;
-            bool Normalize;
-        };
-
-
         class NoiseParameters
         {
         public:

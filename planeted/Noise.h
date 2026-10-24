@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include "FBM.h"
 #include "Random.h"
 
 namespace Planeted
@@ -33,7 +34,7 @@ namespace Planeted
         virtual float noise3D(const Vector3 &p) const = 0;
 
     private:
-        Random::FBMParameters fbmParams;
+        FBMParameters fbmParams;
     };
 
     class ANoiseGenerator : public ANoise
