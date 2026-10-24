@@ -21,6 +21,8 @@ namespace Planeted
 
     NoiseValue GetNoiseArg(const std::vector<Value> &args, size_t index, const std::string &functionName);
 
+    FBMParameters GetFBMParametersArg(const std::vector<Value> &args, size_t index, const std::string &functionName);
+
     Mesh GetMeshArg(const std::vector<Value> &args, size_t index, const std::string &functionName);
 
     // Value conversions:
@@ -32,6 +34,7 @@ namespace Planeted
     bool TryAsTriangle(const Value &value, TriangleIndices &out);
     bool TryAsMesh(const Value &value, Mesh &out);
     bool TryAsNoise(const Value &value, NoiseValue &out);
+    bool TryAsFBMParameters(const Value &value, FBMParameters &out);
 
     // Tuple conversions:
     bool TupleToMesh(const Tuple &t, Mesh &out);

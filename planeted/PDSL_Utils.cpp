@@ -86,6 +86,17 @@ namespace Planeted
         return result;
     }
 
+    FBMParameters GetFBMParametersArg(const std::vector<Value> &args, size_t index, const std::string &functionName)
+    {
+        FBMParameters result;
+        if(!TryAsFBMParameters(args[index], result))
+        {
+            throw std::runtime_error(functionName + ": argument " + std::to_string(index + 1) + " must be fbm parameters.");
+        }
+        return result;
+    }
+
+
     Mesh GetMeshArg(const std::vector<Value> &args, size_t index, const std::string &functionName)
     {
         Mesh result;
@@ -215,6 +226,18 @@ namespace Planeted
         if(value.GetValueType() == ValueTypeEnum::Noise)
         {
             out = value.GetNoiseValue();
+            result = true;
+        }
+        return result;
+    }
+
+    bool TryAsFBMParameters(const Value &value, FBMParameters &out)
+    {
+        bool result = false;
+
+        if(value.GetValueType() == ValueTypeEnum::FBMParameters)
+        {
+            out = value.GetFBMParametersValue();
             result = true;
         }
         return result;
