@@ -75,12 +75,12 @@ namespace Planeted
             return Value(parametersValue);
         }
 
-        static Value builtin_setFBMParamters(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        static Value builtin_fbm(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
-            ExpectArgsCount(args, 2, "setFBMParameters");
+            ExpectArgsCount(args, 2, "fbm");
 
-            NoiseValue noiseValue = GetNoiseArg(args, 0, "setFBMParameters");
-            FBMParameters parametersValue = GetFBMParametersArg(args, 1, "setFBMParameters");
+            NoiseValue noiseValue = GetNoiseArg(args, 0, "fbm");
+            FBMParameters parametersValue = GetFBMParametersArg(args, 1, "fbm");
 
             noiseValue.Get().SetFBMParameters(parametersValue);
 
@@ -414,7 +414,7 @@ namespace Planeted
             runtime.InstallBuiltinFunction("perlinNoise", builtin_perlinNoise);
 
             runtime.InstallBuiltinFunction("fbmParameters", builtin_fbmParameters);
-            runtime.InstallBuiltinFunction("setFBMParameters", builtin_setFBMParamters);
+            runtime.InstallBuiltinFunction("fbm", builtin_fbm);
 
             runtime.InstallBuiltinFunction("seedNoise", builtin_seedNoise);
 
