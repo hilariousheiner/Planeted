@@ -127,6 +127,7 @@ namespace Planeted
             return Value(powNoiseValue);
         }
 
+        /*
         static Value builtin_setNumberOfOctaves(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "setNumberOfOctaves");
@@ -136,16 +137,29 @@ namespace Planeted
 
             return Value(noiseValue);
         }
-        static Value builtin_setStartFrequency(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        */
+        static Value builtin_setNumberOfOctaves(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
-            ExpectArgsCount(args, 2, "setStartFrequency");
+            ExpectArgsCount(args, 2, "setNumberOfOctaves");
 
-            NoiseValue noiseValue = GetNoiseArg(args, 0, "setStartFrequency");
-            noiseValue.Get().SetStartFrequency(GetFloatArg(args, 1, "setStartFrequency"));
+            if(args[0].GetValueType() == ValueTypeEnum::Noise)
+            {
+                NoiseValue noiseValue = GetNoiseArg(args, 0, "setNumberOfOctaves");
+                noiseValue.Get().SetNumberOfOctaves(GetIntArg(args, 1, "setNumberOfOctaves"));
 
-            return Value(noiseValue);
+                return Value(noiseValue);
+            }
+
+            if(args[0].GetValueType() == ValueTypeEnum::FBMParameters)
+            {
+                FBMParameters parametersValue = GetFBMParametersArg(args, 0, "setNumberOfOctaves");
+                parametersValue.NumberOfOctaves = GetIntArg(args, 1, "setNumberOfOctaves");
+
+                return Value(parametersValue);
+            }
+            throw std::runtime_error("first paramter of setNumberOfOctaves must be a noise or FBMParameters.");
         }
-
+        /*
         static Value builtin_setLacunarity(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "setLacunarity");
@@ -155,7 +169,29 @@ namespace Planeted
 
             return Value(noiseValue);
         }
+        */
+        static Value builtin_setLacunarity(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        {
+            ExpectArgsCount(args, 2, "setLacunarity");
 
+            if(args[0].GetValueType() == ValueTypeEnum::Noise)
+            {
+                NoiseValue noiseValue = GetNoiseArg(args, 0, "setLacunarity");
+                noiseValue.Get().SetLacunarity(GetFloatArg(args, 1, "setLacunarity"));
+
+                return Value(noiseValue);
+            }
+
+            if(args[0].GetValueType() == ValueTypeEnum::FBMParameters)
+            {
+                FBMParameters parametersValue = GetFBMParametersArg(args, 0, "setLacunarity");
+                parametersValue.Lacunarity = GetFloatArg(args, 1, "setLacunarity");
+
+                return Value(parametersValue);
+            }
+            throw std::runtime_error("first paramter of setLacunarity must be a noise or FBMParameters.");
+        }
+        /*
         static Value builtin_setPersistence(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "setPersistence");
@@ -165,7 +201,61 @@ namespace Planeted
 
             return Value(noiseValue);
         }
+        */
+        static Value builtin_setPersistence(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        {
+            ExpectArgsCount(args, 2, "setPersistence");
 
+            if(args[0].GetValueType() == ValueTypeEnum::Noise)
+            {
+                NoiseValue noiseValue = GetNoiseArg(args, 0, "setPersistence");
+                noiseValue.Get().SetPersistence(GetFloatArg(args, 1, "setPersistence"));
+
+                return Value(noiseValue);
+            }
+
+            if(args[0].GetValueType() == ValueTypeEnum::FBMParameters)
+            {
+                FBMParameters parametersValue = GetFBMParametersArg(args, 0, "setPersistence");
+                parametersValue.Persistence = GetFloatArg(args, 1, "setPersistence");
+
+                return Value(parametersValue);
+            }
+            throw std::runtime_error("first paramter of setPersistence must be a noise or FBMParameters.");
+        }
+        /*
+        static Value builtin_setStartFrequency(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        {
+            ExpectArgsCount(args, 2, "setStartFrequency");
+
+            NoiseValue noiseValue = GetNoiseArg(args, 0, "setStartFrequency");
+            noiseValue.Get().SetStartFrequency(GetFloatArg(args, 1, "setStartFrequency"));
+
+            return Value(noiseValue);
+        }
+        */
+        static Value builtin_setStartFrequency(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        {
+            ExpectArgsCount(args, 2, "setStartFrequency");
+
+            if(args[0].GetValueType() == ValueTypeEnum::Noise)
+            {
+                NoiseValue noiseValue = GetNoiseArg(args, 0, "setStartFrequency");
+                noiseValue.Get().SetStartFrequency(GetFloatArg(args, 1, "setStartFrequency"));
+
+                return Value(noiseValue);
+            }
+
+            if(args[0].GetValueType() == ValueTypeEnum::FBMParameters)
+            {
+                FBMParameters parametersValue = GetFBMParametersArg(args, 0, "setStartFrequency");
+                parametersValue.StartFrequency = GetFloatArg(args, 1, "setStartFrequency");
+
+                return Value(parametersValue);
+            }
+            throw std::runtime_error("first paramter of setStartFrequency must be a noise or FBMParameters.");
+        }
+        /*
         static Value builtin_setNormalizeFBM(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "setNormalizeFBM");
@@ -174,6 +264,28 @@ namespace Planeted
             noiseValue.Get().SetNormalizeFBM(GetBoolArg(args, 1, "setNormalizeFBM"));
 
             return Value(noiseValue);
+        }
+        */
+        static Value builtin_setNormalizeFBM(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        {
+            ExpectArgsCount(args, 2, "setNormalizeFBM");
+
+            if(args[0].GetValueType() == ValueTypeEnum::Noise)
+            {
+                NoiseValue noiseValue = GetNoiseArg(args, 0, "setNormalizeFBM");
+                noiseValue.Get().SetNormalizeFBM(GetBoolArg(args, 1, "setNormalizeFBM"));
+
+                return Value(noiseValue);
+            }
+
+            if(args[0].GetValueType() == ValueTypeEnum::FBMParameters)
+            {
+                FBMParameters parametersValue = GetFBMParametersArg(args, 0, "setNormalizeFBM");
+                parametersValue.Normalize = GetBoolArg(args, 1, "setNormalizeFBM");
+
+                return Value(parametersValue);
+            }
+            throw std::runtime_error("first paramter of setNormalizeFBM must be a noise or FBMParameters.");
         }
 
         static Value builtin_setWhiteNoiseScale(PDSL_Runtime &runtime, const std::vector<Value> &args)
@@ -314,9 +426,9 @@ namespace Planeted
             runtime.InstallBuiltinFunction("setWhiteNoiseScale", builtin_setWhiteNoiseScale);
 
             runtime.InstallBuiltinFunction("setNumberOfOctaves", builtin_setNumberOfOctaves);
-            runtime.InstallBuiltinFunction("setStartFrequency", builtin_setStartFrequency);
             runtime.InstallBuiltinFunction("setLacunarity", builtin_setLacunarity);
             runtime.InstallBuiltinFunction("setPersistence", builtin_setPersistence);
+            runtime.InstallBuiltinFunction("setStartFrequency", builtin_setStartFrequency);
             runtime.InstallBuiltinFunction("setNormalizeFBM", builtin_setNormalizeFBM);
 
             runtime.InstallBuiltinFunction("subdivide", builtin_subdivide);
