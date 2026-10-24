@@ -21,19 +21,20 @@ namespace Planeted
         virtual void SeedNoise(std::uint32_t seed) = 0;
         virtual void SeedNoise(std::string seed) = 0;
 
+        void SetFBMParameters(const FBMParameters &fbmParameters);
+
         void SetNumberOfOctaves(std::uint32_t numberOfOctaves);
         void SetStartFrequency(float startFrequency);
         void SetLacunarity(float lacunarity);
         void SetPersistence(float persistence);
         void SetNormalizeFBM(bool normalize);
-        void SetExponent(float exponent);
 
     protected:
         virtual float noise1D(const float &p) const = 0;
         virtual float noise2D(const Vector2 &p) const = 0;
         virtual float noise3D(const Vector3 &p) const = 0;
 
-    private:
+    //private:
         FBMParameters fbmParams;
     };
 
@@ -128,6 +129,27 @@ namespace Planeted
     public:
         PowNoiseModifier(std::unique_ptr<ANoise> noise, float exponent);
         PowNoiseModifier(const PowNoiseModifier &other);
+
+        std::unique_ptr<ANoise> Clone() const override;
+
+        void SeedNoise(std::uint32_t seed) override;
+        void SeedNoise(std::string seed) override;
+
+    protected:
+        float noise1D(const float &p) const override;
+        float noise2D(const Vector2 &p) const override;
+        float noise3D(const Vector3 &p) const override;
+
+    private:
+        std::unique_ptr<ANoise> noise;
+        float exponent;
+    };
+
+    class FBMScalarFieldModifier : public ANoise
+    {
+    public:
+        FBMScalarFieldModifier(std::unique_ptr<ANoise> noise, const FBMParameters &fbmParameters);
+        FBMScalarFieldModifier(const FBMScalarFieldModifier &other);
 
         std::unique_ptr<ANoise> Clone() const override;
 

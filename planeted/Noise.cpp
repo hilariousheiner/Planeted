@@ -78,6 +78,10 @@ namespace Planeted
         return result;
     }
 
+    void ANoise::SetFBMParameters(const FBMParameters &fbmParameters)
+    {
+        this->fbmParams = fbmParameters;
+    }
 
     void ANoise::SetNumberOfOctaves(std::uint32_t numberOfOctaves)
     {
@@ -530,5 +534,43 @@ namespace Planeted
     float PowNoiseModifier::noise3D(const Vector3 &p) const
     {
         return std::pow(this->noise->Eval3D(p), this->exponent);
+    }
+
+
+    FBMScalarFieldModifier::FBMScalarFieldModifier(std::unique_ptr<ANoise> noise, const FBMParameters &fbmParameters)
+        : noise(std::move(noise))
+    {
+        this->fbmParams = fbmParameters;
+    }
+
+    FBMScalarFieldModifier::FBMScalarFieldModifier(const FBMScalarFieldModifier &other)
+        : ANoise(other), noise(other.noise->Clone())
+    {}
+
+    std::unique_ptr<ANoise> FBMScalarFieldModifier::Clone() const
+    {
+        return std::make_unique<FBMScalarFieldModifier>(*this);
+    }
+
+    void FBMScalarFieldModifier::SeedNoise(std::uint32_t seed)
+    {
+        this->noise->SeedNoise(seed);
+    }
+    void FBMScalarFieldModifier::SeedNoise(std::string seed)
+    {
+        this->noise->SeedNoise(seed);
+    }
+
+    float FBMScalarFieldModifier::noise1D(const float &p) const
+    {
+        return this->noise->Eval1D(p); // ToDo: implement
+    }
+    float FBMScalarFieldModifier::noise2D(const Vector2 &p) const
+    {
+        return this->noise->Eval2D(p); // ToDo: implement
+    }
+    float FBMScalarFieldModifier::noise3D(const Vector3 &p) const
+    {
+        return this->noise->Eval3D(p); // ToDo: implement
     }
 }
