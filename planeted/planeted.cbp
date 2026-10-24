@@ -33,6 +33,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="Color.h" />
+		<Unit filename="FBM.h" />
 		<Unit filename="Math.h" />
 		<Unit filename="Mesh.cpp" />
 		<Unit filename="Mesh.h" />
