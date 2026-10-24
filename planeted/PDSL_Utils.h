@@ -42,7 +42,6 @@ namespace Planeted
     Value Negate(const Value &value);
 
     // Noise:
-    void SeedNoise(NoiseFunction &noise, const Value &value);
     void SeedNoise(ANoise &noise, const Value &value);
 }
 
