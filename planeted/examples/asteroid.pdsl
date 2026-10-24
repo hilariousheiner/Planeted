@@ -8,7 +8,7 @@ m = calculateNormals(m);
 n1 = setNormalizeFBM(n1, true);
 n1 = setNumberOfOctaves(n1, 8);
 n1 = setLacunarity(n1, 1.0);
-n1 = setExponent(n1, 1.0);
+n1 = pow(abs(n1), 1.0);
 
 m = displace(m, n1, 0.5);
 m = calculateNormals(m);
@@ -18,7 +18,7 @@ n2 = ridge(perlinNoise("BETTY"));
 n2 = setNumberOfOctaves(n2, 2);
 n2 = setStartFrequency(n2, 4);
 n2 = setNormalizeFBM(n2, true);
-n2 = setExponent(n2, 5.0);
+n2 = pow(abs(n2), 5.0);
 
 m = displace(m, n2, 0.5);
 m = calculateNormals(m);
