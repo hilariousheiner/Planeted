@@ -31,7 +31,7 @@ namespace Planeted
         return [&noise](const int x, const int y)
         {
             float nx = x/static_cast<float>(sample_size) - 0.5f;
-            return NoiseToGrayScale(noise.Eval1D(nx));
+            return NoiseToGrayScale(noise.Eval(nx));
         };
     }
     static ColorFunction ToColorFunction2D(const ANoise &noise)
@@ -40,7 +40,7 @@ namespace Planeted
         {
             float nx = x/static_cast<float>(sample_size) - 0.5f;
             float ny = y/static_cast<float>(sample_size) - 0.5f;
-            return NoiseToGrayScale(noise.Eval2D({nx, ny}));
+            return NoiseToGrayScale(noise.Eval({nx, ny}));
         };
     }
     static ColorFunction ToColorFunction3D(const ANoise &noise)
@@ -49,7 +49,7 @@ namespace Planeted
         {
             float nx = x/static_cast<float>(sample_size) - 0.5f;
             float ny = y/static_cast<float>(sample_size) - 0.5f;
-            return NoiseToGrayScale(noise.Eval3D({nx, ny, 1.0f}));
+            return NoiseToGrayScale(noise.Eval({nx, ny, 1.0f}));
         };
     }
     void NoiseTest1D(const std::string &filename, const ANoise &noise)

@@ -127,17 +127,17 @@ namespace Planeted
             return Value(powNoiseValue);
         }
 
-        /*
+
         static Value builtin_setNumberOfOctaves(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "setNumberOfOctaves");
 
-            NoiseValue noiseValue = GetNoiseArg(args, 0, "setNumberOfOctaves");
-            noiseValue.Get().SetNumberOfOctaves(GetIntArg(args, 1, "setNumberOfOctaves"));
+            FBMParameters parametersValue = GetFBMParametersArg(args, 0, "setNumberOfOctaves");
+            parametersValue.NumberOfOctaves = GetIntArg(args, 1, "setNumberOfOctaves");
 
-            return Value(noiseValue);
+            return Value(parametersValue);
         }
-        */
+        /*
         static Value builtin_setNumberOfOctaves(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "setNumberOfOctaves");
@@ -159,6 +159,7 @@ namespace Planeted
             }
             throw std::runtime_error("first paramter of setNumberOfOctaves must be a noise or FBMParameters.");
         }
+        */
         /*
         static Value builtin_setLacunarity(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
@@ -384,7 +385,7 @@ namespace Planeted
         {
             return [&noise](const Vector3 &v)
             {
-                return noise.Eval3D(v);
+                return noise.Eval(v);
             };
         }
 

@@ -14,12 +14,12 @@ namespace Planeted
         virtual ~ANoise() = default;
         virtual std::unique_ptr<ANoise> Clone() const = 0;
 
-        float Eval1D(const float &p) const;
-        float Eval2D(const Vector2 &p) const;
-        float Eval3D(const Vector3 &p) const;
+        float Eval(const float &p) const;
+        float Eval(const Vector2 &p) const;
+        float Eval(const Vector3 &p) const;
 
-        virtual void SeedNoise(std::uint32_t seed) = 0;
-        virtual void SeedNoise(std::string seed) = 0;
+        virtual void Seed(std::uint32_t seed) = 0;
+        virtual void Seed(std::string seed) = 0;
 
         void SetFBMParameters(const FBMParameters &fbmParameters);
 
@@ -41,8 +41,8 @@ namespace Planeted
     class ANoiseGenerator : public ANoise
     {
     public:
-        void SeedNoise(std::uint32_t seed) override;
-        void SeedNoise(std::string seed) override;
+        void Seed(std::uint32_t seed) override;
+        void Seed(std::string seed) override;
 
     protected:
         Random::NoiseParameters noiseParams;
@@ -92,8 +92,8 @@ namespace Planeted
 
         std::unique_ptr<ANoise> Clone() const override;
 
-        void SeedNoise(std::uint32_t seed) override;
-        void SeedNoise(std::string seed) override;
+        void Seed(std::uint32_t seed) override;
+        void Seed(std::string seed) override;
 
     protected:
         float noise1D(const float &p) const override;
@@ -112,8 +112,8 @@ namespace Planeted
 
         std::unique_ptr<ANoise> Clone() const override;
 
-        void SeedNoise(std::uint32_t seed) override;
-        void SeedNoise(std::string seed) override;
+        void Seed(std::uint32_t seed) override;
+        void Seed(std::string seed) override;
 
     protected:
         float noise1D(const float &p) const override;
@@ -132,8 +132,8 @@ namespace Planeted
 
         std::unique_ptr<ANoise> Clone() const override;
 
-        void SeedNoise(std::uint32_t seed) override;
-        void SeedNoise(std::string seed) override;
+        void Seed(std::uint32_t seed) override;
+        void Seed(std::string seed) override;
 
     protected:
         float noise1D(const float &p) const override;
@@ -153,8 +153,8 @@ namespace Planeted
 
         std::unique_ptr<ANoise> Clone() const override;
 
-        void SeedNoise(std::uint32_t seed) override;
-        void SeedNoise(std::string seed) override;
+        void Seed(std::uint32_t seed) override;
+        void Seed(std::string seed) override;
 
     protected:
         float noise1D(const float &p) const override;
@@ -163,7 +163,6 @@ namespace Planeted
 
     private:
         std::unique_ptr<ANoise> noise;
-        float exponent;
     };
 }
 #endif

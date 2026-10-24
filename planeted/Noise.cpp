@@ -3,7 +3,7 @@
 
 namespace Planeted
 {
-    float ANoise::Eval1D(const float &p) const
+    float ANoise::Eval(const float &p) const
     {
         float result = 0.0f;
 
@@ -28,7 +28,7 @@ namespace Planeted
         return result;
     }
 
-    float ANoise::Eval2D(const Vector2 &p) const
+    float ANoise::Eval(const Vector2 &p) const
     {
         float result = 0.0f;
 
@@ -53,7 +53,7 @@ namespace Planeted
         return result;
     }
 
-    float ANoise::Eval3D(const Vector3 &p) const
+    float ANoise::Eval(const Vector3 &p) const
     {
         float result = 0.0f;
 
@@ -108,11 +108,11 @@ namespace Planeted
         this->fbmParams.Normalize = normalize;
     }
 
-    void ANoiseGenerator::SeedNoise(std::uint32_t seed)
+    void ANoiseGenerator::Seed(std::uint32_t seed)
     {
         this->noiseParams.SeedNoise(seed);
     }
-    void ANoiseGenerator::SeedNoise(std::string seed)
+    void ANoiseGenerator::Seed(std::string seed)
     {
         this->noiseParams.SeedNoise(seed);
     }
@@ -440,28 +440,28 @@ namespace Planeted
         return std::make_unique<RidgeNoiseModifier>(*this);
     }
 
-    void RidgeNoiseModifier::SeedNoise(std::uint32_t seed)
+    void RidgeNoiseModifier::Seed(std::uint32_t seed)
     {
-        this->noise->SeedNoise(seed);
+        this->noise->Seed(seed);
     }
-    void RidgeNoiseModifier::SeedNoise(std::string seed)
+    void RidgeNoiseModifier::Seed(std::string seed)
     {
-        this->noise->SeedNoise(seed);
+        this->noise->Seed(seed);
     }
 
     float RidgeNoiseModifier::noise1D(const float &p) const
     {
-        float n = (0.9f - std::abs(this->noise->Eval1D(p)));
+        float n = (0.9f - std::abs(this->noise->Eval(p)));
         return n*n;
     }
     float RidgeNoiseModifier::noise2D(const Vector2 &p) const
     {
-        float n = (0.9f - std::abs(this->noise->Eval2D(p)));
+        float n = (0.9f - std::abs(this->noise->Eval(p)));
         return n*n;
     }
     float RidgeNoiseModifier::noise3D(const Vector3 &p) const
     {
-        float n = (0.9f - std::abs(this->noise->Eval3D(p)));
+        float n = (0.9f - std::abs(this->noise->Eval(p)));
         return n*n;
     }
 
@@ -478,26 +478,26 @@ namespace Planeted
         return std::make_unique<AbsNoiseModifier>(*this);
     }
 
-    void AbsNoiseModifier::SeedNoise(std::uint32_t seed)
+    void AbsNoiseModifier::Seed(std::uint32_t seed)
     {
-        this->noise->SeedNoise(seed);
+        this->noise->Seed(seed);
     }
-    void AbsNoiseModifier::SeedNoise(std::string seed)
+    void AbsNoiseModifier::Seed(std::string seed)
     {
-        this->noise->SeedNoise(seed);
+        this->noise->Seed(seed);
     }
 
     float AbsNoiseModifier::noise1D(const float &p) const
     {
-        return std::abs(this->noise->Eval1D(p));
+        return std::abs(this->noise->Eval(p));
     }
     float AbsNoiseModifier::noise2D(const Vector2 &p) const
     {
-        return std::abs(this->noise->Eval2D(p));
+        return std::abs(this->noise->Eval(p));
     }
     float AbsNoiseModifier::noise3D(const Vector3 &p) const
     {
-        return std::abs(this->noise->Eval3D(p));
+        return std::abs(this->noise->Eval(p));
     }
 
 
@@ -514,26 +514,26 @@ namespace Planeted
         return std::make_unique<PowNoiseModifier>(*this);
     }
 
-    void PowNoiseModifier::SeedNoise(std::uint32_t seed)
+    void PowNoiseModifier::Seed(std::uint32_t seed)
     {
-        this->noise->SeedNoise(seed);
+        this->noise->Seed(seed);
     }
-    void PowNoiseModifier::SeedNoise(std::string seed)
+    void PowNoiseModifier::Seed(std::string seed)
     {
-        this->noise->SeedNoise(seed);
+        this->noise->Seed(seed);
     }
 
     float PowNoiseModifier::noise1D(const float &p) const
     {
-        return std::pow(this->noise->Eval1D(p), this->exponent);
+        return std::pow(this->noise->Eval(p), this->exponent);
     }
     float PowNoiseModifier::noise2D(const Vector2 &p) const
     {
-        return std::pow(this->noise->Eval2D(p), this->exponent);
+        return std::pow(this->noise->Eval(p), this->exponent);
     }
     float PowNoiseModifier::noise3D(const Vector3 &p) const
     {
-        return std::pow(this->noise->Eval3D(p), this->exponent);
+        return std::pow(this->noise->Eval(p), this->exponent);
     }
 
 
@@ -552,25 +552,25 @@ namespace Planeted
         return std::make_unique<FBMScalarFieldModifier>(*this);
     }
 
-    void FBMScalarFieldModifier::SeedNoise(std::uint32_t seed)
+    void FBMScalarFieldModifier::Seed(std::uint32_t seed)
     {
-        this->noise->SeedNoise(seed);
+        this->noise->Seed(seed);
     }
-    void FBMScalarFieldModifier::SeedNoise(std::string seed)
+    void FBMScalarFieldModifier::Seed(std::string seed)
     {
-        this->noise->SeedNoise(seed);
+        this->noise->Seed(seed);
     }
 
     float FBMScalarFieldModifier::noise1D(const float &p) const
     {
-        return this->noise->Eval1D(p); // ToDo: implement
+        return this->noise->Eval(p); // ToDo: implement
     }
     float FBMScalarFieldModifier::noise2D(const Vector2 &p) const
     {
-        return this->noise->Eval2D(p); // ToDo: implement
+        return this->noise->Eval(p); // ToDo: implement
     }
     float FBMScalarFieldModifier::noise3D(const Vector3 &p) const
     {
-        return this->noise->Eval3D(p); // ToDo: implement
+        return this->noise->Eval(p); // ToDo: implement
     }
 }
