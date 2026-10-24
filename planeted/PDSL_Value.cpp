@@ -49,6 +49,9 @@ namespace Planeted
         : data(std::move(noiseValue))
     { }
 
+    Value::Value(FBMParameters parametersValue)
+        : data(std::move(parametersValue))
+    { }
 
     bool Value::IsNull() const
     {
@@ -98,6 +101,12 @@ namespace Planeted
         return std::get<NoiseValue>(this->data);
     }
 
+    const FBMParameters &Value::GetFBMParametersValue() const
+    {
+        return std::get<FBMParameters>(this->data);
+    }
+
+
     ValueTypeEnum Value::GetValueType() const
     {
         if(std::holds_alternative<int>(this->data))
@@ -139,6 +148,10 @@ namespace Planeted
         {
             return ValueTypeEnum::Noise;
         }
+        if(std::holds_alternative<FBMParameters>(this->data))
+        {
+            return ValueTypeEnum::FBMParameters;
+        }
         return ValueTypeEnum::Null; // Todo: maybe throw an exception here?
     }
 
@@ -177,6 +190,8 @@ namespace Planeted
         case ValueTypeEnum::Noise:
             result = "noise";
             break;
+        case ValueTypeEnum::FBMParameters:
+            result = "fbm parameters";
         default:
             break;
         }
@@ -217,6 +232,9 @@ namespace Planeted
             break;
         case ValueTypeEnum::Noise:
             result = "Noise";
+            break;
+        case ValueTypeEnum::FBMParameters:
+            result = "FBMParameters";
             break;
         default:
             break;
