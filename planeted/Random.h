@@ -25,14 +25,10 @@ namespace Planeted
             void SetSeed(std::uint32_t seed);
             void SetSeed(std::string seed);
 
-            std::uint8_t Permute(const std::uint8_t &x) const;
-            std::uint8_t Permute(const int &x, const int &y) const;
-            std::uint8_t Permute(const int &x, const int &y, const int &z) const;
-
             std::uint32_t seed;
             std::uint64_t seed64;
-        private:
-            PermutationTable::InternalTable permutationTable_OLD;
+
+            PermutationTable::InternalTable internalTable;
         };
     }
 }

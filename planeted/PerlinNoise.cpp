@@ -92,14 +92,14 @@ namespace Planeted
 
     const float PerlinNoise::randomDotGrad(const std::uint8_t &x, const float tx) const
     {
-        return this->noiseParams.Permute(x) & 1 ? tx : -tx;
+        return PermutationTable::Permute(this->noiseParams.internalTable, x) & 1 ? tx : -tx;
     }
 
     const float PerlinNoise::randomDotGrad(const int &x, const int &y, const float tx, const float ty) const
     {
         float result;
 
-        switch(this->noiseParams.Permute(x, y) & 7)
+        switch(PermutationTable::Permute(this->noiseParams.internalTable, x, y) & 7)
         {
         case 0:
             result = tx; // (1, 0) * (tx, ty)
@@ -135,7 +135,7 @@ namespace Planeted
     {
         float result;
 
-        switch(this->noiseParams.Permute(x,y,z) & 15)
+        switch(PermutationTable::Permute(this->noiseParams.internalTable, x, y, z) & 15)
         {
         case 0:
             result = tx + ty; //(1,1,0) * (tx, ty, tz)
