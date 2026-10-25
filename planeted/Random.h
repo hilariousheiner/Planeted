@@ -8,6 +8,7 @@
 
 #include "Math.h"
 #include "PRNG.h"
+#include "PermutationTable.h"
 #include "Vector2.h"
 #include "Vector3.h"
 

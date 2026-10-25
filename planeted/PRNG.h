@@ -31,14 +31,5 @@ namespace Planeted
     float HashToSigned(uint32_t h);
     uint32_t StringToSeed32(const std::string &s);
     uint32_t StringToSeed64(const std::string &s);
-
-
-    // Permutation tables:
-    constexpr int PermutationSize = 256;
-
-    using Permutation = std::array<uint8_t, PermutationSize>;
-    using PermutationTable = std::array<uint8_t, PermutationSize * 2>;
-
-    PermutationTable MakePermutationTable(Permutation &permutation, uint64_t seed);
 }
 #endif // PLANETED_PRNG_H
