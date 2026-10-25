@@ -3,6 +3,20 @@
 
 namespace Planeted
 {
+    std::uint8_t PermutationTable::Permute(const InternalTable &table, const std::uint8_t &x) //const;
+    {
+        return table[x];
+    }
+    std::uint8_t PermutationTable::Permute(const InternalTable &table, const int &x, const int &y) //const;
+    {
+        return table[table[x] + y];
+    }
+    std::uint8_t PermutationTable::Permute(const InternalTable &table, const int &x, const int &y, const int &z) //const;
+    {
+        return table[table[table[x] + y] + z];
+    }
+
+
     PermutationTable::InternalTable PermutationTable::MakePermutationTable(Permutation &permutation, uint64_t seed)
     {
         PermutationTable::InternalTable result;

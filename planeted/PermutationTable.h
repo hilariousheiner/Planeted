@@ -17,6 +17,10 @@ namespace Planeted
         using InternalTable = std::array<uint8_t, PermutationSize * 2>;
 
         static InternalTable MakePermutationTable(Permutation &permutation, uint64_t seed);
+
+        static std::uint8_t Permute(const InternalTable &table, const std::uint8_t &x); //const;
+        static std::uint8_t Permute(const InternalTable &table, const int &x, const int &y); //const;
+        static std::uint8_t Permute(const InternalTable &table, const int &x, const int &y, const int &z); //const;
     };
 }
 #endif

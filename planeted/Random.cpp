@@ -48,15 +48,18 @@ namespace Planeted
 
         std::uint8_t NoiseParameters::Permute(const std::uint8_t &x) const
         {
-            return this->permutationTable_OLD[x];
+            //return this->permutationTable_OLD[x];
+            return PermutationTable::Permute(this->permutationTable_OLD, x);
         }
         std::uint8_t NoiseParameters::Permute(const int &x, const int &y) const
         {
-            return this->permutationTable_OLD[this->permutationTable_OLD[x] + y];
+            //return this->permutationTable_OLD[this->permutationTable_OLD[x] + y];
+            return PermutationTable::Permute(this->permutationTable_OLD, x, y);
         }
         std::uint8_t NoiseParameters::Permute(const int &x, const int &y, const int &z) const
         {
-            return this->permutationTable_OLD[this->permutationTable_OLD[this->permutationTable_OLD[x] + y] + z];
+            //return this->permutationTable_OLD[this->permutationTable_OLD[this->permutationTable_OLD[x] + y] + z];
+            return PermutationTable::Permute(this->permutationTable_OLD, x, y, z);
         }
     }
 }
