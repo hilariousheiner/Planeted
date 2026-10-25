@@ -21,21 +21,10 @@ namespace Planeted
         virtual void Seed(std::uint32_t seed) = 0;
         virtual void Seed(std::string seed) = 0;
 
-        void SetFBMParameters(const FBMParameters &fbmParameters);
-
-        void SetNumberOfOctaves(std::uint32_t numberOfOctaves);
-        void SetStartFrequency(float startFrequency);
-        void SetLacunarity(float lacunarity);
-        void SetPersistence(float persistence);
-        void SetNormalizeFBM(bool normalize);
-
     protected:
         virtual float noise1D(const float &p) const = 0;
         virtual float noise2D(const Vector2 &p) const = 0;
         virtual float noise3D(const Vector3 &p) const = 0;
-
-    //private:
-        FBMParameters fbmParams;
     };
 
     class ANoiseGenerator : public ANoise
@@ -167,6 +156,7 @@ namespace Planeted
 
     private:
         std::unique_ptr<ANoise> noise;
+        FBMParameters fbmParams;
     };
 }
 #endif

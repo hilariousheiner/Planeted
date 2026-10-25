@@ -5,107 +5,17 @@ namespace Planeted
 {
     float ANoise::Eval(const float &p) const
     {
-        float result = 0.0f;
-
-        float frequency = this->fbmParams.StartFrequency;
-        float amplitude = 1.0f;
-
-        float t = 0.0f;
-
-        for(std::uint32_t i = 0; i < this->fbmParams.NumberOfOctaves; i++)
-        {
-            result += amplitude*this->noise1D(p*frequency);
-
-            t += amplitude;
-            frequency *= this->fbmParams.Lacunarity;
-            amplitude *= this->fbmParams.Persistence;
-        }
-
-        if(this->fbmParams.Normalize)
-        {
-            result = result / t;
-        }
-        return result;
+        return this->noise1D(p);
     }
 
     float ANoise::Eval(const Vector2 &p) const
     {
-        float result = 0.0f;
-
-        float frequency = this->fbmParams.StartFrequency;
-        float amplitude = 1.0f;
-
-        float t = 0.0f;
-
-        for(std::uint32_t i = 0; i < this->fbmParams.NumberOfOctaves; i++)
-        {
-            result += amplitude*this->noise2D(p*frequency);
-
-            t += amplitude;
-            frequency *= fbmParams.Lacunarity;
-            amplitude *= fbmParams.Persistence;
-        }
-
-        if(fbmParams.Normalize)
-        {
-            result = result / t;
-        }
-        return result;
+        return this->noise2D(p);
     }
 
     float ANoise::Eval(const Vector3 &p) const
     {
-        float result = 0.0f;
-
-        float frequency = this->fbmParams.StartFrequency;
-        float amplitude = 1.0f;
-
-        float t = 0.0f;
-
-        for(std::uint32_t i = 0; i < this->fbmParams.NumberOfOctaves; i++)
-        {
-            result += amplitude*this->noise3D(p*frequency);
-
-            t += amplitude;
-            frequency *= this->fbmParams.Lacunarity;
-            amplitude *= this->fbmParams.Persistence;
-        }
-
-        if(this->fbmParams.Normalize)
-        {
-            result = result / t;
-        }
-        return result;
-    }
-
-    void ANoise::SetFBMParameters(const FBMParameters &fbmParameters)
-    {
-        this->fbmParams = fbmParameters;
-    }
-
-    void ANoise::SetNumberOfOctaves(std::uint32_t numberOfOctaves)
-    {
-        this->fbmParams.NumberOfOctaves = numberOfOctaves;
-    }
-
-    void ANoise::SetStartFrequency(float startFrequency)
-    {
-        this->fbmParams.StartFrequency = startFrequency;
-    }
-
-    void ANoise::SetLacunarity(float lacunarity)
-    {
-        this->fbmParams.Lacunarity = lacunarity;
-    }
-
-    void ANoise::SetPersistence(float persistence)
-    {
-        this->fbmParams.Persistence = persistence;
-    }
-
-    void ANoise::SetNormalizeFBM(bool normalize)
-    {
-        this->fbmParams.Normalize = normalize;
+        return this->noise3D(p);
     }
 
     void ANoiseGenerator::Seed(std::uint32_t seed)
@@ -538,14 +448,12 @@ namespace Planeted
 
 
     FBMScalarFieldModifier::FBMScalarFieldModifier(std::unique_ptr<ANoise> noise, const FBMParameters &fbmParameters)
-        : noise(std::move(noise))
-    {
-        this->fbmParams = fbmParameters;
-    }
+        : noise(std::move(noise)), fbmParams(fbmParameters)
+    { }
 
     FBMScalarFieldModifier::FBMScalarFieldModifier(const FBMScalarFieldModifier &other)
-        : ANoise(other), noise(other.noise->Clone())
-    {}
+        : ANoise(other), noise(other.noise->Clone()), fbmParams(other.fbmParams)
+    { }
 
     std::unique_ptr<ANoise> FBMScalarFieldModifier::Clone() const
     {
