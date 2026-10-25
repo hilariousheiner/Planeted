@@ -66,6 +66,8 @@
 		<Unit filename="PPM.h" />
 		<Unit filename="PRNG.cpp" />
 		<Unit filename="PRNG.h" />
+		<Unit filename="PerlinNoise.cpp" />
+		<Unit filename="PerlinNoise.h" />
 		<Unit filename="PermutationTable.cpp" />
 		<Unit filename="PermutationTable.h" />
 		<Unit filename="PixelMap.h" />
