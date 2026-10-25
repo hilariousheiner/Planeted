@@ -1,4 +1,6 @@
+#include "Math.h"
 #include "Noise.h"
+#include "PermutationTable.h"
 #include "PRNG.h"
 
 namespace Planeted

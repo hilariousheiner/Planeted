@@ -4,9 +4,10 @@
 #include <memory>
 
 #include "FBM.h"
-#include "Random.h"
 #include "ISeedable.h"
 #include "Seed.h"
+#include "Vector2.h"
+#include "Vector3.h"
 
 namespace Planeted
 {

@@ -1,4 +1,5 @@
 #include "PerlinNoise.h"
+#include "Math.h"
 
 namespace Planeted
 {

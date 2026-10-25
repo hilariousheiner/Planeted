@@ -71,8 +71,6 @@
 		<Unit filename="PermutationTable.cpp" />
 		<Unit filename="PermutationTable.h" />
 		<Unit filename="PixelMap.h" />
-		<Unit filename="Random.cpp" />
-		<Unit filename="Random.h" />
 		<Unit filename="SCAD.cpp" />
 		<Unit filename="SCAD.h" />
 		<Unit filename="STL.cpp" />

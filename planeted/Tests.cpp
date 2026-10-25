@@ -2,6 +2,7 @@
 
 #include <fstream>
 
+#include "Math.h"
 #include "PixelMap.h"
 #include "PPM.h"
 #include "PGM.h"
