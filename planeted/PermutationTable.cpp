@@ -17,6 +17,12 @@ namespace Planeted
     }
 
 
+    std::uint8_t PermutationTable::ToGrid(const int &x)
+    {
+        return static_cast<std::uint8_t>(x & (PermutationTable::PermutationSize - 1));
+    }
+
+
     PermutationTable::InternalTable PermutationTable::MakePermutationTable(Permutation &permutation, uint64_t seed)
     {
         PermutationTable::InternalTable result;

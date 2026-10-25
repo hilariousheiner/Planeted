@@ -58,18 +58,13 @@ namespace Planeted
     {
         return std::make_unique<ValueNoise>(*this);
     }
-    // ToDo: move somewhere else; maybe into ANoise or into random Module
-    static std::uint8_t toGrid(const int &x)
-    {
-        return static_cast<std::uint8_t>(x & (PermutationTable::PermutationSize - 1));
-    }
 
     float ValueNoise::Eval(const float &p) const
     {
         int pi = FloorToInt(p);
 
-        std::uint8_t p0 = toGrid(pi);
-        std::uint8_t p1 = toGrid(p0 + 1);
+        std::uint8_t p0 = PermutationTable::ToGrid(pi);
+        std::uint8_t p1 = PermutationTable::ToGrid(p0 + 1);
 
         const float &c0 = HashToSigned(Hash1D(p0, this->noiseParams.seed));
         const float &c1 = HashToSigned(Hash1D(p1, this->noiseParams.seed));
@@ -81,11 +76,11 @@ namespace Planeted
         int xi = FloorToInt(p.X);
         int yi = FloorToInt(p.Y);
 
-        int xi0 = toGrid(xi);
-        int yi0 = toGrid(yi);
+        int xi0 = PermutationTable::ToGrid(xi);
+        int yi0 = PermutationTable::ToGrid(yi);
 
-        int xi1 = toGrid(xi0 + 1);
-        int yi1 = toGrid(yi0 + 1);
+        int xi1 = PermutationTable::ToGrid(xi0 + 1);
+        int yi1 = PermutationTable::ToGrid(yi0 + 1);
 
         float tx = p.X - xi;
         float ty = p.Y - yi;
@@ -107,13 +102,13 @@ namespace Planeted
         int yi = FloorToInt(p.Y);
         int zi = FloorToInt(p.Z);
 
-        int xi0 = toGrid(xi);
-        int yi0 = toGrid(yi);
-        int zi0 = toGrid(zi);
+        int xi0 = PermutationTable::ToGrid(xi);
+        int yi0 = PermutationTable::ToGrid(yi);
+        int zi0 = PermutationTable::ToGrid(zi);
 
-        int xi1 = toGrid(xi0 + 1);
-        int yi1 = toGrid(yi0 + 1);
-        int zi1 = toGrid(zi0 + 1);
+        int xi1 = PermutationTable::ToGrid(xi0 + 1);
+        int yi1 = PermutationTable::ToGrid(yi0 + 1);
+        int zi1 = PermutationTable::ToGrid(zi0 + 1);
 
         float tx = p.X - xi;
         float ty = p.Y - yi;
@@ -155,8 +150,8 @@ namespace Planeted
     {
         int pi = FloorToInt(p);
 
-        std::uint8_t p0 = toGrid(pi);
-        std::uint8_t p1 = toGrid(p0 + 1);
+        std::uint8_t p0 = PermutationTable::ToGrid(pi);
+        std::uint8_t p1 = PermutationTable::ToGrid(p0 + 1);
 
         float tp = p - pi;
 
@@ -206,11 +201,11 @@ namespace Planeted
         int xi = FloorToInt(p.X);
         int yi = FloorToInt(p.Y);
 
-        int xi0 = toGrid(xi);
-        int yi0 = toGrid(yi);
+        int xi0 = PermutationTable::ToGrid(xi);
+        int yi0 = PermutationTable::ToGrid(yi);
 
-        int xi1 = toGrid(xi0 + 1);
-        int yi1 = toGrid(yi0 + 1);
+        int xi1 = PermutationTable::ToGrid(xi0 + 1);
+        int yi1 = PermutationTable::ToGrid(yi0 + 1);
 
         float tx = p.X - xi;
         float ty = p.Y - yi;
@@ -290,13 +285,13 @@ namespace Planeted
         int yi = FloorToInt(p.Y);
         int zi = FloorToInt(p.Z);
 
-        int xi0 = toGrid(xi);
-        int yi0 = toGrid(yi);
-        int zi0 = toGrid(zi);
+        int xi0 = PermutationTable::ToGrid(xi);
+        int yi0 = PermutationTable::ToGrid(yi);
+        int zi0 = PermutationTable::ToGrid(zi);
 
-        int xi1 = toGrid(xi0 + 1);
-        int yi1 = toGrid(yi0 + 1);
-        int zi1 = toGrid(zi0 + 1);
+        int xi1 = PermutationTable::ToGrid(xi0 + 1);
+        int yi1 = PermutationTable::ToGrid(yi0 + 1);
+        int zi1 = PermutationTable::ToGrid(zi0 + 1);
 
         float tx = p.X - xi;
         float ty = p.Y - yi;
