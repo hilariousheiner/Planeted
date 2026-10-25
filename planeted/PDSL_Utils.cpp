@@ -348,12 +348,12 @@ namespace Planeted
         if(value.GetValueType() == ValueTypeEnum::Int)
         {
             int seed = value.GetIntValue();
-            noise.Seed(seed);
+            noise.SetSeed(seed);
         }
         else if(value.GetValueType() == ValueTypeEnum::String)
         {
             std::string seed = value.GetStringValue();
-            noise.Seed(seed);
+            noise.SetSeed(seed);
         }
         else
         {

@@ -28,17 +28,17 @@ namespace Planeted
 
         NoiseParameters::NoiseParameters()
         {
-            this->SeedNoise("Planeted");
+            this->SetSeed("Planeted");
         }
 
-        void NoiseParameters::SeedNoise(std::uint32_t seed)
+        void NoiseParameters::SetSeed(std::uint32_t seed)
         {
             this->seed = seed;
             this->seed64 = FMix64(static_cast<uint64_t>(seed));
 
             this->permutationTable = MakePermutationTable(Random::permutation, this->seed64);
         }
-        void NoiseParameters::SeedNoise(std::string seed)
+        void NoiseParameters::SetSeed(std::string seed)
         {
             this->seed = StringToSeed32(seed);
             this->seed64 = StringToSeed64(seed);

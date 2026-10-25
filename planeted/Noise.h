@@ -5,10 +5,11 @@
 
 #include "FBM.h"
 #include "Random.h"
+#include "ISeedable.h"
 
 namespace Planeted
 {
-    class ANoise
+    class ANoise : public ISeedable
     {
     public:
         virtual ~ANoise() = default;
@@ -17,16 +18,13 @@ namespace Planeted
         virtual float Eval(const float &p) const = 0;
         virtual float Eval(const Vector2 &p) const = 0;
         virtual float Eval(const Vector3 &p) const = 0;
-
-        virtual void Seed(std::uint32_t seed) = 0;
-        virtual void Seed(std::string seed) = 0;
     };
 
     class ANoiseGenerator : public ANoise
     {
     public:
-        void Seed(std::uint32_t seed) override;
-        void Seed(std::string seed) override;
+        void SetSeed(std::uint32_t seed) override;
+        void SetSeed(std::string seed) override;
 
     protected:
         Random::NoiseParameters noiseParams;
@@ -81,8 +79,8 @@ namespace Planeted
         float Eval(const Vector2 &p) const override;
         float Eval(const Vector3 &p) const override;
 
-        void Seed(std::uint32_t seed) override;
-        void Seed(std::string seed) override;
+        void SetSeed(std::uint32_t seed) override;
+        void SetSeed(std::string seed) override;
 
     private:
         std::unique_ptr<ANoise> noise;
@@ -100,8 +98,8 @@ namespace Planeted
         float Eval(const Vector2 &p) const override;
         float Eval(const Vector3 &p) const override;
 
-        void Seed(std::uint32_t seed) override;
-        void Seed(std::string seed) override;
+        void SetSeed(std::uint32_t seed) override;
+        void SetSeed(std::string seed) override;
 
     private:
         std::unique_ptr<ANoise> noise;
@@ -119,8 +117,8 @@ namespace Planeted
         float Eval(const Vector2 &p) const override;
         float Eval(const Vector3 &p) const override;
 
-        void Seed(std::uint32_t seed) override;
-        void Seed(std::string seed) override;
+        void SetSeed(std::uint32_t seed) override;
+        void SetSeed(std::string seed) override;
 
     private:
         std::unique_ptr<ANoise> noise;
@@ -139,8 +137,8 @@ namespace Planeted
         float Eval(const Vector2 &p) const override;
         float Eval(const Vector3 &p) const override;
 
-        void Seed(std::uint32_t seed) override;
-        void Seed(std::string seed) override;
+        void SetSeed(std::uint32_t seed) override;
+        void SetSeed(std::string seed) override;
 
     private:
         std::unique_ptr<ANoise> noise;

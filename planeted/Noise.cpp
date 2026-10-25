@@ -3,13 +3,13 @@
 
 namespace Planeted
 {
-    void ANoiseGenerator::Seed(std::uint32_t seed)
+    void ANoiseGenerator::SetSeed(std::uint32_t seed)
     {
-        this->noiseParams.SeedNoise(seed);
+        this->noiseParams.SetSeed(seed);
     }
-    void ANoiseGenerator::Seed(std::string seed)
+    void ANoiseGenerator::SetSeed(std::string seed)
     {
-        this->noiseParams.SeedNoise(seed);
+        this->noiseParams.SetSeed(seed);
     }
 
     WhiteNoise::WhiteNoise()
@@ -355,13 +355,13 @@ namespace Planeted
         return n*n;
     }
 
-    void RidgeNoiseModifier::Seed(std::uint32_t seed)
+    void RidgeNoiseModifier::SetSeed(std::uint32_t seed)
     {
-        this->noise->Seed(seed);
+        this->noise->SetSeed(seed);
     }
-    void RidgeNoiseModifier::Seed(std::string seed)
+    void RidgeNoiseModifier::SetSeed(std::string seed)
     {
-        this->noise->Seed(seed);
+        this->noise->SetSeed(seed);
     }
 
     AbsNoiseModifier::AbsNoiseModifier(std::unique_ptr<ANoise> noise)
@@ -390,13 +390,13 @@ namespace Planeted
          return std::abs(this->noise->Eval(p));
     }
 
-    void AbsNoiseModifier::Seed(std::uint32_t seed)
+    void AbsNoiseModifier::SetSeed(std::uint32_t seed)
     {
-        this->noise->Seed(seed);
+        this->noise->SetSeed(seed);
     }
-    void AbsNoiseModifier::Seed(std::string seed)
+    void AbsNoiseModifier::SetSeed(std::string seed)
     {
-        this->noise->Seed(seed);
+        this->noise->SetSeed(seed);
     }
 
     PowNoiseModifier::PowNoiseModifier(std::unique_ptr<ANoise> noise, float exponent)
@@ -425,13 +425,13 @@ namespace Planeted
         return std::pow(this->noise->Eval(p), this->exponent);
     }
 
-    void PowNoiseModifier::Seed(std::uint32_t seed)
+    void PowNoiseModifier::SetSeed(std::uint32_t seed)
     {
-        this->noise->Seed(seed);
+        this->noise->SetSeed(seed);
     }
-    void PowNoiseModifier::Seed(std::string seed)
+    void PowNoiseModifier::SetSeed(std::string seed)
     {
-        this->noise->Seed(seed);
+        this->noise->SetSeed(seed);
     }
 
     FBMScalarFieldModifier::FBMScalarFieldModifier(std::unique_ptr<ANoise> noise, const FBMParameters &fbmParameters)
@@ -520,12 +520,12 @@ namespace Planeted
         return result;
     }
 
-    void FBMScalarFieldModifier::Seed(std::uint32_t seed)
+    void FBMScalarFieldModifier::SetSeed(std::uint32_t seed)
     {
-        this->noise->Seed(seed);
+        this->noise->SetSeed(seed);
     }
-    void FBMScalarFieldModifier::Seed(std::string seed)
+    void FBMScalarFieldModifier::SetSeed(std::string seed)
     {
-        this->noise->Seed(seed);
+        this->noise->SetSeed(seed);
     }
 }

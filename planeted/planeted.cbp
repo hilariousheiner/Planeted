@@ -35,6 +35,7 @@
 		<Unit filename="Color.h" />
 		<Unit filename="FBM.cpp" />
 		<Unit filename="FBM.h" />
+		<Unit filename="ISeedable.h" />
 		<Unit filename="Math.h" />
 		<Unit filename="Mesh.cpp" />
 		<Unit filename="Mesh.h" />
