@@ -6,6 +6,7 @@
 #include "FBM.h"
 #include "Random.h"
 #include "ISeedable.h"
+#include "Seed.h"
 
 namespace Planeted
 {

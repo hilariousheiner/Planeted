@@ -7,12 +7,16 @@
 
 namespace Planeted
 {
-    using Permutation = std::array<uint8_t, PermutationSize>;
+    class PermutationTable
+    {
+    public:
+        static constexpr int PermutationSize = 256;
 
-    constexpr int PermutationSize = 256;
+        using Permutation = std::array<uint8_t, PermutationSize>;
 
-    using PermutationTable = std::array<uint8_t, PermutationSize * 2>;
+        using InternalTable = std::array<uint8_t, PermutationSize * 2>;
 
-    PermutationTable MakePermutationTable(Permutation &permutation, uint64_t seed);
+        static InternalTable MakePermutationTable(Permutation &permutation, uint64_t seed);
+    };
 }
 #endif

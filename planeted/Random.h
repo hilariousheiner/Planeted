@@ -32,7 +32,7 @@ namespace Planeted
             std::uint32_t seed;
             std::uint64_t seed64;
         private:
-            PermutationTable permutationTable;
+            PermutationTable::InternalTable permutationTable_OLD;
         };
     }
 }

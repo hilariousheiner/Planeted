@@ -61,7 +61,7 @@ namespace Planeted
     // ToDo: move somewhere else; maybe into ANoise or into random Module
     static std::uint8_t toGrid(const int &x)
     {
-        return static_cast<std::uint8_t>(x & (PermutationSize - 1));
+        return static_cast<std::uint8_t>(x & (PermutationTable::PermutationSize - 1));
     }
 
     float ValueNoise::Eval(const float &p) const
@@ -174,7 +174,7 @@ namespace Planeted
         {
         case 0:
             result = tx; // (1, 0) * (tx, ty)
-            break; //<-- BUG! forgot the break. Fixing this will break tests. Need to generate new reference files
+            break;
         case 1:
             result = -tx; // (-1, 0) * (tx, ty)
             break;

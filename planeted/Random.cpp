@@ -6,7 +6,7 @@ namespace Planeted
 {
     namespace Random
     {
-        static Permutation permutation =
+        static PermutationTable::Permutation permutation =
         {
             8  , 170, 242, 67 , 248, 216, 115, 247, 164, 133, 195, 73 , 45 , 209, 13 , 53 ,
             9  , 131, 102, 214, 153, 254, 224, 63 , 244, 51 , 7  , 172, 106, 137, 95 , 201,
@@ -36,27 +36,27 @@ namespace Planeted
             this->seed = seed;
             this->seed64 = FMix64(static_cast<uint64_t>(seed));
 
-            this->permutationTable = MakePermutationTable(Random::permutation, this->seed64);
+            this->permutationTable_OLD = PermutationTable::MakePermutationTable(Random::permutation, this->seed64);
         }
         void NoiseParameters::SetSeed(std::string seed)
         {
             this->seed = StringToSeed32(seed);
             this->seed64 = StringToSeed64(seed);
 
-            this->permutationTable = MakePermutationTable(Random::permutation, this->seed64);
+            this->permutationTable_OLD = PermutationTable::MakePermutationTable(Random::permutation, this->seed64);
         }
 
         std::uint8_t NoiseParameters::Permute(const std::uint8_t &x) const
         {
-            return this->permutationTable[x];
+            return this->permutationTable_OLD[x];
         }
         std::uint8_t NoiseParameters::Permute(const int &x, const int &y) const
         {
-            return this->permutationTable[this->permutationTable[x] + y];
+            return this->permutationTable_OLD[this->permutationTable_OLD[x] + y];
         }
         std::uint8_t NoiseParameters::Permute(const int &x, const int &y, const int &z) const
         {
-            return this->permutationTable[this->permutationTable[this->permutationTable[x] + y] + z];
+            return this->permutationTable_OLD[this->permutationTable_OLD[this->permutationTable_OLD[x] + y] + z];
         }
     }
 }

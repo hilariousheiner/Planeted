@@ -1,6 +1,9 @@
 #ifndef PLANETED_ISEEDABLE_H
 #define PLANETED_ISEEDABLE_H
 
+#include <cstdint>
+#include <string>
+
 namespace Planeted
 {
     class ISeedable

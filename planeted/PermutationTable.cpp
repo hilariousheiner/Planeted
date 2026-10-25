@@ -3,9 +3,9 @@
 
 namespace Planeted
 {
-    PermutationTable MakePermutationTable(Permutation &permutation, uint64_t seed)
+    PermutationTable::InternalTable PermutationTable::MakePermutationTable(Permutation &permutation, uint64_t seed)
     {
-        PermutationTable result;
+        PermutationTable::InternalTable result;
 
         // copy the permutation into the first half of the table:
         for (int i = 0; i < PermutationSize; ++i)
