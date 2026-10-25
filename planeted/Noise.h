@@ -14,9 +14,9 @@ namespace Planeted
         virtual ~ANoise() = default;
         virtual std::unique_ptr<ANoise> Clone() const = 0;
 
-        virtual float Eval(const float &p) const;
-        virtual float Eval(const Vector2 &p) const;
-        virtual float Eval(const Vector3 &p) const;
+        virtual float Eval(const float &p) const = 0;
+        virtual float Eval(const Vector2 &p) const = 0;
+        virtual float Eval(const Vector3 &p) const = 0;
 
         virtual void Seed(std::uint32_t seed) = 0;
         virtual void Seed(std::string seed) = 0;
@@ -43,6 +43,10 @@ namespace Planeted
         void SetWhiteNoiseScale(float scale);
         std::unique_ptr<ANoise> Clone() const override;
 
+        float Eval(const float &p) const override;
+        float Eval(const Vector2 &p) const override;
+        float Eval(const Vector3 &p) const override;
+
     protected:
         float noise1D(const float &p) const override;
         float noise2D(const Vector2 &p) const override;
@@ -54,6 +58,10 @@ namespace Planeted
     public:
         std::unique_ptr<ANoise> Clone() const override;
 
+        float Eval(const float &p) const override;
+        float Eval(const Vector2 &p) const override;
+        float Eval(const Vector3 &p) const override;
+
     protected:
         float noise1D(const float &p) const override;
         float noise2D(const Vector2 &p) const override;
@@ -64,6 +72,10 @@ namespace Planeted
     {
     public:
         std::unique_ptr<ANoise> Clone() const override;
+
+        float Eval(const float &p) const override;
+        float Eval(const Vector2 &p) const override;
+        float Eval(const Vector3 &p) const override;
 
     protected:
         float noise1D(const float &p) const override;
@@ -80,6 +92,10 @@ namespace Planeted
         RidgeNoiseModifier(const RidgeNoiseModifier &other);
 
         std::unique_ptr<ANoise> Clone() const override;
+
+        float Eval(const float &p) const override;
+        float Eval(const Vector2 &p) const override;
+        float Eval(const Vector3 &p) const override;
 
         void Seed(std::uint32_t seed) override;
         void Seed(std::string seed) override;
@@ -101,6 +117,10 @@ namespace Planeted
 
         std::unique_ptr<ANoise> Clone() const override;
 
+        float Eval(const float &p) const override;
+        float Eval(const Vector2 &p) const override;
+        float Eval(const Vector3 &p) const override;
+
         void Seed(std::uint32_t seed) override;
         void Seed(std::string seed) override;
 
@@ -120,6 +140,10 @@ namespace Planeted
         PowNoiseModifier(const PowNoiseModifier &other);
 
         std::unique_ptr<ANoise> Clone() const override;
+
+        float Eval(const float &p) const override;
+        float Eval(const Vector2 &p) const override;
+        float Eval(const Vector3 &p) const override;
 
         void Seed(std::uint32_t seed) override;
         void Seed(std::string seed) override;
