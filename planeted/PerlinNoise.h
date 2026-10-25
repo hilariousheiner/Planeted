@@ -13,6 +13,11 @@ namespace Planeted
         float Eval(const float &p) const override;
         float Eval(const Vector2 &p) const override;
         float Eval(const Vector3 &p) const override;
+
+    private:
+        const float randomDotGrad(const std::uint8_t &x, const float tx) const;
+        const float randomDotGrad(const int &x, const int &y, const float tx, const float ty) const;
+        const float randomDotGrad(const int &x, const int &y, const int &z, const float tx, const float ty, const float tz) const;
     };
 }
 #endif
