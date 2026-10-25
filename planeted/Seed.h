@@ -12,8 +12,8 @@ namespace Planeted
         Seed(std::uint32_t seed);
         Seed(std::string seed);
 
-        std::uint32_t GetSeed();
-        std::uint64_t GetSeed64();
+        std::uint32_t GetSeed() const;
+        std::uint64_t GetSeed64() const;
 
     private:
         std::uint32_t seed;

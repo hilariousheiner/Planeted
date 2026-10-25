@@ -3,13 +3,13 @@
 
 namespace Planeted
 {
-    void ANoiseGenerator::SetSeed(std::uint32_t seed)
+    void ANoiseGenerator::SetSeed(std::uint32_t seedValue)
     {
-        this->noiseParams.SetSeed(seed);
+        this->seed = Seed(seedValue);
     }
-    void ANoiseGenerator::SetSeed(std::string seed)
+    void ANoiseGenerator::SetSeed(std::string seedValue)
     {
-        this->noiseParams.SetSeed(seed);
+        this->seed = Seed(seedValue);
     }
 
     WhiteNoise::WhiteNoise()
@@ -30,7 +30,7 @@ namespace Planeted
     {
         int pi = std::floor(p * this->WhiteNoiseScale);
 
-        uint32_t h = Hash1D(pi, this->noiseParams.seed);
+        uint32_t h = Hash1D(pi, this->seed.GetSeed());
 
         return HashToSigned(h);
     }
@@ -39,7 +39,7 @@ namespace Planeted
         int xi = std::floor(p.X * this->WhiteNoiseScale);
         int yi = std::floor(p.Y * this->WhiteNoiseScale);
 
-        uint32_t h = Hash2D(xi, yi, this->noiseParams.seed);
+        uint32_t h = Hash2D(xi, yi, this->seed.GetSeed());
 
         return HashToSigned(h);
     }
@@ -49,7 +49,7 @@ namespace Planeted
         int yi = std::floor(p.Y * this->WhiteNoiseScale);
         int zi = std::floor(p.Z * this->WhiteNoiseScale);
 
-        uint32_t h = Hash3D(xi, yi, zi, this->noiseParams.seed);
+        uint32_t h = Hash3D(xi, yi, zi, this->seed.GetSeed());
 
         return HashToSigned(h);
     }
@@ -66,8 +66,8 @@ namespace Planeted
         std::uint8_t p0 = PermutationTable::ToGrid(pi);
         std::uint8_t p1 = PermutationTable::ToGrid(p0 + 1);
 
-        const float &c0 = HashToSigned(Hash1D(p0, this->noiseParams.seed));
-        const float &c1 = HashToSigned(Hash1D(p1, this->noiseParams.seed));
+        const float &c0 = HashToSigned(Hash1D(p0, this->seed.GetSeed()));
+        const float &c1 = HashToSigned(Hash1D(p1, this->seed.GetSeed()));
 
         return SmoothStepUnclamped(c0, c1, p - pi);
     }
@@ -85,10 +85,10 @@ namespace Planeted
         float tx = p.X - xi;
         float ty = p.Y - yi;
 
-        const float &c00 = HashToSigned(Hash2D(xi0, yi0, this->noiseParams.seed));
-        const float &c10 = HashToSigned(Hash2D(xi1, yi0, this->noiseParams.seed));
-        const float &c01 = HashToSigned(Hash2D(xi0, yi1, this->noiseParams.seed));
-        const float &c11 = HashToSigned(Hash2D(xi1, yi1, this->noiseParams.seed));
+        const float &c00 = HashToSigned(Hash2D(xi0, yi0, this->seed.GetSeed()));
+        const float &c10 = HashToSigned(Hash2D(xi1, yi0, this->seed.GetSeed()));
+        const float &c01 = HashToSigned(Hash2D(xi0, yi1, this->seed.GetSeed()));
+        const float &c11 = HashToSigned(Hash2D(xi1, yi1, this->seed.GetSeed()));
 
         float u0 = SmoothStepUnclamped(c00, c10, tx);
         float u1 = SmoothStepUnclamped(c01, c11, tx);
@@ -115,15 +115,15 @@ namespace Planeted
         float tz = p.Z - zi;
 
         // get noise value at cell corners:
-        const float &c000 = HashToSigned(Hash3D(xi0, yi0, zi0, this->noiseParams.seed));
-        const float &c100 = HashToSigned(Hash3D(xi1, yi0, zi0, this->noiseParams.seed));
-        const float &c010 = HashToSigned(Hash3D(xi0, yi1, zi0, this->noiseParams.seed));
-        const float &c110 = HashToSigned(Hash3D(xi1, yi1, zi0, this->noiseParams.seed));
+        const float &c000 = HashToSigned(Hash3D(xi0, yi0, zi0, this->seed.GetSeed()));
+        const float &c100 = HashToSigned(Hash3D(xi1, yi0, zi0, this->seed.GetSeed()));
+        const float &c010 = HashToSigned(Hash3D(xi0, yi1, zi0, this->seed.GetSeed()));
+        const float &c110 = HashToSigned(Hash3D(xi1, yi1, zi0, this->seed.GetSeed()));
 
-        const float &c001 = HashToSigned(Hash3D(xi0, yi0, zi1, this->noiseParams.seed));
-        const float &c101 = HashToSigned(Hash3D(xi1, yi0, zi1, this->noiseParams.seed));
-        const float &c011 = HashToSigned(Hash3D(xi0, yi1, zi1, this->noiseParams.seed));
-        const float &c111 = HashToSigned(Hash3D(xi1, yi1, zi1, this->noiseParams.seed));
+        const float &c001 = HashToSigned(Hash3D(xi0, yi0, zi1, this->seed.GetSeed()));
+        const float &c101 = HashToSigned(Hash3D(xi1, yi0, zi1, this->seed.GetSeed()));
+        const float &c011 = HashToSigned(Hash3D(xi0, yi1, zi1, this->seed.GetSeed()));
+        const float &c111 = HashToSigned(Hash3D(xi1, yi1, zi1, this->seed.GetSeed()));
 
         // interpolate:
         float u00 = SmoothStepUnclamped(c000, c100, tx);

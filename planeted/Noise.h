@@ -24,11 +24,11 @@ namespace Planeted
     class ANoiseGenerator : public ANoise
     {
     public:
-        void SetSeed(std::uint32_t seed) override;
-        void SetSeed(std::string seed) override;
+        void SetSeed(std::uint32_t seedValue) override;
+        void SetSeed(std::string seedValue) override;
 
     protected:
-        Random::NoiseParameters noiseParams;
+        Seed seed;
     };
 
     class WhiteNoise : public ANoiseGenerator

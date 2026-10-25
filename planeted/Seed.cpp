@@ -14,11 +14,11 @@ namespace Planeted
         : seed(StringToSeed32(seed)), seed64(StringToSeed64(seed))
     { }
 
-    std::uint32_t Seed::GetSeed()
+    std::uint32_t Seed::GetSeed() const
     {
         return this->seed;
     }
-    std::uint64_t Seed::GetSeed64()
+    std::uint64_t Seed::GetSeed64() const
     {
         return this->seed64;
     }
