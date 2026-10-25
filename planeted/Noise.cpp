@@ -49,35 +49,6 @@ namespace Planeted
         return HashToSigned(h);
     }
 
-    float WhiteNoise::noise1D(const float &p) const
-    {
-        int pi = std::floor(p * this->noiseParams.WhiteNoiseScale);
-
-        uint32_t h = Hash1D(pi, this->noiseParams.seed);
-
-        return HashToSigned(h);
-    }
-    float WhiteNoise::noise2D(const Vector2 &p) const
-    {
-        int xi = std::floor(p.X * this->noiseParams.WhiteNoiseScale);
-        int yi = std::floor(p.Y * this->noiseParams.WhiteNoiseScale);
-
-        uint32_t h = Hash2D(xi, yi, this->noiseParams.seed);
-
-        return HashToSigned(h);
-    }
-    float WhiteNoise::noise3D(const Vector3 &p) const
-    {
-        int xi = std::floor(p.X * this->noiseParams.WhiteNoiseScale);
-        int yi = std::floor(p.Y * this->noiseParams.WhiteNoiseScale);
-        int zi = std::floor(p.Z * this->noiseParams.WhiteNoiseScale);
-
-        uint32_t h = Hash3D(xi, yi, zi, this->noiseParams.seed);
-
-        return HashToSigned(h);
-    }
-
-
     std::unique_ptr<ANoise> ValueNoise::Clone() const
     {
         return std::make_unique<ValueNoise>(*this);
@@ -167,86 +138,6 @@ namespace Planeted
         return SmoothStepUnclamped(v0, v1, tz);
     }
 
-    float ValueNoise::noise1D(const float &p) const
-    {
-        int pi = FloorToInt(p);
-
-        std::uint8_t p0 = toGrid(pi);
-        std::uint8_t p1 = toGrid(p0 + 1);
-
-        const float &c0 = HashToSigned(Hash1D(p0, this->noiseParams.seed));
-        const float &c1 = HashToSigned(Hash1D(p1, this->noiseParams.seed));
-
-        return SmoothStepUnclamped(c0, c1, p - pi);
-    }
-    float ValueNoise::noise2D(const Vector2 &p) const
-    {
-        int xi = FloorToInt(p.X);
-        int yi = FloorToInt(p.Y);
-
-        int xi0 = toGrid(xi);
-        int yi0 = toGrid(yi);
-
-        int xi1 = toGrid(xi0 + 1);
-        int yi1 = toGrid(yi0 + 1);
-
-        float tx = p.X - xi;
-        float ty = p.Y - yi;
-
-        const float &c00 = HashToSigned(Hash2D(xi0, yi0, this->noiseParams.seed));
-        const float &c10 = HashToSigned(Hash2D(xi1, yi0, this->noiseParams.seed));
-        const float &c01 = HashToSigned(Hash2D(xi0, yi1, this->noiseParams.seed));
-        const float &c11 = HashToSigned(Hash2D(xi1, yi1, this->noiseParams.seed));
-
-        float u0 = SmoothStepUnclamped(c00, c10, tx);
-        float u1 = SmoothStepUnclamped(c01, c11, tx);
-
-        return SmoothStepUnclamped(u0, u1, ty);
-    }
-    float ValueNoise::noise3D(const Vector3 &p) const
-    {
-        // calculate grid cell corner coordinates:
-        int xi = FloorToInt(p.X);
-        int yi = FloorToInt(p.Y);
-        int zi = FloorToInt(p.Z);
-
-        int xi0 = toGrid(xi);
-        int yi0 = toGrid(yi);
-        int zi0 = toGrid(zi);
-
-        int xi1 = toGrid(xi0 + 1);
-        int yi1 = toGrid(yi0 + 1);
-        int zi1 = toGrid(zi0 + 1);
-
-        float tx = p.X - xi;
-        float ty = p.Y - yi;
-        float tz = p.Z - zi;
-
-        // get noise value at cell corners:
-        const float &c000 = HashToSigned(Hash3D(xi0, yi0, zi0, this->noiseParams.seed));
-        const float &c100 = HashToSigned(Hash3D(xi1, yi0, zi0, this->noiseParams.seed));
-        const float &c010 = HashToSigned(Hash3D(xi0, yi1, zi0, this->noiseParams.seed));
-        const float &c110 = HashToSigned(Hash3D(xi1, yi1, zi0, this->noiseParams.seed));
-
-        const float &c001 = HashToSigned(Hash3D(xi0, yi0, zi1, this->noiseParams.seed));
-        const float &c101 = HashToSigned(Hash3D(xi1, yi0, zi1, this->noiseParams.seed));
-        const float &c011 = HashToSigned(Hash3D(xi0, yi1, zi1, this->noiseParams.seed));
-        const float &c111 = HashToSigned(Hash3D(xi1, yi1, zi1, this->noiseParams.seed));
-
-        // interpolate:
-        float u00 = SmoothStepUnclamped(c000, c100, tx);
-        float u10 = SmoothStepUnclamped(c010, c110, tx);
-
-        float u01 = SmoothStepUnclamped(c001, c101, tx);
-        float u11 = SmoothStepUnclamped(c011, c111, tx);
-
-        float v0 = SmoothStepUnclamped(u00, u10, ty);
-        float v1 = SmoothStepUnclamped(u01, u11, ty);
-
-        return SmoothStepUnclamped(v0, v1, tz);
-    }
-
-
     std::unique_ptr<ANoise> PerlinNoise::Clone() const
     {
         return std::make_unique<PerlinNoise>(*this);
@@ -269,20 +160,7 @@ namespace Planeted
 
         return SmoothStepUnclamped5(g0, g1, tp);
     }
-    float PerlinNoise::noise1D(const float &p) const
-    {
-        int pi = FloorToInt(p);
 
-        std::uint8_t p0 = toGrid(pi);
-        std::uint8_t p1 = toGrid(p0 + 1);
-
-        float tp = p - pi;
-
-        const float g0 = randomDotGradPerlin(this->noiseParams, p0, tp);
-        const float g1 = randomDotGradPerlin(this->noiseParams, p1, tp - 1);
-
-        return SmoothStepUnclamped5(g0, g1, tp);
-    }
     static float randomDotGradPerlin(const Random::NoiseParameters &params, const int &x, const int &y, const float tx, const float ty)
     {
         float result;
@@ -342,30 +220,7 @@ namespace Planeted
 
         return SmoothStepUnclamped5(u0, u1, ty);
     }
-    float PerlinNoise::noise2D(const Vector2 &p) const
-    {
-        int xi = FloorToInt(p.X);
-        int yi = FloorToInt(p.Y);
 
-        int xi0 = toGrid(xi);
-        int yi0 = toGrid(yi);
-
-        int xi1 = toGrid(xi0 + 1);
-        int yi1 = toGrid(yi0 + 1);
-
-        float tx = p.X - xi;
-        float ty = p.Y - yi;
-
-        const float &c00 = randomDotGradPerlin(this->noiseParams, xi0, yi0, tx    , ty    );
-        const float &c10 = randomDotGradPerlin(this->noiseParams, xi1, yi0, tx - 1, ty    );
-        const float &c01 = randomDotGradPerlin(this->noiseParams, xi0, yi1, tx    , ty - 1);
-        const float &c11 = randomDotGradPerlin(this->noiseParams, xi1, yi1, tx - 1, ty - 1);
-
-        float u0 = SmoothStepUnclamped5(c00, c10, tx);
-        float u1 = SmoothStepUnclamped5(c01, c11, tx);
-
-        return SmoothStepUnclamped5(u0, u1, ty);
-    }
     static float randomDotGradPerlin(const Random::NoiseParameters &params, const int &x, const int &y, const int &z, const float tx, const float ty, const float tz)
     {
         float result;
@@ -465,48 +320,6 @@ namespace Planeted
 
         return SmoothStepUnclamped5(v0, v1, tz);
     }
-    float PerlinNoise::noise3D(const Vector3 &p) const
-    {
-        // calculate grid cell corner coordinates:
-        int xi = FloorToInt(p.X);
-        int yi = FloorToInt(p.Y);
-        int zi = FloorToInt(p.Z);
-
-        int xi0 = toGrid(xi);
-        int yi0 = toGrid(yi);
-        int zi0 = toGrid(zi);
-
-        int xi1 = toGrid(xi0 + 1);
-        int yi1 = toGrid(yi0 + 1);
-        int zi1 = toGrid(zi0 + 1);
-
-        float tx = p.X - xi;
-        float ty = p.Y - yi;
-        float tz = p.Z - zi;
-
-        // compute dot products with gradients at cell corners:
-        const float &c000 = randomDotGradPerlin(this->noiseParams, xi0, yi0, zi0, tx    , ty    , tz   );
-        const float &c100 = randomDotGradPerlin(this->noiseParams, xi1, yi0, zi0, tx - 1, ty    , tz   );
-        const float &c010 = randomDotGradPerlin(this->noiseParams, xi0, yi1, zi0, tx    , ty - 1, tz   );
-        const float &c110 = randomDotGradPerlin(this->noiseParams, xi1, yi1, zi0, tx - 1, ty - 1, tz   );
-
-        const float &c001 = randomDotGradPerlin(this->noiseParams, xi0, yi0, zi1, tx    , ty    , tz - 1);
-        const float &c101 = randomDotGradPerlin(this->noiseParams, xi1, yi0, zi1, tx - 1, ty    , tz - 1);
-        const float &c011 = randomDotGradPerlin(this->noiseParams, xi0, yi1, zi1, tx    , ty - 1, tz - 1);
-        const float &c111 = randomDotGradPerlin(this->noiseParams, xi1, yi1, zi1, tx - 1, ty - 1, tz - 1);
-
-        // interpolate:
-        float u00 = SmoothStepUnclamped5(c000, c100, tx);
-        float u10 = SmoothStepUnclamped5(c010, c110, tx);
-
-        float u01 = SmoothStepUnclamped5(c001, c101, tx);
-        float u11 = SmoothStepUnclamped5(c011, c111, tx);
-
-        float v0 = SmoothStepUnclamped5(u00, u10, ty);
-        float v1 = SmoothStepUnclamped5(u01, u11, ty);
-
-        return SmoothStepUnclamped5(v0, v1, tz);
-    }
 
     RidgeNoiseModifier::RidgeNoiseModifier(std::unique_ptr<ANoise> noise)
         : noise(std::move(noise))
@@ -546,22 +359,6 @@ namespace Planeted
         this->noise->Seed(seed);
     }
 
-    float RidgeNoiseModifier::noise1D(const float &p) const
-    {
-        float n = (0.9f - std::abs(this->noise->Eval(p)));
-        return n*n;
-    }
-    float RidgeNoiseModifier::noise2D(const Vector2 &p) const
-    {
-        float n = (0.9f - std::abs(this->noise->Eval(p)));
-        return n*n;
-    }
-    float RidgeNoiseModifier::noise3D(const Vector3 &p) const
-    {
-        float n = (0.9f - std::abs(this->noise->Eval(p)));
-        return n*n;
-    }
-
     AbsNoiseModifier::AbsNoiseModifier(std::unique_ptr<ANoise> noise)
         : noise(std::move(noise))
     {}
@@ -596,20 +393,6 @@ namespace Planeted
     {
         this->noise->Seed(seed);
     }
-
-    float AbsNoiseModifier::noise1D(const float &p) const
-    {
-        return std::abs(this->noise->Eval(p));
-    }
-    float AbsNoiseModifier::noise2D(const Vector2 &p) const
-    {
-        return std::abs(this->noise->Eval(p));
-    }
-    float AbsNoiseModifier::noise3D(const Vector3 &p) const
-    {
-        return std::abs(this->noise->Eval(p));
-    }
-
 
     PowNoiseModifier::PowNoiseModifier(std::unique_ptr<ANoise> noise, float exponent)
         : noise(std::move(noise)), exponent(exponent)
@@ -646,20 +429,6 @@ namespace Planeted
         this->noise->Seed(seed);
     }
 
-    float PowNoiseModifier::noise1D(const float &p) const
-    {
-        return std::pow(this->noise->Eval(p), this->exponent);
-    }
-    float PowNoiseModifier::noise2D(const Vector2 &p) const
-    {
-        return std::pow(this->noise->Eval(p), this->exponent);
-    }
-    float PowNoiseModifier::noise3D(const Vector3 &p) const
-    {
-        return std::pow(this->noise->Eval(p), this->exponent);
-    }
-
-
     FBMScalarFieldModifier::FBMScalarFieldModifier(std::unique_ptr<ANoise> noise, const FBMParameters &fbmParameters)
         : noise(std::move(noise)), fbmParams(fbmParameters)
     { }
@@ -684,7 +453,7 @@ namespace Planeted
 
         for(std::uint32_t i = 0; i < this->fbmParams.NumberOfOctaves; i++)
         {
-            result += amplitude*this->noise1D(p*frequency);
+            result += amplitude*this->noise->Eval(p*frequency);
 
             t += amplitude;
             frequency *= this->fbmParams.Lacunarity;
@@ -708,7 +477,7 @@ namespace Planeted
 
         for(std::uint32_t i = 0; i < this->fbmParams.NumberOfOctaves; i++)
         {
-            result += amplitude*this->noise2D(p*frequency);
+            result += amplitude*this->noise->Eval(p*frequency);
 
             t += amplitude;
             frequency *= fbmParams.Lacunarity;
@@ -732,7 +501,7 @@ namespace Planeted
 
         for(std::uint32_t i = 0; i < this->fbmParams.NumberOfOctaves; i++)
         {
-            result += amplitude*this->noise3D(p*frequency);
+            result += amplitude*this->noise->Eval(p*frequency);
 
             t += amplitude;
             frequency *= this->fbmParams.Lacunarity;
@@ -753,18 +522,5 @@ namespace Planeted
     void FBMScalarFieldModifier::Seed(std::string seed)
     {
         this->noise->Seed(seed);
-    }
-
-    float FBMScalarFieldModifier::noise1D(const float &p) const
-    {
-        return this->noise->Eval(p); // ToDo: implement
-    }
-    float FBMScalarFieldModifier::noise2D(const Vector2 &p) const
-    {
-        return this->noise->Eval(p); // ToDo: implement
-    }
-    float FBMScalarFieldModifier::noise3D(const Vector3 &p) const
-    {
-        return this->noise->Eval(p); // ToDo: implement
     }
 }
