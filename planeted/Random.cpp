@@ -28,7 +28,6 @@ namespace Planeted
 
         NoiseParameters::NoiseParameters()
         {
-            this->WhiteNoiseScale = 100.0f;
             this->SeedNoise("Planeted");
         }
 

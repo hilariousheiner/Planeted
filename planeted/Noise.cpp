@@ -12,18 +12,23 @@ namespace Planeted
         this->noiseParams.SeedNoise(seed);
     }
 
+    WhiteNoise::WhiteNoise()
+    {
+        this->WhiteNoiseScale = 100.0f;
+    }
+
     std::unique_ptr<ANoise> WhiteNoise::Clone() const
     {
         return std::make_unique<WhiteNoise>(*this);
     }
     void WhiteNoise::SetWhiteNoiseScale(float scale)
     {
-        this->noiseParams.WhiteNoiseScale = scale;
+        this->WhiteNoiseScale = scale;
     }
 
     float WhiteNoise::Eval(const float &p) const
     {
-        int pi = std::floor(p * this->noiseParams.WhiteNoiseScale);
+        int pi = std::floor(p * this->WhiteNoiseScale);
 
         uint32_t h = Hash1D(pi, this->noiseParams.seed);
 
@@ -31,8 +36,8 @@ namespace Planeted
     }
     float WhiteNoise::Eval(const Vector2 &p) const
     {
-        int xi = std::floor(p.X * this->noiseParams.WhiteNoiseScale);
-        int yi = std::floor(p.Y * this->noiseParams.WhiteNoiseScale);
+        int xi = std::floor(p.X * this->WhiteNoiseScale);
+        int yi = std::floor(p.Y * this->WhiteNoiseScale);
 
         uint32_t h = Hash2D(xi, yi, this->noiseParams.seed);
 
@@ -40,9 +45,9 @@ namespace Planeted
     }
     float WhiteNoise::Eval(const Vector3 &p) const
     {
-        int xi = std::floor(p.X * this->noiseParams.WhiteNoiseScale);
-        int yi = std::floor(p.Y * this->noiseParams.WhiteNoiseScale);
-        int zi = std::floor(p.Z * this->noiseParams.WhiteNoiseScale);
+        int xi = std::floor(p.X * this->WhiteNoiseScale);
+        int yi = std::floor(p.Y * this->WhiteNoiseScale);
+        int zi = std::floor(p.Z * this->WhiteNoiseScale);
 
         uint32_t h = Hash3D(xi, yi, zi, this->noiseParams.seed);
 

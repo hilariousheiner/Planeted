@@ -21,8 +21,6 @@ namespace Planeted
 
             NoiseParameters();
 
-            float WhiteNoiseScale;
-
             void SeedNoise(std::uint32_t seed);
             void SeedNoise(std::string seed);
 
