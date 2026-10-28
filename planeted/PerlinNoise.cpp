@@ -23,6 +23,44 @@ namespace Planeted
             212, 182, 136, 185, 110, 40 , 235, 21 , 222, 178, 174, 205, 68 , 90 , 171, 199
     };
 
+    std::unique_ptr<IField1> PerlinNoise1::Clone() const
+    {
+        return std::make_unique<PerlinNoise1>(*this);
+    }
+
+    void PerlinNoise1::SetSeed(std::uint32_t seedValue)
+    {
+        this->seed = Seed(seedValue);
+        this->permutationTable = PermutationTable(pnPermutation, this->seed.GetSeed64());
+    }
+    void PerlinNoise1::SetSeed(std::string seedValue)
+    {
+        this->seed = Seed(seedValue);
+        this->permutationTable = PermutationTable(pnPermutation, this->seed.GetSeed64());
+    }
+
+    float PerlinNoise1::Eval(const float &p) const
+    {
+        int pi = FloorToInt(p);
+
+        std::uint8_t p0 = PermutationTable::ToGrid(pi);
+        std::uint8_t p1 = PermutationTable::ToGrid(p0 + 1);
+
+        float tp = p - pi;
+
+        const float g0 = this->randomDotGrad(p0, tp);
+        const float g1 = this->randomDotGrad(p1, tp - 1);
+
+        return SmoothStepUnclamped5(g0, g1, tp);
+    }
+
+    const float PerlinNoise1::randomDotGrad(const std::uint8_t &x, const float tx) const
+    {
+        return this->permutationTable.Permute(x) & 1 ? tx : -tx;
+    }
+
+    ////////////////////////////////////////////////////
+
     std::unique_ptr<ANoise> PerlinNoise::Clone() const
     {
         return std::make_unique<PerlinNoise>(*this);

@@ -1,11 +1,28 @@
 #ifndef PLANETED_PERLINNOISE_H
 #define PLANETED_PERLINNOISE_H
 
+#include "Field.h"
 #include "Noise.h"
 #include "PermutationTable.h"
 
 namespace Planeted
 {
+    class PerlinNoise1 : public AFieldGenerator1
+    {
+    public:
+        std::unique_ptr<IField1> Clone() const override;
+
+        float Eval(const float &p) const override;
+
+        void SetSeed(std::uint32_t seedValue) override;
+        void SetSeed(std::string seedValue) override;
+
+    private:
+        PermutationTable permutationTable;
+
+        const float randomDotGrad(const std::uint8_t &x, const float tx) const;
+    };
+
     class PerlinNoise : public ANoiseGenerator
     {
     public:
