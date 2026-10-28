@@ -15,7 +15,7 @@ namespace Planeted
         {}
 
         Field1Value(const Field1Value &other)
-            : noise(other.field->Clone())
+            : field(other.field->Clone())
         {}
 
         Field1Value &operator=(const Field1Value &other)
@@ -36,7 +36,7 @@ namespace Planeted
         }
 
     private:
-        std::unique_ptr<ANoise> noise;
+        std::unique_ptr<IField1> field;
     };
 }
 #endif // PLANETED_FIELDVALUE_H
