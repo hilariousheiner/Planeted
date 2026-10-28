@@ -38,7 +38,7 @@ namespace Planeted
 
             if(args.size() == 1)
             {
-                SeedNoise(noiseValue.Get(), args[0]);
+                SetSeed(noiseValue.Get(), args[0]);
             }
             return Value(noiseValue);
         }
@@ -50,7 +50,7 @@ namespace Planeted
 
             if(args.size() == 1)
             {
-                SeedNoise(noiseValue.Get(), args[0]);
+                SetSeed(noiseValue.Get(), args[0]);
             }
             return Value(noiseValue);
         }
@@ -61,7 +61,7 @@ namespace Planeted
 
             if(args.size() == 1)
             {
-                SeedNoise(noiseValue.Get(), args[0]);
+                SetSeed(noiseValue.Get(), args[0]);
             }
             return Value(noiseValue);
         }
@@ -81,7 +81,7 @@ namespace Planeted
 
             NoiseValue noiseValue = GetNoiseArg(args, 0, "seedNoise");
 
-            SeedNoise(noiseValue.Get(), args[1]);
+            SetSeed(noiseValue.Get(), args[1]);
 
             return Value(noiseValue);
         }

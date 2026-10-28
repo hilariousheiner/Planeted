@@ -343,17 +343,17 @@ namespace Planeted
     }
 
     // Noise:
-    void SeedNoise(ANoise &noise, const Value &value)
+    void SetSeed(ISeedable &seedable, const Value &value)
     {
         if(value.GetValueType() == ValueTypeEnum::Int)
         {
             int seed = value.GetIntValue();
-            noise.SetSeed(seed);
+            seedable.SetSeed(seed);
         }
         else if(value.GetValueType() == ValueTypeEnum::String)
         {
             std::string seed = value.GetStringValue();
-            noise.SetSeed(seed);
+            seedable.SetSeed(seed);
         }
         else
         {

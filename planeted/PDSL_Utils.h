@@ -45,7 +45,7 @@ namespace Planeted
     Value Negate(const Value &value);
 
     // Noise:
-    void SeedNoise(ANoise &noise, const Value &value);
+    void SetSeed(ISeedable &seedable, const Value &value);
 }
 
 #endif // PLANETED_PDSL_UTILS_H
