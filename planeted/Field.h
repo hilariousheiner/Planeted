@@ -4,6 +4,7 @@
 #include <memory>
 
 #include "ISeedable.h"
+#include "Seed.h"
 #include "Vector2.h"
 #include "Vector3.h"
 
@@ -34,6 +35,36 @@ namespace Planeted
         virtual std::unique_ptr<IField3> Clone() const = 0;
 
         virtual float Eval(const Vector3 &p) const = 0;
+    };
+
+    class AFieldGenerator1 : public IField1
+    {
+    public:
+        void SetSeed(std::uint32_t seedValue) override;
+        void SetSeed(std::string seedValue) override;
+
+    protected:
+        Seed seed;
+    };
+
+    class AFieldGenerator2 : public IField2
+    {
+    public:
+        void SetSeed(std::uint32_t seedValue) override;
+        void SetSeed(std::string seedValue) override;
+
+    protected:
+        Seed seed;
+    };
+
+    class AFieldGenerator3 : public IField3
+    {
+    public:
+        void SetSeed(std::uint32_t seedValue) override;
+        void SetSeed(std::string seedValue) override;
+
+    protected:
+        Seed seed;
     };
 }
 #endif // PLANETED_FIELD_H
