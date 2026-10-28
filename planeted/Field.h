@@ -1,6 +1,8 @@
 #ifndef PLANETED_FIELD_H
 #define PLANETED_FIELD_H
 
+#include <memory>
+
 #include "ISeedable.h"
 #include "Vector2.h"
 #include "Vector3.h"
