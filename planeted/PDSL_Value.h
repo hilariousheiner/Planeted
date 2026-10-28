@@ -8,6 +8,7 @@
 #include "Mesh.h"
 #include "FBM.h"
 #include "Noise.h"
+#include "NoiseValue.h"
 
 namespace Planeted
 {
@@ -41,40 +42,6 @@ namespace Planeted
         std::vector<Value> elements;
 
         std::string ToString() const;
-    };
-
-    class NoiseValue
-    {
-    public:
-        NoiseValue() = default;
-
-        explicit NoiseValue(std::unique_ptr<ANoise> noise)
-            : noise(std::move(noise))
-        {}
-
-        NoiseValue(const NoiseValue &other)
-            : noise(other.noise->Clone())
-        {}
-
-        NoiseValue &operator=(const NoiseValue &other)
-        {
-            if(this != &other)
-            {
-                this->noise = other.noise->Clone();
-            }
-            return *this;
-        }
-
-        NoiseValue(NoiseValue&&) noexcept = default;
-        NoiseValue& operator=(NoiseValue&&) noexcept = default;
-
-        ANoise &Get()
-        {
-            return *noise;
-        }
-
-    private:
-        std::unique_ptr<ANoise> noise;
     };
 
     class Value
