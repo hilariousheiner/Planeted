@@ -66,5 +66,22 @@ namespace Planeted
     protected:
         Seed seed;
     };
+
+    class AbsFieldModifier1 : public IField1
+    {
+    public:
+        AbsFieldModifier1(std::unique_ptr<IField1> field);
+        AbsFieldModifier1(const AbsFieldModifier1 &other);
+
+        std::unique_ptr<IField1> Clone() const override;
+
+        float Eval(const float &p) const override;
+
+        void SetSeed(std::uint32_t seed) override;
+        void SetSeed(std::string seed) override;
+
+    private:
+        std::unique_ptr<IField1> field;
+    };
 }
 #endif // PLANETED_FIELD_H
