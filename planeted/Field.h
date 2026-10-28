@@ -68,6 +68,19 @@ namespace Planeted
         Seed seed;
     };
 
+    class ConstantField1 : public AFieldGenerator1
+    {
+    public:
+        ConstantField1(float constant);
+
+        std::unique_ptr<IField1> Clone() const override;
+
+        float Eval(const float &p) const override;
+
+    private:
+        float constant;
+    };
+
     class AbsFieldModifier1 : public IField1
     {
     public:

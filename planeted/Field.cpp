@@ -30,6 +30,20 @@ namespace Planeted
     }
 
 
+    ConstantField1::ConstantField1(float constant)
+        : constant(constant)
+    { }
+
+    std::unique_ptr<IField1> ConstantField1::Clone() const
+    {
+        return std::make_unique<ConstantField1>(*this);
+    }
+
+    float ConstantField1::Eval(const float &p) const
+    {
+        return this->constant;
+    }
+
     AbsFieldModifier1::AbsFieldModifier1(std::unique_ptr<IField1> field)
         : field(std::move(field))
     {}
