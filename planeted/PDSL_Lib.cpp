@@ -102,7 +102,7 @@ namespace Planeted
             NoiseValue noiseValue = GetNoiseArg(args, 0, "fbm");
             FBMParameters parametersValue = GetFBMParametersArg(args, 1, "fbm");
 
-            NoiseValue fbmNoiseValue(FBMScalarFieldModifier(noiseValue.Get().Clone(), parametersValue).Clone());
+            NoiseValue fbmNoiseValue(FBMNoiseModifier(noiseValue.Get().Clone(), parametersValue).Clone());
 
             return Value(fbmNoiseValue);
         }

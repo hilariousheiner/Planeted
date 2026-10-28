@@ -248,20 +248,20 @@ namespace Planeted
         this->noise->SetSeed(seed);
     }
 
-    FBMScalarFieldModifier::FBMScalarFieldModifier(std::unique_ptr<ANoise> noise, const FBMParameters &fbmParameters)
+    FBMNoiseModifier::FBMNoiseModifier(std::unique_ptr<ANoise> noise, const FBMParameters &fbmParameters)
         : noise(std::move(noise)), fbmParams(fbmParameters)
     { }
 
-    FBMScalarFieldModifier::FBMScalarFieldModifier(const FBMScalarFieldModifier &other)
+    FBMNoiseModifier::FBMNoiseModifier(const FBMNoiseModifier &other)
         : ANoise(other), noise(other.noise->Clone()), fbmParams(other.fbmParams)
     { }
 
-    std::unique_ptr<ANoise> FBMScalarFieldModifier::Clone() const
+    std::unique_ptr<ANoise> FBMNoiseModifier::Clone() const
     {
-        return std::make_unique<FBMScalarFieldModifier>(*this);
+        return std::make_unique<FBMNoiseModifier>(*this);
     }
 
-    float FBMScalarFieldModifier::Eval(const float &p) const
+    float FBMNoiseModifier::Eval(const float &p) const
     {
         float result = 0.0f;
 
@@ -285,7 +285,7 @@ namespace Planeted
         }
         return result;
     }
-    float FBMScalarFieldModifier::Eval(const Vector2 &p) const
+    float FBMNoiseModifier::Eval(const Vector2 &p) const
     {
         float result = 0.0f;
 
@@ -309,7 +309,7 @@ namespace Planeted
         }
         return result;
     }
-    float FBMScalarFieldModifier::Eval(const Vector3 &p) const
+    float FBMNoiseModifier::Eval(const Vector3 &p) const
     {
         float result = 0.0f;
 
@@ -334,11 +334,11 @@ namespace Planeted
         return result;
     }
 
-    void FBMScalarFieldModifier::SetSeed(std::uint32_t seed)
+    void FBMNoiseModifier::SetSeed(std::uint32_t seed)
     {
         this->noise->SetSeed(seed);
     }
-    void FBMScalarFieldModifier::SetSeed(std::string seed)
+    void FBMNoiseModifier::SetSeed(std::string seed)
     {
         this->noise->SetSeed(seed);
     }

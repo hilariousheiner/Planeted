@@ -117,11 +117,11 @@ namespace Planeted
         float exponent;
     };
 
-    class FBMScalarFieldModifier : public ANoise
+    class FBMNoiseModifier : public ANoise
     {
     public:
-        FBMScalarFieldModifier(std::unique_ptr<ANoise> noise, const FBMParameters &fbmParameters);
-        FBMScalarFieldModifier(const FBMScalarFieldModifier &other);
+        FBMNoiseModifier(std::unique_ptr<ANoise> noise, const FBMParameters &fbmParameters);
+        FBMNoiseModifier(const FBMNoiseModifier &other);
 
         std::unique_ptr<ANoise> Clone() const override;
 
