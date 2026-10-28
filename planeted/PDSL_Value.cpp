@@ -49,6 +49,10 @@ namespace Planeted
         : data(std::move(noiseValue))
     { }
 
+    Value::Value(Field1Value field1Value)
+        : data(std::move(field1Value))
+    { }
+
     Value::Value(FBMParameters parametersValue)
         : data(std::move(parametersValue))
     { }
@@ -101,11 +105,15 @@ namespace Planeted
         return std::get<NoiseValue>(this->data);
     }
 
+    const Field1Value &Value::GetField1Value() const
+    {
+        return std::get<Field1Value>(this->data);
+    }
+
     const FBMParameters &Value::GetFBMParametersValue() const
     {
         return std::get<FBMParameters>(this->data);
     }
-
 
     ValueTypeEnum Value::GetValueType() const
     {
@@ -147,6 +155,10 @@ namespace Planeted
         if(std::holds_alternative<NoiseValue>(this->data))
         {
             return ValueTypeEnum::Noise;
+        }
+        if(std::holds_alternative<Field1Value>(this->data))
+        {
+            return ValueTypeEnum::Field1;
         }
         if(std::holds_alternative<FBMParameters>(this->data))
         {
@@ -190,8 +202,12 @@ namespace Planeted
         case ValueTypeEnum::Noise:
             result = "noise";
             break;
+        case ValueTypeEnum::Field1:
+            result = "field1";
+            break;
         case ValueTypeEnum::FBMParameters:
             result = "fbm parameters";
+            break;
         default:
             break;
         }
@@ -232,6 +248,9 @@ namespace Planeted
             break;
         case ValueTypeEnum::Noise:
             result = "Noise";
+            break;
+        case ValueTypeEnum::Field1:
+            result = "Field1";
             break;
         case ValueTypeEnum::FBMParameters:
             result = "FBMParameters";

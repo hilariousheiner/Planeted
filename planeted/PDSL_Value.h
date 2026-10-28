@@ -7,6 +7,8 @@
 
 #include "Mesh.h"
 #include "FBM.h"
+#include "Field.h"
+#include "FieldValue.h"
 #include "Noise.h"
 #include "NoiseValue.h"
 
@@ -25,7 +27,8 @@ namespace Planeted
 
         Mesh,
         Noise,
-        FBMParameters
+        FBMParameters,
+        Field1
     };
 
     class Value;
@@ -60,6 +63,8 @@ namespace Planeted
         explicit Value(NoiseValue noiseValue);
         explicit Value(FBMParameters fbmParametersValue);
 
+        explicit Value(Field1Value field1Value);
+
         bool IsNull() const;
         static const Value &Null();
 
@@ -72,8 +77,11 @@ namespace Planeted
         const List &GetListValue() const;
 
         const Mesh &GetMeshValue() const;
-        const NoiseValue &GetNoiseValue() const;
+
         const FBMParameters &GetFBMParametersValue() const;
+
+        const NoiseValue &GetNoiseValue() const;
+        const Field1Value &GetField1Value() const;
 
         ValueTypeEnum GetValueType() const;
 
@@ -81,7 +89,7 @@ namespace Planeted
         std::string TypeToString() const;
 
     private:
-        std::variant<std::monostate, int, float, bool, std::string, Tuple, List, Mesh, NoiseValue, FBMParameters> data;
+        std::variant<std::monostate, int, float, bool, std::string, Tuple, List, Mesh, NoiseValue, FBMParameters, Field1Value> data;
     };
 }
 #endif // PLANETED_PDSL_VALUE_H
