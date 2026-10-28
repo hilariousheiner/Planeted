@@ -19,7 +19,8 @@ namespace Planeted
         void SetSeed(std::string seedValue) override;
 
     private:
-        PermutationTable::InternalTable internalTable;
+        PermutationTable permutationTable;
+        //PermutationTable::internalTable internalTable;
 
         const float randomDotGrad(const std::uint8_t &x, const float tx) const;
         const float randomDotGrad(const int &x, const int &y, const float tx, const float ty) const;

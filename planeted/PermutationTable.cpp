@@ -3,15 +3,33 @@
 
 namespace Planeted
 {
-    std::uint8_t PermutationTable::Permute(const InternalTable &table, const std::uint8_t &x) //const;
+    PermutationTable::PermutationTable(Permutation &permutation, uint64_t seed)
+    {
+        this->table = PermutationTable::makePermutationTable(permutation, seed);
+    }
+
+    std::uint8_t PermutationTable::Permute(const std::uint8_t &x) const
+    {
+        return this->table[x];
+    }
+    std::uint8_t PermutationTable::Permute(const int &x, const int &y) const
+    {
+        return this->table[this->table[x] + y];
+    }
+    std::uint8_t PermutationTable::Permute(const int &x, const int &y, const int &z) const
+    {
+        return this->table[this->table[this->table[x] + y] + z];
+    }
+
+    std::uint8_t PermutationTable::Permute(const internalTable &table, const std::uint8_t &x) //const;
     {
         return table[x];
     }
-    std::uint8_t PermutationTable::Permute(const InternalTable &table, const int &x, const int &y) //const;
+    std::uint8_t PermutationTable::Permute(const internalTable &table, const int &x, const int &y) //const;
     {
         return table[table[x] + y];
     }
-    std::uint8_t PermutationTable::Permute(const InternalTable &table, const int &x, const int &y, const int &z) //const;
+    std::uint8_t PermutationTable::Permute(const internalTable &table, const int &x, const int &y, const int &z) //const;
     {
         return table[table[table[x] + y] + z];
     }
@@ -23,9 +41,9 @@ namespace Planeted
     }
 
 
-    PermutationTable::InternalTable PermutationTable::MakePermutationTable(Permutation &permutation, uint64_t seed)
+    PermutationTable::internalTable PermutationTable::makePermutationTable(Permutation &permutation, uint64_t seed)
     {
-        PermutationTable::InternalTable result;
+        PermutationTable::internalTable result;
 
         // copy the permutation into the first half of the table:
         for (int i = 0; i < PermutationSize; ++i)

@@ -31,12 +31,14 @@ namespace Planeted
     void PerlinNoise::SetSeed(std::uint32_t seedValue)
     {
         this->seed = Seed(seedValue);
-        this->internalTable = PermutationTable::MakePermutationTable(gPermutation, this->seed.GetSeed64());
+        //this->internalTable = PermutationTable::makePermutationTable(gPermutation, this->seed.GetSeed64());
+        this->permutationTable = PermutationTable(gPermutation, this->seed.GetSeed64());
     }
     void PerlinNoise::SetSeed(std::string seedValue)
     {
         this->seed = Seed(seedValue);
-        this->internalTable = PermutationTable::MakePermutationTable(gPermutation, this->seed.GetSeed64());
+        //this->internalTable = PermutationTable::makePermutationTable(gPermutation, this->seed.GetSeed64());
+        this->permutationTable = PermutationTable(gPermutation, this->seed.GetSeed64());
     }
 
     float PerlinNoise::Eval(const float &p) const
@@ -124,14 +126,16 @@ namespace Planeted
 
     const float PerlinNoise::randomDotGrad(const std::uint8_t &x, const float tx) const
     {
-        return PermutationTable::Permute(this->internalTable, x) & 1 ? tx : -tx;
+        return this->permutationTable.Permute(x) & 1 ? tx : -tx;
+        //return PermutationTable::Permute(this->internalTable, x) & 1 ? tx : -tx;
     }
 
     const float PerlinNoise::randomDotGrad(const int &x, const int &y, const float tx, const float ty) const
     {
         float result;
 
-        switch(PermutationTable::Permute(this->internalTable, x, y) & 7)
+        switch(this->permutationTable.Permute(x, y) & 7)
+        //switch(PermutationTable::Permute(this->internalTable, x, y) & 7)
         {
         case 0:
             result = tx; // (1, 0) * (tx, ty)
@@ -167,7 +171,8 @@ namespace Planeted
     {
         float result;
 
-        switch(PermutationTable::Permute(this->internalTable, x, y, z) & 15)
+        switch(this->permutationTable.Permute(x, y, z) & 15)
+        //switch(PermutationTable::Permute(this->internalTable, x, y, z) & 15)
         {
         case 0:
             result = tx + ty; //(1,1,0) * (tx, ty, tz)
