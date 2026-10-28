@@ -41,6 +41,7 @@
 		<Unit filename="Mesh.h" />
 		<Unit filename="Noise.cpp" />
 		<Unit filename="Noise.h" />
+		<Unit filename="NoiseValue.h" />
 		<Unit filename="OBJ.cpp" />
 		<Unit filename="OBJ.h" />
 		<Unit filename="PDSL.cpp" />
