@@ -83,4 +83,52 @@ namespace Planeted
     {
         this->field->SetSeed(seed);
     }
+
+
+    FBMFieldModifier1::FBMFieldModifier1(std::unique_ptr<IField1> field, const FBMParameters &fbmParameters)
+        : field(std::move(field)), fbmParams(fbmParameters)
+    { }
+
+    FBMFieldModifier1::FBMFieldModifier1(const FBMFieldModifier1 &other)
+        : IField1(other), field(other.field->Clone()), fbmParams(other.fbmParams)
+    { }
+
+    std::unique_ptr<IField1> FBMFieldModifier1::Clone() const
+    {
+        return std::make_unique<FBMFieldModifier1>(*this);
+    }
+
+    float FBMFieldModifier1::Eval(const float &p) const
+    {
+        float result = 0.0f;
+
+        float frequency = this->fbmParams.StartFrequency;
+        float amplitude = 1.0f;
+
+        float t = 0.0f;
+
+        for(std::uint32_t i = 0; i < this->fbmParams.NumberOfOctaves; i++)
+        {
+            result += amplitude*this->field->Eval(p*frequency);
+
+            t += amplitude;
+            frequency *= this->fbmParams.Lacunarity;
+            amplitude *= this->fbmParams.Persistence;
+        }
+
+        if(this->fbmParams.Normalize)
+        {
+            result = result / t;
+        }
+        return result;
+    }
+
+    void FBMFieldModifier1::SetSeed(std::uint32_t seed)
+    {
+        this->field->SetSeed(seed);
+    }
+    void FBMFieldModifier1::SetSeed(std::string seed)
+    {
+        this->field->SetSeed(seed);
+    }
 }

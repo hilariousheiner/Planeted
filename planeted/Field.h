@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include "FBM.h"
 #include "ISeedable.h"
 #include "Seed.h"
 #include "Vector2.h"
@@ -100,6 +101,24 @@ namespace Planeted
     private:
         std::unique_ptr<IField1> field;
         float exponent;
+    };
+
+    class FBMFieldModifier1 : public IField1
+    {
+    public:
+        FBMFieldModifier1(std::unique_ptr<IField1> field, const FBMParameters &fbmParameters);
+        FBMFieldModifier1(const FBMFieldModifier1 &other);
+
+        std::unique_ptr<IField1> Clone() const override;
+
+        float Eval(const float &p) const override;
+
+        void SetSeed(std::uint32_t seed) override;
+        void SetSeed(std::string seed) override;
+
+    private:
+        std::unique_ptr<IField1> field;
+        FBMParameters fbmParams;
     };
 }
 #endif // PLANETED_FIELD_H
