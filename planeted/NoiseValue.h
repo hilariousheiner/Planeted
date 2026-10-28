@@ -30,7 +30,7 @@ namespace Planeted
 
         ANoise &Get()
         {
-            return *noise;
+            return *(this->noise);
         }
 
     private:
