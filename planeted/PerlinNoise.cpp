@@ -3,7 +3,7 @@
 
 namespace Planeted
 {
-    static PermutationTable::Permutation gPermutation =
+    static PermutationTable::Permutation pnPermutation =
     {
             8  , 170, 242, 67 , 248, 216, 115, 247, 164, 133, 195, 73 , 45 , 209, 13 , 53 ,
             9  , 131, 102, 214, 153, 254, 224, 63 , 244, 51 , 7  , 172, 106, 137, 95 , 201,
@@ -31,14 +31,12 @@ namespace Planeted
     void PerlinNoise::SetSeed(std::uint32_t seedValue)
     {
         this->seed = Seed(seedValue);
-        //this->internalTable = PermutationTable::makePermutationTable(gPermutation, this->seed.GetSeed64());
-        this->permutationTable = PermutationTable(gPermutation, this->seed.GetSeed64());
+        this->permutationTable = PermutationTable(pnPermutation, this->seed.GetSeed64());
     }
     void PerlinNoise::SetSeed(std::string seedValue)
     {
         this->seed = Seed(seedValue);
-        //this->internalTable = PermutationTable::makePermutationTable(gPermutation, this->seed.GetSeed64());
-        this->permutationTable = PermutationTable(gPermutation, this->seed.GetSeed64());
+        this->permutationTable = PermutationTable(pnPermutation, this->seed.GetSeed64());
     }
 
     float PerlinNoise::Eval(const float &p) const
@@ -127,7 +125,6 @@ namespace Planeted
     const float PerlinNoise::randomDotGrad(const std::uint8_t &x, const float tx) const
     {
         return this->permutationTable.Permute(x) & 1 ? tx : -tx;
-        //return PermutationTable::Permute(this->internalTable, x) & 1 ? tx : -tx;
     }
 
     const float PerlinNoise::randomDotGrad(const int &x, const int &y, const float tx, const float ty) const
@@ -135,7 +132,6 @@ namespace Planeted
         float result;
 
         switch(this->permutationTable.Permute(x, y) & 7)
-        //switch(PermutationTable::Permute(this->internalTable, x, y) & 7)
         {
         case 0:
             result = tx; // (1, 0) * (tx, ty)
@@ -172,7 +168,6 @@ namespace Planeted
         float result;
 
         switch(this->permutationTable.Permute(x, y, z) & 15)
-        //switch(PermutationTable::Permute(this->internalTable, x, y, z) & 15)
         {
         case 0:
             result = tx + ty; //(1,1,0) * (tx, ty, tz)

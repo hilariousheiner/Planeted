@@ -21,20 +21,6 @@ namespace Planeted
         return this->table[this->table[this->table[x] + y] + z];
     }
 
-    std::uint8_t PermutationTable::Permute(const internalTable &table, const std::uint8_t &x) //const;
-    {
-        return table[x];
-    }
-    std::uint8_t PermutationTable::Permute(const internalTable &table, const int &x, const int &y) //const;
-    {
-        return table[table[x] + y];
-    }
-    std::uint8_t PermutationTable::Permute(const internalTable &table, const int &x, const int &y, const int &z) //const;
-    {
-        return table[table[table[x] + y] + z];
-    }
-
-
     std::uint8_t PermutationTable::ToGrid(const int &x)
     {
         return static_cast<std::uint8_t>(x & (PermutationTable::PermutationSize - 1));

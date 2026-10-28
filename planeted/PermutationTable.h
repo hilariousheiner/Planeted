@@ -13,15 +13,6 @@ namespace Planeted
         static constexpr int PermutationSize = 256;
         using Permutation = std::array<uint8_t, PermutationSize>;
 
-    private:
-        using internalTable = std::array<uint8_t, PermutationSize * 2>;
-        static internalTable makePermutationTable(Permutation &permutation, uint64_t seed);
-        internalTable table;
-        static std::uint8_t Permute(const internalTable &table, const std::uint8_t &x); //const;
-        static std::uint8_t Permute(const internalTable &table, const int &x, const int &y); //const;
-        static std::uint8_t Permute(const internalTable &table, const int &x, const int &y, const int &z); //const;
-
-    public:
         PermutationTable() = default;
         PermutationTable(Permutation &permutation, uint64_t seed);
 
@@ -30,6 +21,12 @@ namespace Planeted
         std::uint8_t Permute(const int &x, const int &y, const int &z) const;
 
         static std::uint8_t ToGrid(const int &x);
+
+    private:
+        using internalTable = std::array<uint8_t, PermutationSize * 2>;
+
+        static internalTable makePermutationTable(Permutation &permutation, uint64_t seed);
+        internalTable table;
     };
 }
 #endif
