@@ -86,6 +86,17 @@ namespace Planeted
             return Value(noiseValue);
         }
 
+        static Value builtin_field1(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        {
+            ExpectArgsCount(args, 1, "field1");
+
+            float constant = GetFloatArg(args, 0, "pow");
+
+            Field1Value fieldValue(std::make_unique<ConstantField1>(constant));
+
+            return Value(fieldValue);
+        }
+
         static Value builtin_ridge(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 1, "ridge");
@@ -301,6 +312,8 @@ namespace Planeted
             runtime.InstallBuiltinFunction("fbmParameters", builtin_fbmParameters);
 
             runtime.InstallBuiltinFunction("seedNoise", builtin_seedNoise);
+
+            runtime.InstallBuiltinFunction("field1", builtin_field1);
 
             runtime.InstallBuiltinFunction("ridge", builtin_ridge);
             runtime.InstallBuiltinFunction("fbm", builtin_fbm);
