@@ -85,6 +85,15 @@ namespace Planeted
         }
         return result;
     }
+    Field1Value GetField1Arg(const std::vector<Value> &args, size_t index, const std::string &functionName)
+    {
+        Field1Value result;
+        if(!TryAsField1(args[index], result))
+        {
+            throw std::runtime_error(functionName + ": argument " + std::to_string(index + 1) + " must be of type Field1.");
+        }
+        return result;
+    }
 
     FBMParameters GetFBMParametersArg(const std::vector<Value> &args, size_t index, const std::string &functionName)
     {
@@ -226,6 +235,18 @@ namespace Planeted
         if(value.GetValueType() == ValueTypeEnum::Noise)
         {
             out = value.GetNoiseValue();
+            result = true;
+        }
+        return result;
+    }
+
+    bool TryAsField1(const Value &value, Field1Value &out)
+    {
+        bool result = false;
+
+        if(value.GetValueType() == ValueTypeEnum::Field1)
+        {
+            out = value.GetField1Value();
             result = true;
         }
         return result;
