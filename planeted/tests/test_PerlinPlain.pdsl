@@ -8,7 +8,9 @@ fbmParams = setStartFrequency(fbmParams, 1.0);
 fbmParams = setNormalizeFBM(fbmParams, true);
 
 n = pow(abs(fbm(perlinNoise("11836-Eileen"), fbmParams)), 1.0);
+n1 = field1(0.5);
 
+savePGM(n1, "field1");
 noiseTest(n, "test_PerlinPlain3D");
 noiseTest2D(n, "test_PerlinPlain2D");
 noiseTest1D(n, "test_PerlinPlain1D");

@@ -3,10 +3,13 @@
 #include <memory>
 #include <iostream>
 
+#include "Math.h"
 #include "Noise.h"
 #include "PerlinNoise.h"
 #include "PDSL_Utils.h"
 #include "Tests.h"
+#include "PGM.h"
+#include "PixelMap.h"
 
 namespace Planeted
 {
@@ -195,6 +198,35 @@ namespace Planeted
             return Value(NoiseValue(wNoise.Clone()));
         }
 
+        static Value builtin_savePGM(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        {
+            ExpectArgsCount(args, 2, "savePGM");
+
+            Field1Value field1Value = GetField1Arg(args, 0, "savePGM");
+            std::string filename = GetStringArg(args, 1, "savePGM");
+
+            filename = NormalizePath(runtime.OutPath + filename);
+
+            uint16_t sample_size = 256;
+
+            IField1 &field1 = field1Value.Get();
+            ColorFunction colorFunction = [&field1, sample_size](const int x, const int y)
+            {
+                float nx = x/static_cast<float>(sample_size) - 0.5f;
+                return ToUint8(field1.Eval(nx));
+            };
+
+            PixelMap pixelMap = PixelMap(sample_size, sample_size);
+
+            pixelMap.FillRect(0, 0, sample_size, sample_size, colorFunction);
+
+            std::ofstream pgmfile(filename + ".pgm");
+
+            pgmfile << PGM::PixelMapToPGM(pixelMap);
+
+            return Value::Null();
+        }
+
         static Value builtin_noiseTest(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "noiseTest");
@@ -334,6 +366,8 @@ namespace Planeted
             runtime.InstallBuiltinFunction("projectToUnitSphere", builtin_projectToUnitSphere);
             runtime.InstallBuiltinFunction("calculateNormals", builtin_calculateNormals);
             runtime.InstallBuiltinFunction("displace", builtin_displace);
+
+            runtime.InstallBuiltinFunction("savePGM", builtin_savePGM);
 
             runtime.InstallBuiltinFunction("noiseTest", builtin_noiseTest);
             runtime.InstallBuiltinFunction("noiseTest2D", builtin_noiseTest2D);
