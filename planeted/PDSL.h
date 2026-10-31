@@ -22,7 +22,7 @@ namespace Planeted
 {
     struct PDSL_Runtime;
 
-    using BuiltinFunction = std::function<Value(PDSL_Runtime&, const std::vector<Value>&)>;
+    using BuiltinFunctionPtr = std::function<Value(PDSL_Runtime&, const std::vector<Value>&)>;
 
     void PDSL_Run(const std::string &code, PDSL_Runtime &runtime);
     void PDSL_RunFile(const std::string &filename, PDSL_Runtime &runtime);
@@ -36,7 +36,7 @@ namespace Planeted
         Value GetVariableValue(const std::string &name) const;
         void SetVariableValue(std::string name, Value value);
 
-        void InstallBuiltinFunction(std::string name, BuiltinFunction fn);
+        void DefineFunction(std::string name, BuiltinFunctionPtr fn);
         Value CallFunction(std::string &name, std::vector<Value> &args);
 
         void DumpEnvironment();
@@ -52,7 +52,7 @@ namespace Planeted
 
         private:
         std::unordered_map<std::string, Value> environment;
-        std::unordered_map<std::string, BuiltinFunction> builtinFunctionsTable;
+        std::unordered_map<std::string, BuiltinFunctionPtr> builtinFunctionsTable;
     };
 }
 #endif

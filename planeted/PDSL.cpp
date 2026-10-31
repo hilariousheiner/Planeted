@@ -28,9 +28,9 @@ namespace Planeted
 
     PDSL_Runtime::PDSL_Runtime()
     {
-        this->InstallBuiltinFunction("setDebugFlag", builtin_setDebugFlag);
-        this->InstallBuiltinFunction("log", builtin_log);
-        this->InstallBuiltinFunction("load", builtin_load);
+        this->DefineFunction("setDebugFlag", builtin_setDebugFlag);
+        this->DefineFunction("log", builtin_log);
+        this->DefineFunction("load", builtin_load);
     }
 
     Value PDSL_Runtime::GetVariableValue(const std::string &name) const
@@ -48,7 +48,7 @@ namespace Planeted
     }
 
 
-    void PDSL_Runtime::InstallBuiltinFunction(std::string name, BuiltinFunction fn)
+    void PDSL_Runtime::DefineFunction(std::string name, BuiltinFunctionPtr fn)
     {
         this->builtinFunctionsTable[name] = fn;
     }

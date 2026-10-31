@@ -349,43 +349,43 @@ namespace Planeted
 
         void Load(PDSL_Runtime &runtime)
         {
-            runtime.InstallBuiltinFunction("whiteNoise", builtin_whiteNoise);
-            runtime.InstallBuiltinFunction("valueNoise", builtin_valueNoise);
+            runtime.DefineFunction("whiteNoise", builtin_whiteNoise);
+            runtime.DefineFunction("valueNoise", builtin_valueNoise);
 
-            runtime.InstallBuiltinFunction("perlinNoise", builtin_perlinNoise);
-            runtime.InstallBuiltinFunction("perlinNoise1", builtin_perlinNoise1);
+            runtime.DefineFunction("perlinNoise", builtin_perlinNoise);
+            runtime.DefineFunction("perlinNoise1", builtin_perlinNoise1);
 
-            runtime.InstallBuiltinFunction("fbmParameters", builtin_fbmParameters);
+            runtime.DefineFunction("fbmParameters", builtin_fbmParameters);
 
-            runtime.InstallBuiltinFunction("seedNoise", builtin_seedNoise);
+            runtime.DefineFunction("seedNoise", builtin_seedNoise);
 
-            runtime.InstallBuiltinFunction("field1", builtin_field1);
+            runtime.DefineFunction("field1", builtin_field1);
 
-            runtime.InstallBuiltinFunction("ridge", builtin_ridge);
-            runtime.InstallBuiltinFunction("fbm", builtin_fbm);
+            runtime.DefineFunction("ridge", builtin_ridge);
+            runtime.DefineFunction("fbm", builtin_fbm);
 
-            runtime.InstallBuiltinFunction("abs", builtin_abs);
-            runtime.InstallBuiltinFunction("pow", builtin_pow);
+            runtime.DefineFunction("abs", builtin_abs);
+            runtime.DefineFunction("pow", builtin_pow);
 
-            runtime.InstallBuiltinFunction("setWhiteNoiseScale", builtin_setWhiteNoiseScale);
+            runtime.DefineFunction("setWhiteNoiseScale", builtin_setWhiteNoiseScale);
 
-            runtime.InstallBuiltinFunction("setNumberOfOctaves", builtin_setNumberOfOctaves);
-            runtime.InstallBuiltinFunction("setLacunarity", builtin_setLacunarity);
-            runtime.InstallBuiltinFunction("setPersistence", builtin_setPersistence);
-            runtime.InstallBuiltinFunction("setStartFrequency", builtin_setStartFrequency);
-            runtime.InstallBuiltinFunction("setNormalizeFBM", builtin_setNormalizeFBM);
+            runtime.DefineFunction("setNumberOfOctaves", builtin_setNumberOfOctaves);
+            runtime.DefineFunction("setLacunarity", builtin_setLacunarity);
+            runtime.DefineFunction("setPersistence", builtin_setPersistence);
+            runtime.DefineFunction("setStartFrequency", builtin_setStartFrequency);
+            runtime.DefineFunction("setNormalizeFBM", builtin_setNormalizeFBM);
 
-            runtime.InstallBuiltinFunction("subdivide", builtin_subdivide);
-            runtime.InstallBuiltinFunction("tessellate", builtin_tessellate);
-            runtime.InstallBuiltinFunction("projectToUnitSphere", builtin_projectToUnitSphere);
-            runtime.InstallBuiltinFunction("calculateNormals", builtin_calculateNormals);
-            runtime.InstallBuiltinFunction("displace", builtin_displace);
+            runtime.DefineFunction("subdivide", builtin_subdivide);
+            runtime.DefineFunction("tessellate", builtin_tessellate);
+            runtime.DefineFunction("projectToUnitSphere", builtin_projectToUnitSphere);
+            runtime.DefineFunction("calculateNormals", builtin_calculateNormals);
+            runtime.DefineFunction("displace", builtin_displace);
 
-            runtime.InstallBuiltinFunction("savePGM", builtin_savePGM);
+            runtime.DefineFunction("savePGM", builtin_savePGM);
 
-            runtime.InstallBuiltinFunction("noiseTest", builtin_noiseTest);
-            runtime.InstallBuiltinFunction("noiseTest2D", builtin_noiseTest2D);
-            runtime.InstallBuiltinFunction("noiseTest1D", builtin_noiseTest1D);
+            runtime.DefineFunction("noiseTest", builtin_noiseTest);
+            runtime.DefineFunction("noiseTest2D", builtin_noiseTest2D);
+            runtime.DefineFunction("noiseTest1D", builtin_noiseTest1D);
         }
     }
 }
