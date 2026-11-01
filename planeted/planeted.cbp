@@ -32,6 +32,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="AFunction.cpp" />
+		<Unit filename="AFunction.h" />
 		<Unit filename="Color.h" />
 		<Unit filename="FBM.cpp" />
 		<Unit filename="FBM.h" />
