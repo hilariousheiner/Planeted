@@ -28,7 +28,7 @@ namespace Planeted
         Mesh,
         Noise,
         FBMParameters,
-        Field1
+        Field
     };
 
     class Value;

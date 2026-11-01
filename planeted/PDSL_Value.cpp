@@ -158,7 +158,7 @@ namespace Planeted
         }
         if(std::holds_alternative<Field1Value>(this->data))
         {
-            return ValueTypeEnum::Field1;
+            return ValueTypeEnum::Field;
         }
         if(std::holds_alternative<FBMParameters>(this->data))
         {
@@ -202,8 +202,8 @@ namespace Planeted
         case ValueTypeEnum::Noise:
             result = "noise";
             break;
-        case ValueTypeEnum::Field1:
-            result = "field1";
+        case ValueTypeEnum::Field:
+            result = "field";
             break;
         case ValueTypeEnum::FBMParameters:
             result = "fbm parameters";
@@ -249,8 +249,8 @@ namespace Planeted
         case ValueTypeEnum::Noise:
             result = "Noise";
             break;
-        case ValueTypeEnum::Field1:
-            result = "Field1";
+        case ValueTypeEnum::Field:
+            result = "Field";
             break;
         case ValueTypeEnum::FBMParameters:
             result = "FBMParameters";

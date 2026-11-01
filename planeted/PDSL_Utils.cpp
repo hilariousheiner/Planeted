@@ -244,7 +244,7 @@ namespace Planeted
     {
         bool result = false;
 
-        if(value.GetValueType() == ValueTypeEnum::Field1)
+        if(value.GetValueType() == ValueTypeEnum::Field)
         {
             out = value.GetField1Value();
             result = true;
