@@ -28,9 +28,9 @@ namespace Planeted
 
     PDSL_Runtime::PDSL_Runtime()
     {
-        this->DefineFunction("setDebugFlag", builtin_setDebugFlag);
-        this->DefineFunction("log", builtin_log);
-        this->DefineFunction("load", builtin_load);
+        this->DefineFunction("setDebugFlag", {}, builtin_setDebugFlag);
+        this->DefineFunction("log", {}, builtin_log);
+        this->DefineFunction("load", {}, builtin_load);
     }
 
     Value PDSL_Runtime::GetVariableValue(const std::string &name) const
@@ -47,19 +47,38 @@ namespace Planeted
         this->environment[name] = value;
     }
 
-
-    void PDSL_Runtime::DefineFunction(std::string name, BuiltinFunction::BuiltinFunctionPtr fn)
+    void PDSL_Runtime::DefineFunction(std::string name, const std::vector<PLTypeInfo*> &argumentTypes, BuiltinFunction::BuiltinFunctionPtr fn)
     {
-        this->builtinFunctionsTable[name] = fn;
+        this->functionsTable[name].push_back(std::make_unique<BuiltinFunction>(name, argumentTypes, fn));
     }
     Value PDSL_Runtime::CallFunction(std::string &name, std::vector<Value> &args)
     {
-        auto it = this->builtinFunctionsTable.find(name);
-        if(it == this->builtinFunctionsTable.end())
+        AFunction *fn = this->findMatchingFunction(name, args);
+
+        if(fn == nullptr)
         {
             throw std::runtime_error("Unknown function: " + name);
         }
-        return it->second(*this, args);
+        return fn->Call(*this, args);
+    }
+
+    AFunction *PDSL_Runtime::findMatchingFunction(const std::string &name, const std::vector<Value> &arguments)
+    {
+        auto it = this->functionsTable.find(name);
+
+        if (it == this->functionsTable.end())
+        {
+            return nullptr;
+        }
+
+        for (auto &fn : it->second)
+        {
+            if (fn->Matches(*this, arguments))
+            {
+                return fn.get();
+            }
+        }
+        return nullptr;
     }
 
     void PDSL_Runtime::DumpEnvironment()
