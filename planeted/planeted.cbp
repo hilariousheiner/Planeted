@@ -34,6 +34,8 @@
 		</Compiler>
 		<Unit filename="AFunction.cpp" />
 		<Unit filename="AFunction.h" />
+		<Unit filename="BuiltinFunction.cpp" />
+		<Unit filename="BuiltinFunction.h" />
 		<Unit filename="Color.h" />
 		<Unit filename="FBM.cpp" />
 		<Unit filename="FBM.h" />
