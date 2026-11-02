@@ -66,6 +66,8 @@
 		<Unit filename="PDSL_Value.h" />
 		<Unit filename="PGM.cpp" />
 		<Unit filename="PGM.h" />
+		<Unit filename="PLTypeInfo.cpp" />
+		<Unit filename="PLTypeInfo.h" />
 		<Unit filename="POV.cpp" />
 		<Unit filename="POV.h" />
 		<Unit filename="PPM.cpp" />
