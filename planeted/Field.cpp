@@ -34,7 +34,11 @@ namespace Planeted
         : constant(constant)
     { }
 
-    std::unique_ptr<IField1> ConstantField1::Clone() const
+    std::unique_ptr<IField> ConstantField1::Clone() const
+    {
+        return std::make_unique<ConstantField1>(*this);
+    }
+    std::unique_ptr<IField1> ConstantField1::Clone1() const
     {
         return std::make_unique<ConstantField1>(*this);
     }
@@ -49,10 +53,14 @@ namespace Planeted
     {}
 
     AbsFieldModifier1::AbsFieldModifier1(const AbsFieldModifier1 &other)
-        : IField1(other), field(other.field->Clone())
+        : IField1(other), field(other.field->Clone1())
     {}
 
-    std::unique_ptr<IField1> AbsFieldModifier1::Clone() const
+    std::unique_ptr<IField> AbsFieldModifier1::Clone() const
+    {
+        return std::make_unique<AbsFieldModifier1>(*this);
+    }
+    std::unique_ptr<IField1> AbsFieldModifier1::Clone1() const
     {
         return std::make_unique<AbsFieldModifier1>(*this);
     }
@@ -76,10 +84,14 @@ namespace Planeted
     {}
 
     PowFieldModifier1::PowFieldModifier1(const PowFieldModifier1 &other)
-        : IField1(other), field(other.field->Clone()), exponent(other.exponent)
+        : IField1(other), field(other.field->Clone1()), exponent(other.exponent)
     {}
 
-    std::unique_ptr<IField1> PowFieldModifier1::Clone() const
+    std::unique_ptr<IField> PowFieldModifier1::Clone() const
+    {
+        return std::make_unique<PowFieldModifier1>(*this);
+    }
+    std::unique_ptr<IField1> PowFieldModifier1::Clone1() const
     {
         return std::make_unique<PowFieldModifier1>(*this);
     }
@@ -104,10 +116,15 @@ namespace Planeted
     { }
 
     FBMFieldModifier1::FBMFieldModifier1(const FBMFieldModifier1 &other)
-        : IField1(other), field(other.field->Clone()), fbmParams(other.fbmParams)
+        : IField1(other), field(other.field->Clone1()), fbmParams(other.fbmParams)
     { }
 
-    std::unique_ptr<IField1> FBMFieldModifier1::Clone() const
+
+    std::unique_ptr<IField> FBMFieldModifier1::Clone() const
+    {
+        return std::make_unique<FBMFieldModifier1>(*this);
+    }
+    std::unique_ptr<IField1> FBMFieldModifier1::Clone1() const
     {
         return std::make_unique<FBMFieldModifier1>(*this);
     }

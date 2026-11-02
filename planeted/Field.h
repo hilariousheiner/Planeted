@@ -11,29 +11,39 @@
 
 namespace Planeted
 {
-    class IField1 : public ISeedable
+    class IField : public ISeedable
+    {
+    public:
+        virtual ~IField() = default;
+        virtual std::unique_ptr<IField> Clone() const = 0;
+    };
+
+    class IField1 : public IField
     {
     public:
         virtual ~IField1() = default;
-        virtual std::unique_ptr<IField1> Clone() const = 0;
+        virtual std::unique_ptr<IField> Clone() const = 0;
+        virtual std::unique_ptr<IField1> Clone1() const = 0;
 
         virtual float Eval(const float &p) const = 0;
     };
 
-    class IField2 : public ISeedable
+    class IField2 : public IField
     {
     public:
         virtual ~IField2() = default;
-        virtual std::unique_ptr<IField2> Clone() const = 0;
+        virtual std::unique_ptr<IField> Clone() const = 0;
+        virtual std::unique_ptr<IField2> Clone2() const = 0;
 
         virtual float Eval(const Vector2 &p) const = 0;
     };
 
-    class IField3 : public ISeedable
+    class IField3 : public IField
     {
     public:
         virtual ~IField3() = default;
-        virtual std::unique_ptr<IField3> Clone() const = 0;
+        virtual std::unique_ptr<IField> Clone() const = 0;
+        virtual std::unique_ptr<IField3> Clone3() const = 0;
 
         virtual float Eval(const Vector3 &p) const = 0;
     };
@@ -73,7 +83,8 @@ namespace Planeted
     public:
         ConstantField1(float constant);
 
-        std::unique_ptr<IField1> Clone() const override;
+        std::unique_ptr<IField> Clone() const override;
+        std::unique_ptr<IField1> Clone1() const override;
 
         float Eval(const float &p) const override;
 
@@ -87,7 +98,8 @@ namespace Planeted
         AbsFieldModifier1(std::unique_ptr<IField1> field);
         AbsFieldModifier1(const AbsFieldModifier1 &other);
 
-        std::unique_ptr<IField1> Clone() const override;
+        std::unique_ptr<IField> Clone() const override;
+        std::unique_ptr<IField1> Clone1() const override;
 
         float Eval(const float &p) const override;
 
@@ -104,7 +116,8 @@ namespace Planeted
         PowFieldModifier1(std::unique_ptr<IField1> field, float exponent);
         PowFieldModifier1(const PowFieldModifier1 &other);
 
-        std::unique_ptr<IField1> Clone() const override;
+        std::unique_ptr<IField> Clone() const override;
+        std::unique_ptr<IField1> Clone1() const override;
 
         float Eval(const float &p) const override;
 
@@ -122,7 +135,8 @@ namespace Planeted
         FBMFieldModifier1(std::unique_ptr<IField1> field, const FBMParameters &fbmParameters);
         FBMFieldModifier1(const FBMFieldModifier1 &other);
 
-        std::unique_ptr<IField1> Clone() const override;
+        std::unique_ptr<IField> Clone() const override;
+        std::unique_ptr<IField1> Clone1() const override;
 
         float Eval(const float &p) const override;
 

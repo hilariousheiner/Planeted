@@ -23,7 +23,11 @@ namespace Planeted
             212, 182, 136, 185, 110, 40 , 235, 21 , 222, 178, 174, 205, 68 , 90 , 171, 199
     };
 
-    std::unique_ptr<IField1> PerlinNoise1::Clone() const
+    std::unique_ptr<IField> PerlinNoise1::Clone() const
+    {
+        return std::make_unique<PerlinNoise1>(*this);
+    }
+    std::unique_ptr<IField1> PerlinNoise1::Clone1() const
     {
         return std::make_unique<PerlinNoise1>(*this);
     }

@@ -15,14 +15,14 @@ namespace Planeted
         {}
 
         Field1Value(const Field1Value &other)
-            : field(other.field->Clone())
+            : field(other.field->Clone1())
         {}
 
         Field1Value &operator=(const Field1Value &other)
         {
             if(this != &other)
             {
-                this->field = other.field->Clone();
+                this->field = other.field->Clone1();
             }
             return *this;
         }
