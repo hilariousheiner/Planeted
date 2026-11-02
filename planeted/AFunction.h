@@ -2,11 +2,12 @@
 #define PLANETED_AFUNCTION_H
 
 #include <string>
-
-#include "PDSL.h"
+#include "PDSL_Value.h"
 
 namespace Planeted
 {
+    struct PDSL_Runtime;
+
     class AFunction
     {
     public:

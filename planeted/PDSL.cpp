@@ -48,7 +48,7 @@ namespace Planeted
     }
 
 
-    void PDSL_Runtime::DefineFunction(std::string name, BuiltinFunctionPtr fn)
+    void PDSL_Runtime::DefineFunction(std::string name, BuiltinFunction::BuiltinFunctionPtr fn)
     {
         this->builtinFunctionsTable[name] = fn;
     }

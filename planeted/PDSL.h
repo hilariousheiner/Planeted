@@ -8,6 +8,8 @@
 #include <unordered_map>
 #include <vector>
 
+
+#include "BuiltinFunction.h"
 #include "Utils.h"
 
 #include "PDSL_Lexer.h"
@@ -22,8 +24,6 @@ namespace Planeted
 {
     struct PDSL_Runtime;
 
-    using BuiltinFunctionPtr = std::function<Value(PDSL_Runtime&, const std::vector<Value>&)>;
-
     void PDSL_Run(const std::string &code, PDSL_Runtime &runtime);
     void PDSL_RunFile(const std::string &filename, PDSL_Runtime &runtime);
 
@@ -36,7 +36,7 @@ namespace Planeted
         Value GetVariableValue(const std::string &name) const;
         void SetVariableValue(std::string name, Value value);
 
-        void DefineFunction(std::string name, BuiltinFunctionPtr fn);
+        void DefineFunction(std::string name, BuiltinFunction::BuiltinFunctionPtr fn);
         Value CallFunction(std::string &name, std::vector<Value> &args);
 
         void DumpEnvironment();
@@ -50,9 +50,9 @@ namespace Planeted
         Value Result;
         bool DebugFlag = false;
 
-        private:
+    private:
         std::unordered_map<std::string, Value> environment;
-        std::unordered_map<std::string, BuiltinFunctionPtr> builtinFunctionsTable;
+        std::unordered_map<std::string, BuiltinFunction::BuiltinFunctionPtr> builtinFunctionsTable;
     };
 }
 #endif
