@@ -33,6 +33,9 @@ namespace Planeted
     {
         PDSL_Runtime();
 
+        PLTypeInfo *DefineType(std::string name, ValueTypeEnum valueType, PLTypeInfo *baseType);
+        PLTypeInfo *FindType(std::string name);
+
         Value GetVariableValue(const std::string &name) const;
         void SetVariableValue(std::string name, Value value);
 
@@ -51,6 +54,7 @@ namespace Planeted
         bool DebugFlag = false;
 
     private:
+        std::unordered_map<std::string, PLTypeInfo*> typeInfoTable;
         std::unordered_map<std::string, Value> environment;
 
         std::unordered_map<std::string, std::vector<std::unique_ptr<AFunction>>> functionsTable;

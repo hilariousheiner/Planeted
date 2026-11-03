@@ -33,6 +33,28 @@ namespace Planeted
         this->DefineFunction("load", {}, builtin_load);
     }
 
+
+    PLTypeInfo *PDSL_Runtime::DefineType(std::string name, ValueTypeEnum valueType, PLTypeInfo *baseType)
+    {
+        PLTypeInfo *result = new PLTypeInfo(name, valueType, baseType);
+
+        this->typeInfoTable[name] = result;
+
+        return result;
+    }
+
+    PLTypeInfo *PDSL_Runtime::FindType(std::string name)
+    {
+        PLTypeInfo *result = nullptr;
+
+        std::unordered_map<std::string, PLTypeInfo*>::const_iterator it = this->typeInfoTable.find(name);
+        if(it != this->typeInfoTable.end())
+        {
+            result = it->second;
+        }
+        return result;
+    }
+
     Value PDSL_Runtime::GetVariableValue(const std::string &name) const
     {
         std::unordered_map<std::string, Value>::const_iterator it = this->environment.find(name);
