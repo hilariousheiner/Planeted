@@ -34,7 +34,8 @@ namespace Planeted
         PDSL_Runtime();
 
         PLTypeInfo *DefineType(std::string name, ValueTypeEnum valueType, PLTypeInfo *baseType);
-        PLTypeInfo *FindType(std::string name);
+        PLTypeInfo *FindType(std::string name) const;
+        PLTypeInfo *GetTypeInfo(const Value &value) const;
 
         Value GetVariableValue(const std::string &name) const;
         void SetVariableValue(std::string name, Value value);

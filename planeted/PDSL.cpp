@@ -28,6 +28,17 @@ namespace Planeted
 
     PDSL_Runtime::PDSL_Runtime()
     {
+        this->DefineType("Boolean", ValueTypeEnum::Bool, nullptr);
+        this->DefineType("FBMParamters", ValueTypeEnum::FBMParameters, nullptr);
+        this->DefineType("Field", ValueTypeEnum::Field, nullptr);
+        this->DefineType("Float", ValueTypeEnum::Float, nullptr);
+        this->DefineType("Integer", ValueTypeEnum::Int, nullptr);
+        this->DefineType("List", ValueTypeEnum::List, nullptr);
+        this->DefineType("Mesh", ValueTypeEnum::Mesh, nullptr);
+        this->DefineType("Noise", ValueTypeEnum::Noise, nullptr);
+        this->DefineType("String", ValueTypeEnum::String, nullptr);
+        this->DefineType("Tuple", ValueTypeEnum::Tuple, nullptr);
+
         this->DefineFunction("setDebugFlag", {}, builtin_setDebugFlag);
         this->DefineFunction("log", {}, builtin_log);
         this->DefineFunction("load", {}, builtin_load);
@@ -43,7 +54,7 @@ namespace Planeted
         return result;
     }
 
-    PLTypeInfo *PDSL_Runtime::FindType(std::string name)
+    PLTypeInfo *PDSL_Runtime::FindType(std::string name) const
     {
         PLTypeInfo *result = nullptr;
 
@@ -54,6 +65,14 @@ namespace Planeted
         }
         return result;
     }
+
+    PLTypeInfo *PDSL_Runtime::GetTypeInfo(const Value &value) const
+    {
+        PLTypeInfo *result = nullptr;
+
+        return result;
+    }
+
 
     Value PDSL_Runtime::GetVariableValue(const std::string &name) const
     {
