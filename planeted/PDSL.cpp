@@ -28,22 +28,62 @@ namespace Planeted
 
     PDSL_Runtime::PDSL_Runtime()
     {
-        this->DefineType("Boolean", ValueTypeEnum::Bool, nullptr);
-        this->DefineType("FBMParamters", ValueTypeEnum::FBMParameters, nullptr);
-        this->DefineType("Field", ValueTypeEnum::Field, nullptr);
-        this->DefineType("Float", ValueTypeEnum::Float, nullptr);
-        this->DefineType("Integer", ValueTypeEnum::Int, nullptr);
-        this->DefineType("List", ValueTypeEnum::List, nullptr);
-        this->DefineType("Mesh", ValueTypeEnum::Mesh, nullptr);
-        this->DefineType("Noise", ValueTypeEnum::Noise, nullptr);
-        this->DefineType("String", ValueTypeEnum::String, nullptr);
-        this->DefineType("Tuple", ValueTypeEnum::Tuple, nullptr);
+        this->booleanTypeInfo = this->DefineType("Boolean", ValueTypeEnum::Bool, nullptr);
+        this->fbmParametersTypeInfo = this->DefineType("FBMParamters", ValueTypeEnum::FBMParameters, nullptr);
+        this->fieldTypeInfo = this->DefineType("Field", ValueTypeEnum::Field, nullptr);
+        this->floatTypeInfo = this->DefineType("Float", ValueTypeEnum::Float, nullptr);
+        this->integerTypeInfo = this->DefineType("Integer", ValueTypeEnum::Int, nullptr);
+        this->listTypeInfo = this->DefineType("List", ValueTypeEnum::List, nullptr);
+        this->meshTypeInfo = this->DefineType("Mesh", ValueTypeEnum::Mesh, nullptr);
+        this->noiseTypeInfo = this->DefineType("Noise", ValueTypeEnum::Noise, nullptr);
+        this->stringTypeInfo = this->DefineType("String", ValueTypeEnum::String, nullptr);
+        this->tupleTypeInfo = this->DefineType("Tuple", ValueTypeEnum::Tuple, nullptr);
 
         this->DefineFunction("setDebugFlag", {}, builtin_setDebugFlag);
         this->DefineFunction("log", {}, builtin_log);
         this->DefineFunction("load", {}, builtin_load);
     }
 
+    PLTypeInfo *PDSL_Runtime::GetBooleanTypeInfo() const
+    {
+        return this->booleanTypeInfo;
+    }
+    PLTypeInfo *PDSL_Runtime::GetFBMParatersTypeInfo() const
+    {
+        return this->fbmParametersTypeInfo;
+    }
+    PLTypeInfo *PDSL_Runtime::GetFieldTypeInfo() const
+    {
+        return this->fieldTypeInfo;
+    }
+    PLTypeInfo *PDSL_Runtime::GetFloatTypeInfo() const
+    {
+        return this->floatTypeInfo;
+    }
+    PLTypeInfo *PDSL_Runtime::GetIntegerTypeInfo() const
+    {
+        return this->integerTypeInfo;
+    }
+    PLTypeInfo *PDSL_Runtime::GetListTypeInfo() const
+    {
+        return this->listTypeInfo;
+    }
+    PLTypeInfo *PDSL_Runtime::GetMeshTypeInfo() const
+    {
+        return this->meshTypeInfo;
+    }
+    PLTypeInfo *PDSL_Runtime::GetNoiseTypeInfo() const
+    {
+        return this->noiseTypeInfo;
+    }
+    PLTypeInfo *PDSL_Runtime::GetStringTypeInfo() const
+    {
+        return this->stringTypeInfo;
+    }
+    PLTypeInfo *PDSL_Runtime::GetTupleTypeInfo() const
+    {
+        return this->tupleTypeInfo;
+    }
 
     PLTypeInfo *PDSL_Runtime::DefineType(std::string name, ValueTypeEnum valueType, PLTypeInfo *baseType)
     {

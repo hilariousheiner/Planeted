@@ -37,6 +37,17 @@ namespace Planeted
         PLTypeInfo *FindType(std::string name) const;
         PLTypeInfo *GetTypeInfo(const Value &value) const;
 
+        PLTypeInfo *GetBooleanTypeInfo() const;
+        PLTypeInfo *GetFBMParatersTypeInfo() const;
+        PLTypeInfo *GetFieldTypeInfo() const;
+        PLTypeInfo *GetFloatTypeInfo() const;
+        PLTypeInfo *GetIntegerTypeInfo() const;
+        PLTypeInfo *GetListTypeInfo() const;
+        PLTypeInfo *GetMeshTypeInfo() const;
+        PLTypeInfo *GetNoiseTypeInfo() const;
+        PLTypeInfo *GetStringTypeInfo() const;
+        PLTypeInfo *GetTupleTypeInfo() const;
+
         Value GetVariableValue(const std::string &name) const;
         void SetVariableValue(std::string name, Value value);
 
@@ -56,6 +67,18 @@ namespace Planeted
 
     private:
         std::unordered_map<std::string, PLTypeInfo*> typeInfoTable;
+
+        PLTypeInfo *booleanTypeInfo;
+        PLTypeInfo *fbmParametersTypeInfo;
+        PLTypeInfo *fieldTypeInfo;
+        PLTypeInfo *floatTypeInfo;
+        PLTypeInfo *integerTypeInfo;
+        PLTypeInfo *listTypeInfo;
+        PLTypeInfo *meshTypeInfo;
+        PLTypeInfo *noiseTypeInfo;
+        PLTypeInfo *stringTypeInfo;
+        PLTypeInfo *tupleTypeInfo;
+
         std::unordered_map<std::string, Value> environment;
 
         std::unordered_map<std::string, std::vector<std::unique_ptr<AFunction>>> functionsTable;
