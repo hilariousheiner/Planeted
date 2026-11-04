@@ -26,6 +26,22 @@ namespace Planeted
         return PDSL_Load(args[0].ToString(), runtime);
     }
 
+    static Value intrinsic_typeof(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        ExpectArgsCount(args, 1, "typeof");
+        if(args[0].IsNull())
+        {
+            throw std::runtime_error("argument of typeof cannot be null!");
+        }
+
+        PLTypeInfo *typeInfo = runtime.GetTypeInfo(args[0]);
+        if(typeInfo == nullptr)
+        {
+            throw std::runtime_error("couldn't determine type of value: " + args[0].ToString());
+        }
+        return Value(typeInfo->ToString());
+    }
+
     PDSL_Runtime::PDSL_Runtime()
     {
         this->booleanTypeInfo = this->DefineType("Boolean", ValueTypeEnum::Bool, nullptr);
@@ -42,6 +58,7 @@ namespace Planeted
         this->DefineIntrinsicFunction("setDebugFlag", intrinsic_setDebugFlag);
         this->DefineIntrinsicFunction("log", intrinsic_log);
         this->DefineIntrinsicFunction("load", intrinsic_load);
+        this->DefineIntrinsicFunction("typeof", intrinsic_typeof);
     }
 
     PLTypeInfo *PDSL_Runtime::GetBooleanTypeInfo() const
