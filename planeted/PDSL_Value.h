@@ -11,26 +11,10 @@
 #include "FieldValue.h"
 #include "Noise.h"
 #include "NoiseValue.h"
+#include "ValueTypeEnum.h"
 
 namespace Planeted
 {
-    enum class ValueTypeEnum
-    {
-        Int,
-        Float,
-        Bool,
-        String,
-        Null,
-
-        Tuple,
-        List,
-
-        Mesh,
-        Noise,
-        FBMParameters,
-        Field
-    };
-
     class Value;
 
     struct Tuple

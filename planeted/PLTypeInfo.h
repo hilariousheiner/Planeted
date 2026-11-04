@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "PDSL_Value.h"
+#include "ValueTypeEnum.h"
 
 namespace Planeted
 {
