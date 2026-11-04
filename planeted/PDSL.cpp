@@ -8,19 +8,19 @@
 
 namespace Planeted
 {
-    static Value builtin_setDebugFlag(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    static Value intrinsic_setDebugFlag(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
         ExpectArgsCount(args, 1, "setDebugFlag");
         runtime.DebugFlag = args[0].GetBoolValue();
         return Value::Null();
     }
-    static Value builtin_log(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    static Value intrinsic_log(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
         ExpectArgsCount(args, 1, "log");
         std::cout << args[0].ToString() << "\n";
         return Value::Null();
     }
-    static Value builtin_load(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    static Value intrinsic_load(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
         ExpectArgsCount(args, 1, "load");
         return PDSL_Load(args[0].ToString(), runtime);
@@ -39,9 +39,9 @@ namespace Planeted
         this->stringTypeInfo = this->DefineType("String", ValueTypeEnum::String, nullptr);
         this->tupleTypeInfo = this->DefineType("Tuple", ValueTypeEnum::Tuple, nullptr);
 
-        this->DefineFunction("setDebugFlag", {}, builtin_setDebugFlag);
-        this->DefineFunction("log", {}, builtin_log);
-        this->DefineFunction("load", {}, builtin_load);
+        this->DefineIntrinsicFunction("setDebugFlag", intrinsic_setDebugFlag);
+        this->DefineIntrinsicFunction("log", intrinsic_log);
+        this->DefineIntrinsicFunction("load", intrinsic_load);
     }
 
     PLTypeInfo *PDSL_Runtime::GetBooleanTypeInfo() const
@@ -128,12 +128,25 @@ namespace Planeted
         this->environment[name] = value;
     }
 
+    void PDSL_Runtime::DefineIntrinsicFunction(std::string name, BuiltinFunction::BuiltinFunctionPtr fn)
+    {
+        this->intrinsicFunctionsTable[name] = fn;
+    }
+
     void PDSL_Runtime::DefineFunction(std::string name, const std::vector<PLTypeInfo*> &argumentTypes, BuiltinFunction::BuiltinFunctionPtr fn)
     {
         this->functionsTable[name].push_back(std::make_unique<BuiltinFunction>(name, argumentTypes, fn));
     }
     Value PDSL_Runtime::CallFunction(std::string &name, std::vector<Value> &args)
     {
+        // try intrinsics first:
+        auto it = this->intrinsicFunctionsTable.find(name);
+        if(it != this->intrinsicFunctionsTable.end())
+        {
+            return it->second(*this, args);
+        }
+
+        // try other functions:
         AFunction *fn = this->findMatchingFunction(name, args);
 
         if(fn == nullptr)

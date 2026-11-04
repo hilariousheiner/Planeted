@@ -51,6 +51,7 @@ namespace Planeted
         Value GetVariableValue(const std::string &name) const;
         void SetVariableValue(std::string name, Value value);
 
+        void DefineIntrinsicFunction(std::string name, BuiltinFunction::BuiltinFunctionPtr fn);
         void DefineFunction(std::string name, const std::vector<PLTypeInfo*> &argumentTypes, BuiltinFunction::BuiltinFunctionPtr fn);
         Value CallFunction(std::string &name, std::vector<Value> &args);
 
@@ -81,6 +82,7 @@ namespace Planeted
 
         std::unordered_map<std::string, Value> environment;
 
+        std::unordered_map<std::string, BuiltinFunction::BuiltinFunctionPtr> intrinsicFunctionsTable;
         std::unordered_map<std::string, std::vector<std::unique_ptr<AFunction>>> functionsTable;
         AFunction *findMatchingFunction(const std::string &name, const std::vector<Value> &arguments);
     };
