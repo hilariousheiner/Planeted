@@ -91,6 +91,8 @@
 		<Unit filename="Tests.h" />
 		<Unit filename="Utils.h" />
 		<Unit filename="ValueTypeEnum.h" />
+		<Unit filename="ValueTypeUtils.cpp" />
+		<Unit filename="ValueTypeUtils.h" />
 		<Unit filename="Vector2.cpp" />
 		<Unit filename="Vector2.h" />
 		<Unit filename="Vector3.cpp" />
