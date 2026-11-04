@@ -349,46 +349,43 @@ namespace Planeted
 
         void Load(PDSL_Runtime &runtime)
         {
-            PLTypeInfo *fbmParametersTypeInfo = runtime.GetFBMParametersTypeInfo();
-            PLTypeInfo *noiseTypeInfo = runtime.GetNoiseTypeInfo();
+            runtime.DefineIntrinsicFunction("whiteNoise", builtin_whiteNoise);
+            runtime.DefineIntrinsicFunction("valueNoise", builtin_valueNoise);
 
-            runtime.DefineFunction("whiteNoise", {}, builtin_whiteNoise);
-            runtime.DefineFunction("valueNoise", {}, builtin_valueNoise);
+            runtime.DefineIntrinsicFunction("perlinNoise", builtin_perlinNoise);
+            runtime.DefineIntrinsicFunction("perlinNoise1", builtin_perlinNoise1);
 
-            runtime.DefineFunction("perlinNoise", {}, builtin_perlinNoise);
-            runtime.DefineFunction("perlinNoise1", {}, builtin_perlinNoise1);
+            runtime.DefineIntrinsicFunction("fbmParameters", builtin_fbmParameters);
 
-            runtime.DefineFunction("fbmParameters", {noiseTypeInfo, fbmParametersTypeInfo}, builtin_fbmParameters);
+            runtime.DefineIntrinsicFunction("seedNoise", builtin_seedNoise);
 
-            runtime.DefineFunction("seedNoise", {}, builtin_seedNoise);
+            runtime.DefineIntrinsicFunction("field1", builtin_field1);
 
-            runtime.DefineFunction("field1", {}, builtin_field1);
+            runtime.DefineIntrinsicFunction("ridge", builtin_ridge);
+            runtime.DefineIntrinsicFunction("fbm", builtin_fbm);
 
-            runtime.DefineFunction("ridge", {}, builtin_ridge);
-            runtime.DefineFunction("fbm", {}, builtin_fbm);
+            runtime.DefineIntrinsicFunction("abs", builtin_abs);
+            runtime.DefineIntrinsicFunction("pow", builtin_pow);
 
-            runtime.DefineFunction("abs", {}, builtin_abs);
-            runtime.DefineFunction("pow", {}, builtin_pow);
+            runtime.DefineIntrinsicFunction("setWhiteNoiseScale", builtin_setWhiteNoiseScale);
 
-            runtime.DefineFunction("setWhiteNoiseScale", {}, builtin_setWhiteNoiseScale);
+            runtime.DefineIntrinsicFunction("setNumberOfOctaves", builtin_setNumberOfOctaves);
+            runtime.DefineIntrinsicFunction("setLacunarity", builtin_setLacunarity);
+            runtime.DefineIntrinsicFunction("setPersistence", builtin_setPersistence);
+            runtime.DefineIntrinsicFunction("setStartFrequency", builtin_setStartFrequency);
+            runtime.DefineIntrinsicFunction("setNormalizeFBM", builtin_setNormalizeFBM);
 
-            runtime.DefineFunction("setNumberOfOctaves", {}, builtin_setNumberOfOctaves);
-            runtime.DefineFunction("setLacunarity", {}, builtin_setLacunarity);
-            runtime.DefineFunction("setPersistence", {}, builtin_setPersistence);
-            runtime.DefineFunction("setStartFrequency", {}, builtin_setStartFrequency);
-            runtime.DefineFunction("setNormalizeFBM", {}, builtin_setNormalizeFBM);
+            runtime.DefineIntrinsicFunction("subdivide", builtin_subdivide);
+            runtime.DefineIntrinsicFunction("tessellate", builtin_tessellate);
+            runtime.DefineIntrinsicFunction("projectToUnitSphere", builtin_projectToUnitSphere);
+            runtime.DefineIntrinsicFunction("calculateNormals", builtin_calculateNormals);
+            runtime.DefineIntrinsicFunction("displace", builtin_displace);
 
-            runtime.DefineFunction("subdivide", {}, builtin_subdivide);
-            runtime.DefineFunction("tessellate", {}, builtin_tessellate);
-            runtime.DefineFunction("projectToUnitSphere", {}, builtin_projectToUnitSphere);
-            runtime.DefineFunction("calculateNormals", {}, builtin_calculateNormals);
-            runtime.DefineFunction("displace", {}, builtin_displace);
+            runtime.DefineIntrinsicFunction("savePGM", builtin_savePGM);
 
-            runtime.DefineFunction("savePGM", {}, builtin_savePGM);
-
-            runtime.DefineFunction("noiseTest", {}, builtin_noiseTest);
-            runtime.DefineFunction("noiseTest2D", {}, builtin_noiseTest2D);
-            runtime.DefineFunction("noiseTest1D", {}, builtin_noiseTest1D);
+            runtime.DefineIntrinsicFunction("noiseTest", builtin_noiseTest);
+            runtime.DefineIntrinsicFunction("noiseTest2D", builtin_noiseTest2D);
+            runtime.DefineIntrinsicFunction("noiseTest1D", builtin_noiseTest1D);
         }
     }
 }
