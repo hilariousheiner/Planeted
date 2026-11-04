@@ -17,7 +17,7 @@ namespace Planeted
 
         virtual Value Call(PDSL_Runtime &runtime, const std::vector<Value>& arguments) const = 0;
 
-        virtual bool Matches(const PDSL_Runtime &runtime, const std::vector<Value> &arguments) const;
+        bool Matches(const PDSL_Runtime &runtime, const std::vector<Value> &arguments) const;
 
     private:
         std::string name;
