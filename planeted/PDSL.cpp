@@ -110,9 +110,43 @@ namespace Planeted
     {
         PLTypeInfo *result = nullptr;
 
+        switch(value.GetValueType())
+        {
+        case ValueTypeEnum::Bool:
+            return this->GetBooleanTypeInfo();
+            break;
+        case ValueTypeEnum::FBMParameters:
+            return this->GetFBMParatersTypeInfo();
+            break;
+        case ValueTypeEnum::Field:
+            return this->GetFieldTypeInfo();
+            break;
+        case ValueTypeEnum::Float:
+            return this->GetFloatTypeInfo();
+            break;
+        case ValueTypeEnum::Int:
+            return this->GetIntegerTypeInfo();
+            break;
+        case ValueTypeEnum::List:
+            return this->GetListTypeInfo();
+            break;
+        case ValueTypeEnum::Mesh:
+            return this->GetMeshTypeInfo();
+            break;
+        case ValueTypeEnum::Noise:
+            return this->GetNoiseTypeInfo();
+            break;
+        case ValueTypeEnum::String:
+            result = this->GetStringTypeInfo();
+            break;
+        case ValueTypeEnum::Tuple:
+            result = this->GetTupleTypeInfo();
+            break;
+        default:
+            break;
+        }
         return result;
     }
-
 
     Value PDSL_Runtime::GetVariableValue(const std::string &name) const
     {
