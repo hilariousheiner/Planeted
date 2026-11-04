@@ -15,6 +15,8 @@ namespace Planeted
         const std::string &GetName() const;
         ValueTypeEnum GetValueType() const;
 
+        std::string ToString() const;
+
     private:
         std::string name;
         ValueTypeEnum valueType;
