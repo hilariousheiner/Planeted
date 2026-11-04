@@ -48,7 +48,7 @@ namespace Planeted
     {
         return this->booleanTypeInfo;
     }
-    PLTypeInfo *PDSL_Runtime::GetFBMParatersTypeInfo() const
+    PLTypeInfo *PDSL_Runtime::GetFBMParametersTypeInfo() const
     {
         return this->fbmParametersTypeInfo;
     }
@@ -116,7 +116,7 @@ namespace Planeted
             return this->GetBooleanTypeInfo();
             break;
         case ValueTypeEnum::FBMParameters:
-            return this->GetFBMParatersTypeInfo();
+            return this->GetFBMParametersTypeInfo();
             break;
         case ValueTypeEnum::Field:
             return this->GetFieldTypeInfo();

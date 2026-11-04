@@ -349,7 +349,7 @@ namespace Planeted
 
         void Load(PDSL_Runtime &runtime)
         {
-            PLTypeInfo *fbmParametersTypeInfo = runtime.GetFBMParatersTypeInfo();
+            PLTypeInfo *fbmParametersTypeInfo = runtime.GetFBMParametersTypeInfo();
             PLTypeInfo *noiseTypeInfo = runtime.GetNoiseTypeInfo();
 
             runtime.DefineFunction("whiteNoise", {}, builtin_whiteNoise);

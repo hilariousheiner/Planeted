@@ -38,7 +38,7 @@ namespace Planeted
         PLTypeInfo *GetTypeInfo(const Value &value) const;
 
         PLTypeInfo *GetBooleanTypeInfo() const;
-        PLTypeInfo *GetFBMParatersTypeInfo() const;
+        PLTypeInfo *GetFBMParametersTypeInfo() const;
         PLTypeInfo *GetFieldTypeInfo() const;
         PLTypeInfo *GetFloatTypeInfo() const;
         PLTypeInfo *GetIntegerTypeInfo() const;
