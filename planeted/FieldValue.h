@@ -5,38 +5,38 @@
 
 namespace Planeted
 {
-    class Field1Value
+    class FieldValue
     {
     public:
-        Field1Value() = default;
+        FieldValue() = default;
 
-        explicit Field1Value(std::unique_ptr<IField1> field)
+        explicit FieldValue(std::unique_ptr<IField> field)
             : field(std::move(field))
         {}
 
-        Field1Value(const Field1Value &other)
-            : field(other.field->Clone1())
+        FieldValue(const FieldValue &other)
+            : field(other.field->Clone())
         {}
 
-        Field1Value &operator=(const Field1Value &other)
+        FieldValue &operator=(const FieldValue &other)
         {
             if(this != &other)
             {
-                this->field = other.field->Clone1();
+                this->field = other.field->Clone();
             }
             return *this;
         }
 
-        Field1Value(Field1Value&&) noexcept = default;
-        Field1Value& operator=(Field1Value&&) noexcept = default;
+        FieldValue(FieldValue&&) noexcept = default;
+        FieldValue& operator=(FieldValue&&) noexcept = default;
 
-        IField1 &Get()
+        IField &Get()
         {
             return *(this->field);
         }
 
     private:
-        std::unique_ptr<IField1> field;
+        std::unique_ptr<IField> field;
     };
 }
 #endif // PLANETED_FIELDVALUE_H

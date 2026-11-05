@@ -85,10 +85,10 @@ namespace Planeted
         }
         return result;
     }
-    Field1Value GetField1Arg(const std::vector<Value> &args, size_t index, const std::string &functionName)
+    FieldValue GetFieldArg(const std::vector<Value> &args, size_t index, const std::string &functionName)
     {
-        Field1Value result;
-        if(!TryAsField1(args[index], result))
+        FieldValue result;
+        if(!TryAsField(args[index], result))
         {
             throw std::runtime_error(functionName + ": argument " + std::to_string(index + 1) + " must be of type Field1.");
         }
@@ -240,13 +240,13 @@ namespace Planeted
         return result;
     }
 
-    bool TryAsField1(const Value &value, Field1Value &out)
+    bool TryAsField(const Value &value, FieldValue &out)
     {
         bool result = false;
 
         if(value.GetValueType() == ValueTypeEnum::Field)
         {
-            out = value.GetField1Value();
+            out = value.GetFieldValue();
             result = true;
         }
         return result;

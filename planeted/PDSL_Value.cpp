@@ -49,8 +49,8 @@ namespace Planeted
         : data(std::move(noiseValue))
     { }
 
-    Value::Value(Field1Value field1Value)
-        : data(std::move(field1Value))
+    Value::Value(FieldValue fieldValue)
+        : data(std::move(fieldValue))
     { }
 
     Value::Value(FBMParameters parametersValue)
@@ -105,9 +105,9 @@ namespace Planeted
         return std::get<NoiseValue>(this->data);
     }
 
-    const Field1Value &Value::GetField1Value() const
+    const FieldValue &Value::GetFieldValue() const
     {
-        return std::get<Field1Value>(this->data);
+        return std::get<FieldValue>(this->data);
     }
 
     const FBMParameters &Value::GetFBMParametersValue() const
@@ -156,7 +156,7 @@ namespace Planeted
         {
             return ValueTypeEnum::Noise;
         }
-        if(std::holds_alternative<Field1Value>(this->data))
+        if(std::holds_alternative<FieldValue>(this->data))
         {
             return ValueTypeEnum::Field;
         }

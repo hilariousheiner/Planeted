@@ -72,13 +72,13 @@ namespace Planeted
         static Value builtin_perlinNoise1(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCountAtMost(args, 1, "perlinNoise1");
-            Field1Value field1Value(std::make_unique<PerlinNoise1>());
+            FieldValue fieldValue(std::make_unique<PerlinNoise1>());
 
             if(args.size() == 1)
             {
-                SetSeed(field1Value.Get(), args[0]);
+                SetSeed(fieldValue.Get(), args[0]);
             }
-            return Value(field1Value);
+            return Value(fieldValue);
         }
 
         static Value builtin_fbmParameters(PDSL_Runtime &runtime, const std::vector<Value> &args)
@@ -120,7 +120,7 @@ namespace Planeted
         }
         static Value builtin_setSeedFromInteger(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
-            Field1Value fieldValue = GetField1Arg(args, 0, "setSeed"); // note: this performs checks that are now redundant; replace by something else.
+            FieldValue fieldValue = GetFieldArg(args, 0, "setSeed"); // note: this performs checks that are now redundant; replace by something else.
             int seed = GetIntArg(args, 1, "setSeed"); // note: this performs checks that are now redundant; replace by something else.
 
             fieldValue.Get().SetSeed(seed);
@@ -129,7 +129,7 @@ namespace Planeted
         }
         static Value builtin_setSeedFromString(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
-            Field1Value fieldValue = GetField1Arg(args, 0, "setSeed"); // note: this performs checks that are now redundant; replace by something else.
+            FieldValue fieldValue = GetFieldArg(args, 0, "setSeed"); // note: this performs checks that are now redundant; replace by something else.
             std::string seed = GetStringArg(args, 1, "setSeed"); // note: this performs checks that are now redundant; replace by something else.
 
             fieldValue.Get().SetSeed(seed);
@@ -143,7 +143,7 @@ namespace Planeted
 
             float constant = GetFloatArg(args, 0, "pow");
 
-            Field1Value fieldValue(std::make_unique<ConstantField1>(constant));
+            FieldValue fieldValue(std::make_unique<ConstantField1>(constant));
 
             return Value(fieldValue);
         }
@@ -250,14 +250,14 @@ namespace Planeted
         {
             ExpectArgsCount(args, 2, "savePGM");
 
-            Field1Value field1Value = GetField1Arg(args, 0, "savePGM");
+            FieldValue fieldValue = GetFieldArg(args, 0, "savePGM");
             std::string filename = GetStringArg(args, 1, "savePGM");
 
             filename = NormalizePath(runtime.OutPath + filename);
 
             uint16_t sample_size = 256;
 
-            IField1 &field1 = field1Value.Get();
+            IField1 &field1 = dynamic_cast<IField1&>(fieldValue.Get());
             ColorFunction colorFunction = [&field1, sample_size](const int x, const int y)
             {
                 float nx = x/static_cast<float>(sample_size) - 0.5f;
