@@ -5,6 +5,7 @@
 #include "PDSL_Lib.h"
 #include "PDSL_Utils.h"
 #include "PDSL_Parser.h"
+#include "PLTypeUtils.h"
 
 namespace Planeted
 {
@@ -202,7 +203,8 @@ namespace Planeted
 
         if(fn == nullptr)
         {
-            throw std::runtime_error("Unknown function: " + name);
+            throw std::runtime_error("Unknown function: " + name +
+                                     "(" + PLTypeUtils::TypeInfoListToString(PLTypeUtils::ResolveTypes(*this, args))+")");
         }
         return fn->Call(*this, args);
     }
