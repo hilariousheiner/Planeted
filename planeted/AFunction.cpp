@@ -1,4 +1,5 @@
 #include "AFunction.h"
+#include "PDSL.h"
 
 namespace Planeted
 {
@@ -8,6 +9,21 @@ namespace Planeted
 
     bool AFunction::Matches(const PDSL_Runtime &runtime, const std::vector<Value> &arguments) const
     {
+        if (arguments.size() != argumentTypes.size())
+        {
+            return false;
+        }
+
+        for (size_t i = 0; i < arguments.size(); i++)
+        {
+            PLTypeInfo* argumentType = runtime.GetTypeInfo(arguments[i]);
+            PLTypeInfo* parameterType = argumentTypes[i];
+
+            if(argumentType != parameterType)
+            {
+                return false;
+            }
+        }
         return true;
     }
 }
