@@ -70,6 +70,8 @@
 		<Unit filename="PGM.h" />
 		<Unit filename="PLTypeInfo.cpp" />
 		<Unit filename="PLTypeInfo.h" />
+		<Unit filename="PLTypeUtils.cpp" />
+		<Unit filename="PLTypeUtils.h" />
 		<Unit filename="POV.cpp" />
 		<Unit filename="POV.h" />
 		<Unit filename="PPM.cpp" />
