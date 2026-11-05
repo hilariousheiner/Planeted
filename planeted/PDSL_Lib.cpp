@@ -90,16 +90,6 @@ namespace Planeted
             return Value(parametersValue);
         }
 
-        static Value builtin_seedNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
-        {
-            ExpectArgsCount(args, 2, "seedNoise");
-
-            NoiseValue noiseValue = GetNoiseArg(args, 0, "seedNoise");
-
-            SetSeed(noiseValue.Get(), args[1]);
-
-            return Value(noiseValue);
-        }
         static Value builtin_setNoiseSeedFromInteger(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             NoiseValue noiseValue = GetNoiseArg(args, 0, "setSeed"); // note: this performs checks that are now redundant; replace by something else.
@@ -402,8 +392,6 @@ namespace Planeted
             runtime.DefineIntrinsicFunction("perlinNoise1", builtin_perlinNoise1);
 
             runtime.DefineIntrinsicFunction("fbmParameters", builtin_fbmParameters);
-
-            runtime.DefineIntrinsicFunction("seedNoise", builtin_seedNoise);
 
             runtime.DefineIntrinsicFunction("field1", builtin_field1);
 
