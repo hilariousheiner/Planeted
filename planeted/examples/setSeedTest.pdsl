@@ -1,0 +1,5 @@
+setDebugFlag(true);
+
+n = perlinNoise();
+setSeed(n, 12345);
+setSeed(n, "12345");
