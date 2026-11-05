@@ -109,6 +109,15 @@ namespace Planeted
 
             return Value(noiseValue);
         }
+        static Value builtin_setSeedFromString(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        {
+            NoiseValue noiseValue = GetNoiseArg(args, 0, "setSeed"); // note: this performs checks that are now redundant; replace by something else.
+            std::string seed = GetStringArg(args, 1, "setSeed"); // note: this performs checks that are now redundant; replace by something else.
+
+            noiseValue.Get().SetSeed(seed);
+
+            return Value(noiseValue);
+        }
 
         static Value builtin_field1(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
@@ -363,6 +372,7 @@ namespace Planeted
             PLTypeInfo *integerTypeInfo = runtime.GetIntegerTypeInfo();
 
             runtime.DefineFunction("setSeed", {noiseTypeInfo, integerTypeInfo}, builtin_setSeedFromInteger);
+            runtime.DefineFunction("setSeed", {noiseTypeInfo, stringTypeInfo}, builtin_setSeedFromString);
 
             runtime.DefineIntrinsicFunction("whiteNoise", builtin_whiteNoise);
             runtime.DefineIntrinsicFunction("valueNoise", builtin_valueNoise);
