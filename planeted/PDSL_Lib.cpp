@@ -100,7 +100,7 @@ namespace Planeted
 
             return Value(noiseValue);
         }
-        static Value builtin_setSeedFromInteger(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        static Value builtin_setNoiseSeedFromInteger(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             NoiseValue noiseValue = GetNoiseArg(args, 0, "setSeed"); // note: this performs checks that are now redundant; replace by something else.
             int seed = GetIntArg(args, 1, "setSeed"); // note: this performs checks that are now redundant; replace by something else.
@@ -109,7 +109,7 @@ namespace Planeted
 
             return Value(noiseValue);
         }
-        static Value builtin_setSeedFromString(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        static Value builtin_setNoiseSeedFromString(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             NoiseValue noiseValue = GetNoiseArg(args, 0, "setSeed"); // note: this performs checks that are now redundant; replace by something else.
             std::string seed = GetStringArg(args, 1, "setSeed"); // note: this performs checks that are now redundant; replace by something else.
@@ -117,6 +117,24 @@ namespace Planeted
             noiseValue.Get().SetSeed(seed);
 
             return Value(noiseValue);
+        }
+        static Value builtin_setSeedFromInteger(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        {
+            Field1Value fieldValue = GetField1Arg(args, 0, "setSeed"); // note: this performs checks that are now redundant; replace by something else.
+            int seed = GetIntArg(args, 1, "setSeed"); // note: this performs checks that are now redundant; replace by something else.
+
+            fieldValue.Get().SetSeed(seed);
+
+            return Value(fieldValue);
+        }
+        static Value builtin_setSeedFromString(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        {
+            Field1Value fieldValue = GetField1Arg(args, 0, "setSeed"); // note: this performs checks that are now redundant; replace by something else.
+            std::string seed = GetStringArg(args, 1, "setSeed"); // note: this performs checks that are now redundant; replace by something else.
+
+            fieldValue.Get().SetSeed(seed);
+
+            return Value(fieldValue);
         }
 
         static Value builtin_field1(PDSL_Runtime &runtime, const std::vector<Value> &args)
@@ -368,11 +386,14 @@ namespace Planeted
         void Load(PDSL_Runtime &runtime)
         {
             PLTypeInfo *noiseTypeInfo = runtime.GetNoiseTypeInfo();
+            PLTypeInfo *fieldTypeInfo = runtime.GetFieldTypeInfo();
             PLTypeInfo *stringTypeInfo = runtime.GetStringTypeInfo();
             PLTypeInfo *integerTypeInfo = runtime.GetIntegerTypeInfo();
 
-            runtime.DefineFunction("setSeed", {noiseTypeInfo, integerTypeInfo}, builtin_setSeedFromInteger);
-            runtime.DefineFunction("setSeed", {noiseTypeInfo, stringTypeInfo}, builtin_setSeedFromString);
+            runtime.DefineFunction("setSeed", {noiseTypeInfo, integerTypeInfo}, builtin_setNoiseSeedFromInteger);
+            runtime.DefineFunction("setSeed", {noiseTypeInfo, stringTypeInfo}, builtin_setNoiseSeedFromString);
+            runtime.DefineFunction("setSeed", {fieldTypeInfo, integerTypeInfo}, builtin_setSeedFromInteger);
+            runtime.DefineFunction("setSeed", {fieldTypeInfo, stringTypeInfo}, builtin_setSeedFromString);
 
             runtime.DefineIntrinsicFunction("whiteNoise", builtin_whiteNoise);
             runtime.DefineIntrinsicFunction("valueNoise", builtin_valueNoise);
