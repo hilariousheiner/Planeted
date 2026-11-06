@@ -8,6 +8,11 @@ namespace Planeted
         return runtime.GetFieldTypeInfo();
     }
 
+    PLTypeInfo* IField1::GetTypeInfo(const PDSL_Runtime &runtime) const
+    {
+        return runtime.GetField1TypeInfo();
+    }
+
     void AFieldGenerator1::SetSeed(std::uint32_t seedValue)
     {
         this->seed = Seed(seedValue);

@@ -30,6 +30,8 @@ namespace Planeted
         virtual std::unique_ptr<IField> Clone() const = 0;
         virtual std::unique_ptr<IField1> Clone1() const = 0;
 
+        PLTypeInfo* GetTypeInfo(const PDSL_Runtime &runtime) const override;
+
         virtual float Eval(const float &p) const = 0;
     };
 
