@@ -15,11 +15,14 @@ namespace Planeted
         const std::string &GetName() const;
         ValueTypeEnum GetValueType() const;
 
+        bool IsDerivedFrom(const PLTypeInfo *other) const;
+
         std::string ToString() const;
 
     private:
         std::string name;
         ValueTypeEnum valueType;
+        PLTypeInfo *baseTypeInfo;
     };
 }
 #endif // PLANETED_PLTYPEINFO_H
