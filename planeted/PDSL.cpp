@@ -146,7 +146,13 @@ namespace Planeted
             return this->GetFBMParametersTypeInfo();
             break;
         case ValueTypeEnum::Field:
-            return this->GetFieldTypeInfo();
+            {
+                FieldValue fieldValue;
+                if(TryAsField(value, fieldValue))
+                {
+                    result = fieldValue.GetTypeInfo(*this);
+                }
+            }
             break;
         case ValueTypeEnum::Float:
             return this->GetFloatTypeInfo();
