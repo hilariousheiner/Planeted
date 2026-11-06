@@ -8,14 +8,19 @@
 #include "Seed.h"
 #include "Vector2.h"
 #include "Vector3.h"
+#include "PLTypeInfo.h"
 
 namespace Planeted
 {
+    struct PDSL_Runtime;
+
     class IField : public ISeedable
     {
     public:
         virtual ~IField() = default;
         virtual std::unique_ptr<IField> Clone() const = 0;
+
+        virtual PLTypeInfo* GetTypeInfo(const PDSL_Runtime &runtime) const;
     };
 
     class IField1 : public IField

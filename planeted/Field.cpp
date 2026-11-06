@@ -1,7 +1,13 @@
 #include "Field.h"
+#include "PDSL.h"
 
 namespace Planeted
 {
+    PLTypeInfo* IField::GetTypeInfo(const PDSL_Runtime &runtime) const
+    {
+        return runtime.GetFieldTypeInfo();
+    }
+
     void AFieldGenerator1::SetSeed(std::uint32_t seedValue)
     {
         this->seed = Seed(seedValue);
