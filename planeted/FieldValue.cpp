@@ -27,6 +27,6 @@ namespace Planeted
 
     PLTypeInfo* FieldValue::GetTypeInfo(const PDSL_Runtime &runtime) const
     {
-        return runtime.GetFieldTypeInfo();
+        return this->field->GetTypeInfo(runtime);
     }
 }
