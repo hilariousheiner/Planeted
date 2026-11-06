@@ -19,7 +19,7 @@ namespace Planeted
             PLTypeInfo* argumentType = runtime.GetTypeInfo(arguments[i]);
             PLTypeInfo* parameterType = argumentTypes[i];
 
-            if(argumentType != parameterType)
+            if(!argumentType->IsDerivedFrom(parameterType))
             {
                 return false;
             }
