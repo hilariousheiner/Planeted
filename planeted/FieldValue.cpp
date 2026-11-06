@@ -1,4 +1,5 @@
 #include "FieldValue.h"
+#include "PDSL.h"
 
 namespace Planeted
 {
@@ -22,5 +23,10 @@ namespace Planeted
     IField &FieldValue::Get()
     {
         return *(this->field);
+    }
+
+    PLTypeInfo* FieldValue::GetTypeInfo(const PDSL_Runtime &runtime) const
+    {
+        return runtime.GetFieldTypeInfo();
     }
 }

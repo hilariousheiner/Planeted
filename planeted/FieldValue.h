@@ -2,9 +2,12 @@
 #define PLANETED_FIELDVALUE_H
 
 #include "Field.h"
+#include "PLTypeInfo.h"
 
 namespace Planeted
 {
+    struct PDSL_Runtime;
+
     class FieldValue
     {
     public:
@@ -20,6 +23,7 @@ namespace Planeted
         FieldValue& operator=(FieldValue&&) noexcept = default;
 
         IField &Get();
+        PLTypeInfo* GetTypeInfo(const PDSL_Runtime &runtime) const;
 
     private:
         std::unique_ptr<IField> field;
