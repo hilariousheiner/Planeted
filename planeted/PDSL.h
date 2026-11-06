@@ -39,7 +39,10 @@ namespace Planeted
 
         PLTypeInfo *GetBooleanTypeInfo() const;
         PLTypeInfo *GetFBMParametersTypeInfo() const;
+
         PLTypeInfo *GetFieldTypeInfo() const;
+        PLTypeInfo *GetField1TypeInfo() const;
+
         PLTypeInfo *GetFloatTypeInfo() const;
         PLTypeInfo *GetIntegerTypeInfo() const;
         PLTypeInfo *GetListTypeInfo() const;
@@ -71,7 +74,10 @@ namespace Planeted
 
         PLTypeInfo *booleanTypeInfo;
         PLTypeInfo *fbmParametersTypeInfo;
+
         PLTypeInfo *fieldTypeInfo;
+        PLTypeInfo *field1TypeInfo;
+
         PLTypeInfo *floatTypeInfo;
         PLTypeInfo *integerTypeInfo;
         PLTypeInfo *listTypeInfo;
