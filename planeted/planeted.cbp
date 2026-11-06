@@ -41,6 +41,7 @@
 		<Unit filename="FBM.h" />
 		<Unit filename="Field.cpp" />
 		<Unit filename="Field.h" />
+		<Unit filename="FieldValue.cpp" />
 		<Unit filename="FieldValue.h" />
 		<Unit filename="ISeedable.h" />
 		<Unit filename="Math.h" />

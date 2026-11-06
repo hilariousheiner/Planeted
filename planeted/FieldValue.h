@@ -10,30 +10,16 @@ namespace Planeted
     public:
         FieldValue() = default;
 
-        explicit FieldValue(std::unique_ptr<IField> field)
-            : field(std::move(field))
-        {}
+        explicit FieldValue(std::unique_ptr<IField> field);
 
-        FieldValue(const FieldValue &other)
-            : field(other.field->Clone())
-        {}
+        FieldValue(const FieldValue &other);
 
-        FieldValue &operator=(const FieldValue &other)
-        {
-            if(this != &other)
-            {
-                this->field = other.field->Clone();
-            }
-            return *this;
-        }
+        FieldValue &operator=(const FieldValue &other);
 
         FieldValue(FieldValue&&) noexcept = default;
         FieldValue& operator=(FieldValue&&) noexcept = default;
 
-        IField &Get()
-        {
-            return *(this->field);
-        }
+        IField &Get();
 
     private:
         std::unique_ptr<IField> field;
