@@ -43,6 +43,10 @@
 		<Unit filename="Field.h" />
 		<Unit filename="FieldValue.cpp" />
 		<Unit filename="FieldValue.h" />
+		<Unit filename="FieldsModule.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="FieldsModule.h" />
 		<Unit filename="ISeedable.h" />
 		<Unit filename="Math.h" />
 		<Unit filename="Mesh.cpp" />

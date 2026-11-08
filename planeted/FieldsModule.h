@@ -1,0 +1,8 @@
+#ifndef PLANETED_FIELDSMODULE_H
+#define PLANETED_FIELDSMODULE_H
+
+namespace Planeted
+{
+
+}
+#endif // PLANETED_FIELDSMODULE_H
