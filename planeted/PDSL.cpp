@@ -46,10 +46,6 @@ namespace Planeted
     PDSL_Runtime::PDSL_Runtime()
     {
         this->booleanTypeInfo = this->DefineType("Boolean", ValueTypeEnum::Bool, nullptr);
-        this->fbmParametersTypeInfo = this->DefineType("FBMParamters", ValueTypeEnum::FBMParameters, nullptr);
-
-        this->fieldTypeInfo = this->DefineType("Field", ValueTypeEnum::Field, nullptr);
-        this->field1TypeInfo = this->DefineType("Field1", ValueTypeEnum::Field, this->fieldTypeInfo);
 
         this->floatTypeInfo = this->DefineType("Float", ValueTypeEnum::Float, nullptr);
         this->integerTypeInfo = this->DefineType("Integer", ValueTypeEnum::Int, nullptr);
@@ -70,19 +66,6 @@ namespace Planeted
     PLTypeInfo *PDSL_Runtime::GetBooleanTypeInfo() const
     {
         return this->booleanTypeInfo;
-    }
-    PLTypeInfo *PDSL_Runtime::GetFBMParametersTypeInfo() const
-    {
-        return this->fbmParametersTypeInfo;
-    }
-
-    PLTypeInfo *PDSL_Runtime::GetFieldTypeInfo() const
-    {
-        return this->fieldTypeInfo;
-    }
-    PLTypeInfo *PDSL_Runtime::GetField1TypeInfo() const
-    {
-        return this->field1TypeInfo;
     }
 
     PLTypeInfo *PDSL_Runtime::GetFloatTypeInfo() const
@@ -145,7 +128,7 @@ namespace Planeted
             return this->GetBooleanTypeInfo();
             break;
         case ValueTypeEnum::FBMParameters:
-            return this->GetFBMParametersTypeInfo();
+            return this->FieldsMod->GetFBMParametersTypeInfo();
             break;
         case ValueTypeEnum::Field:
             {

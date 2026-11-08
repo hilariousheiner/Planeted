@@ -376,7 +376,7 @@ namespace Planeted
         void Load(PDSL_Runtime &runtime)
         {
             PLTypeInfo *noiseTypeInfo = runtime.GetNoiseTypeInfo();
-            PLTypeInfo *fieldTypeInfo = runtime.GetFieldTypeInfo();
+            PLTypeInfo *fieldTypeInfo = runtime.FieldsMod->GetFieldTypeInfo();
             PLTypeInfo *stringTypeInfo = runtime.GetStringTypeInfo();
             PLTypeInfo *integerTypeInfo = runtime.GetIntegerTypeInfo();
 

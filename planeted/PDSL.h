@@ -40,10 +40,7 @@ namespace Planeted
         PLTypeInfo *GetTypeInfo(const Value &value) const;
 
         PLTypeInfo *GetBooleanTypeInfo() const;
-        PLTypeInfo *GetFBMParametersTypeInfo() const;
 
-        PLTypeInfo *GetFieldTypeInfo() const;
-        PLTypeInfo *GetField1TypeInfo() const;
 
         PLTypeInfo *GetFloatTypeInfo() const;
         PLTypeInfo *GetIntegerTypeInfo() const;
@@ -77,11 +74,6 @@ namespace Planeted
         std::unordered_map<std::string, PLTypeInfo*> typeInfoTable;
 
         PLTypeInfo *booleanTypeInfo;
-        PLTypeInfo *fbmParametersTypeInfo;
-
-        PLTypeInfo *fieldTypeInfo;
-        PLTypeInfo *field1TypeInfo;
-
         PLTypeInfo *floatTypeInfo;
         PLTypeInfo *integerTypeInfo;
         PLTypeInfo *listTypeInfo;
