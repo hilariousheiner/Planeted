@@ -3,5 +3,8 @@
 
 namespace Planeted
 {
+	FieldsModule::FieldsModule(PDSL_Runtime &runtime)
+    {
 
+    }
 }

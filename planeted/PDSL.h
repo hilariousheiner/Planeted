@@ -3,6 +3,7 @@
 
 #include <functional>
 #include <iostream>
+#include <memory>
 #include <stdexcept>
 #include <string>
 #include <unordered_map>
@@ -10,6 +11,7 @@
 
 
 #include "BuiltinFunction.h"
+#include "FieldsModule.h"
 #include "Utils.h"
 
 #include "PDSL_Lexer.h"
@@ -68,6 +70,8 @@ namespace Planeted
 
         Value Result;
         bool DebugFlag = false;
+
+        std::unique_ptr<FieldsModule> FieldsMod;
 
     private:
         std::unordered_map<std::string, PLTypeInfo*> typeInfoTable;
