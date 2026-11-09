@@ -234,12 +234,15 @@ namespace Planeted
 
         void Load(PDSL_Runtime &runtime)
         {
+            PLTypeInfo *noiseTypeInfo = runtime.GetNoiseTypeInfo();
+            PLTypeInfo *fbmParametersTypeInfo = runtime.FieldsMod->GetFBMParametersTypeInfo();
+
             runtime.DefineIntrinsicFunction("whiteNoise", builtin_whiteNoise);
             runtime.DefineIntrinsicFunction("valueNoise", builtin_valueNoise);
             runtime.DefineIntrinsicFunction("perlinNoise", builtin_perlinNoise);
 
             runtime.DefineIntrinsicFunction("ridge", builtin_ridge);
-            runtime.DefineIntrinsicFunction("fbm", builtin_fbm);
+            runtime.DefineFunction("fbm", {noiseTypeInfo, fbmParametersTypeInfo}, builtin_fbm);
 
             runtime.DefineIntrinsicFunction("abs", builtin_abs);
             runtime.DefineIntrinsicFunction("pow", builtin_pow);

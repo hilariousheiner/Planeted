@@ -105,6 +105,18 @@ namespace Planeted
         return Value(parametersValue);
     }
 
+    static Value builtin_fbmField1(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue = GetFieldArg(args, 0, "fbm");
+        FBMParameters parametersValue = GetFBMParametersArg(args, 1, "fbm");
+
+        IField1 &field1 = dynamic_cast<IField1&>(fieldValue.Get());
+
+        FieldValue fbmFieldValue(FBMFieldModifier1(field1.Clone1(), parametersValue).Clone());
+
+        return Value(fieldValue);
+    }
+
     static Value builtin_savePGM(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
         FieldValue fieldValue = GetFieldArg(args, 0, "savePGM");
@@ -159,6 +171,8 @@ namespace Planeted
         runtime.DefineFunction("perlinNoise1", {}, builtin_perlinNoise1);
         runtime.DefineFunction("perlinNoise1", {integerTypeInfo}, builtin_perlinNoise1FromInteger);
         runtime.DefineFunction("perlinNoise1", {stringTypeInfo}, builtin_perlinNoise1FromString);
+
+        runtime.DefineFunction("fbm", {this->field1TypeInfo, this->fbmParametersTypeInfo}, builtin_fbmField1);
 
         runtime.DefineFunction("savePGM", {this->field1TypeInfo, stringTypeInfo}, builtin_savePGM);
     }
