@@ -236,6 +236,7 @@ namespace Planeted
         {
             PLTypeInfo *noiseTypeInfo = runtime.GetNoiseTypeInfo();
             PLTypeInfo *fbmParametersTypeInfo = runtime.FieldsMod->GetFBMParametersTypeInfo();
+            PLTypeInfo *floatTypeInfo = runtime.GetFloatTypeInfo();
 
             runtime.DefineIntrinsicFunction("whiteNoise", builtin_whiteNoise);
             runtime.DefineIntrinsicFunction("valueNoise", builtin_valueNoise);
@@ -245,7 +246,7 @@ namespace Planeted
             runtime.DefineFunction("fbm", {noiseTypeInfo, fbmParametersTypeInfo}, builtin_fbm);
 
             runtime.DefineFunction("abs", {noiseTypeInfo}, builtin_abs);
-            runtime.DefineIntrinsicFunction("pow", builtin_pow);
+            runtime.DefineFunction("pow", {noiseTypeInfo, floatTypeInfo}, builtin_pow);
 
             runtime.DefineIntrinsicFunction("setWhiteNoiseScale", builtin_setWhiteNoiseScale);
 
