@@ -69,27 +69,6 @@ namespace Planeted
             return Value(noiseValue);
         }
 
-        static Value builtin_setNoiseSeedFromInteger(PDSL_Runtime &runtime, const std::vector<Value> &args)
-        {
-            NoiseValue noiseValue = GetNoiseArg(args, 0, "setSeed"); // note: this performs checks that are now redundant; replace by something else.
-            int seed = GetIntArg(args, 1, "setSeed"); // note: this performs checks that are now redundant; replace by something else.
-
-            noiseValue.Get().SetSeed(seed);
-
-            return Value(noiseValue);
-        }
-        static Value builtin_setNoiseSeedFromString(PDSL_Runtime &runtime, const std::vector<Value> &args)
-        {
-            NoiseValue noiseValue = GetNoiseArg(args, 0, "setSeed"); // note: this performs checks that are now redundant; replace by something else.
-            std::string seed = GetStringArg(args, 1, "setSeed"); // note: this performs checks that are now redundant; replace by something else.
-
-            noiseValue.Get().SetSeed(seed);
-
-            return Value(noiseValue);
-        }
-
-
-
         static Value builtin_ridge(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 1, "ridge");
@@ -255,16 +234,8 @@ namespace Planeted
 
         void Load(PDSL_Runtime &runtime)
         {
-            PLTypeInfo *noiseTypeInfo = runtime.GetNoiseTypeInfo();
-            PLTypeInfo *stringTypeInfo = runtime.GetStringTypeInfo();
-            PLTypeInfo *integerTypeInfo = runtime.GetIntegerTypeInfo();
-
-            runtime.DefineFunction("setSeed", {noiseTypeInfo, integerTypeInfo}, builtin_setNoiseSeedFromInteger);
-            runtime.DefineFunction("setSeed", {noiseTypeInfo, stringTypeInfo}, builtin_setNoiseSeedFromString);
-
             runtime.DefineIntrinsicFunction("whiteNoise", builtin_whiteNoise);
             runtime.DefineIntrinsicFunction("valueNoise", builtin_valueNoise);
-
             runtime.DefineIntrinsicFunction("perlinNoise", builtin_perlinNoise);
 
             runtime.DefineIntrinsicFunction("ridge", builtin_ridge);
