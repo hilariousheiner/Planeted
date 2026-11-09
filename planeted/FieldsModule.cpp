@@ -27,10 +27,35 @@ namespace Planeted
         return Value(fieldValue);
     }
 
+    static Value builtin_perlinNoise1(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue(std::make_unique<PerlinNoise1>());
+
+        return Value(fieldValue);
+    }
+    static Value builtin_perlinNoise1FromString(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue(std::make_unique<PerlinNoise1>());
+
+        std::string seed = GetStringArg(args, 0, "perlinNoise1"); // note: this performs checks that are now redundant; replace by something else.
+
+        fieldValue.Get().SetSeed(seed);
+
+        return Value(fieldValue);
+    }
+    static Value builtin_perlinNoise1FromInteger(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue(std::make_unique<PerlinNoise1>());
+
+        int seed = GetIntArg(args, 0, "perlinNoise1"); // note: this performs checks that are now redundant; replace by something else.
+
+        fieldValue.Get().SetSeed(seed);
+
+        return Value(fieldValue);
+    }
+
     static Value builtin_field1(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
-        ExpectArgsCount(args, 1, "field1");
-
         float constant = GetFloatArg(args, 0, "pow");
 
         FieldValue fieldValue(std::make_unique<ConstantField1>(constant));
@@ -38,30 +63,14 @@ namespace Planeted
         return Value(fieldValue);
     }
 
-    static Value builtin_perlinNoise1(PDSL_Runtime &runtime, const std::vector<Value> &args)
-    {
-        ExpectArgsCountAtMost(args, 1, "perlinNoise1");
-        FieldValue fieldValue(std::make_unique<PerlinNoise1>());
-
-        if(args.size() == 1)
-        {
-            SetSeed(fieldValue.Get(), args[0]);
-        }
-        return Value(fieldValue);
-    }
-
     static Value builtin_fbmParameters(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
-        ExpectArgsCount(args, 0, "fbmParameters");
-
         FBMParameters parametersValue;
 
         return Value(parametersValue);
     }
     static Value builtin_setNumberOfOctaves(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
-        ExpectArgsCount(args, 2, "setNumberOfOctaves");
-
         FBMParameters parametersValue = GetFBMParametersArg(args, 0, "setNumberOfOctaves");
         parametersValue.NumberOfOctaves = GetIntArg(args, 1, "setNumberOfOctaves");
 
@@ -69,8 +78,6 @@ namespace Planeted
     }
     static Value builtin_setLacunarity(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
-        ExpectArgsCount(args, 2, "setLacunarity");
-
         FBMParameters parametersValue = GetFBMParametersArg(args, 0, "setLacunarity");
         parametersValue.Lacunarity = GetFloatArg(args, 1, "setLacunarity");
 
@@ -78,8 +85,6 @@ namespace Planeted
     }
     static Value builtin_setPersistence(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
-        ExpectArgsCount(args, 2, "setPersistence");
-
         FBMParameters parametersValue = GetFBMParametersArg(args, 0, "setPersistence");
         parametersValue.Persistence = GetFloatArg(args, 1, "setPersistence");
 
@@ -87,8 +92,6 @@ namespace Planeted
     }
     static Value builtin_setStartFrequency(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
-        ExpectArgsCount(args, 2, "setStartFrequency");
-
         FBMParameters parametersValue = GetFBMParametersArg(args, 0, "setStartFrequency");
         parametersValue.StartFrequency = GetFloatArg(args, 1, "setStartFrequency");
 
@@ -96,8 +99,6 @@ namespace Planeted
     }
     static Value builtin_setNormalizeFBM(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
-        ExpectArgsCount(args, 2, "setNormalizeFBM");
-
         FBMParameters parametersValue = GetFBMParametersArg(args, 0, "setNormalizeFBM");
         parametersValue.Normalize = GetBoolArg(args, 1, "setNormalizeFBM");
 
@@ -106,8 +107,6 @@ namespace Planeted
 
     static Value builtin_savePGM(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
-        ExpectArgsCount(args, 2, "savePGM");
-
         FieldValue fieldValue = GetFieldArg(args, 0, "savePGM");
         std::string filename = GetStringArg(args, 1, "savePGM");
 
@@ -142,21 +141,26 @@ namespace Planeted
 
         PLTypeInfo *integerTypeInfo = runtime.GetIntegerTypeInfo();
         PLTypeInfo *stringTypeInfo = runtime.GetStringTypeInfo();
+        PLTypeInfo *floatTypeInfo = runtime.GetFloatTypeInfo();
+        PLTypeInfo *boolTypeInfo = runtime.GetBooleanTypeInfo();
 
         runtime.DefineFunction("setSeed", {this->fieldTypeInfo, integerTypeInfo}, builtin_setSeedFromInteger);
         runtime.DefineFunction("setSeed", {this->fieldTypeInfo, stringTypeInfo}, builtin_setSeedFromString);
 
-        runtime.DefineIntrinsicFunction("fbmParameters", builtin_fbmParameters);
-        runtime.DefineIntrinsicFunction("setNumberOfOctaves", builtin_setNumberOfOctaves);
-        runtime.DefineIntrinsicFunction("setLacunarity", builtin_setLacunarity);
-        runtime.DefineIntrinsicFunction("setPersistence", builtin_setPersistence);
-        runtime.DefineIntrinsicFunction("setStartFrequency", builtin_setStartFrequency);
-        runtime.DefineIntrinsicFunction("setNormalizeFBM", builtin_setNormalizeFBM);
+        runtime.DefineFunction("fbmParameters", {}, builtin_fbmParameters);
+        runtime.DefineFunction("setNumberOfOctaves", {this->fbmParametersTypeInfo, integerTypeInfo}, builtin_setNumberOfOctaves);
+        runtime.DefineFunction("setLacunarity",{this->fbmParametersTypeInfo, floatTypeInfo}, builtin_setLacunarity);
+        runtime.DefineFunction("setPersistence", {this->fbmParametersTypeInfo, floatTypeInfo}, builtin_setPersistence);
+        runtime.DefineFunction("setStartFrequency", {this->fbmParametersTypeInfo, floatTypeInfo}, builtin_setStartFrequency);
+        runtime.DefineFunction("setNormalizeFBM", {this->fbmParametersTypeInfo, boolTypeInfo}, builtin_setNormalizeFBM);
 
-        runtime.DefineIntrinsicFunction("field1", builtin_field1);
-        runtime.DefineIntrinsicFunction("perlinNoise1", builtin_perlinNoise1);
+        runtime.DefineFunction("field1", {this->fbmParametersTypeInfo, floatTypeInfo}, builtin_field1);
 
-        runtime.DefineIntrinsicFunction("savePGM", builtin_savePGM);
+        runtime.DefineFunction("perlinNoise1", {}, builtin_perlinNoise1);
+        runtime.DefineFunction("perlinNoise1", {integerTypeInfo}, builtin_perlinNoise1FromInteger);
+        runtime.DefineFunction("perlinNoise1", {stringTypeInfo}, builtin_perlinNoise1FromString);
+
+        runtime.DefineFunction("savePGM", {this->field1TypeInfo, stringTypeInfo}, builtin_savePGM);
     }
 
     PLTypeInfo *FieldsModule::GetFBMParametersTypeInfo() const
