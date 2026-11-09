@@ -147,7 +147,7 @@ namespace Planeted
         ColorFunction colorFunction = [&field1, sample_size](const int x, const int y)
         {
             float nx = x/static_cast<float>(sample_size) - 0.5f;
-            return ToUint8(field1.Eval(nx));
+            return ToUint8(SignedToUnitRange(field1.Eval(nx)));
         };
 
         PixelMap pixelMap = PixelMap(sample_size, sample_size);
