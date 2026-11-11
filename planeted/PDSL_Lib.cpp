@@ -268,7 +268,7 @@ namespace Planeted
             runtime.DefineIntrinsicFunction("valueNoise", builtin_valueNoise);
             runtime.DefineIntrinsicFunction("perlinNoise", builtin_perlinNoise);
 
-            runtime.DefineIntrinsicFunction("ridge", builtin_ridge);
+            runtime.DefineFunction("ridge", {noiseTypeInfo}, builtin_ridge);
             runtime.DefineFunction("fbm", {noiseTypeInfo, fbmParametersTypeInfo}, builtin_fbm);
 
             runtime.DefineFunction("abs", {noiseTypeInfo}, builtin_abs);

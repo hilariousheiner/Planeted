@@ -99,6 +99,24 @@ namespace Planeted
         float constant;
     };
 
+    class RidgeFieldModifier1 : public IField1
+    {
+    public:
+        RidgeFieldModifier1(std::unique_ptr<IField1> field);
+        RidgeFieldModifier1(const RidgeFieldModifier1 &other);
+
+        std::unique_ptr<IField> Clone() const override;
+        std::unique_ptr<IField1> Clone1() const override;
+
+        float Eval(const float &p) const override;
+
+        void SetSeed(std::uint32_t seed) override;
+        void SetSeed(std::string seed) override;
+
+    private:
+        std::unique_ptr<IField1> field;
+    };
+
     class AbsFieldModifier1 : public IField1
     {
     public:

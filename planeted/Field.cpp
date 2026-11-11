@@ -59,6 +59,40 @@ namespace Planeted
         return this->constant;
     }
 
+    //------------------------------------------------
+    RidgeFieldModifier1::RidgeFieldModifier1(std::unique_ptr<IField1> field)
+        : field(std::move(field))
+    {}
+
+    RidgeFieldModifier1::RidgeFieldModifier1(const RidgeFieldModifier1 &other)
+        : IField1(other), field(other.field->Clone1())
+    {}
+
+    std::unique_ptr<IField> RidgeFieldModifier1::Clone() const
+    {
+        return std::make_unique<RidgeFieldModifier1>(*this);
+    }
+    std::unique_ptr<IField1> RidgeFieldModifier1::Clone1() const
+    {
+        return std::make_unique<RidgeFieldModifier1>(*this);
+    }
+
+    float RidgeFieldModifier1::Eval(const float &p) const
+    {
+        float n = (0.9f - std::abs(this->field->Eval(p)));
+        return n*n;
+    }
+
+    void RidgeFieldModifier1::SetSeed(std::uint32_t seed)
+    {
+        this->field->SetSeed(seed);
+    }
+    void RidgeFieldModifier1::SetSeed(std::string seed)
+    {
+        this->field->SetSeed(seed);
+    }
+    //-----------------------------------------
+
     AbsFieldModifier1::AbsFieldModifier1(std::unique_ptr<IField1> field)
         : field(std::move(field))
     {}

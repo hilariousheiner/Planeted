@@ -115,6 +115,14 @@ namespace Planeted
         FieldValue fbmFieldValue(FBMFieldModifier1(field1.Clone1(), parametersValue).Clone());
         return Value(fbmFieldValue);
     }
+    static Value builtin_ridgeField1(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue = GetFieldArg(args, 0, "ridge");
+        IField1 &field1 = dynamic_cast<IField1&>(fieldValue.Get());
+
+        FieldValue ridgeFieldValue(RidgeFieldModifier1(field1.Clone1()).Clone());
+        return Value(ridgeFieldValue);
+    }
     static Value builtin_absField1(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
         FieldValue fieldValue = GetFieldArg(args, 0, "abs");
@@ -190,6 +198,7 @@ namespace Planeted
         runtime.DefineFunction("perlinNoise1", {stringTypeInfo}, builtin_perlinNoise1FromString);
 
         runtime.DefineFunction("fbm", {this->field1TypeInfo, this->fbmParametersTypeInfo}, builtin_fbmField1);
+        runtime.DefineFunction("ridge", {this->field1TypeInfo}, builtin_ridgeField1);
         runtime.DefineFunction("abs", {this->field1TypeInfo}, builtin_absField1);
         runtime.DefineFunction("pow", {this->field1TypeInfo, floatTypeInfo}, builtin_powField1);
 
