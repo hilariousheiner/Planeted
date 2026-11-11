@@ -113,7 +113,7 @@ namespace Planeted
         FBMParameters parametersValue = GetFBMParametersArg(args, 1, "fbm");
 
         FieldValue fbmFieldValue(FBMFieldModifier1(field1.Clone1(), parametersValue).Clone());
-        return Value(fieldValue);
+        return Value(fbmFieldValue);
     }
     static Value builtin_absField1(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
