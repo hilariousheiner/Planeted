@@ -8,10 +8,11 @@ fbmParams = setStartFrequency(fbmParams, 1.0);
 fbmParams = setNormalizeFBM(fbmParams, false);
 
 n = pow(abs(fbm(abs(perlinNoise("Amphitrite-29")), fbmParams)), 1.5);
+n1 = pow(abs(fbm(abs(perlinNoise1("Amphitrite-29")), fbmParams)), 1.5);
 
 noiseTest(n, "test_PerlinBillow3D");
 noiseTest2D(n, "test_PerlinBillow2D");
-noiseTest1D(n, "test_PerlinBillow1D");
+savePGM(n1, "test_PerlinBillow1D");
 
 m = load("../lib/icosphere2.pdsl");
 m = calculateNormals(m);
