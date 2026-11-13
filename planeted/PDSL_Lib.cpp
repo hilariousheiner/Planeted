@@ -10,6 +10,7 @@
 #include "Tests.h"
 #include "PGM.h"
 #include "PixelMap.h"
+#include "ValueNoise.h"
 
 namespace Planeted
 {
