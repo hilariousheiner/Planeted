@@ -1,4 +1,5 @@
 #include "WhiteNoise.h"
+#include "PDSL.h"
 
 namespace Planeted
 {
@@ -25,6 +26,10 @@ namespace Planeted
         return HashToSigned(h);
     }
 
+    PLTypeInfo* WhiteNoise1::GetTypeInfo(const PDSL_Runtime &runtime) const
+    {
+        return runtime.FieldsMod->GetWhiteNoise1TypeInfo();
+    }
 
     // -------------------
     WhiteNoise::WhiteNoise()
