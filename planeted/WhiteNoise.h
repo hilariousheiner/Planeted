@@ -16,6 +16,8 @@ namespace Planeted
 
         PLTypeInfo* GetTypeInfo(const PDSL_Runtime &runtime) const override;
 
+        void SetWhiteNoiseScale(float scale);
+
         float Eval(const float &p) const override;
 
     private:

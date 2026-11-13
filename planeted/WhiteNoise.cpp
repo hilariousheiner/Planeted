@@ -31,6 +31,11 @@ namespace Planeted
         return runtime.FieldsMod->GetWhiteNoise1TypeInfo();
     }
 
+    void WhiteNoise1::SetWhiteNoiseScale(float scale)
+    {
+        this->whiteNoiseScale = scale;
+    }
+
     // -------------------
     WhiteNoise::WhiteNoise()
     {
