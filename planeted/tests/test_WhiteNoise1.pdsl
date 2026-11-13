@@ -1,10 +1,11 @@
 import "../lib/stdlib.pdsl" 
 
 n = setWhiteNoiseScale(whiteNoise("Diomedes-1437"), 1.0);
+n1 = setWhiteNoiseScale(whiteNoise1("Diomedes-1437"), 1.0);
 
 noiseTest(n, "test_WhiteNoise1_3D");
 noiseTest2D(n, "test_WhiteNoise1_2D");
-noiseTest1D(n, "test_WhiteNoise1_1D");
+savePGM(n1, "test_WhiteNoise1_1D");
 
 m = load("../lib/icosphere2.pdsl");
 m = calculateNormals(m);
