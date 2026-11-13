@@ -5,6 +5,7 @@
 #include "PerlinNoise.h"
 #include "PGM.h"
 #include "PixelMap.h"
+#include "WhiteNoise.h"
 
 namespace Planeted
 {
@@ -53,6 +54,37 @@ namespace Planeted
 
         return Value(fieldValue);
     }
+
+    //------------------------------------------
+
+    static Value builtin_whiteNoise1(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue(std::make_unique<WhiteNoise1>());
+
+        return Value(fieldValue);
+    }
+    static Value builtin_whiteNoise1FromString(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue(std::make_unique<WhiteNoise1>());
+
+        std::string seed = GetStringArg(args, 0, "whiteNoise1"); // note: this performs checks that are now redundant; replace by something else.
+
+        fieldValue.Get().SetSeed(seed);
+
+        return Value(fieldValue);
+    }
+    static Value builtin_whiteNoise1FromInteger(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue(std::make_unique<WhiteNoise1>());
+
+        int seed = GetIntArg(args, 0, "whiteNoise1"); // note: this performs checks that are now redundant; replace by something else.
+
+        fieldValue.Get().SetSeed(seed);
+
+        return Value(fieldValue);
+    }
+
+    //-----------------------------------------
 
     static Value builtin_field1(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
@@ -196,6 +228,10 @@ namespace Planeted
         runtime.DefineFunction("perlinNoise1", {}, builtin_perlinNoise1);
         runtime.DefineFunction("perlinNoise1", {integerTypeInfo}, builtin_perlinNoise1FromInteger);
         runtime.DefineFunction("perlinNoise1", {stringTypeInfo}, builtin_perlinNoise1FromString);
+
+        runtime.DefineFunction("whiteNoise1", {}, builtin_whiteNoise1);
+        runtime.DefineFunction("whiteNoise1", {integerTypeInfo}, builtin_whiteNoise1FromInteger);
+        runtime.DefineFunction("whiteNoise1", {stringTypeInfo}, builtin_whiteNoise1FromString);
 
         runtime.DefineFunction("fbm", {this->field1TypeInfo, this->fbmParametersTypeInfo}, builtin_fbmField1);
         runtime.DefineFunction("ridge", {this->field1TypeInfo}, builtin_ridgeField1);
