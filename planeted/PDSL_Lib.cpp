@@ -11,6 +11,7 @@
 #include "PGM.h"
 #include "PixelMap.h"
 #include "ValueNoise.h"
+#include "WhiteNoise.h"
 
 namespace Planeted
 {
