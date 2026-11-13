@@ -276,7 +276,7 @@ namespace Planeted
             runtime.DefineFunction("abs", {noiseTypeInfo}, builtin_abs);
             runtime.DefineFunction("pow", {noiseTypeInfo, floatTypeInfo}, builtin_pow);
 
-            runtime.DefineIntrinsicFunction("setWhiteNoiseScale", builtin_setWhiteNoiseScale);
+            runtime.DefineFunction("setWhiteNoiseScale", {noiseTypeInfo, floatTypeInfo}, builtin_setWhiteNoiseScale);
 
             runtime.DefineIntrinsicFunction("subdivide", builtin_subdivide);
             runtime.DefineIntrinsicFunction("tessellate", builtin_tessellate);
