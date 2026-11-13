@@ -2,6 +2,27 @@
 
 namespace Planeted
 {
+
+    std::unique_ptr<IField> WhiteNoise1::Clone() const
+    {
+        return std::make_unique<WhiteNoise1>(*this);
+    }
+    std::unique_ptr<IField1> WhiteNoise1::Clone1() const
+    {
+        return std::make_unique<WhiteNoise1>(*this);
+    }
+
+    float WhiteNoise1::Eval(const float &p) const
+    {
+        int pi = std::floor(p * this->whiteNoiseScale);
+
+        uint32_t h = Hash1D(pi, this->seed.GetSeed());
+
+        return HashToSigned(h);
+    }
+
+
+    // -------------------
     WhiteNoise::WhiteNoise()
     {
         this->WhiteNoiseScale = 100.0f;
