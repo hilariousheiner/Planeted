@@ -208,6 +208,8 @@ namespace Planeted
         this->fieldTypeInfo = runtime.DefineType("Field", ValueTypeEnum::Field, nullptr);
         this->field1TypeInfo = runtime.DefineType("Field1", ValueTypeEnum::Field, this->fieldTypeInfo);
 
+        this->whiteNoise1TypeInfo = runtime.DefineType("WhiteNoise1", ValueTypeEnum::Field, this->field1TypeInfo);
+
         PLTypeInfo *integerTypeInfo = runtime.GetIntegerTypeInfo();
         PLTypeInfo *stringTypeInfo = runtime.GetStringTypeInfo();
         PLTypeInfo *floatTypeInfo = runtime.GetFloatTypeInfo();
@@ -253,5 +255,10 @@ namespace Planeted
     PLTypeInfo *FieldsModule::GetField1TypeInfo() const
     {
         return this->field1TypeInfo;
+    }
+
+    PLTypeInfo *FieldsModule::GetWhiteNoise1TypeInfo() const
+    {
+        return this->whiteNoise1TypeInfo;
     }
 }
