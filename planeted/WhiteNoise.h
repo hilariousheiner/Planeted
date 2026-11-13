@@ -9,6 +9,8 @@ namespace Planeted
     class WhiteNoise1 : public AFieldGenerator1
     {
     public:
+        WhiteNoise1();
+
         std::unique_ptr<IField> Clone() const override;
         std::unique_ptr<IField1> Clone1() const override;
 

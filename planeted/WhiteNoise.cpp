@@ -2,6 +2,10 @@
 
 namespace Planeted
 {
+    WhiteNoise1::WhiteNoise1()
+    {
+        this->whiteNoiseScale = 100.0f;
+    }
 
     std::unique_ptr<IField> WhiteNoise1::Clone() const
     {
