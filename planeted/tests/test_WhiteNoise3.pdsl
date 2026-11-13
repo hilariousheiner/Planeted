@@ -1,7 +1,6 @@
 import "../lib/stdlib.pdsl" 
 
-n = whiteNoise("Diomedes-1437");
-n = setWhiteNoiseScale(n, 3.0);
+n = setWhiteNoiseScale(whiteNoise("Diomedes-1437"), 3.0);
 
 noiseTest(n, "test_WhiteNoise3_3D");
 noiseTest2D(n, "test_WhiteNoise3_2D");
