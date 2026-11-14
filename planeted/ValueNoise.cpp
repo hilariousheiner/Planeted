@@ -3,6 +3,29 @@
 
 namespace Planeted
 {
+    std::unique_ptr<IField> ValueNoise1::ValueNoise1::Clone() const
+    {
+        return std::make_unique<ValueNoise1>(*this);
+    }
+    std::unique_ptr<IField1> ValueNoise1::ValueNoise1::Clone1() const
+    {
+        return std::make_unique<ValueNoise1>(*this);
+    }
+
+    float ValueNoise1::Eval(const float &p) const
+    {
+        int pi = FloorToInt(p);
+
+        std::uint8_t p0 = PermutationTable::ToGrid(pi);
+        std::uint8_t p1 = PermutationTable::ToGrid(p0 + 1);
+
+        const float &c0 = HashToSigned(Hash1D(p0, this->seed.GetSeed()));
+        const float &c1 = HashToSigned(Hash1D(p1, this->seed.GetSeed()));
+
+        return SmoothStepUnclamped(c0, c1, p - pi);
+    }
+
+    // --------------------------------------------------------------
     std::unique_ptr<ANoise> ValueNoise::Clone() const
     {
         return std::make_unique<ValueNoise>(*this);

@@ -7,6 +7,15 @@
 
 namespace Planeted
 {
+    class ValueNoise1 : public AFieldGenerator1
+    {
+    public:
+        std::unique_ptr<IField> Clone() const override;
+        std::unique_ptr<IField1> Clone1() const override;
+
+        float Eval(const float &p) const override;
+    };
+
     class ValueNoise : public ANoiseGenerator
     {
     public:
