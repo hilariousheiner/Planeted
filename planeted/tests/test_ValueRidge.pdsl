@@ -8,10 +8,11 @@ fbmParams = setStartFrequency(fbmParams, 4.0);
 fbmParams = setNormalizeFBM(fbmParams, false);
 
 n = pow(abs(fbm(ridge(valueNoise("BETTY")), fbmParams)), 10.0);
+n1 = pow(abs(fbm(ridge(valueNoise1("BETTY")), fbmParams)), 10.0);
 
 noiseTest(n, "test_ValueRidge3D");
 noiseTest2D(n, "test_ValueRidge2D");
-noiseTest1D(n, "test_ValueRidge1D");
+savePGM(n1, "test_ValueRidge1D");
 
 m = load("../lib/icosphere2.pdsl");
 m = calculateNormals(m);
