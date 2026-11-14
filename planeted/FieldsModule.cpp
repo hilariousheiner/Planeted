@@ -5,6 +5,7 @@
 #include "PerlinNoise.h"
 #include "PGM.h"
 #include "PixelMap.h"
+#include "ValueNoise.h"
 #include "WhiteNoise.h"
 
 namespace Planeted
@@ -96,6 +97,34 @@ namespace Planeted
 
     //-----------------------------------------
 
+    static Value builtin_valueNoise1(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue(std::make_unique<ValueNoise1>());
+
+        return Value(fieldValue);
+    }
+    static Value builtin_valueNoise1FromString(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue(std::make_unique<ValueNoise1>());
+
+        std::string seed = GetStringArg(args, 0, "valueNoise1"); // note: this performs checks that are now redundant; replace by something else.
+
+        fieldValue.Get().SetSeed(seed);
+
+        return Value(fieldValue);
+    }
+    static Value builtin_valueNoise1FromInteger(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue(std::make_unique<ValueNoise1>());
+
+        int seed = GetIntArg(args, 0, "valueNoise1"); // note: this performs checks that are now redundant; replace by something else.
+
+        fieldValue.Get().SetSeed(seed);
+
+        return Value(fieldValue);
+    }
+
+    //--------------------------------------------
     static Value builtin_field1(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
         float constant = GetFloatArg(args, 0, "pow");
@@ -240,6 +269,10 @@ namespace Planeted
         runtime.DefineFunction("perlinNoise1", {}, builtin_perlinNoise1);
         runtime.DefineFunction("perlinNoise1", {integerTypeInfo}, builtin_perlinNoise1FromInteger);
         runtime.DefineFunction("perlinNoise1", {stringTypeInfo}, builtin_perlinNoise1FromString);
+
+        runtime.DefineFunction("valueNoise1", {}, builtin_valueNoise1);
+        runtime.DefineFunction("valueNoise1", {integerTypeInfo}, builtin_valueNoise1FromInteger);
+        runtime.DefineFunction("valueNoise1", {stringTypeInfo}, builtin_valueNoise1FromString);
 
         runtime.DefineFunction("whiteNoise1", {}, builtin_whiteNoise1);
         runtime.DefineFunction("whiteNoise1", {integerTypeInfo}, builtin_whiteNoise1FromInteger);
