@@ -243,20 +243,24 @@ namespace Planeted
 
         static Value builtin_displace(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
-            ExpectArgsCountAtLeast(args, 3, "displace");
-            ExpectArgsCountAtMost(args, 4, "displace");
-
             Mesh m = GetMeshArg(args, 0, "displace");
             NoiseValue noiseValue = GetNoiseArg(args, 1, "displace");
             float a = GetFloatArg(args, 2, "displace");
 
-            DisplacementTypeEnum displacementType = DisplacementTypeEnum::Normal;
-            if(args.size() == 4)
-            {
-                displacementType = toDisplacementType(args[3].GetIntValue());
-            }
+            //DisplacementTypeEnum displacementType = toDisplacementType(args[3].GetIntValue());
+            DisplacementTypeEnum displacementType = toDisplacementType(GetIntArg(args, 3, "displace"));
 
             m.Displace(noiseDisplaceFun(noiseValue.Get()), a, displacementType);
+            return Value(m);
+        }
+
+        static Value builtin_displaceNormal(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        {
+            Mesh m = GetMeshArg(args, 0, "displace");
+            NoiseValue noiseValue = GetNoiseArg(args, 1, "displace");
+            float a = GetFloatArg(args, 2, "displace");
+
+            m.Displace(noiseDisplaceFun(noiseValue.Get()), a, DisplacementTypeEnum::Normal);
             return Value(m);
         }
 
@@ -265,6 +269,8 @@ namespace Planeted
             PLTypeInfo *noiseTypeInfo = runtime.GetNoiseTypeInfo();
             PLTypeInfo *fbmParametersTypeInfo = runtime.FieldsMod->GetFBMParametersTypeInfo();
             PLTypeInfo *floatTypeInfo = runtime.GetFloatTypeInfo();
+            PLTypeInfo *meshTypeInfo = runtime.GetMeshTypeInfo();
+            PLTypeInfo *intTypeInfo = runtime.GetIntegerTypeInfo();
 
             runtime.DefineIntrinsicFunction("whiteNoise", builtin_whiteNoise);
             runtime.DefineIntrinsicFunction("valueNoise", builtin_valueNoise);
@@ -282,7 +288,9 @@ namespace Planeted
             runtime.DefineIntrinsicFunction("tessellate", builtin_tessellate);
             runtime.DefineIntrinsicFunction("projectToUnitSphere", builtin_projectToUnitSphere);
             runtime.DefineIntrinsicFunction("calculateNormals", builtin_calculateNormals);
-            runtime.DefineIntrinsicFunction("displace", builtin_displace);
+
+            runtime.DefineFunction("displace", {meshTypeInfo, noiseTypeInfo, floatTypeInfo, intTypeInfo}, builtin_displace);
+            runtime.DefineFunction("displace", {meshTypeInfo, noiseTypeInfo, floatTypeInfo}, builtin_displaceNormal);
 
             runtime.DefineIntrinsicFunction("noiseTest", builtin_noiseTest);
             runtime.DefineIntrinsicFunction("noiseTest2D", builtin_noiseTest2D);
