@@ -241,7 +241,7 @@ namespace Planeted
             };
         }
 
-        static Value builtin_displace(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        static Value builtin_displaceNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             Mesh m = GetMeshArg(args, 0, "displace");
             NoiseValue noiseValue = GetNoiseArg(args, 1, "displace");
@@ -254,7 +254,7 @@ namespace Planeted
             return Value(m);
         }
 
-        static Value builtin_displaceNormal(PDSL_Runtime &runtime, const std::vector<Value> &args)
+        static Value builtin_displaceNoiseNormal(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             Mesh m = GetMeshArg(args, 0, "displace");
             NoiseValue noiseValue = GetNoiseArg(args, 1, "displace");
@@ -289,8 +289,8 @@ namespace Planeted
             runtime.DefineIntrinsicFunction("projectToUnitSphere", builtin_projectToUnitSphere);
             runtime.DefineIntrinsicFunction("calculateNormals", builtin_calculateNormals);
 
-            runtime.DefineFunction("displace", {meshTypeInfo, noiseTypeInfo, floatTypeInfo, intTypeInfo}, builtin_displace);
-            runtime.DefineFunction("displace", {meshTypeInfo, noiseTypeInfo, floatTypeInfo}, builtin_displaceNormal);
+            runtime.DefineFunction("displace", {meshTypeInfo, noiseTypeInfo, floatTypeInfo, intTypeInfo}, builtin_displaceNoise);
+            runtime.DefineFunction("displace", {meshTypeInfo, noiseTypeInfo, floatTypeInfo}, builtin_displaceNoiseNormal);
 
             runtime.DefineIntrinsicFunction("noiseTest", builtin_noiseTest);
             runtime.DefineIntrinsicFunction("noiseTest2D", builtin_noiseTest2D);

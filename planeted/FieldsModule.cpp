@@ -372,6 +372,25 @@ namespace Planeted
         return Value::Null();
     }
 
+    //ToDo: move to mesh module as soon as that's available
+    static DisplacementFunction fieldDisplaceFun(const AField3 &field3)
+    {
+        return [&field3](const Vector3 &v)
+        {
+            return field3.Eval(v);
+        };
+    }
+    static Value builtin_displaceNormal(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        Mesh m = GetMeshArg(args, 0, "displace");
+        FieldValue fieldValue = GetFieldArg(args, 1, "displace");
+        float a = GetFloatArg(args, 2, "displace");
+
+        AField3 &field3 = dynamic_cast<AField3&>(fieldValue.Get());
+
+        m.Displace(fieldDisplaceFun(field3), a, DisplacementTypeEnum::Normal);
+        return Value(m);
+    }
 
 	FieldsModule::FieldsModule(PDSL_Runtime &runtime)
     {
@@ -390,6 +409,7 @@ namespace Planeted
         PLTypeInfo *stringTypeInfo = runtime.GetStringTypeInfo();
         PLTypeInfo *floatTypeInfo = runtime.GetFloatTypeInfo();
         PLTypeInfo *boolTypeInfo = runtime.GetBooleanTypeInfo();
+        PLTypeInfo *meshTypeInfo = runtime.GetMeshTypeInfo();
 
         runtime.DefineFunction("setSeed", {this->fieldTypeInfo, integerTypeInfo}, builtin_setSeedFromInteger);
         runtime.DefineFunction("setSeed", {this->fieldTypeInfo, stringTypeInfo}, builtin_setSeedFromString);
@@ -435,6 +455,9 @@ namespace Planeted
         runtime.DefineFunction("savePGM", {this->field1TypeInfo, stringTypeInfo}, builtin_savePGM1);
         runtime.DefineFunction("savePGM", {this->field2TypeInfo, stringTypeInfo}, builtin_savePGM2);
         runtime.DefineFunction("savePGM", {this->field3TypeInfo, stringTypeInfo}, builtin_savePGM3);
+
+        runtime.DefineFunction("displace", {meshTypeInfo, this->field3TypeInfo, floatTypeInfo}, builtin_displaceNormal);
+
     }
 
     PLTypeInfo *FieldsModule::GetFBMParametersTypeInfo() const
