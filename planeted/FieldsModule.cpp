@@ -136,6 +136,35 @@ namespace Planeted
 
     //-----------------------------------------
 
+    static Value builtin_whiteNoise3(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue(std::make_unique<WhiteNoise3>());
+
+        return Value(fieldValue);
+    }
+    static Value builtin_whiteNoise3FromString(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue(std::make_unique<WhiteNoise2>());
+
+        std::string seed = GetStringArg(args, 0, "whiteNoise3"); // note: this performs checks that are now redundant; replace by something else.
+
+        fieldValue.Get().SetSeed(seed);
+
+        return Value(fieldValue);
+    }
+    static Value builtin_whiteNoise3FromInteger(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue(std::make_unique<WhiteNoise3>());
+
+        int seed = GetIntArg(args, 0, "whiteNoise3"); // note: this performs checks that are now redundant; replace by something else.
+
+        fieldValue.Get().SetSeed(seed);
+
+        return Value(fieldValue);
+    }
+
+    //-----------------------------------------
+
     static Value builtin_valueNoise1(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
         FieldValue fieldValue(std::make_unique<ValueNoise1>());
@@ -379,6 +408,10 @@ namespace Planeted
         runtime.DefineFunction("whiteNoise2", {}, builtin_whiteNoise2);
         runtime.DefineFunction("whiteNoise2", {integerTypeInfo}, builtin_whiteNoise2FromInteger);
         runtime.DefineFunction("whiteNoise2", {stringTypeInfo}, builtin_whiteNoise2FromString);
+
+        runtime.DefineFunction("whiteNoise3", {}, builtin_whiteNoise3);
+        runtime.DefineFunction("whiteNoise3", {integerTypeInfo}, builtin_whiteNoise3FromInteger);
+        runtime.DefineFunction("whiteNoise3", {stringTypeInfo}, builtin_whiteNoise3FromString);
 
         runtime.DefineFunction("setWhiteNoiseScale", {this->whiteNoise1TypeInfo, floatTypeInfo}, builtin_setWhiteNoise1Scale);
         runtime.DefineFunction("setWhiteNoiseScale", {this->whiteNoise2TypeInfo, floatTypeInfo}, builtin_setWhiteNoise2Scale);
