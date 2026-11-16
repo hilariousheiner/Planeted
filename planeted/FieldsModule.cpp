@@ -213,7 +213,7 @@ namespace Planeted
         return Value(powFieldValue);
     }
 
-    static Value builtin_savePGM(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    static Value builtin_savePGM1(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
         FieldValue fieldValue = GetFieldArg(args, 0, "savePGM");
         std::string filename = GetStringArg(args, 1, "savePGM");
@@ -227,6 +227,33 @@ namespace Planeted
         {
             float nx = x/static_cast<float>(sample_size) - 0.5f;
             return ToUint8(SignedToUnitRange(field1.Eval(nx)));
+        };
+
+        PixelMap pixelMap = PixelMap(sample_size, sample_size);
+
+        pixelMap.FillRect(0, 0, sample_size, sample_size, colorFunction);
+
+        std::ofstream pgmfile(filename + ".pgm");
+
+        pgmfile << PGM::PixelMapToPGM(pixelMap);
+
+        return Value::Null();
+    }
+    static Value builtin_savePGM2(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue = GetFieldArg(args, 0, "savePGM");
+        std::string filename = GetStringArg(args, 1, "savePGM");
+
+        filename = NormalizePath(runtime.OutPath + filename);
+
+        uint16_t sample_size = 256;
+
+        AField2 &field2 = dynamic_cast<AField2&>(fieldValue.Get());
+        ColorFunction colorFunction = [&field2, sample_size](const int x, const int y)
+        {
+            float nx = x/static_cast<float>(sample_size) - 0.5f;
+            float ny = y/static_cast<float>(sample_size) - 0.5f;
+            return ToUint8(SignedToUnitRange(field2.Eval({nx, ny})));
         };
 
         PixelMap pixelMap = PixelMap(sample_size, sample_size);
@@ -287,7 +314,8 @@ namespace Planeted
         runtime.DefineFunction("abs", {this->field1TypeInfo}, builtin_absField1);
         runtime.DefineFunction("pow", {this->field1TypeInfo, floatTypeInfo}, builtin_powField1);
 
-        runtime.DefineFunction("savePGM", {this->field1TypeInfo, stringTypeInfo}, builtin_savePGM);
+        runtime.DefineFunction("savePGM", {this->field1TypeInfo, stringTypeInfo}, builtin_savePGM1);
+        runtime.DefineFunction("savePGM", {this->field2TypeInfo, stringTypeInfo}, builtin_savePGM2);
     }
 
     PLTypeInfo *FieldsModule::GetFBMParametersTypeInfo() const
