@@ -42,6 +42,24 @@ namespace Planeted
         float whiteNoiseScale;
     };
 
+    class WhiteNoise3 : public AFieldGenerator3
+    {
+    public:
+        WhiteNoise3();
+
+        std::unique_ptr<AField> Clone() const override;
+        std::unique_ptr<AField3> Clone3() const override;
+
+        PLTypeInfo* GetTypeInfo(const PDSL_Runtime &runtime) const override;
+
+        void SetWhiteNoiseScale(float scale);
+
+        float Eval(const Vector3 &p) const override;
+
+    private:
+        float whiteNoiseScale;
+    };
+
     class WhiteNoise : public ANoiseGenerator
     {
     public:

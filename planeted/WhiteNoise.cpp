@@ -72,6 +72,43 @@ namespace Planeted
     }
 
     // -------------------
+
+    WhiteNoise3::WhiteNoise3()
+    {
+        this->whiteNoiseScale = 100.0f;
+    }
+
+    std::unique_ptr<AField> WhiteNoise3::Clone() const
+    {
+        return std::make_unique<WhiteNoise3>(*this);
+    }
+    std::unique_ptr<AField3> WhiteNoise3::Clone3() const
+    {
+        return std::make_unique<WhiteNoise3>(*this);
+    }
+
+    float WhiteNoise3::Eval(const Vector3 &p) const
+    {
+        int xi = std::floor(p.X * this->whiteNoiseScale);
+        int yi = std::floor(p.Y * this->whiteNoiseScale);
+        int zi = std::floor(p.Z * this->whiteNoiseScale);
+
+        uint32_t h = Hash3D(xi, yi, zi, this->seed.GetSeed());
+
+        return HashToSigned(h);
+    }
+
+    PLTypeInfo* WhiteNoise3::GetTypeInfo(const PDSL_Runtime &runtime) const
+    {
+        return runtime.FieldsMod->GetWhiteNoise3TypeInfo();
+    }
+
+    void WhiteNoise3::SetWhiteNoiseScale(float scale)
+    {
+        this->whiteNoiseScale = scale;
+    }
+
+    // -------------------
     WhiteNoise::WhiteNoise()
     {
         this->WhiteNoiseScale = 100.0f;
