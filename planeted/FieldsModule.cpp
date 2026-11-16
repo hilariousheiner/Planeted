@@ -144,7 +144,7 @@ namespace Planeted
     }
     static Value builtin_whiteNoise3FromString(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
-        FieldValue fieldValue(std::make_unique<WhiteNoise2>());
+        FieldValue fieldValue(std::make_unique<WhiteNoise3>());
 
         std::string seed = GetStringArg(args, 0, "whiteNoise3"); // note: this performs checks that are now redundant; replace by something else.
 
@@ -161,6 +161,16 @@ namespace Planeted
         fieldValue.Get().SetSeed(seed);
 
         return Value(fieldValue);
+    }
+
+    static Value builtin_setWhiteNoise3Scale(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue = GetFieldArg(args, 0, "setWhiteNoiseScale");
+
+        WhiteNoise3 &wNoise3 = dynamic_cast<WhiteNoise3&>(fieldValue.Get());
+        wNoise3.SetWhiteNoiseScale(GetFloatArg(args, 1, "setWhiteNoiseScale"));
+
+        return Value(FieldValue(wNoise3.Clone()));
     }
 
     //-----------------------------------------
@@ -415,6 +425,7 @@ namespace Planeted
 
         runtime.DefineFunction("setWhiteNoiseScale", {this->whiteNoise1TypeInfo, floatTypeInfo}, builtin_setWhiteNoise1Scale);
         runtime.DefineFunction("setWhiteNoiseScale", {this->whiteNoise2TypeInfo, floatTypeInfo}, builtin_setWhiteNoise2Scale);
+        runtime.DefineFunction("setWhiteNoiseScale", {this->whiteNoise3TypeInfo, floatTypeInfo}, builtin_setWhiteNoise3Scale);
 
         runtime.DefineFunction("fbm", {this->field1TypeInfo, this->fbmParametersTypeInfo}, builtin_fbmField1);
         runtime.DefineFunction("ridge", {this->field1TypeInfo}, builtin_ridgeField1);
