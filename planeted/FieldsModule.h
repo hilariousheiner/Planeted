@@ -16,15 +16,19 @@ namespace Planeted
 
         PLTypeInfo *GetFieldTypeInfo() const;
         PLTypeInfo *GetField1TypeInfo() const;
+        PLTypeInfo *GetField2TypeInfo() const;
 
         PLTypeInfo *GetWhiteNoise1TypeInfo() const;
+        PLTypeInfo *GetWhiteNoise2TypeInfo() const;
     private:
         PLTypeInfo *fbmParametersTypeInfo;
 
         PLTypeInfo *fieldTypeInfo;
         PLTypeInfo *field1TypeInfo;
+        PLTypeInfo *field2TypeInfo;
 
         PLTypeInfo *whiteNoise1TypeInfo;
+        PLTypeInfo *whiteNoise2TypeInfo;
     };
 }
 #endif // PLANETED_FIELDSMODULE_H
