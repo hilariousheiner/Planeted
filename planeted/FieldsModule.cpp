@@ -179,7 +179,7 @@ namespace Planeted
     static Value builtin_fbmField1(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
         FieldValue fieldValue = GetFieldArg(args, 0, "fbm");
-        IField1 &field1 = dynamic_cast<IField1&>(fieldValue.Get());
+        AField1 &field1 = dynamic_cast<AField1&>(fieldValue.Get());
 
         FBMParameters parametersValue = GetFBMParametersArg(args, 1, "fbm");
 
@@ -189,7 +189,7 @@ namespace Planeted
     static Value builtin_ridgeField1(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
         FieldValue fieldValue = GetFieldArg(args, 0, "ridge");
-        IField1 &field1 = dynamic_cast<IField1&>(fieldValue.Get());
+        AField1 &field1 = dynamic_cast<AField1&>(fieldValue.Get());
 
         FieldValue ridgeFieldValue(RidgeFieldModifier1(field1.Clone1()).Clone());
         return Value(ridgeFieldValue);
@@ -197,7 +197,7 @@ namespace Planeted
     static Value builtin_absField1(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
         FieldValue fieldValue = GetFieldArg(args, 0, "abs");
-        IField1 &field1 = dynamic_cast<IField1&>(fieldValue.Get());
+        AField1 &field1 = dynamic_cast<AField1&>(fieldValue.Get());
 
         FieldValue absFieldValue(AbsFieldModifier1(field1.Clone1()).Clone());
         return Value(absFieldValue);
@@ -205,7 +205,7 @@ namespace Planeted
     static Value builtin_powField1(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
         FieldValue fieldValue = GetFieldArg(args, 0, "pow");
-        IField1 &field1 = dynamic_cast<IField1&>(fieldValue.Get());
+        AField1 &field1 = dynamic_cast<AField1&>(fieldValue.Get());
 
         float exponent = GetFloatArg(args, 1, "pow");
 
@@ -222,7 +222,7 @@ namespace Planeted
 
         uint16_t sample_size = 256;
 
-        IField1 &field1 = dynamic_cast<IField1&>(fieldValue.Get());
+        AField1 &field1 = dynamic_cast<AField1&>(fieldValue.Get());
         ColorFunction colorFunction = [&field1, sample_size](const int x, const int y)
         {
             float nx = x/static_cast<float>(sample_size) - 0.5f;

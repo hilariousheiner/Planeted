@@ -14,48 +14,48 @@ namespace Planeted
 {
     struct PDSL_Runtime;
 
-    class IField : public ISeedable
+    class AField : public ISeedable
     {
     public:
-        virtual ~IField() = default;
-        virtual std::unique_ptr<IField> Clone() const = 0;
+        virtual ~AField() = default;
+        virtual std::unique_ptr<AField> Clone() const = 0;
 
         virtual PLTypeInfo* GetTypeInfo(const PDSL_Runtime &runtime) const;
     };
 
-    class IField1 : public IField
+    class AField1 : public AField
     {
     public:
-        virtual ~IField1() = default;
-        virtual std::unique_ptr<IField> Clone() const = 0;
-        virtual std::unique_ptr<IField1> Clone1() const = 0;
+        virtual ~AField1() = default;
+        virtual std::unique_ptr<AField> Clone() const = 0;
+        virtual std::unique_ptr<AField1> Clone1() const = 0;
 
         PLTypeInfo* GetTypeInfo(const PDSL_Runtime &runtime) const override;
 
         virtual float Eval(const float &p) const = 0;
     };
 
-    class IField2 : public IField
+    class AField2 : public AField
     {
     public:
-        virtual ~IField2() = default;
-        virtual std::unique_ptr<IField> Clone() const = 0;
-        virtual std::unique_ptr<IField2> Clone2() const = 0;
+        virtual ~AField2() = default;
+        virtual std::unique_ptr<AField> Clone() const = 0;
+        virtual std::unique_ptr<AField2> Clone2() const = 0;
 
         virtual float Eval(const Vector2 &p) const = 0;
     };
 
-    class IField3 : public IField
+    class AField3 : public AField
     {
     public:
-        virtual ~IField3() = default;
-        virtual std::unique_ptr<IField> Clone() const = 0;
-        virtual std::unique_ptr<IField3> Clone3() const = 0;
+        virtual ~AField3() = default;
+        virtual std::unique_ptr<AField> Clone() const = 0;
+        virtual std::unique_ptr<AField3> Clone3() const = 0;
 
         virtual float Eval(const Vector3 &p) const = 0;
     };
 
-    class AFieldGenerator1 : public IField1
+    class AFieldGenerator1 : public AField1
     {
     public:
         void SetSeed(std::uint32_t seedValue) override;
@@ -65,7 +65,7 @@ namespace Planeted
         Seed seed;
     };
 
-    class AFieldGenerator2 : public IField2
+    class AFieldGenerator2 : public AField2
     {
     public:
         void SetSeed(std::uint32_t seedValue) override;
@@ -75,7 +75,7 @@ namespace Planeted
         Seed seed;
     };
 
-    class AFieldGenerator3 : public IField3
+    class AFieldGenerator3 : public AField3
     {
     public:
         void SetSeed(std::uint32_t seedValue) override;
@@ -90,8 +90,8 @@ namespace Planeted
     public:
         ConstantField1(float constant);
 
-        std::unique_ptr<IField> Clone() const override;
-        std::unique_ptr<IField1> Clone1() const override;
+        std::unique_ptr<AField> Clone() const override;
+        std::unique_ptr<AField1> Clone1() const override;
 
         float Eval(const float &p) const override;
 
@@ -99,14 +99,14 @@ namespace Planeted
         float constant;
     };
 
-    class RidgeFieldModifier1 : public IField1
+    class RidgeFieldModifier1 : public AField1
     {
     public:
-        RidgeFieldModifier1(std::unique_ptr<IField1> field);
+        RidgeFieldModifier1(std::unique_ptr<AField1> field);
         RidgeFieldModifier1(const RidgeFieldModifier1 &other);
 
-        std::unique_ptr<IField> Clone() const override;
-        std::unique_ptr<IField1> Clone1() const override;
+        std::unique_ptr<AField> Clone() const override;
+        std::unique_ptr<AField1> Clone1() const override;
 
         float Eval(const float &p) const override;
 
@@ -114,17 +114,17 @@ namespace Planeted
         void SetSeed(std::string seed) override;
 
     private:
-        std::unique_ptr<IField1> field;
+        std::unique_ptr<AField1> field;
     };
 
-    class AbsFieldModifier1 : public IField1
+    class AbsFieldModifier1 : public AField1
     {
     public:
-        AbsFieldModifier1(std::unique_ptr<IField1> field);
+        AbsFieldModifier1(std::unique_ptr<AField1> field);
         AbsFieldModifier1(const AbsFieldModifier1 &other);
 
-        std::unique_ptr<IField> Clone() const override;
-        std::unique_ptr<IField1> Clone1() const override;
+        std::unique_ptr<AField> Clone() const override;
+        std::unique_ptr<AField1> Clone1() const override;
 
         float Eval(const float &p) const override;
 
@@ -132,17 +132,17 @@ namespace Planeted
         void SetSeed(std::string seed) override;
 
     private:
-        std::unique_ptr<IField1> field;
+        std::unique_ptr<AField1> field;
     };
 
-    class PowFieldModifier1 : public IField1
+    class PowFieldModifier1 : public AField1
     {
     public:
-        PowFieldModifier1(std::unique_ptr<IField1> field, float exponent);
+        PowFieldModifier1(std::unique_ptr<AField1> field, float exponent);
         PowFieldModifier1(const PowFieldModifier1 &other);
 
-        std::unique_ptr<IField> Clone() const override;
-        std::unique_ptr<IField1> Clone1() const override;
+        std::unique_ptr<AField> Clone() const override;
+        std::unique_ptr<AField1> Clone1() const override;
 
         float Eval(const float &p) const override;
 
@@ -150,18 +150,18 @@ namespace Planeted
         void SetSeed(std::string seed) override;
 
     private:
-        std::unique_ptr<IField1> field;
+        std::unique_ptr<AField1> field;
         float exponent;
     };
 
-    class FBMFieldModifier1 : public IField1
+    class FBMFieldModifier1 : public AField1
     {
     public:
-        FBMFieldModifier1(std::unique_ptr<IField1> field, const FBMParameters &fbmParameters);
+        FBMFieldModifier1(std::unique_ptr<AField1> field, const FBMParameters &fbmParameters);
         FBMFieldModifier1(const FBMFieldModifier1 &other);
 
-        std::unique_ptr<IField> Clone() const override;
-        std::unique_ptr<IField1> Clone1() const override;
+        std::unique_ptr<AField> Clone() const override;
+        std::unique_ptr<AField1> Clone1() const override;
 
         float Eval(const float &p) const override;
 
@@ -169,7 +169,7 @@ namespace Planeted
         void SetSeed(std::string seed) override;
 
     private:
-        std::unique_ptr<IField1> field;
+        std::unique_ptr<AField1> field;
         FBMParameters fbmParams;
     };
 }

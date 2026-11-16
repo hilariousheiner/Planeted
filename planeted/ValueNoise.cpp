@@ -3,11 +3,11 @@
 
 namespace Planeted
 {
-    std::unique_ptr<IField> ValueNoise1::ValueNoise1::Clone() const
+    std::unique_ptr<AField> ValueNoise1::ValueNoise1::Clone() const
     {
         return std::make_unique<ValueNoise1>(*this);
     }
-    std::unique_ptr<IField1> ValueNoise1::ValueNoise1::Clone1() const
+    std::unique_ptr<AField1> ValueNoise1::ValueNoise1::Clone1() const
     {
         return std::make_unique<ValueNoise1>(*this);
     }

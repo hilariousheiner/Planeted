@@ -3,7 +3,7 @@
 
 namespace Planeted
 {
-    FieldValue::FieldValue(std::unique_ptr<IField> field)
+    FieldValue::FieldValue(std::unique_ptr<AField> field)
         : field(std::move(field))
     {}
 
@@ -20,7 +20,7 @@ namespace Planeted
         return *this;
     }
 
-    IField &FieldValue::Get()
+    AField &FieldValue::Get()
     {
         return *(this->field);
     }

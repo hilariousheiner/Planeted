@@ -13,7 +13,7 @@ namespace Planeted
     public:
         FieldValue() = default;
 
-        explicit FieldValue(std::unique_ptr<IField> field);
+        explicit FieldValue(std::unique_ptr<AField> field);
 
         FieldValue(const FieldValue &other);
 
@@ -22,11 +22,11 @@ namespace Planeted
         FieldValue(FieldValue&&) noexcept = default;
         FieldValue& operator=(FieldValue&&) noexcept = default;
 
-        IField &Get();
+        AField &Get();
         PLTypeInfo* GetTypeInfo(const PDSL_Runtime &runtime) const;
 
     private:
-        std::unique_ptr<IField> field;
+        std::unique_ptr<AField> field;
     };
 }
 #endif // PLANETED_FIELDVALUE_H
