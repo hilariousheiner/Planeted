@@ -123,6 +123,17 @@ namespace Planeted
 
         return Value(fieldValue);
     }
+
+    static Value builtin_setWhiteNoise2Scale(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue = GetFieldArg(args, 0, "setWhiteNoiseScale");
+
+        WhiteNoise2 &wNoise2 = dynamic_cast<WhiteNoise2&>(fieldValue.Get());
+        wNoise2.SetWhiteNoiseScale(GetFloatArg(args, 1, "setWhiteNoiseScale"));
+
+        return Value(FieldValue(wNoise2.Clone()));
+    }
+
     //-----------------------------------------
 
     static Value builtin_valueNoise1(PDSL_Runtime &runtime, const std::vector<Value> &args)
@@ -340,6 +351,7 @@ namespace Planeted
         runtime.DefineFunction("whiteNoise2", {stringTypeInfo}, builtin_whiteNoise2FromString);
 
         runtime.DefineFunction("setWhiteNoiseScale", {this->whiteNoise1TypeInfo, floatTypeInfo}, builtin_setWhiteNoise1Scale);
+        runtime.DefineFunction("setWhiteNoiseScale", {this->whiteNoise2TypeInfo, floatTypeInfo}, builtin_setWhiteNoise2Scale);
 
         runtime.DefineFunction("fbm", {this->field1TypeInfo, this->fbmParametersTypeInfo}, builtin_fbmField1);
         runtime.DefineFunction("ridge", {this->field1TypeInfo}, builtin_ridgeField1);
