@@ -172,7 +172,6 @@ namespace Planeted
     private:
         std::unique_ptr<AField1> field;
     };
-
     class AbsFieldModifier2 : public AField2
     {
     public:
@@ -189,6 +188,23 @@ namespace Planeted
 
     private:
         std::unique_ptr<AField2> field;
+    };
+    class AbsFieldModifier3 : public AField3
+    {
+    public:
+        AbsFieldModifier3(std::unique_ptr<AField3> field);
+        AbsFieldModifier3(const AbsFieldModifier3 &other);
+
+        std::unique_ptr<AField> Clone() const override;
+        std::unique_ptr<AField3> Clone3() const override;
+
+        float Eval(const Vector3 &p) const override;
+
+        void SetSeed(std::uint32_t seed) override;
+        void SetSeed(std::string seed) override;
+
+    private:
+        std::unique_ptr<AField3> field;
     };
 
     class PowFieldModifier1 : public AField1

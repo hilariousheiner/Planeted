@@ -230,6 +230,38 @@ namespace Planeted
     {
         this->field->SetSeed(seed);
     }
+    // --------------------------------------------
+
+    AbsFieldModifier3::AbsFieldModifier3(std::unique_ptr<AField3> field)
+        : field(std::move(field))
+    {}
+
+    AbsFieldModifier3::AbsFieldModifier3(const AbsFieldModifier3 &other)
+        : AField3(other), field(other.field->Clone3())
+    {}
+
+    std::unique_ptr<AField> AbsFieldModifier3::Clone() const
+    {
+        return std::make_unique<AbsFieldModifier3>(*this);
+    }
+    std::unique_ptr<AField3> AbsFieldModifier3::Clone3() const
+    {
+        return std::make_unique<AbsFieldModifier3>(*this);
+    }
+
+    float AbsFieldModifier3::Eval(const Vector3 &p) const
+    {
+        return std::abs(this->field->Eval(p));
+    }
+
+    void AbsFieldModifier3::SetSeed(std::uint32_t seed)
+    {
+        this->field->SetSeed(seed);
+    }
+    void AbsFieldModifier3::SetSeed(std::string seed)
+    {
+        this->field->SetSeed(seed);
+    }
 
     // ---------------------------------------------------------------------
     PowFieldModifier1::PowFieldModifier1(std::unique_ptr<AField1> field, float exponent)
