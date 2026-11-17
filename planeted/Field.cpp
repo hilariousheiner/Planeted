@@ -13,6 +13,16 @@ namespace Planeted
         return runtime.FieldsMod->GetField1TypeInfo();
     }
 
+    PLTypeInfo* AField2::GetTypeInfo(const PDSL_Runtime &runtime) const
+    {
+        return runtime.FieldsMod->GetField2TypeInfo();
+    }
+
+    PLTypeInfo* AField3::GetTypeInfo(const PDSL_Runtime &runtime) const
+    {
+        return runtime.FieldsMod->GetField3TypeInfo();
+    }
+
     void AFieldGenerator1::SetSeed(std::uint32_t seedValue)
     {
         this->seed = Seed(seedValue);

@@ -42,6 +42,8 @@ namespace Planeted
         virtual std::unique_ptr<AField> Clone() const = 0;
         virtual std::unique_ptr<AField2> Clone2() const = 0;
 
+        PLTypeInfo* GetTypeInfo(const PDSL_Runtime &runtime) const override;
+
         virtual float Eval(const Vector2 &p) const = 0;
     };
 
@@ -51,6 +53,8 @@ namespace Planeted
         virtual ~AField3() = default;
         virtual std::unique_ptr<AField> Clone() const = 0;
         virtual std::unique_ptr<AField3> Clone3() const = 0;
+
+        PLTypeInfo* GetTypeInfo(const PDSL_Runtime &runtime) const override;
 
         virtual float Eval(const Vector3 &p) const = 0;
     };
