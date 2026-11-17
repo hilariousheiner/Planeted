@@ -229,6 +229,33 @@ namespace Planeted
         return Value(fieldValue);
     }
 
+    static Value builtin_valueNoise3(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue(std::make_unique<ValueNoise3>());
+
+        return Value(fieldValue);
+    }
+    static Value builtin_valueNoise3FromString(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue(std::make_unique<ValueNoise3>());
+
+        std::string seed = GetStringArg(args, 0, "valueNoise3"); // note: this performs checks that are now redundant; replace by something else.
+
+        fieldValue.Get().SetSeed(seed);
+
+        return Value(fieldValue);
+    }
+    static Value builtin_valueNoise3FromInteger(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue(std::make_unique<ValueNoise3>());
+
+        int seed = GetIntArg(args, 0, "valueNoise3"); // note: this performs checks that are now redundant; replace by something else.
+
+        fieldValue.Get().SetSeed(seed);
+
+        return Value(fieldValue);
+    }
+
     //--------------------------------------------
     static Value builtin_field1(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
@@ -506,6 +533,10 @@ namespace Planeted
         runtime.DefineFunction("valueNoise2", {}, builtin_valueNoise2);
         runtime.DefineFunction("valueNoise2", {integerTypeInfo}, builtin_valueNoise2FromInteger);
         runtime.DefineFunction("valueNoise2", {stringTypeInfo}, builtin_valueNoise2FromString);
+
+        runtime.DefineFunction("valueNoise3", {}, builtin_valueNoise3);
+        runtime.DefineFunction("valueNoise3", {integerTypeInfo}, builtin_valueNoise3FromInteger);
+        runtime.DefineFunction("valueNoise3", {stringTypeInfo}, builtin_valueNoise3FromString);
 
         runtime.DefineFunction("whiteNoise1", {}, builtin_whiteNoise1);
         runtime.DefineFunction("whiteNoise1", {integerTypeInfo}, builtin_whiteNoise1FromInteger);
