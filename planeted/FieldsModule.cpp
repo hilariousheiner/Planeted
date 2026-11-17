@@ -202,6 +202,33 @@ namespace Planeted
         return Value(fieldValue);
     }
 
+    static Value builtin_valueNoise2(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue(std::make_unique<ValueNoise2>());
+
+        return Value(fieldValue);
+    }
+    static Value builtin_valueNoise2FromString(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue(std::make_unique<ValueNoise2>());
+
+        std::string seed = GetStringArg(args, 0, "valueNoise2"); // note: this performs checks that are now redundant; replace by something else.
+
+        fieldValue.Get().SetSeed(seed);
+
+        return Value(fieldValue);
+    }
+    static Value builtin_valueNoise2FromInteger(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue(std::make_unique<ValueNoise2>());
+
+        int seed = GetIntArg(args, 0, "valueNoise2"); // note: this performs checks that are now redundant; replace by something else.
+
+        fieldValue.Get().SetSeed(seed);
+
+        return Value(fieldValue);
+    }
+
     //--------------------------------------------
     static Value builtin_field1(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
@@ -211,6 +238,8 @@ namespace Planeted
 
         return Value(fieldValue);
     }
+
+    //------------------------------------------------
 
     static Value builtin_fbmParameters(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
@@ -254,6 +283,8 @@ namespace Planeted
         return Value(parametersValue);
     }
 
+    //--------------------------------------------------
+
     static Value builtin_fbmField1(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
         FieldValue fieldValue = GetFieldArg(args, 0, "fbm");
@@ -290,6 +321,8 @@ namespace Planeted
         FieldValue powFieldValue(PowFieldModifier1(field1.Clone1(), exponent).Clone());
         return Value(powFieldValue);
     }
+
+    //------------------------------------------------------
 
     static Value builtin_savePGM1(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
@@ -430,6 +463,10 @@ namespace Planeted
         runtime.DefineFunction("valueNoise1", {}, builtin_valueNoise1);
         runtime.DefineFunction("valueNoise1", {integerTypeInfo}, builtin_valueNoise1FromInteger);
         runtime.DefineFunction("valueNoise1", {stringTypeInfo}, builtin_valueNoise1FromString);
+
+        runtime.DefineFunction("valueNoise2", {}, builtin_valueNoise2);
+        runtime.DefineFunction("valueNoise2", {integerTypeInfo}, builtin_valueNoise2FromInteger);
+        runtime.DefineFunction("valueNoise2", {stringTypeInfo}, builtin_valueNoise2FromString);
 
         runtime.DefineFunction("whiteNoise1", {}, builtin_whiteNoise1);
         runtime.DefineFunction("whiteNoise1", {integerTypeInfo}, builtin_whiteNoise1FromInteger);
