@@ -332,6 +332,16 @@ namespace Planeted
         FieldValue fbmFieldValue(FBMFieldModifier2(field2.Clone2(), parametersValue).Clone());
         return Value(fbmFieldValue);
     }
+    static Value builtin_fbmField3(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue = GetFieldArg(args, 0, "fbm");
+        AField3 &field3 = dynamic_cast<AField3&>(fieldValue.Get());
+
+        FBMParameters parametersValue = GetFBMParametersArg(args, 1, "fbm");
+
+        FieldValue fbmFieldValue(FBMFieldModifier3(field3.Clone3(), parametersValue).Clone());
+        return Value(fbmFieldValue);
+    }
 
     static Value builtin_ridgeField1(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
@@ -349,6 +359,14 @@ namespace Planeted
         FieldValue ridgeFieldValue(RidgeFieldModifier2(field2.Clone2()).Clone());
         return Value(ridgeFieldValue);
     }
+    static Value builtin_ridgeField3(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue = GetFieldArg(args, 0, "ridge");
+        AField3 &field3 = dynamic_cast<AField3&>(fieldValue.Get());
+
+        FieldValue ridgeFieldValue(RidgeFieldModifier3(field3.Clone3()).Clone());
+        return Value(ridgeFieldValue);
+    }
 
     static Value builtin_absField1(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
@@ -364,6 +382,14 @@ namespace Planeted
         AField2 &field2 = dynamic_cast<AField2&>(fieldValue.Get());
 
         FieldValue absFieldValue(AbsFieldModifier2(field2.Clone2()).Clone());
+        return Value(absFieldValue);
+    }
+    static Value builtin_absField3(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue = GetFieldArg(args, 0, "abs");
+        AField3 &field3 = dynamic_cast<AField3&>(fieldValue.Get());
+
+        FieldValue absFieldValue(AbsFieldModifier3(field3.Clone3()).Clone());
         return Value(absFieldValue);
     }
 
@@ -385,6 +411,16 @@ namespace Planeted
         float exponent = GetFloatArg(args, 1, "pow");
 
         FieldValue powFieldValue(PowFieldModifier2(field2.Clone2(), exponent).Clone());
+        return Value(powFieldValue);
+    }
+    static Value builtin_powField3(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue = GetFieldArg(args, 0, "pow");
+        AField3 &field3 = dynamic_cast<AField3&>(fieldValue.Get());
+
+        float exponent = GetFloatArg(args, 1, "pow");
+
+        FieldValue powFieldValue(PowFieldModifier3(field3.Clone3(), exponent).Clone());
         return Value(powFieldValue);
     }
 
@@ -556,15 +592,19 @@ namespace Planeted
 
         runtime.DefineFunction("fbm", {this->field1TypeInfo, this->fbmParametersTypeInfo}, builtin_fbmField1);
         runtime.DefineFunction("fbm", {this->field2TypeInfo, this->fbmParametersTypeInfo}, builtin_fbmField2);
+        runtime.DefineFunction("fbm", {this->field3TypeInfo, this->fbmParametersTypeInfo}, builtin_fbmField3);
 
         runtime.DefineFunction("ridge", {this->field1TypeInfo}, builtin_ridgeField1);
         runtime.DefineFunction("ridge", {this->field2TypeInfo}, builtin_ridgeField2);
+        runtime.DefineFunction("ridge", {this->field3TypeInfo}, builtin_ridgeField3);
 
         runtime.DefineFunction("abs", {this->field1TypeInfo}, builtin_absField1);
         runtime.DefineFunction("abs", {this->field2TypeInfo}, builtin_absField2);
+        runtime.DefineFunction("abs", {this->field3TypeInfo}, builtin_absField3);
 
         runtime.DefineFunction("pow", {this->field1TypeInfo, floatTypeInfo}, builtin_powField1);
         runtime.DefineFunction("pow", {this->field2TypeInfo, floatTypeInfo}, builtin_powField2);
+        runtime.DefineFunction("pow", {this->field3TypeInfo, floatTypeInfo}, builtin_powField3);
 
         runtime.DefineFunction("savePGM", {this->field1TypeInfo, stringTypeInfo}, builtin_savePGM1);
         runtime.DefineFunction("savePGM", {this->field2TypeInfo, stringTypeInfo}, builtin_savePGM2);
