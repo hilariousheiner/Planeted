@@ -7,14 +7,14 @@ fbmParams = setPersistence(fbmParams, 0.5);
 fbmParams = setStartFrequency(fbmParams, 4.0);
 fbmParams = setNormalizeFBM(fbmParams, false);
 
-n = pow(abs(fbm(ridge(valueNoise("BETTY")), fbmParams)), 10.0);
 n1 = pow(abs(fbm(ridge(valueNoise1("BETTY")), fbmParams)), 10.0);
 n2 = pow(abs(fbm(ridge(valueNoise2("BETTY")), fbmParams)), 10.0);
+n3 = pow(abs(fbm(ridge(valueNoise3("BETTY")), fbmParams)), 10.0);
 
-noiseTest(n, "test_ValueRidge3D");
 savePGM(n1, "test_ValueRidge1D");
 savePGM(n2, "test_ValueRidge2D"); 
+savePGM(n3, "test_ValueRidge3D");
 
 m = load("../lib/icosphere2.pdsl");
 m = calculateNormals(m);
-return displace(m, n, 0.05);
+return displace(m, n3, 0.05);
