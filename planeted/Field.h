@@ -190,6 +190,25 @@ namespace Planeted
         float exponent;
     };
 
+    class PowFieldModifier2 : public AField2
+    {
+    public:
+        PowFieldModifier2(std::unique_ptr<AField2> field, float exponent);
+        PowFieldModifier2(const PowFieldModifier2 &other);
+
+        std::unique_ptr<AField> Clone() const override;
+        std::unique_ptr<AField2> Clone2() const override;
+
+        float Eval(const Vector2 &p) const override;
+
+        void SetSeed(std::uint32_t seed) override;
+        void SetSeed(std::string seed) override;
+
+    private:
+        std::unique_ptr<AField2> field;
+        float exponent;
+    };
+
     class FBMFieldModifier1 : public AField1
     {
     public:

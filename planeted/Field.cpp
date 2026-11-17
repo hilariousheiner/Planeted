@@ -219,7 +219,38 @@ namespace Planeted
     {
         this->field->SetSeed(seed);
     }
+    //----------------------------------------
+    PowFieldModifier2::PowFieldModifier2(std::unique_ptr<AField2> field, float exponent)
+        : field(std::move(field)), exponent(exponent)
+    {}
 
+    PowFieldModifier2::PowFieldModifier2(const PowFieldModifier2 &other)
+        : AField2(other), field(other.field->Clone2()), exponent(other.exponent)
+    {}
+
+    std::unique_ptr<AField> PowFieldModifier2::Clone() const
+    {
+        return std::make_unique<PowFieldModifier2>(*this);
+    }
+    std::unique_ptr<AField2> PowFieldModifier2::Clone2() const
+    {
+        return std::make_unique<PowFieldModifier2>(*this);
+    }
+
+    float PowFieldModifier2::Eval(const Vector2 &p) const
+    {
+        return std::pow(this->field->Eval(p), this->exponent);
+    }
+
+    void PowFieldModifier2::SetSeed(std::uint32_t seed)
+    {
+        this->field->SetSeed(seed);
+    }
+    void PowFieldModifier2::SetSeed(std::string seed)
+    {
+        this->field->SetSeed(seed);
+    }
+    //----------------------------------------
 
     FBMFieldModifier1::FBMFieldModifier1(std::unique_ptr<AField1> field, const FBMParameters &fbmParameters)
         : field(std::move(field)), fbmParams(fbmParameters)
