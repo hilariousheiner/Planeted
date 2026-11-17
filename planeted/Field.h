@@ -120,7 +120,6 @@ namespace Planeted
     private:
         std::unique_ptr<AField1> field;
     };
-
     class RidgeFieldModifier2 : public AField2
     {
     public:
@@ -137,6 +136,23 @@ namespace Planeted
 
     private:
         std::unique_ptr<AField2> field;
+    };
+    class RidgeFieldModifier3 : public AField3
+    {
+    public:
+        RidgeFieldModifier3(std::unique_ptr<AField3> field);
+        RidgeFieldModifier3(const RidgeFieldModifier3 &other);
+
+        std::unique_ptr<AField> Clone() const override;
+        std::unique_ptr<AField3> Clone3() const override;
+
+        float Eval(const Vector3 &p) const override;
+
+        void SetSeed(std::uint32_t seed) override;
+        void SetSeed(std::string seed) override;
+
+    private:
+        std::unique_ptr<AField3> field;
     };
 
     class AbsFieldModifier1 : public AField1
