@@ -25,6 +25,15 @@ namespace Planeted
         float Eval(const Vector2 &p) const override;
     };
 
+    class ValueNoise3 : public AFieldGenerator3
+    {
+    public:
+        std::unique_ptr<AField> Clone() const override;
+        std::unique_ptr<AField3> Clone3() const override;
+
+        float Eval(const Vector3 &p) const override;
+    };
+
     class ValueNoise : public ANoiseGenerator
     {
     public:
