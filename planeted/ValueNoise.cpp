@@ -25,6 +25,40 @@ namespace Planeted
         return SmoothStepUnclamped(c0, c1, p - pi);
     }
 
+    std::unique_ptr<AField> ValueNoise2::ValueNoise2::Clone() const
+    {
+        return std::make_unique<ValueNoise2>(*this);
+    }
+    std::unique_ptr<AField2> ValueNoise2::ValueNoise2::Clone2() const
+    {
+        return std::make_unique<ValueNoise2>(*this);
+    }
+
+    float ValueNoise2::Eval(const Vector2 &p) const
+    {
+        int xi = FloorToInt(p.X);
+        int yi = FloorToInt(p.Y);
+
+        int xi0 = PermutationTable::ToGrid(xi);
+        int yi0 = PermutationTable::ToGrid(yi);
+
+        int xi1 = PermutationTable::ToGrid(xi0 + 1);
+        int yi1 = PermutationTable::ToGrid(yi0 + 1);
+
+        float tx = p.X - xi;
+        float ty = p.Y - yi;
+
+        const float &c00 = HashToSigned(Hash2D(xi0, yi0, this->seed.GetSeed()));
+        const float &c10 = HashToSigned(Hash2D(xi1, yi0, this->seed.GetSeed()));
+        const float &c01 = HashToSigned(Hash2D(xi0, yi1, this->seed.GetSeed()));
+        const float &c11 = HashToSigned(Hash2D(xi1, yi1, this->seed.GetSeed()));
+
+        float u0 = SmoothStepUnclamped(c00, c10, tx);
+        float u1 = SmoothStepUnclamped(c01, c11, tx);
+
+        return SmoothStepUnclamped(u0, u1, ty);
+    }
+
     // --------------------------------------------------------------
     std::unique_ptr<ANoise> ValueNoise::Clone() const
     {
