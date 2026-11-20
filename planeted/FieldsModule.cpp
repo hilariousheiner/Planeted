@@ -87,6 +87,35 @@ namespace Planeted
 
     //------------------------------------------
 
+    static Value builtin_perlinNoise3(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue(std::make_unique<PerlinNoise3>());
+
+        return Value(fieldValue);
+    }
+    static Value builtin_perlinNoise3FromString(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue(std::make_unique<PerlinNoise3>());
+
+        std::string seed = GetStringArg(args, 0, "perlinNoise3"); // note: this performs checks that are now redundant; replace by something else.
+
+        fieldValue.Get().SetSeed(seed);
+
+        return Value(fieldValue);
+    }
+    static Value builtin_perlinNoise3FromInteger(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldValue(std::make_unique<PerlinNoise3>());
+
+        int seed = GetIntArg(args, 0, "perlinNoise3"); // note: this performs checks that are now redundant; replace by something else.
+
+        fieldValue.Get().SetSeed(seed);
+
+        return Value(fieldValue);
+    }
+
+    //------------------------------------------
+
     static Value builtin_whiteNoise1(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
         FieldValue fieldValue(std::make_unique<WhiteNoise1>());
@@ -594,6 +623,10 @@ namespace Planeted
         runtime.DefineFunction("perlinNoise2", {}, builtin_perlinNoise2);
         runtime.DefineFunction("perlinNoise2", {integerTypeInfo}, builtin_perlinNoise2FromInteger);
         runtime.DefineFunction("perlinNoise2", {stringTypeInfo}, builtin_perlinNoise2FromString);
+
+        runtime.DefineFunction("perlinNoise3", {}, builtin_perlinNoise3);
+        runtime.DefineFunction("perlinNoise3", {integerTypeInfo}, builtin_perlinNoise3FromInteger);
+        runtime.DefineFunction("perlinNoise3", {stringTypeInfo}, builtin_perlinNoise3FromString);
 
         runtime.DefineFunction("valueNoise1", {}, builtin_valueNoise1);
         runtime.DefineFunction("valueNoise1", {integerTypeInfo}, builtin_valueNoise1FromInteger);
