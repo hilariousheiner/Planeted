@@ -17,24 +17,6 @@ namespace Planeted
 {
     namespace PDSL_Lib
     {
-        static DisplacementTypeEnum toDisplacementType(int type)
-        {
-            DisplacementTypeEnum result = DisplacementTypeEnum::Vertex;
-
-            switch(type)
-            {
-            case 0:
-                result = DisplacementTypeEnum::Vertex;
-                break;
-            case 1:
-                result = DisplacementTypeEnum::Normal;
-                break;
-            default:
-                break;
-            }
-            return result;
-        }
-
         static Value builtin_whiteNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCountAtMost(args, 1, "whiteNoise");
@@ -164,44 +146,11 @@ namespace Planeted
             return Value(m);
         }
 
-        static DisplacementFunction noiseDisplaceFun(const ANoise &noise)
-        {
-            return [&noise](const Vector3 &v)
-            {
-                return noise.Eval(v);
-            };
-        }
-
-        static Value builtin_displaceNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
-        {
-            Mesh m = GetMeshArg(args, 0, "displace");
-            NoiseValue noiseValue = GetNoiseArg(args, 1, "displace");
-            float a = GetFloatArg(args, 2, "displace");
-
-            //DisplacementTypeEnum displacementType = toDisplacementType(args[3].GetIntValue());
-            DisplacementTypeEnum displacementType = toDisplacementType(GetIntArg(args, 3, "displace"));
-
-            m.Displace(noiseDisplaceFun(noiseValue.Get()), a, displacementType);
-            return Value(m);
-        }
-
-        static Value builtin_displaceNoiseNormal(PDSL_Runtime &runtime, const std::vector<Value> &args)
-        {
-            Mesh m = GetMeshArg(args, 0, "displace");
-            NoiseValue noiseValue = GetNoiseArg(args, 1, "displace");
-            float a = GetFloatArg(args, 2, "displace");
-
-            m.Displace(noiseDisplaceFun(noiseValue.Get()), a, DisplacementTypeEnum::Normal);
-            return Value(m);
-        }
-
         void Load(PDSL_Runtime &runtime)
         {
             PLTypeInfo *noiseTypeInfo = runtime.GetNoiseTypeInfo();
             PLTypeInfo *fbmParametersTypeInfo = runtime.FieldsMod->GetFBMParametersTypeInfo();
             PLTypeInfo *floatTypeInfo = runtime.GetFloatTypeInfo();
-            PLTypeInfo *meshTypeInfo = runtime.GetMeshTypeInfo();
-            PLTypeInfo *intTypeInfo = runtime.GetIntegerTypeInfo();
 
             runtime.DefineIntrinsicFunction("whiteNoise", builtin_whiteNoise);
             runtime.DefineIntrinsicFunction("valueNoise", builtin_valueNoise);
@@ -219,9 +168,6 @@ namespace Planeted
             runtime.DefineIntrinsicFunction("tessellate", builtin_tessellate);
             runtime.DefineIntrinsicFunction("projectToUnitSphere", builtin_projectToUnitSphere);
             runtime.DefineIntrinsicFunction("calculateNormals", builtin_calculateNormals);
-
-            runtime.DefineFunction("displace", {meshTypeInfo, noiseTypeInfo, floatTypeInfo, intTypeInfo}, builtin_displaceNoise);
-            runtime.DefineFunction("displace", {meshTypeInfo, noiseTypeInfo, floatTypeInfo}, builtin_displaceNoiseNormal);
         }
     }
 }
