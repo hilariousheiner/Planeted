@@ -51,7 +51,6 @@ namespace Planeted
         this->integerTypeInfo = this->DefineType("Integer", ValueTypeEnum::Int, nullptr);
         this->listTypeInfo = this->DefineType("List", ValueTypeEnum::List, nullptr);
         this->meshTypeInfo = this->DefineType("Mesh", ValueTypeEnum::Mesh, nullptr);
-        this->noiseTypeInfo = this->DefineType("Noise", ValueTypeEnum::Noise, nullptr);
         this->stringTypeInfo = this->DefineType("String", ValueTypeEnum::String, nullptr);
         this->tupleTypeInfo = this->DefineType("Tuple", ValueTypeEnum::Tuple, nullptr);
 
@@ -150,9 +149,6 @@ namespace Planeted
             break;
         case ValueTypeEnum::Mesh:
             return this->GetMeshTypeInfo();
-            break;
-        case ValueTypeEnum::Noise:
-            return this->GetNoiseTypeInfo();
             break;
         case ValueTypeEnum::String:
             result = this->GetStringTypeInfo();

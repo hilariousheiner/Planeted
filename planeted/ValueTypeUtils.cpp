@@ -34,9 +34,6 @@ namespace Planeted
             case ValueTypeEnum::Mesh:
                 result = "Mesh";
                 break;
-            case ValueTypeEnum::Noise:
-                result = "Noise";
-                break;
             case ValueTypeEnum::Field:
                 result = "Field";
                 break;

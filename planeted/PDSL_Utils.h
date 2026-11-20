@@ -19,8 +19,6 @@ namespace Planeted
 
     bool GetBoolArg(const std::vector<Value> &args, size_t index, const std::string &functionName);
 
-    NoiseValue GetNoiseArg(const std::vector<Value> &args, size_t index, const std::string &functionName);
-
     FieldValue GetFieldArg(const std::vector<Value> &args, size_t index, const std::string &functionName);
 
     FBMParameters GetFBMParametersArg(const std::vector<Value> &args, size_t index, const std::string &functionName);
@@ -35,7 +33,6 @@ namespace Planeted
     bool TryAsVector3(const Value &value, Vector3 &out);
     bool TryAsTriangle(const Value &value, TriangleIndices &out);
     bool TryAsMesh(const Value &value, Mesh &out);
-    bool TryAsNoise(const Value &value, NoiseValue &out);
     bool TryAsField(const Value &value, FieldValue &out);
     bool TryAsFBMParameters(const Value &value, FBMParameters &out);
 

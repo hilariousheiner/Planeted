@@ -44,7 +44,7 @@ namespace Planeted
         explicit Value(List listValue);
         explicit Value(Mesh meshValue);
 
-        explicit Value(NoiseValue noiseValue);
+        //explicit Value(NoiseValue noiseValue);
         explicit Value(FBMParameters fbmParametersValue);
 
         explicit Value(FieldValue fieldValue);
@@ -64,7 +64,6 @@ namespace Planeted
 
         const FBMParameters &GetFBMParametersValue() const;
 
-        const NoiseValue &GetNoiseValue() const;
         const FieldValue &GetFieldValue() const;
 
         ValueTypeEnum GetValueType() const;
@@ -72,7 +71,7 @@ namespace Planeted
         std::string ToString() const;
 
     private:
-        std::variant<std::monostate, int, float, bool, std::string, Tuple, List, Mesh, NoiseValue, FBMParameters, FieldValue> data;
+        std::variant<std::monostate, int, float, bool, std::string, Tuple, List, Mesh, FBMParameters, FieldValue> data;
     };
 }
 #endif // PLANETED_PDSL_VALUE_H

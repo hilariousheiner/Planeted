@@ -76,6 +76,7 @@ namespace Planeted
         return result;
     }
 
+    /*
     NoiseValue GetNoiseArg(const std::vector<Value> &args, size_t index, const std::string &functionName)
     {
         NoiseValue result;
@@ -85,6 +86,7 @@ namespace Planeted
         }
         return result;
     }
+    */
     FieldValue GetFieldArg(const std::vector<Value> &args, size_t index, const std::string &functionName)
     {
         FieldValue result;
@@ -224,18 +226,6 @@ namespace Planeted
                     result = true;
                 }
             }
-        }
-        return result;
-    }
-
-    bool TryAsNoise(const Value &value, NoiseValue &out)
-    {
-        bool result = false;
-
-        if(value.GetValueType() == ValueTypeEnum::Noise)
-        {
-            out = value.GetNoiseValue();
-            result = true;
         }
         return result;
     }

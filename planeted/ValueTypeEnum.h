@@ -15,7 +15,6 @@ namespace Planeted
         List,
 
         Mesh,
-        Noise,
         FBMParameters,
         Field
     };
