@@ -51,9 +51,6 @@
 		<Unit filename="Math.h" />
 		<Unit filename="Mesh.cpp" />
 		<Unit filename="Mesh.h" />
-		<Unit filename="Noise.cpp" />
-		<Unit filename="Noise.h" />
-		<Unit filename="NoiseValue.h" />
 		<Unit filename="OBJ.cpp" />
 		<Unit filename="OBJ.h" />
 		<Unit filename="PDSL.cpp" />
@@ -94,8 +91,6 @@
 		<Unit filename="STL.h" />
 		<Unit filename="Seed.cpp" />
 		<Unit filename="Seed.h" />
-		<Unit filename="Tests.cpp" />
-		<Unit filename="Tests.h" />
 		<Unit filename="Utils.h" />
 		<Unit filename="ValueNoise.cpp" />
 		<Unit filename="ValueNoise.h" />
