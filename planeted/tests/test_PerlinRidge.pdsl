@@ -12,7 +12,6 @@ n1 = pow(abs(fbm(ridge(perlinNoise1("NERIXI")), fbmParams)), 10.0);
 
 noiseTest(n, "test_PerlinRidge3D");
 noiseTest2D(n, "test_PerlinRidge2D");
-//noiseTest1D(n, "test_PerlinRidge1D");
 savePGM(n1, "test_PerlinRidge1D");
 
 m = load("../lib/icosphere2.pdsl");
