@@ -17,6 +17,7 @@ namespace Planeted
 {
     namespace PDSL_Lib
     {
+        /*
         static Value builtin_whiteNoise(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCountAtMost(args, 1, "whiteNoise");
@@ -104,6 +105,7 @@ namespace Planeted
             wNoise.SetWhiteNoiseScale(GetFloatArg(args, 1, "setWhiteNoiseScale"));
             return Value(NoiseValue(wNoise.Clone()));
         }
+        */
 
         static Value builtin_subdivide(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
@@ -148,10 +150,12 @@ namespace Planeted
 
         void Load(PDSL_Runtime &runtime)
         {
+            /*
             PLTypeInfo *noiseTypeInfo = runtime.GetNoiseTypeInfo();
             PLTypeInfo *fbmParametersTypeInfo = runtime.FieldsMod->GetFBMParametersTypeInfo();
             PLTypeInfo *floatTypeInfo = runtime.GetFloatTypeInfo();
-
+            */
+            /*
             runtime.DefineIntrinsicFunction("whiteNoise", builtin_whiteNoise);
             runtime.DefineIntrinsicFunction("valueNoise", builtin_valueNoise);
             runtime.DefineIntrinsicFunction("perlinNoise", builtin_perlinNoise);
@@ -163,6 +167,7 @@ namespace Planeted
             runtime.DefineFunction("pow", {noiseTypeInfo, floatTypeInfo}, builtin_pow);
 
             runtime.DefineFunction("setWhiteNoiseScale", {noiseTypeInfo, floatTypeInfo}, builtin_setWhiteNoiseScale);
+            */
 
             runtime.DefineIntrinsicFunction("subdivide", builtin_subdivide);
             runtime.DefineIntrinsicFunction("tessellate", builtin_tessellate);
