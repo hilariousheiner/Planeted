@@ -8,7 +8,6 @@
 #include "PDSL_Utils.h"
 #include "SCAD.h"
 #include "STL.h"
-#include "Tests.h"
 #include "Version.h"
 
 using namespace Planeted;

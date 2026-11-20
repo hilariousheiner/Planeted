@@ -7,7 +7,6 @@
 #include "Noise.h"
 #include "PerlinNoise.h"
 #include "PDSL_Utils.h"
-#include "Tests.h"
 #include "PGM.h"
 #include "PixelMap.h"
 #include "ValueNoise.h"
