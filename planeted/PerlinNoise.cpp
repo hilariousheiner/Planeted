@@ -145,6 +145,128 @@ namespace Planeted
         }
         return result;
     }
+    //--------------------------------------------------
+
+    std::unique_ptr<AField> PerlinNoise3::Clone() const
+    {
+        return std::make_unique<PerlinNoise3>(*this);
+    }
+    std::unique_ptr<AField3> PerlinNoise3::Clone3() const
+    {
+        return std::make_unique<PerlinNoise3>(*this);
+    }
+
+    void PerlinNoise3::SetSeed(std::uint32_t seedValue)
+    {
+        this->seed = Seed(seedValue);
+        this->permutationTable = PermutationTable(pnPermutation, this->seed.GetSeed64());
+    }
+    void PerlinNoise3::SetSeed(std::string seedValue)
+    {
+        this->seed = Seed(seedValue);
+        this->permutationTable = PermutationTable(pnPermutation, this->seed.GetSeed64());
+    }
+
+    float PerlinNoise3::Eval(const Vector3 &p) const
+    {
+        // calculate grid cell corner coordinates:
+        int xi = FloorToInt(p.X);
+        int yi = FloorToInt(p.Y);
+        int zi = FloorToInt(p.Z);
+
+        int xi0 = PermutationTable::ToGrid(xi);
+        int yi0 = PermutationTable::ToGrid(yi);
+        int zi0 = PermutationTable::ToGrid(zi);
+
+        int xi1 = PermutationTable::ToGrid(xi0 + 1);
+        int yi1 = PermutationTable::ToGrid(yi0 + 1);
+        int zi1 = PermutationTable::ToGrid(zi0 + 1);
+
+        float tx = p.X - xi;
+        float ty = p.Y - yi;
+        float tz = p.Z - zi;
+
+        // compute dot products with gradients at cell corners:
+        const float &c000 = this->randomDotGrad(xi0, yi0, zi0, tx    , ty    , tz   );
+        const float &c100 = this->randomDotGrad(xi1, yi0, zi0, tx - 1, ty    , tz   );
+        const float &c010 = this->randomDotGrad(xi0, yi1, zi0, tx    , ty - 1, tz   );
+        const float &c110 = this->randomDotGrad(xi1, yi1, zi0, tx - 1, ty - 1, tz   );
+
+        const float &c001 = this->randomDotGrad(xi0, yi0, zi1, tx    , ty    , tz - 1);
+        const float &c101 = this->randomDotGrad(xi1, yi0, zi1, tx - 1, ty    , tz - 1);
+        const float &c011 = this->randomDotGrad(xi0, yi1, zi1, tx    , ty - 1, tz - 1);
+        const float &c111 = this->randomDotGrad(xi1, yi1, zi1, tx - 1, ty - 1, tz - 1);
+
+        // interpolate:
+        float u00 = SmoothStepUnclamped5(c000, c100, tx);
+        float u10 = SmoothStepUnclamped5(c010, c110, tx);
+
+        float u01 = SmoothStepUnclamped5(c001, c101, tx);
+        float u11 = SmoothStepUnclamped5(c011, c111, tx);
+
+        float v0 = SmoothStepUnclamped5(u00, u10, ty);
+        float v1 = SmoothStepUnclamped5(u01, u11, ty);
+
+        return SmoothStepUnclamped5(v0, v1, tz);
+    }
+
+    const float PerlinNoise3::randomDotGrad(const int &x, const int &y, const int &z, const float tx, const float ty, const float tz) const
+    {
+        float result;
+
+        switch(this->permutationTable.Permute(x, y, z) & 15)
+        {
+        case 0:
+            result = tx + ty; //(1,1,0) * (tx, ty, tz)
+            break;
+        case 1:
+            result = -tx + ty; //(-1,1,0) * (tx, ty, tz)
+            break;
+        case 2:
+            result = tx - ty;  //(1,-1,0) * (tx, ty, tz)
+            break;
+        case 3:
+            result = -tx - ty;//(-1,-1,0) * (tx, ty, tz)
+            break;
+        case 4:
+            result = tx + tz; //(1,0,1) * (tx, ty, tz)
+            break;
+        case 5:
+            result = -tx + tz; //(-1,0,1) * (tx, ty, tz)
+            break;
+        case 6:
+            result = tx - tz; //(1,0,-1) * (tx, ty, tz)
+            break;
+        case 7:
+            result = -tx - tz;//(-1,0,-1) * (tx, ty, tz)
+            break;
+        case 8:
+            result = ty + tz; //(0,1,1) * (tx, ty, tz)
+            break;
+        case 9:
+            result = -ty + tz; //(0,-1,1) * (tx, ty, tz)
+            break;
+        case 10:
+            result = ty - tz; //(0,1,-1) * (tx, ty, tz)
+            break;
+        case 11:
+            result = -ty - tz; //(0,-1,-1) * (tx, ty, tz)
+            break;
+        case 12:
+            result = tx + ty; //(1,1,0) * (tx, ty, tz)
+            break;
+        case 13:
+            result = -tx + ty; //(-1,1,0) * (tx, ty, tz)
+            break;
+        case 14:
+            result = -ty + tz; //(0,-1,1) * (tx, ty, tz)
+            break;
+        case 15:
+            result = -ty - tz; //(0,-1,-1) * (tx, ty, tz)
+            break;
+        }
+        return result;
+    }
 
     //--------------------------------------------------
     std::unique_ptr<ANoise> PerlinNoise::Clone() const

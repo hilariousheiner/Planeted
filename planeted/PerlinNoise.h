@@ -41,6 +41,23 @@ namespace Planeted
         const float randomDotGrad(const int &x, const int &y, const float tx, const float ty) const;
     };
 
+    class PerlinNoise3 : public AFieldGenerator3
+    {
+    public:
+        std::unique_ptr<AField> Clone() const override;
+        std::unique_ptr<AField3> Clone3() const override;
+
+        float Eval(const Vector3 &p) const override;
+
+        void SetSeed(std::uint32_t seedValue) override;
+        void SetSeed(std::string seedValue) override;
+
+    private:
+        PermutationTable permutationTable;
+
+        const float randomDotGrad(const int &x, const int &y, const int &z, const float tx, const float ty, const float tz) const;
+    };
+
     class PerlinNoise : public ANoiseGenerator
     {
     public:
