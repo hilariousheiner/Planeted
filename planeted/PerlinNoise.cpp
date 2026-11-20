@@ -65,6 +65,88 @@ namespace Planeted
 
     ////////////////////////////////////////////////////
 
+     std::unique_ptr<AField> PerlinNoise2::Clone() const
+    {
+        return std::make_unique<PerlinNoise2>(*this);
+    }
+    std::unique_ptr<AField2> PerlinNoise2::Clone2() const
+    {
+        return std::make_unique<PerlinNoise2>(*this);
+    }
+
+    void PerlinNoise2::SetSeed(std::uint32_t seedValue)
+    {
+        this->seed = Seed(seedValue);
+        this->permutationTable = PermutationTable(pnPermutation, this->seed.GetSeed64());
+    }
+    void PerlinNoise2::SetSeed(std::string seedValue)
+    {
+        this->seed = Seed(seedValue);
+        this->permutationTable = PermutationTable(pnPermutation, this->seed.GetSeed64());
+    }
+
+    float PerlinNoise2::Eval(const Vector2 &p) const
+    {
+        int xi = FloorToInt(p.X);
+        int yi = FloorToInt(p.Y);
+
+        int xi0 = PermutationTable::ToGrid(xi);
+        int yi0 = PermutationTable::ToGrid(yi);
+
+        int xi1 = PermutationTable::ToGrid(xi0 + 1);
+        int yi1 = PermutationTable::ToGrid(yi0 + 1);
+
+        float tx = p.X - xi;
+        float ty = p.Y - yi;
+
+        const float &c00 = this->randomDotGrad(xi0, yi0, tx    , ty    );
+        const float &c10 = this->randomDotGrad(xi1, yi0, tx - 1, ty    );
+        const float &c01 = this->randomDotGrad(xi0, yi1, tx    , ty - 1);
+        const float &c11 = this->randomDotGrad(xi1, yi1, tx - 1, ty - 1);
+
+        float u0 = SmoothStepUnclamped5(c00, c10, tx);
+        float u1 = SmoothStepUnclamped5(c01, c11, tx);
+
+        return SmoothStepUnclamped5(u0, u1, ty);
+    }
+
+    const float PerlinNoise2::randomDotGrad(const int &x, const int &y, const float tx, const float ty) const
+    {
+        float result;
+
+        switch(this->permutationTable.Permute(x, y) & 7)
+        {
+        case 0:
+            result = tx; // (1, 0) * (tx, ty)
+            break;
+        case 1:
+            result = -tx; // (-1, 0) * (tx, ty)
+            break;
+        case 2:
+            result = ty; // (0, 1) * (tx, ty)
+            break;
+        case 3:
+            result = -ty; // (0, -1) * (tx, ty)
+            break;
+        case 4:
+            result = tx + ty; // (1, 1) * (tx, ty)
+            break;
+        case 5:
+            result = -tx + ty; // (-1, 1) * (tx, ty)
+            break;
+        case 6:
+            result = tx - ty; // (1, -1) * (tx, ty)
+            break;
+        case 7:
+            result = -tx - ty; // (-1, -1) * (tx, ty)
+            break;
+        default:
+            break;
+        }
+        return result;
+    }
+
+    //--------------------------------------------------
     std::unique_ptr<ANoise> PerlinNoise::Clone() const
     {
         return std::make_unique<PerlinNoise>(*this);
