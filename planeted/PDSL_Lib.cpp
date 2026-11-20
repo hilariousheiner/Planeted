@@ -4,7 +4,6 @@
 #include <iostream>
 
 #include "Math.h"
-#include "Noise.h"
 #include "PerlinNoise.h"
 #include "PDSL_Utils.h"
 #include "PGM.h"

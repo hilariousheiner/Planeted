@@ -2,7 +2,6 @@
 #define PLANETED_PERLINNOISE_H
 
 #include "Field.h"
-#include "Noise.h"
 #include "PermutationTable.h"
 
 namespace Planeted
