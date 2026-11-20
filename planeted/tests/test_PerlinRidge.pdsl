@@ -7,14 +7,14 @@ fbmParams = setPersistence(fbmParams, 0.5);
 fbmParams = setStartFrequency(fbmParams, 4.0);
 fbmParams = setNormalizeFBM(fbmParams, false);
 
-n = pow(abs(fbm(ridge(perlinNoise("NERIXI")), fbmParams)), 10.0);
 n1 = pow(abs(fbm(ridge(perlinNoise1("NERIXI")), fbmParams)), 10.0);
 n2 = pow(abs(fbm(ridge(perlinNoise2("NERIXI")), fbmParams)), 10.0);
+n3 = pow(abs(fbm(ridge(perlinNoise3("NERIXI")), fbmParams)), 10.0);
 
-noiseTest(n, "test_PerlinRidge3D");
 savePGM(n1, "test_PerlinRidge1D");
 savePGM(n2, "test_PerlinRidge2D");
+savePGM(n3, "test_PerlinRidge3D");
 
 m = load("../lib/icosphere2.pdsl");
 m = calculateNormals(m);
-return displace(m, n, 0.05);
+return displace(m, n3, 0.05);

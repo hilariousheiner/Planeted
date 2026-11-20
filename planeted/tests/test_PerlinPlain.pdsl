@@ -7,14 +7,14 @@ fbmParams = setPersistence(fbmParams, 0.5);
 fbmParams = setStartFrequency(fbmParams, 1.0);
 fbmParams = setNormalizeFBM(fbmParams, true);
 
-n = pow(abs(fbm(perlinNoise("11836-Eileen"), fbmParams)), 1.0);
 n1 = pow(abs(fbm(perlinNoise1("11836-Eileen"), fbmParams)), 1.0);
 n2 = pow(abs(fbm(perlinNoise2("11836-Eileen"), fbmParams)), 1.0);
+n3 = pow(abs(fbm(perlinNoise3("11836-Eileen"), fbmParams)), 1.0);
 
-noiseTest(n, "test_PerlinPlain3D");
 savePGM(n1, "test_PerlinPlain1D");
 savePGM(n2, "test_PerlinPlain2D");
+savePGM(n3, "test_PerlinPlain3D");
 
 m = load("../lib/icosphere2.pdsl");
 m = calculateNormals(m);
-return displace(m, n, 0.25);
+return displace(m, n3, 0.25);
