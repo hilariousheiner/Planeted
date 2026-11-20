@@ -112,8 +112,6 @@ namespace Planeted
             return Value(powNoiseValue);
         }
 
-
-
         static Value builtin_setWhiteNoiseScale(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "setWhiteNoiseScale");
@@ -123,73 +121,6 @@ namespace Planeted
             WhiteNoise &wNoise = dynamic_cast<WhiteNoise&>(noiseValue.Get());
             wNoise.SetWhiteNoiseScale(GetFloatArg(args, 1, "setWhiteNoiseScale"));
             return Value(NoiseValue(wNoise.Clone()));
-        }
-
-
-        static Value builtin_noiseTest(PDSL_Runtime &runtime, const std::vector<Value> &args)
-        {
-            ExpectArgsCount(args, 2, "noiseTest");
-
-            NoiseValue noiseValue = GetNoiseArg(args, 0, "noiseTest");
-            std::string filename = GetStringArg(args, 1, "noiseTest");
-
-            filename = NormalizePath(runtime.OutPath + filename);
-
-            NoiseTest3D(filename, noiseValue.Get());
-
-            return Value::Null();
-        }
-        static Value builtin_noiseTest2D(PDSL_Runtime &runtime, const std::vector<Value> &args)
-        {
-            ExpectArgsCount(args, 2, "noiseTest2D");
-
-            NoiseValue noiseValue = GetNoiseArg(args, 0, "noiseTest2D");
-            std::string filename = GetStringArg(args, 1, "noiseTest2D");
-
-            filename = NormalizePath(runtime.OutPath + filename);
-
-            NoiseTest2D(filename, noiseValue.Get());
-
-            return Value::Null();
-        }
-        static Value builtin_noiseTest1D(PDSL_Runtime &runtime, const std::vector<Value> &args)
-        {
-            /*
-            ExpectArgsCount(args, 2, "noiseTest1D");
-
-            NoiseValue noiseValue = GetNoiseArg(args, 0, "noiseTest1D");
-            std::string filename = GetStringArg(args, 1, "noiseTest1D");
-
-            filename = NormalizePath(runtime.OutPath + filename);
-
-            NoiseTest1D(filename, noiseValue.Get());
-
-            return Value::Null();
-            */
-
-            NoiseValue noiseValue = GetNoiseArg(args, 0, "noiseTest1D");
-            std::string filename = GetStringArg(args, 1, "noiseTest1D");
-
-            filename = NormalizePath(runtime.OutPath + filename);
-
-            uint16_t sample_size = 256;
-
-            ANoise &noise = noiseValue.Get();
-            ColorFunction colorFunction = [&noise, sample_size](const int x, const int y)
-            {
-                float nx = x/static_cast<float>(sample_size) - 0.5f;
-                return ToUint8(SignedToUnitRange(noise.Eval(nx)));
-            };
-
-            PixelMap pixelMap = PixelMap(sample_size, sample_size);
-
-            pixelMap.FillRect(0, 0, sample_size, sample_size, colorFunction);
-
-            std::ofstream pgmfile(filename + ".pgm");
-
-            pgmfile << PGM::PixelMapToPGM(pixelMap);
-
-            return Value::Null();
         }
 
         static Value builtin_subdivide(PDSL_Runtime &runtime, const std::vector<Value> &args)
@@ -291,10 +222,6 @@ namespace Planeted
 
             runtime.DefineFunction("displace", {meshTypeInfo, noiseTypeInfo, floatTypeInfo, intTypeInfo}, builtin_displaceNoise);
             runtime.DefineFunction("displace", {meshTypeInfo, noiseTypeInfo, floatTypeInfo}, builtin_displaceNoiseNormal);
-
-            runtime.DefineIntrinsicFunction("noiseTest", builtin_noiseTest);
-            runtime.DefineIntrinsicFunction("noiseTest2D", builtin_noiseTest2D);
-            runtime.DefineIntrinsicFunction("noiseTest1D", builtin_noiseTest1D);
         }
     }
 }
