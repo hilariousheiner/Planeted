@@ -10,7 +10,6 @@
 #include "Field.h"
 #include "FieldValue.h"
 #include "Noise.h"
-#include "NoiseValue.h"
 #include "ValueTypeEnum.h"
 
 namespace Planeted
