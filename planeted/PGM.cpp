@@ -1,9 +1,32 @@
 #include "PGM.h"
+#include "Math.h"
 
 namespace Planeted
 {
     namespace PGM
     {
+        std::string Field1ToPGM(const AField1 &field1, uint16_t sample_size)
+        {
+            std::stringstream stream;
+
+            stream << "P2\n";
+            stream << sample_size << " " << sample_size << "\n";
+            stream << "255\n";
+
+            for(int y = 0; y < sample_size; y++)
+            {
+                for(int x = 0; x < sample_size; x++)
+                {
+                    float nx = x/static_cast<float>(sample_size) - 0.5f;
+                    std::uint8_t c = ToUint8(SignedToUnitRange(field1.Eval(nx)));
+
+                    stream << static_cast<int>(c) << "\n";
+                }
+            }
+            return stream.str();
+        }
+
+
         std::string PixelMapToPGM(const PixelMap &pmap)
         {
             std::stringstream stream;

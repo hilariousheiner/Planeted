@@ -494,19 +494,9 @@ namespace Planeted
         uint16_t sample_size = 256;
 
         AField1 &field1 = dynamic_cast<AField1&>(fieldValue.Get());
-        ColorFunction colorFunction = [&field1, sample_size](const int x, const int y)
-        {
-            float nx = x/static_cast<float>(sample_size) - 0.5f;
-            return ToUint8(SignedToUnitRange(field1.Eval(nx)));
-        };
-
-        PixelMap pixelMap = PixelMap(sample_size, sample_size);
-
-        pixelMap.FillRect(0, 0, sample_size, sample_size, colorFunction);
 
         std::ofstream pgmfile(filename + ".pgm");
-
-        pgmfile << PGM::PixelMapToPGM(pixelMap);
+        pgmfile << PGM::Field1ToPGM(field1, sample_size);
 
         return Value::Null();
     }
