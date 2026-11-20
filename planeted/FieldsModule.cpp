@@ -489,14 +489,12 @@ namespace Planeted
         FieldValue fieldValue = GetFieldArg(args, 0, "savePGM");
         std::string filename = GetStringArg(args, 1, "savePGM");
 
-        filename = NormalizePath(runtime.OutPath + filename);
-
-        uint16_t sample_size = 256;
-
         AField1 &field1 = dynamic_cast<AField1&>(fieldValue.Get());
 
-        std::ofstream pgmfile(filename + ".pgm");
-        pgmfile << PGM::Field1ToPGM(field1, sample_size);
+        filename = NormalizePath(runtime.OutPath + filename) + ".pgm";
+
+        std::ofstream pgmfile(filename);
+        pgmfile << PGM::Field1ToPGM(field1, 256);
 
         return Value::Null();
     }
