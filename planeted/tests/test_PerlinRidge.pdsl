@@ -9,10 +9,11 @@ fbmParams = setNormalizeFBM(fbmParams, false);
 
 n = pow(abs(fbm(ridge(perlinNoise("NERIXI")), fbmParams)), 10.0);
 n1 = pow(abs(fbm(ridge(perlinNoise1("NERIXI")), fbmParams)), 10.0);
+n2 = pow(abs(fbm(ridge(perlinNoise2("NERIXI")), fbmParams)), 10.0);
 
 noiseTest(n, "test_PerlinRidge3D");
-noiseTest2D(n, "test_PerlinRidge2D");
 savePGM(n1, "test_PerlinRidge1D");
+savePGM(n2, "test_PerlinRidge2D");
 
 m = load("../lib/icosphere2.pdsl");
 m = calculateNormals(m);

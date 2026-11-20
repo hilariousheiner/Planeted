@@ -9,10 +9,11 @@ fbmParams = setNormalizeFBM(fbmParams, true);
 
 n = pow(abs(fbm(perlinNoise("11836-Eileen"), fbmParams)), 1.0);
 n1 = pow(abs(fbm(perlinNoise1("11836-Eileen"), fbmParams)), 1.0);
+n2 = pow(abs(fbm(perlinNoise2("11836-Eileen"), fbmParams)), 1.0);
 
 noiseTest(n, "test_PerlinPlain3D");
-noiseTest2D(n, "test_PerlinPlain2D");
 savePGM(n1, "test_PerlinPlain1D");
+savePGM(n2, "test_PerlinPlain2D");
 
 m = load("../lib/icosphere2.pdsl");
 m = calculateNormals(m);
