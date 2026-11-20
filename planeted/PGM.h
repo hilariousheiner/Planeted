@@ -14,6 +14,7 @@ namespace Planeted
     {
         std::string Field1ToPGM(const AField1 &field1, uint16_t sample_size);
         std::string Field2ToPGM(const AField2 &field2, uint16_t sample_size);
+        std::string Field3ToPGM(const AField3 &field3, uint16_t sample_size);
 
         std::string PixelMapToPGM(const PixelMap &pmap);
     }

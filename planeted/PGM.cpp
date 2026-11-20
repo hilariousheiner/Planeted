@@ -48,6 +48,27 @@ namespace Planeted
             return stream.str();
         }
 
+        std::string Field3ToPGM(const AField3 &field3, uint16_t sample_size)
+        {
+            std::stringstream stream;
+
+            stream << "P2\n";
+            stream << sample_size << " " << sample_size << "\n";
+            stream << "255\n";
+
+            for(int y = 0; y < sample_size; y++)
+            {
+                for(int x = 0; x < sample_size; x++)
+                {
+                    float nx = x/static_cast<float>(sample_size) - 0.5f;
+                    float ny = y/static_cast<float>(sample_size) - 0.5f;
+                    std::uint8_t c = ToUint8(SignedToUnitRange(field3.Eval({nx, ny, 1.0f})));
+
+                    stream << static_cast<int>(c) << "\n";
+                }
+            }
+            return stream.str();
+        }
 
         std::string PixelMapToPGM(const PixelMap &pmap)
         {
