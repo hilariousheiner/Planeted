@@ -5,6 +5,13 @@
 
 namespace Planeted
 {
+    struct PDSL_Runtime;
+
+    class IOModule
+    {
+    public:
+        IOModule(PDSL_Runtime &runtime);
+    };
 }
 
 #endif

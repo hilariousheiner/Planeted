@@ -12,6 +12,7 @@
 
 #include "BuiltinFunction.h"
 #include "FieldsModule.h"
+#include "IOModule.h"
 #include "Utils.h"
 
 #include "PDSL_Lexer.h"
@@ -69,6 +70,7 @@ namespace Planeted
         bool DebugFlag = false;
 
         std::unique_ptr<FieldsModule> FieldsMod;
+        std::unique_ptr<IOModule> IOMod;
 
     private:
         std::unordered_map<std::string, PLTypeInfo*> typeInfoTable;

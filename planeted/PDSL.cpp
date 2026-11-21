@@ -60,6 +60,7 @@ namespace Planeted
         this->DefineIntrinsicFunction("typeof", intrinsic_typeof);
 
         this->FieldsMod = std::make_unique<FieldsModule>(*this);
+        this->IOMod = std::make_unique<IOModule>(*this);
     }
 
     PLTypeInfo *PDSL_Runtime::GetBooleanTypeInfo() const
