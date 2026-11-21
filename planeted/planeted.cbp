@@ -47,6 +47,8 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="FieldsModule.h" />
+		<Unit filename="IOModule.cpp" />
+		<Unit filename="IOModule.h" />
 		<Unit filename="ISeedable.h" />
 		<Unit filename="Math.h" />
 		<Unit filename="Mesh.cpp" />
