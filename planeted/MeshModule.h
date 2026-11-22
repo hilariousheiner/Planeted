@@ -5,5 +5,12 @@
 
 namespace Planeted
 {
+    struct PDSL_Runtime;
+
+    class MeshModule
+    {
+    public:
+        MeshModule(PDSL_Runtime &runtime);
+    };
 }
 #endif
