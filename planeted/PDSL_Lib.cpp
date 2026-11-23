@@ -15,6 +15,7 @@ namespace Planeted
 {
     namespace PDSL_Lib
     {
+        /*
         static Value builtin_subdivide(PDSL_Runtime &runtime, const std::vector<Value> &args)
         {
             ExpectArgsCount(args, 2, "subdivide");
@@ -55,13 +56,16 @@ namespace Planeted
 
             return Value(m);
         }
+        */
 
         void Load(PDSL_Runtime &runtime)
         {
+            /*
             runtime.DefineIntrinsicFunction("subdivide", builtin_subdivide);
             runtime.DefineIntrinsicFunction("tessellate", builtin_tessellate);
             runtime.DefineIntrinsicFunction("projectToUnitSphere", builtin_projectToUnitSphere);
             runtime.DefineIntrinsicFunction("calculateNormals", builtin_calculateNormals);
+            */
         }
     }
 }
