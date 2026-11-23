@@ -2,7 +2,6 @@
 
 #include <memory>
 
-#include "PDSL_Lib.h"
 #include "PDSL_Utils.h"
 #include "PDSL_Parser.h"
 #include "PLTypeUtils.h"
@@ -293,8 +292,6 @@ namespace Planeted
     Value PDSL_Load(const std::string &filename, PDSL_Runtime &runtime)
     {
         PDSL_Runtime new_runtime;
-
-        PDSL_Lib::Load(new_runtime);
 
         new_runtime.OutPath = runtime.OutPath;
 
