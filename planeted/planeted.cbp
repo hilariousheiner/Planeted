@@ -63,8 +63,6 @@
 		<Unit filename="PDSL_Ast.h" />
 		<Unit filename="PDSL_Lexer.cpp" />
 		<Unit filename="PDSL_Lexer.h" />
-		<Unit filename="PDSL_Lib.cpp" />
-		<Unit filename="PDSL_Lib.h" />
 		<Unit filename="PDSL_Parser.cpp" />
 		<Unit filename="PDSL_Parser.h" />
 		<Unit filename="PDSL_Token.h" />
