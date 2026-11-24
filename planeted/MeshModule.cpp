@@ -29,8 +29,6 @@ namespace Planeted
     }
     static Value builtin_tessellate(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
-        ExpectArgsCount(args, 2, "tessellate");
-
         Mesh m = GetMeshArg(args, 0, "tessellate");
         int n = args[1].GetIntValue();
 
@@ -40,8 +38,6 @@ namespace Planeted
     }
     static Value builtin_projectToUnitSphere(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
-        ExpectArgsCount(args, 1, "projectToUnitSphere");
-
         Mesh m = GetMeshArg(args, 0, "projectToUnitSphere");
         m.ProjectToUnitSphere();
 
@@ -49,8 +45,6 @@ namespace Planeted
     }
     static Value builtin_calculateNormals(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
-        ExpectArgsCount(args, 1, "calculateNormals");
-
         Mesh m = GetMeshArg(args, 0, "calculateNormals");
         m.CalculateNormals();
 
