@@ -11,6 +11,11 @@ namespace Planeted
     {
     public:
         MeshModule(PDSL_Runtime &runtime);
+
+        PLTypeInfo *GetMeshTypeInfo() const;
+
+    private:
+        PLTypeInfo *meshTypeInfo;
     };
 }
 #endif

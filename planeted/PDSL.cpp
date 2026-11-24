@@ -49,7 +49,6 @@ namespace Planeted
         this->floatTypeInfo = this->DefineType("Float", ValueTypeEnum::Float, nullptr);
         this->integerTypeInfo = this->DefineType("Integer", ValueTypeEnum::Int, nullptr);
         this->listTypeInfo = this->DefineType("List", ValueTypeEnum::List, nullptr);
-        this->meshTypeInfo = this->DefineType("Mesh", ValueTypeEnum::Mesh, nullptr);
         this->stringTypeInfo = this->DefineType("String", ValueTypeEnum::String, nullptr);
         this->tupleTypeInfo = this->DefineType("Tuple", ValueTypeEnum::Tuple, nullptr);
 
@@ -79,10 +78,6 @@ namespace Planeted
     PLTypeInfo *PDSL_Runtime::GetListTypeInfo() const
     {
         return this->listTypeInfo;
-    }
-    PLTypeInfo *PDSL_Runtime::GetMeshTypeInfo() const
-    {
-        return this->meshTypeInfo;
     }
     PLTypeInfo *PDSL_Runtime::GetStringTypeInfo() const
     {
@@ -145,7 +140,7 @@ namespace Planeted
             return this->GetListTypeInfo();
             break;
         case ValueTypeEnum::Mesh:
-            return this->GetMeshTypeInfo();
+            return this->MeshMod->GetMeshTypeInfo();
             break;
         case ValueTypeEnum::String:
             result = this->GetStringTypeInfo();

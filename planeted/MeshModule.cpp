@@ -78,19 +78,25 @@ namespace Planeted
 
     MeshModule::MeshModule(PDSL_Runtime &runtime)
     {
-        PLTypeInfo *meshTypeInfo = runtime.GetMeshTypeInfo();
+        this->meshTypeInfo = runtime.DefineType("Mesh", ValueTypeEnum::Mesh, nullptr);
+
         PLTypeInfo *intTypeInfo = runtime.GetIntegerTypeInfo();
         PLTypeInfo *tupleTypeInfo = runtime.GetTupleTypeInfo();
         PLTypeInfo *floatTypeInfo = runtime.GetFloatTypeInfo();
         PLTypeInfo *field3TypeInfo = runtime.FieldsMod->GetField3TypeInfo();
 
-        runtime.DefineFunction("displace", {meshTypeInfo, field3TypeInfo, floatTypeInfo}, builtin_displaceNormal);
+        runtime.DefineFunction("displace", {this->meshTypeInfo, field3TypeInfo, floatTypeInfo}, builtin_displaceNormal);
 
-        runtime.DefineFunction("subdivide", {meshTypeInfo, intTypeInfo}, builtin_subdivide);
+        runtime.DefineFunction("subdivide", {this->meshTypeInfo, intTypeInfo}, builtin_subdivide);
         runtime.DefineFunction("subdivide", {tupleTypeInfo, intTypeInfo}, builtin_subdivideTuple);
 
-        runtime.DefineFunction("tessellate", {meshTypeInfo, intTypeInfo}, builtin_tessellate);
-        runtime.DefineFunction("projectToUnitSphere", {meshTypeInfo}, builtin_projectToUnitSphere);
-        runtime.DefineFunction("calculateNormals", {meshTypeInfo}, builtin_calculateNormals);
+        runtime.DefineFunction("tessellate", {this->meshTypeInfo, intTypeInfo}, builtin_tessellate);
+        runtime.DefineFunction("projectToUnitSphere", {this->meshTypeInfo}, builtin_projectToUnitSphere);
+        runtime.DefineFunction("calculateNormals", {this->meshTypeInfo}, builtin_calculateNormals);
+    }
+
+    PLTypeInfo *MeshModule::GetMeshTypeInfo() const
+    {
+        return this->meshTypeInfo;
     }
 }

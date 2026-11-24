@@ -45,7 +45,6 @@ namespace Planeted
         PLTypeInfo *GetFloatTypeInfo() const;
         PLTypeInfo *GetIntegerTypeInfo() const;
         PLTypeInfo *GetListTypeInfo() const;
-        PLTypeInfo *GetMeshTypeInfo() const;
         PLTypeInfo *GetStringTypeInfo() const;
         PLTypeInfo *GetTupleTypeInfo() const;
 
@@ -78,7 +77,6 @@ namespace Planeted
         PLTypeInfo *floatTypeInfo;
         PLTypeInfo *integerTypeInfo;
         PLTypeInfo *listTypeInfo;
-        PLTypeInfo *meshTypeInfo;
         PLTypeInfo *stringTypeInfo;
         PLTypeInfo *tupleTypeInfo;
 
