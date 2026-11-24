@@ -84,10 +84,6 @@ namespace Planeted
     {
         return this->meshTypeInfo;
     }
-    PLTypeInfo *PDSL_Runtime::GetNoiseTypeInfo() const
-    {
-        return this->noiseTypeInfo;
-    }
     PLTypeInfo *PDSL_Runtime::GetStringTypeInfo() const
     {
         return this->stringTypeInfo;
