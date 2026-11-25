@@ -518,6 +518,40 @@ namespace Planeted
         return Value(sumFieldValue);
     }
 
+    //----------------
+    static Value builtin_multFields1(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldAValue = GetFieldArg(args, 0, "mult");
+        AField1 &fieldA = dynamic_cast<AField1&>(fieldAValue.Get());
+
+        FieldValue fieldBValue = GetFieldArg(args, 1, "mult");
+        AField1 &fieldB = dynamic_cast<AField1&>(fieldBValue.Get());
+
+        FieldValue productFieldValue(FieldProduct1(fieldA.Clone1(), fieldB.Clone1()).Clone());
+        return Value(productFieldValue);
+    }
+    static Value builtin_multFields2(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldAValue = GetFieldArg(args, 0, "mult");
+        AField2 &fieldA = dynamic_cast<AField2&>(fieldAValue.Get());
+
+        FieldValue fieldBValue = GetFieldArg(args, 1, "mult");
+        AField2 &fieldB = dynamic_cast<AField2&>(fieldBValue.Get());
+
+        FieldValue productFieldValue(FieldProduct2(fieldA.Clone2(), fieldB.Clone2()).Clone());
+        return Value(productFieldValue);
+    }
+    static Value builtin_multFields3(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldAValue = GetFieldArg(args, 0, "mult");
+        AField3 &fieldA = dynamic_cast<AField3&>(fieldAValue.Get());
+
+        FieldValue fieldBValue = GetFieldArg(args, 1, "mult");
+        AField3 &fieldB = dynamic_cast<AField3&>(fieldBValue.Get());
+
+        FieldValue productFieldValue(FieldProduct3(fieldA.Clone3(), fieldB.Clone3()).Clone());
+        return Value(productFieldValue);
+    }
 
 	FieldsModule::FieldsModule(PDSL_Runtime &runtime)
     {
@@ -608,6 +642,10 @@ namespace Planeted
         runtime.DefineFunction("add", {this->field1TypeInfo, this->field1TypeInfo}, builtin_addFields1);
         runtime.DefineFunction("add", {this->field2TypeInfo, this->field2TypeInfo}, builtin_addFields2);
         runtime.DefineFunction("add", {this->field3TypeInfo, this->field3TypeInfo}, builtin_addFields3);
+
+        runtime.DefineFunction("mult", {this->field1TypeInfo, this->field1TypeInfo}, builtin_multFields1);
+        runtime.DefineFunction("mult", {this->field2TypeInfo, this->field2TypeInfo}, builtin_multFields2);
+        runtime.DefineFunction("mult", {this->field3TypeInfo, this->field3TypeInfo}, builtin_multFields3);
     }
 
     PLTypeInfo *FieldsModule::GetFBMParametersTypeInfo() const
