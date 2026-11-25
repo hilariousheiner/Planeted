@@ -1,3 +1,4 @@
+#include "FieldArithmetic.h"
 #include "FieldsModule.h"
 #include "Math.h"
 #include "PDSL.h"
@@ -482,6 +483,42 @@ namespace Planeted
         return Value(powFieldValue);
     }
 
+    //---------
+    static Value builtin_addFields1(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldAValue = GetFieldArg(args, 0, "add");
+        AField1 &fieldA = dynamic_cast<AField1&>(fieldAValue.Get());
+
+        FieldValue fieldBValue = GetFieldArg(args, 1, "add");
+        AField1 &fieldB = dynamic_cast<AField1&>(fieldBValue.Get());
+
+        FieldValue sumFieldValue(FieldSum1(fieldA.Clone1(), fieldB.Clone1()).Clone());
+        return Value(sumFieldValue);
+    }
+    static Value builtin_addFields2(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldAValue = GetFieldArg(args, 0, "add");
+        AField2 &fieldA = dynamic_cast<AField2&>(fieldAValue.Get());
+
+        FieldValue fieldBValue = GetFieldArg(args, 1, "add");
+        AField2 &fieldB = dynamic_cast<AField2&>(fieldBValue.Get());
+
+        FieldValue sumFieldValue(FieldSum2(fieldA.Clone2(), fieldB.Clone2()).Clone());
+        return Value(sumFieldValue);
+    }
+    static Value builtin_addFields3(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        FieldValue fieldAValue = GetFieldArg(args, 0, "add");
+        AField3 &fieldA = dynamic_cast<AField3&>(fieldAValue.Get());
+
+        FieldValue fieldBValue = GetFieldArg(args, 1, "add");
+        AField3 &fieldB = dynamic_cast<AField3&>(fieldBValue.Get());
+
+        FieldValue sumFieldValue(FieldSum3(fieldA.Clone3(), fieldB.Clone3()).Clone());
+        return Value(sumFieldValue);
+    }
+
+
 	FieldsModule::FieldsModule(PDSL_Runtime &runtime)
     {
         this->fbmParametersTypeInfo = runtime.DefineType("FBMParamters", ValueTypeEnum::FBMParameters, nullptr);
@@ -567,6 +604,10 @@ namespace Planeted
         runtime.DefineFunction("pow", {this->field1TypeInfo, floatTypeInfo}, builtin_powField1);
         runtime.DefineFunction("pow", {this->field2TypeInfo, floatTypeInfo}, builtin_powField2);
         runtime.DefineFunction("pow", {this->field3TypeInfo, floatTypeInfo}, builtin_powField3);
+
+        runtime.DefineFunction("add", {this->field1TypeInfo, this->field1TypeInfo}, builtin_addFields1);
+        runtime.DefineFunction("add", {this->field2TypeInfo, this->field2TypeInfo}, builtin_addFields2);
+        runtime.DefineFunction("add", {this->field3TypeInfo, this->field3TypeInfo}, builtin_addFields3);
     }
 
     PLTypeInfo *FieldsModule::GetFBMParametersTypeInfo() const
