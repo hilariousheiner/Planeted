@@ -1,0 +1,20 @@
+import "../lib/stdlib.pdsl" 
+
+fbmParams = fbmParameters();
+fbmParams = setNumberOfOctaves(fbmParams, 6);
+fbmParams = setLacunarity(fbmParams, 1.0); 
+fbmParams = setPersistence(fbmParams, 0.5);
+fbmParams = setStartFrequency(fbmParams, 1.0);
+fbmParams = setNormalizeFBM(fbmParams, false);
+
+n1 = add(fbm(perlinNoise1("Amphitrite-29"), fbmParams), setWhiteNoiseScale(whiteNoise1("Diomedes-1437"), 100.0));
+n2 = add(fbm(perlinNoise2("Amphitrite-29"), fbmParams), setWhiteNoiseScale(whiteNoise2("Diomedes-1437"), 100.0));
+n3 = add(fbm(perlinNoise3("Amphitrite-29"), fbmParams), setWhiteNoiseScale(whiteNoise3("Diomedes-1437"), 100.0));
+
+savePGM(n1, "test_FieldSum1D");
+savePGM(n2, "test_FieldSum2D");
+savePGM(n3, "test_FieldSum3D");
+
+m = load("../lib/icosphere2.pdsl");
+m = calculateNormals(m);
+return displace(m, n3, 0.25);
