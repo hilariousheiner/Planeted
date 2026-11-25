@@ -1,0 +1,8 @@
+#ifndef PLANETED_FIELDARITHMETIC_H
+#define PLANETED_FIELDARITHMETIC_H
+
+namespace Planeted
+{
+
+}
+#endif // PLANETED_FIELDARITHMETIC_H

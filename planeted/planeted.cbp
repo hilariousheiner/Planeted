@@ -41,6 +41,8 @@
 		<Unit filename="FBM.h" />
 		<Unit filename="Field.cpp" />
 		<Unit filename="Field.h" />
+		<Unit filename="FieldArithmetic.cpp" />
+		<Unit filename="FieldArithmetic.h" />
 		<Unit filename="FieldValue.cpp" />
 		<Unit filename="FieldValue.h" />
 		<Unit filename="FieldsModule.cpp">
