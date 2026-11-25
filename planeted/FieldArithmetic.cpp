@@ -69,4 +69,39 @@ namespace Planeted
         this->fieldA->SetSeed(seed);
         this->fieldB->SetSeed(seed);
     }
+
+    //---------------------------------
+
+    FieldSum3::FieldSum3(std::unique_ptr<AField3> fieldA, std::unique_ptr<AField3> fieldB)
+        : fieldA(std::move(fieldA)), fieldB(std::move(fieldB))
+    {}
+
+    FieldSum3::FieldSum3(const FieldSum3 &other)
+        : AField3(other), fieldA(other.fieldA->Clone3()), fieldB(other.fieldB->Clone3())
+    {}
+
+    std::unique_ptr<AField> FieldSum3::Clone() const
+    {
+        return std::make_unique<FieldSum3>(*this);
+    }
+    std::unique_ptr<AField3> FieldSum3::Clone3() const
+    {
+        return std::make_unique<FieldSum3>(*this);
+    }
+
+    float FieldSum3::Eval(const Vector3 &p) const
+    {
+        return this->fieldA->Eval(p) + this->fieldB->Eval(p);
+    }
+
+    void FieldSum3::SetSeed(std::uint32_t seed)
+    {
+        this->fieldA->SetSeed(seed);
+        this->fieldB->SetSeed(seed);
+    }
+    void FieldSum3::SetSeed(std::string seed)
+    {
+        this->fieldA->SetSeed(seed);
+        this->fieldB->SetSeed(seed);
+    }
 }
