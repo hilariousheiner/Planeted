@@ -23,5 +23,24 @@ namespace Planeted
         std::unique_ptr<AField1> fieldA;
         std::unique_ptr<AField1> fieldB;
     };
+
+    class FieldSum2 : public AField2
+    {
+    public:
+        FieldSum2(std::unique_ptr<AField2> fieldA, std::unique_ptr<AField2> fieldB);
+        FieldSum2(const FieldSum2 &other);
+
+        std::unique_ptr<AField> Clone() const override;
+        std::unique_ptr<AField2> Clone2() const override;
+
+        float Eval(const Vector2 &p) const override;
+
+        void SetSeed(std::uint32_t seed) override;
+        void SetSeed(std::string seed) override;
+
+    private:
+        std::unique_ptr<AField2> fieldA;
+        std::unique_ptr<AField2> fieldB;
+    };
 }
 #endif // PLANETED_FIELDARITHMETIC_H
