@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.0] - 2026-11-25
+
+This release, again, introduces major breaking changes to the language and runtime. 
+Scripts written for previous versions will have to be migrated. 
+
+The main change in this version is a switch from the previous noise system to a more general 
+fields system that adds scalar fields in 1D, 2D and 3D as built-in language types. 
+
+To make this change easier to implement, a type system and a new way of overloading 
+built-in functions was added to the runtime.
+
+The modularity of the runtime was also again improved. 
+
+### Breaking Changes 
+
+* Removed `Noise` type and all built-ins operating on it
+
+### Added 
+
+* Added a new type system and built-in types `Field`, `Field1`, `Field2`, `Field3`, `WhiteNoise1`, `WhiteNoise2`, `WhiteNoise3`
+* Added built-in constructor functions for perlin noise, value noise and white noise fields of dimensions 1, 2 and 3
+* Added built-in `typeof()` function that returns the name of the type of its argument (as a string)
+* Added a `savePGM()` built-in that replaces the old `noiseTest()` built-ins and that has overloads accepting scalar fields of dimension 1, 2, or 3  
+* Added a `setSeed()` built-in that replaces the old `seedNoise()` built-in and that accepts and field as argument
+* Added a `field1()` built-in constructor function that can be used to create constant 1d scalar fields
+* Added a new `setWhiteNoiseScale()` built-in that only works on white noise scalar fields 
+  
+### Changed 
+
+* All example scripts have been migrated to the new language version.
+* Switched to a new system for built-in functions.
+* Replaced Noise system with a more general scalar fields system 
+* Worked on improving modularity and encapsulation of runtime in general.
+* Added a formal notion of "Modules" to the runtime, migrated built-ins and types from PDSL_lib to new FieldsModule, MeshModule and IOModule
+
 ## [0.3.0] - 2026-10-28
 
 This release introduces major breaking changes to the language and runtime. 
