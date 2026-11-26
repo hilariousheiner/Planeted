@@ -2,5 +2,10 @@
 
 namespace Planeted
 {
+    OperatorsModule::OperatorsModule(PDSL_Runtime &runtime)
+        : runtime(runtime)
+    {
 
+    }
 }
+

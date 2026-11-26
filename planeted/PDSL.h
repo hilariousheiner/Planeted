@@ -14,6 +14,7 @@
 #include "FieldsModule.h"
 #include "IOModule.h"
 #include "MeshModule.h"
+#include "OperatorsModule.h"
 #include "Utils.h"
 
 #include "PDSL_Lexer.h"
@@ -69,6 +70,7 @@ namespace Planeted
         std::unique_ptr<FieldsModule> FieldsMod;
         std::unique_ptr<MeshModule> MeshMod;
         std::unique_ptr<IOModule> IOMod;
+        std::unique_ptr<OperatorsModule> OperatorsMod;
 
     private:
         std::unordered_map<std::string, PLTypeInfo*> typeInfoTable;

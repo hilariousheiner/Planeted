@@ -60,6 +60,7 @@ namespace Planeted
         this->FieldsMod = std::make_unique<FieldsModule>(*this);
         this->MeshMod = std::make_unique<MeshModule>(*this);
         this->IOMod = std::make_unique<IOModule>(*this);
+        this->OperatorsMod = std::make_unique<OperatorsModule>(*this);
     }
 
     PLTypeInfo *PDSL_Runtime::GetBooleanTypeInfo() const
