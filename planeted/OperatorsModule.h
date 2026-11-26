@@ -13,7 +13,7 @@ namespace Planeted
     public:
         OperatorsModule(PDSL_Runtime &runtime);
 
-        CallOperator(TokenTypeEnum op, const Value &operand);
+        Value UnaryOperator(TokenTypeEnum op, const Value &operand);
     private:
         PDSL_Runtime &runtime;
     };
