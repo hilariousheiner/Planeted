@@ -581,7 +581,7 @@ namespace Planeted
         runtime.DefineFunction("setStartFrequency", {this->fbmParametersTypeInfo, floatTypeInfo}, builtin_setStartFrequency);
         runtime.DefineFunction("setNormalizeFBM", {this->fbmParametersTypeInfo, boolTypeInfo}, builtin_setNormalizeFBM);
 
-        runtime.DefineFunction("field1", {this->fbmParametersTypeInfo, floatTypeInfo}, builtin_field1);
+        runtime.DefineFunction("field1", {floatTypeInfo}, builtin_field1);
 
         runtime.DefineFunction("perlinNoise1", {}, builtin_perlinNoise1);
         runtime.DefineFunction("perlinNoise1", {integerTypeInfo}, builtin_perlinNoise1FromInteger);
