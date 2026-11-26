@@ -15,14 +15,13 @@ namespace Planeted
         switch(op)
         {
         case TokenTypeEnum::Minus:
-            return "negate";
+            return OperatorsModule::NEGATE;
             break;
         default:
             throw std::runtime_error("unknown unary operator");
             break;
         }
     }
-
     Value OperatorsModule::UnaryOperator(TokenTypeEnum op, const Value &operand)
     {
         std::string name = getUnaryOperatorName(op);

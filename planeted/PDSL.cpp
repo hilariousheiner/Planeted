@@ -44,13 +44,13 @@ namespace Planeted
 
     static Value builtin_negateFloat(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
-        float operand = GetFloatArg(args, 0, "negate");
+        float operand = GetFloatArg(args, 0, OperatorsModule::NEGATE);
 
         return Value(-operand);
     }
     static Value builtin_negateInt(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
-        int operand = GetIntArg(args, 0, "negate");
+        int operand = GetIntArg(args, 0, OperatorsModule::NEGATE);
 
         return Value(-operand);
     }
@@ -67,8 +67,8 @@ namespace Planeted
         this->stringTypeInfo = this->DefineType("String", ValueTypeEnum::String, nullptr);
         this->tupleTypeInfo = this->DefineType("Tuple", ValueTypeEnum::Tuple, nullptr);
 
-        this->DefineFunction("negate", {this->floatTypeInfo}, builtin_negateFloat);
-        this->DefineFunction("negate", {this->integerTypeInfo}, builtin_negateInt);
+        this->DefineFunction(OperatorsModule::NEGATE, {this->floatTypeInfo}, builtin_negateFloat);
+        this->DefineFunction(OperatorsModule::NEGATE, {this->integerTypeInfo}, builtin_negateInt);
 
         this->DefineIntrinsicFunction("setDebugFlag", intrinsic_setDebugFlag);
         this->DefineIntrinsicFunction("log", intrinsic_log);
