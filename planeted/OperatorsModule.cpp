@@ -6,9 +6,7 @@ namespace Planeted
 {
     OperatorsModule::OperatorsModule(PDSL_Runtime &runtime)
         : runtime(runtime)
-    {
-
-    }
+    { }
 
     static std::string getUnaryOperatorName(TokenTypeEnum op)
     {
