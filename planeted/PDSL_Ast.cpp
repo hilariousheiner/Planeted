@@ -78,6 +78,17 @@ namespace Planeted
         return runtime.OperatorsMod->UnaryOperator(op, val);
     }
 
+    BinaryExpression::BinaryExpression(TokenTypeEnum op, std::unique_ptr<Expression> left, std::unique_ptr<Expression> right)
+        : op(op), left(std::move(left)), right(std::move(right))
+    {}
+
+    Value BinaryExpression::eval(PDSL_Runtime &runtime)
+    {
+        Value leftVal = this->left->eval(runtime);
+        Value rightVal = this->right->eval(runtime);
+
+        return runtime.OperatorsMod->BinaryOperator(op, leftVal, rightVal);
+    }
     // Statements:
 
     AssignmentStatement::AssignmentStatement(std::string name, std::unique_ptr<Expression> expression)

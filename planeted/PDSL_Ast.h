@@ -72,6 +72,17 @@ namespace Planeted
         std::unique_ptr<Expression> operand;
     };
 
+    struct BinaryExpression : Expression
+    {
+        BinaryExpression(TokenTypeEnum op, std::unique_ptr<Expression> left, std::unique_ptr<Expression> right);
+
+        Value eval(PDSL_Runtime &runtime) override;
+
+        TokenTypeEnum op;
+        std::unique_ptr<Expression> left;
+        std::unique_ptr<Expression> right;
+    };
+
     // Statements:
 
     struct Statement
