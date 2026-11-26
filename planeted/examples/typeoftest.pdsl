@@ -5,6 +5,6 @@ log(typeof(3.141));
 log(typeof(2));
 log(typeof([1,2,3]));
 log(typeof(load("../lib/icosphere2.pdsl")));
-log(typeof(perlinNoise("TEST")));
+log(typeof(perlinNoise1("TEST")));
 log(typeof("hello, world!"));
 log(typeof((1,2,3)));
