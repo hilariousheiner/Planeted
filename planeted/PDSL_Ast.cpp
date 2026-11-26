@@ -75,18 +75,7 @@ namespace Planeted
     Value UnaryExpression::eval(PDSL_Runtime &runtime)
     {
         Value val = this->operand->eval(runtime);
-        Value result;
-
-        switch(this->op)
-        {
-        case TokenTypeEnum::Minus:
-            result = Negate(val);
-            break;
-        default:
-            throw std::runtime_error("unknown unary operator");
-            break;
-        }
-        return result;
+        return runtime.OperatorsMod->UnaryOperator(op, val);
     }
 
     // Statements:
