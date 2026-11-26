@@ -41,9 +41,6 @@ namespace Planeted
     bool TupleToVector3(const Tuple &t, Vector3 &out);
     bool TupleToTriangle(const Tuple &t, TriangleIndices &out);
 
-    // Arithmetic:
-    Value Negate(const Value &value);
-
     // Noise:
     void SetSeed(ISeedable &seedable, const Value &value);
 }

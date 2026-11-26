@@ -333,26 +333,6 @@ namespace Planeted
         return result;
     }
 
-    // Arithmetic:
-    Value Negate(const Value &value)
-    {
-        Value result;
-
-        switch(value.GetValueType())
-        {
-        case ValueTypeEnum::Float:
-            result = Value(-(value.GetFloatValue()));
-            break;
-        case ValueTypeEnum::Int:
-            result = Value(-(value.GetIntValue()));
-            break;
-        default:
-            throw std::runtime_error("cannot negate value.");
-            break;
-        }
-        return result;
-    }
-
     // Noise:
     void SetSeed(ISeedable &seedable, const Value &value)
     {
