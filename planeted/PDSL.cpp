@@ -42,8 +42,23 @@ namespace Planeted
         return Value(typeInfo->ToString());
     }
 
+    static Value builtin_negateFloat(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        float operand = GetFloatArg(args, 0, "negate");
+
+        return Value(-operand);
+    }
+    static Value builtin_negateInt(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        int operand = GetIntArg(args, 0, "negate");
+
+        return Value(-operand);
+    }
+
     PDSL_Runtime::PDSL_Runtime()
     {
+        this->OperatorsMod = std::make_unique<OperatorsModule>(*this);
+
         this->booleanTypeInfo = this->DefineType("Boolean", ValueTypeEnum::Bool, nullptr);
 
         this->floatTypeInfo = this->DefineType("Float", ValueTypeEnum::Float, nullptr);
@@ -51,6 +66,9 @@ namespace Planeted
         this->listTypeInfo = this->DefineType("List", ValueTypeEnum::List, nullptr);
         this->stringTypeInfo = this->DefineType("String", ValueTypeEnum::String, nullptr);
         this->tupleTypeInfo = this->DefineType("Tuple", ValueTypeEnum::Tuple, nullptr);
+
+        this->DefineFunction("negate", {this->floatTypeInfo}, builtin_negateFloat);
+        this->DefineFunction("negate", {this->integerTypeInfo}, builtin_negateInt);
 
         this->DefineIntrinsicFunction("setDebugFlag", intrinsic_setDebugFlag);
         this->DefineIntrinsicFunction("log", intrinsic_log);
@@ -60,7 +78,6 @@ namespace Planeted
         this->FieldsMod = std::make_unique<FieldsModule>(*this);
         this->MeshMod = std::make_unique<MeshModule>(*this);
         this->IOMod = std::make_unique<IOModule>(*this);
-        this->OperatorsMod = std::make_unique<OperatorsModule>(*this);
     }
 
     PLTypeInfo *PDSL_Runtime::GetBooleanTypeInfo() const
