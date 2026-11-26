@@ -26,6 +26,8 @@ namespace Planeted
         RBrack,
         Comma,
         Minus,
+        Plus,
+        Star,
 
         End
     };
@@ -88,6 +90,12 @@ namespace Planeted
             break;
         case TokenTypeEnum::Minus:
             result = "-";
+            break;
+        case TokenTypeEnum::Plus:
+            result = "+";
+            break;
+        case TokenTypeEnum::Star:
+            result = "*";
             break;
         case TokenTypeEnum::End:
             result = "End";
