@@ -29,5 +29,25 @@ namespace Planeted
         std::vector<Value> args { operand };
         return this->runtime.CallFunction(name, args);
     }
+
+    static std::string getBinaryOperatorName(TokenTypeEnum op)
+    {
+        switch(op)
+        {
+        case TokenTypeEnum::Star:
+            return OperatorsModule::MULTIPLY;
+            break;
+        default:
+            throw std::runtime_error("unknown binary operator");
+            break;
+        }
+    }
+    Value OperatorsModule::BinaryOperator(TokenTypeEnum op, const Value &left, const Value &right)
+    {
+        std::string name = getBinaryOperatorName(op);
+
+        std::vector<Value> args { left, right };
+        return this->runtime.CallFunction(name, args);
+    }
 }
 

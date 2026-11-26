@@ -14,6 +14,7 @@ namespace Planeted
         OperatorsModule(PDSL_Runtime &runtime);
 
         Value UnaryOperator(TokenTypeEnum op, const Value &operand);
+        Value BinaryOperator(TokenTypeEnum op, const Value &left, const Value &right);
 
         inline static const std::string ADD = "add";
         inline static const std::string SUBTRACT = "sub";
