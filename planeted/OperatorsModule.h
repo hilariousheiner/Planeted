@@ -1,0 +1,8 @@
+#ifndef PLANETED_OPERATORSMODULE_H
+#define PLANETED_OPERATORSMODULE_H
+
+namespace Planeted
+{
+
+}
+#endif // PLANETED_OPERATORSMODULE_H

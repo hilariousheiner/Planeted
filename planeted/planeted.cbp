@@ -59,6 +59,8 @@
 		<Unit filename="MeshModule.h" />
 		<Unit filename="OBJ.cpp" />
 		<Unit filename="OBJ.h" />
+		<Unit filename="OperatorsModule.cpp" />
+		<Unit filename="OperatorsModule.h" />
 		<Unit filename="PDSL.cpp" />
 		<Unit filename="PDSL.h" />
 		<Unit filename="PDSL_Ast.cpp" />
