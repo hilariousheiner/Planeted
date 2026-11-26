@@ -1,4 +1,7 @@
 log(-5);
 log(-7.345);
-log(negate(2.0)); 
-log(negate(3));
+log(neg(2.0)); 
+log(neg(3));
+
+log(mul(5, 3));
+log(mul(3.4, 5.6));
