@@ -42,6 +42,7 @@ namespace Planeted
         return Value(typeInfo->ToString());
     }
 
+    // move the below to floats and integer modules once they are available:
     static Value builtin_negateFloat(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
         float operand = GetFloatArg(args, 0, OperatorsModule::NEGATE);
@@ -53,6 +54,21 @@ namespace Planeted
         int operand = GetIntArg(args, 0, OperatorsModule::NEGATE);
 
         return Value(-operand);
+    }
+
+    static Value builtin_mulFloats(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        float leftOp = GetFloatArg(args, 0, OperatorsModule::MULTIPLY);
+        float rightOp = GetFloatArg(args, 1, OperatorsModule::MULTIPLY);
+
+        return Value(leftOp * rightOp);
+    }
+    static Value builtin_mulInts(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        int leftOp = GetIntArg(args, 0, OperatorsModule::MULTIPLY);
+        int rightOp = GetIntArg(args, 1, OperatorsModule::MULTIPLY);
+
+        return Value(leftOp * rightOp);
     }
 
     PDSL_Runtime::PDSL_Runtime()
@@ -69,6 +85,9 @@ namespace Planeted
 
         this->DefineFunction(OperatorsModule::NEGATE, {this->floatTypeInfo}, builtin_negateFloat);
         this->DefineFunction(OperatorsModule::NEGATE, {this->integerTypeInfo}, builtin_negateInt);
+
+        this->DefineFunction(OperatorsModule::MULTIPLY, {this->floatTypeInfo, this->floatTypeInfo}, builtin_mulFloats);
+        this->DefineFunction(OperatorsModule::MULTIPLY, {this->integerTypeInfo, this->integerTypeInfo}, builtin_mulInts);
 
         this->DefineIntrinsicFunction("setDebugFlag", intrinsic_setDebugFlag);
         this->DefineIntrinsicFunction("log", intrinsic_log);
