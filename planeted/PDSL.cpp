@@ -86,6 +86,15 @@ namespace Planeted
         return Value(leftOp * rightOp);
     }
 
+    // move the below to the string module, once that is available:
+    static Value builtin_addStrings(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        std::string leftOp = GetStringArg(args, 0, OperatorsModule::ADD);
+        std::string rightOp = GetStringArg(args, 1, OperatorsModule::ADD);
+
+        return Value(leftOp + rightOp);
+    }
+
     PDSL_Runtime::PDSL_Runtime()
     {
         this->OperatorsMod = std::make_unique<OperatorsModule>(*this);
@@ -107,10 +116,13 @@ namespace Planeted
         this->DefineFunction(OperatorsModule::MULTIPLY, {this->floatTypeInfo, this->floatTypeInfo}, builtin_mulFloats);
         this->DefineFunction(OperatorsModule::MULTIPLY, {this->integerTypeInfo, this->integerTypeInfo}, builtin_mulInts);
 
+        this->DefineFunction(OperatorsModule::ADD, {this->stringTypeInfo, this->stringTypeInfo}, builtin_addStrings);
+
         this->DefineIntrinsicFunction("setDebugFlag", intrinsic_setDebugFlag);
         this->DefineIntrinsicFunction("log", intrinsic_log);
         this->DefineIntrinsicFunction("load", intrinsic_load);
         this->DefineIntrinsicFunction("typeof", intrinsic_typeof);
+
 
         this->FieldsMod = std::make_unique<FieldsModule>(*this);
         this->MeshMod = std::make_unique<MeshModule>(*this);
