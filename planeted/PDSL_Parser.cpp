@@ -163,7 +163,7 @@ namespace Planeted
         }
         if(this->currentToken.TokenType == TokenTypeEnum::LParen)
         {
-            return this->parseTupleExpression();
+            return this->parseParenthesizedExpression();
         }
         if(this->currentToken.TokenType == TokenTypeEnum::LBrack)
         {
@@ -232,30 +232,43 @@ namespace Planeted
         return std::make_unique<CallExpression>(name, std::move(args));
     }
 
-    std::unique_ptr<TupleExpression> Parser::parseTupleExpression()
+    std::unique_ptr<Expression> Parser::parseParenthesizedExpression()
     {
         // (
         this->expect(TokenTypeEnum::LParen);
 
         std::vector<std::unique_ptr<Expression>> args;
 
-        if(this->currentToken.TokenType != TokenTypeEnum::RParen)
+        if(this->currentToken.TokenType == TokenTypeEnum::RParen)
         {
+            this->advance();
+            return std::make_unique<TupleExpression>(std::move(args));
+        }
+
+        std::unique_ptr<Expression> first = this->parseExpression();
+
+        if(this->currentToken.TokenType == TokenTypeEnum::Comma)
+        {
+            args.push_back(std::move(first));
+
             while(true)
             {
-                args.push_back(this->parseExpression());
                 if(this->currentToken.TokenType == TokenTypeEnum::Comma)
                 {
                     this->advance();
-                    continue;
                 }
-                break;
+                else
+                {
+                    break;
+                }
+                args.push_back(this->parseExpression());
             }
+            // )
+            this->expect(TokenTypeEnum::RParen);
+            return std::make_unique<TupleExpression>(std::move(args));
         }
-        // )
-
         this->expect(TokenTypeEnum::RParen);
-        return std::make_unique<TupleExpression>(std::move(args));
+        return first;
     }
     std::unique_ptr<ListExpression> Parser::parseListExpression()
     {

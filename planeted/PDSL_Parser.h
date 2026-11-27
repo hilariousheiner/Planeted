@@ -46,7 +46,7 @@ namespace Planeted
 
         std::unique_ptr<CallExpression> parseCallExpression();
 
-        std::unique_ptr<TupleExpression> parseTupleExpression();
+        std::unique_ptr<Expression> parseParenthesizedExpression();
 
         std::unique_ptr<ListExpression> parseListExpression();
 
