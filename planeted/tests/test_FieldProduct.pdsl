@@ -7,9 +7,9 @@ fbmParams = setPersistence(fbmParams, 0.5);
 fbmParams = setStartFrequency(fbmParams, 1.0);
 fbmParams = setNormalizeFBM(fbmParams, false);
 
-n1 = mult(fbm(perlinNoise1("Amphitrite-29"), fbmParams), setWhiteNoiseScale(whiteNoise1("Diomedes-1437"), 100.0));
-n2 = mult(fbm(perlinNoise2("Amphitrite-29"), fbmParams), setWhiteNoiseScale(whiteNoise2("Diomedes-1437"), 100.0));
-n3 = mult(fbm(perlinNoise3("Amphitrite-29"), fbmParams), setWhiteNoiseScale(whiteNoise3("Diomedes-1437"), 100.0));
+n1 = fbm(perlinNoise1("Amphitrite-29"), fbmParams) * setWhiteNoiseScale(whiteNoise1("Diomedes-1437"), 100.0);
+n2 = fbm(perlinNoise2("Amphitrite-29"), fbmParams) * setWhiteNoiseScale(whiteNoise2("Diomedes-1437"), 100.0);
+n3 = fbm(perlinNoise3("Amphitrite-29"), fbmParams) * setWhiteNoiseScale(whiteNoise3("Diomedes-1437"), 100.0);
 
 savePGM(n1, "test_FieldProduct1D");
 savePGM(n2, "test_FieldProduct2D");
