@@ -107,8 +107,6 @@ namespace Planeted
 
         this->BooleansMod = std::make_unique<BooleansModule>(*this);
 
-        this->booleanTypeInfo = this->DefineType("Boolean", ValueTypeEnum::Bool, nullptr);
-
         this->floatTypeInfo = this->DefineType("Float", ValueTypeEnum::Float, nullptr);
         this->integerTypeInfo = this->DefineType("Integer", ValueTypeEnum::Int, nullptr);
         this->listTypeInfo = this->DefineType("List", ValueTypeEnum::List, nullptr);
@@ -135,11 +133,6 @@ namespace Planeted
         this->FieldsMod = std::make_unique<FieldsModule>(*this);
         this->MeshMod = std::make_unique<MeshModule>(*this);
         this->IOMod = std::make_unique<IOModule>(*this);
-    }
-
-    PLTypeInfo *PDSL_Runtime::GetBooleanTypeInfo() const
-    {
-        return this->booleanTypeInfo;
     }
 
     PLTypeInfo *PDSL_Runtime::GetFloatTypeInfo() const
@@ -191,7 +184,7 @@ namespace Planeted
         switch(value.GetValueType())
         {
         case ValueTypeEnum::Bool:
-            return this->GetBooleanTypeInfo();
+            return this->BooleansMod->GetBooleanTypeInfo();
             break;
         case ValueTypeEnum::FBMParameters:
             return this->FieldsMod->GetFBMParametersTypeInfo();

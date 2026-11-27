@@ -43,7 +43,6 @@ namespace Planeted
         PLTypeInfo *FindType(std::string name) const;
         PLTypeInfo *GetTypeInfo(const Value &value) const;
 
-        PLTypeInfo *GetBooleanTypeInfo() const;
         PLTypeInfo *GetFloatTypeInfo() const;
         PLTypeInfo *GetIntegerTypeInfo() const;
         PLTypeInfo *GetListTypeInfo() const;
@@ -77,7 +76,6 @@ namespace Planeted
     private:
         std::unordered_map<std::string, PLTypeInfo*> typeInfoTable;
 
-        PLTypeInfo *booleanTypeInfo;
         PLTypeInfo *floatTypeInfo;
         PLTypeInfo *integerTypeInfo;
         PLTypeInfo *listTypeInfo;

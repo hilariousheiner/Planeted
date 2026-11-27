@@ -569,7 +569,7 @@ namespace Planeted
         PLTypeInfo *integerTypeInfo = runtime.GetIntegerTypeInfo();
         PLTypeInfo *stringTypeInfo = runtime.GetStringTypeInfo();
         PLTypeInfo *floatTypeInfo = runtime.GetFloatTypeInfo();
-        PLTypeInfo *boolTypeInfo = runtime.GetBooleanTypeInfo();
+        PLTypeInfo *boolTypeInfo = runtime.BooleansMod->GetBooleanTypeInfo();
 
         runtime.DefineFunction("setSeed", {this->fieldTypeInfo, integerTypeInfo}, builtin_setSeedFromInteger);
         runtime.DefineFunction("setSeed", {this->fieldTypeInfo, stringTypeInfo}, builtin_setSeedFromString);
