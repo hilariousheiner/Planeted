@@ -11,5 +11,5 @@ log(3.4 * 5.6);
 
 log("addition tests:");
 log("hello " + "world");
-log(1 + 1);
-log(1.0 + 1.0);
+log("1 + 1 = " + str(1 + 1));
+log("1.0 + 1.0 = " + str(1.0 + 1.0));
