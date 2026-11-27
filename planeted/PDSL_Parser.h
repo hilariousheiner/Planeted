@@ -34,6 +34,8 @@ namespace Planeted
 
         std::unique_ptr<Expression> parseExpression();
 
+        std::unique_ptr<Expression> parseSumExpression();
+
         std::unique_ptr<Expression> parseProductExpression();
 
         std::unique_ptr<Expression> parseUnaryExpression();

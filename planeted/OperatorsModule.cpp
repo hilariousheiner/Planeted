@@ -34,6 +34,8 @@ namespace Planeted
         {
         case TokenTypeEnum::Star:
             return OperatorsModule::MULTIPLY;
+        case TokenTypeEnum::Plus:
+            return OperatorsModule::ADD;
             break;
         default:
             throw std::runtime_error("unknown binary operator");
