@@ -105,6 +105,8 @@ namespace Planeted
     {
         this->OperatorsMod = std::make_unique<OperatorsModule>(*this);
 
+        this->BooleansMod = std::make_unique<BooleansModule>(*this);
+
         this->booleanTypeInfo = this->DefineType("Boolean", ValueTypeEnum::Bool, nullptr);
 
         this->floatTypeInfo = this->DefineType("Float", ValueTypeEnum::Float, nullptr);
@@ -129,7 +131,6 @@ namespace Planeted
         this->DefineIntrinsicFunction("log", intrinsic_log);
         this->DefineIntrinsicFunction("load", intrinsic_load);
         this->DefineIntrinsicFunction("typeof", intrinsic_typeof);
-
 
         this->FieldsMod = std::make_unique<FieldsModule>(*this);
         this->MeshMod = std::make_unique<MeshModule>(*this);

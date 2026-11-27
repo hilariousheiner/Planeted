@@ -1,6 +1,11 @@
 #include "BooleansModule.h"
 
- namespace Planeted
- {
+#include "PDSL.h"
 
- }
+namespace Planeted
+{
+    BooleansModule::BooleansModule(PDSL_Runtime &runtime)
+    {
+
+    }
+}

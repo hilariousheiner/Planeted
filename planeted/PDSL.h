@@ -10,6 +10,7 @@
 #include <vector>
 
 
+#include "BooleansModule.h"
 #include "BuiltinFunction.h"
 #include "FieldsModule.h"
 #include "IOModule.h"
@@ -67,6 +68,7 @@ namespace Planeted
         Value Result;
         bool DebugFlag = false;
 
+        std::unique_ptr<BooleansModule> BooleansMod;
         std::unique_ptr<FieldsModule> FieldsMod;
         std::unique_ptr<MeshModule> MeshMod;
         std::unique_ptr<IOModule> IOMod;
