@@ -95,6 +95,12 @@ namespace Planeted
         return Value(leftOp + rightOp);
     }
 
+    static Value intrinsic_toString(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        ExpectArgsCount(args, 1, "toString");
+        return Value(args[0].ToString());
+    }
+
     PDSL_Runtime::PDSL_Runtime()
     {
         this->OperatorsMod = std::make_unique<OperatorsModule>(*this);
@@ -117,6 +123,7 @@ namespace Planeted
         this->DefineFunction(OperatorsModule::MULTIPLY, {this->integerTypeInfo, this->integerTypeInfo}, builtin_mulInts);
 
         this->DefineFunction(OperatorsModule::ADD, {this->stringTypeInfo, this->stringTypeInfo}, builtin_addStrings);
+        this->DefineIntrinsicFunction("str", intrinsic_toString);
 
         this->DefineIntrinsicFunction("setDebugFlag", intrinsic_setDebugFlag);
         this->DefineIntrinsicFunction("log", intrinsic_log);
