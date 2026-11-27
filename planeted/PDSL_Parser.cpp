@@ -102,7 +102,23 @@ namespace Planeted
 
     std::unique_ptr<Expression> Parser::parseExpression()
     {
-        return this->parseUnaryExpression();
+        return this->parseProductExpression();
+    }
+
+    std::unique_ptr<Expression> Parser::parseProductExpression()
+    {
+        std::unique_ptr<Expression> result = this->parseUnaryExpression();
+
+        while(this->currentToken.TokenType == TokenTypeEnum::Star)
+        {
+            TokenTypeEnum op = TokenTypeEnum::Star;
+            this->advance();
+
+            std::unique_ptr<Expression> rhs = this->parseUnaryExpression();
+
+            result = std::make_unique<BinaryExpression>(op, std::move(result), std::move(rhs));
+        }
+        return result;
     }
 
     std::unique_ptr<Expression> Parser::parseUnaryExpression()
