@@ -1,0 +1,9 @@
+#ifndef PLANETED_BOOLEANSMODULE_H
+#define PLANETED_BOOLEANSMODULE_H
+
+namespace Planeted
+{
+
+}
+
+#endif // PLANETED_BOOLEANSMODULE_H
