@@ -56,6 +56,21 @@ namespace Planeted
         return Value(-operand);
     }
 
+
+    static Value builtin_addFloats(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        float leftOp = GetFloatArg(args, 0, OperatorsModule::ADD);
+        float rightOp = GetFloatArg(args, 1, OperatorsModule::ADD);
+
+        return Value(leftOp + rightOp);
+    }
+    static Value builtin_addInts(PDSL_Runtime &runtime, const std::vector<Value> &args)
+    {
+        int leftOp = GetIntArg(args, 0, OperatorsModule::ADD);
+        int rightOp = GetIntArg(args, 1, OperatorsModule::ADD);
+
+        return Value(leftOp + rightOp);
+    }
     static Value builtin_mulFloats(PDSL_Runtime &runtime, const std::vector<Value> &args)
     {
         float leftOp = GetFloatArg(args, 0, OperatorsModule::MULTIPLY);
@@ -85,6 +100,9 @@ namespace Planeted
 
         this->DefineFunction(OperatorsModule::NEGATE, {this->floatTypeInfo}, builtin_negateFloat);
         this->DefineFunction(OperatorsModule::NEGATE, {this->integerTypeInfo}, builtin_negateInt);
+
+        this->DefineFunction(OperatorsModule::ADD, {this->floatTypeInfo, this->floatTypeInfo}, builtin_addFloats);
+        this->DefineFunction(OperatorsModule::ADD, {this->integerTypeInfo, this->integerTypeInfo}, builtin_addInts);
 
         this->DefineFunction(OperatorsModule::MULTIPLY, {this->floatTypeInfo, this->floatTypeInfo}, builtin_mulFloats);
         this->DefineFunction(OperatorsModule::MULTIPLY, {this->integerTypeInfo, this->integerTypeInfo}, builtin_mulInts);
